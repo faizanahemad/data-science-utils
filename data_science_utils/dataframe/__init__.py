@@ -190,6 +190,7 @@ def find_correlated_pairs(df,thres):
 def remove_correlated_pairs(df, thres, inplace=False):
     _check_df(df)
     df_nulls = count_nulls(df).T
+    print(df_nulls.shape)
     correlated_pairs = find_correlated_pairs(df, thres)
     from IPython.core.debugger import Tracer;
     Tracer()()
