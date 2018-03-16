@@ -198,6 +198,7 @@ def remove_correlated_pairs(df,thres,inplace=False):
                 dropped_cols.append(p2)
             else:
                 dropped_cols.append(p1)
+    from IPython.core.debugger import Tracer; Tracer()() 
     print(len(dropped_cols))
     print(dropped_cols)
     dropped_cols = list(dropped_cols)
