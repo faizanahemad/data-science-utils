@@ -2,6 +2,12 @@
 import numpy as np # linear algebra
 import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
 
+def _check_df(df):
+    # Empty Dataframe check
+    assert df.shape[0]>0 and df.shape[1]>0 , "DataFrame is Empty"
+    # duplicate columns check
+    assert len(df.columns.values)==len(set(df.columns.values)) , "DataFrame has duplicate columns"
+
 
 def get_column_names(df,sorted=True):
     if(sorted):
@@ -16,6 +22,7 @@ def count_nulls(df):
     return df_t.sort_values("count",ascending=False)
 
 def count_distinct_values(df):
+    _check_df(df)
     unique_counts = {}
     for idx in df.columns.values:
         #cnt=len(df[idx].unique())
@@ -28,6 +35,7 @@ def count_distinct_values(df):
 
 
 def __particular_values_per_column(df,values):
+    _check_df(df)
     counts = {}
     for idx in df.columns.values:
         cnt=np.sum(df[idx].isin(values).values)
@@ -37,6 +45,7 @@ def __particular_values_per_column(df,values):
     return ctr_2
 
 def get_column_datatypes(df):
+    _check_df(df)
     dtype = {}
     for idx in df.columns.values:
         dt = df[idx].dtype
@@ -49,6 +58,7 @@ def get_column_datatypes(df):
 
 def most_common_value(df):
     # for simple cases use df.mode().T
+    _check_df(df)
     total_rows = df.shape[0]
     columns,modes,counts = list(),list(),list()
     for column in df.columns:
@@ -63,6 +73,7 @@ def most_common_value(df):
     return description
 
 def column_summaries(df):
+    _check_df(df)
     mis_val = df.isnull().sum()
     mis_val_percent = 100 * mis_val/len(df)
     particular_ctr = __particular_values_per_column(df,[0])
@@ -76,6 +87,7 @@ def column_summaries(df):
     return mis_val_table_ren_columns
 
 def filter_dataframe_values(df,filter_columns):
+    _check_df(df)
     df_filtered = df
     for feature in filter_columns:
         values = filter_columns[feature]
@@ -87,6 +99,7 @@ def filter_dataframe_values(df,filter_columns):
     return df_filtered
 
 def filter_dataframe_percentile(df, filter_columns):
+    _check_df(df)
     df_filtered = df
     for feature in filter_columns:
         quantiles = filter_columns[feature]
@@ -118,6 +131,7 @@ def get_specific_cols(df,prefix=None,suffix=None,substring=None):
 
 
 def drop_specific_cols(df,prefix=None,suffix=None,substring=None,inplace=False):
+    _check_df(df)
     features = list(df.columns.values)
     sl = list()
     if(substring is not None):
@@ -138,6 +152,7 @@ def drop_specific_cols(df,prefix=None,suffix=None,substring=None,inplace=False):
 
 
 def drop_columns_safely(df,columns,inplace=False):
+    _check_df(df)
     cur_cols=set(df.columns)
     drop_columns = list(set(columns).intersection(cur_cols))
     return df.drop(drop_columns,axis=1,inplace=inplace)
@@ -147,6 +162,7 @@ def drop_columns_safely(df,columns,inplace=False):
 
 
 def find_correlated_pairs(df,thres):
+    _check_df(df)
     df_nulls = count_nulls(df).transpose()
     df_corr=df.corr()
     correlated_pairs = list()
@@ -170,6 +186,7 @@ def find_correlated_pairs(df,thres):
     return correlated_pairs
 
 def remove_correlated_pairs(df,thres,inplace=False):
+    _check_df(df)
     df_nulls = count_nulls(df).transpose()
     correlated_pairs = find_correlated_pairs(df,thres)
     dropped_cols = set()
@@ -184,6 +201,7 @@ def remove_correlated_pairs(df,thres,inplace=False):
     return (drop_columns_safely(df,dropped_cols,inplace),list(np.sort(dropped_cols)))
 
 def detect_nan_columns(df):
+    _check_df(df)
     columns = df.columns.values.tolist()
     cols = list()
     for colname in columns:
@@ -206,6 +224,7 @@ def fast_read_and_append(file_path,chunksize,fullsize=1e9,dtype=None):
     return df
 
 def add_polynomial_and_log_features(df,f_name):
+    _check_df(df)
     cnames=[f_name]
     log_col = "log_%s"%f_name
     df[log_col] = np.log1p(df[f_name]+1)
