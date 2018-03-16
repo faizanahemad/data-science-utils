@@ -183,6 +183,7 @@ def find_correlated_pairs(df,thres):
                     
             except:
                 print()
+    print(correlated_pairs)
     return correlated_pairs
 
 
