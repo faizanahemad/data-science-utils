@@ -69,3 +69,60 @@ def baseline_logistic_random(df,predicted_column,df_test=None,id_col=None,verbos
         print(classification_report(df[predicted_column],random_preds_train))
         
     return (classification_report(df[predicted_column],random_preds_train),df_test)
+
+
+def autoencoder_provide_reasons(actual,scaler,thres,autoencoder,features,top_error_cols=3):
+    """
+
+    returns errors,masked_actual,unmasked_actual_cols,description_df
+    """
+    scaled = actual.copy()
+    
+    scaled[features] = scaler.transform(actual[features].fillna(0))
+    
+    predictions = autoencoder.predict(scaled[features])
+    mse = np.mean(np.power(scaled[features] - predictions, 2), axis=1)
+    scaled['autoencoder_mse'] = mse
+    scaled_copy = scaled[scaled['autoencoder_mse']>thres]
+    actual = actual[scaled['autoencoder_mse']>thres]
+    scaled = scaled_copy
+    
+    
+    unmasked_actual_cols = actual.copy()
+    errors = scaled.copy()
+    actual = actual.copy()
+    if(errors.shape[0]<1):
+        print("No samples with error above given threshold, try decreasing threshold.")
+    
+    predictions = np.asarray(autoencoder.predict(scaled[features]))
+    predictions = np.asarray(np.power(scaled[features] - predictions, 2))
+    mse = np.mean(predictions, axis=1)
+    se = np.sum(predictions, axis=1)
+    mask = predictions<np.sort(predictions)[:,-top_error_cols:-top_error_cols+1].flatten().reshape((predictions.shape[0],1))
+    predictions[mask]=0
+    
+    frac_se = np.sum(predictions, axis=1)
+    frac_contribution_percent = (frac_se/se)*100
+    errors[features] = (predictions/se.reshape((predictions.shape[0],1)))*100
+    acv = np.asarray(actual[features].values)
+    acv[mask] = 0
+    actual[features] = acv
+    
+    biggest_contributor = errors[features].idxmax(axis=1)
+    vals = np.asarray(errors[features].values)
+    largest_contrib_mask = vals<np.sort(vals)[:,-1].flatten().reshape((vals.shape[0],1))
+    vals[largest_contrib_mask]=0
+    # We already calculated % in errors df
+    largest_contrib_error_percent = np.sum(vals, axis=1)
+    
+    actual_vals = np.asarray(actual[features].values)
+    actual_vals[largest_contrib_mask]=0
+    largest_contrib_actual_value = np.sum(actual_vals, axis=1)
+    
+    description_df = pd.DataFrame({"fraction_contribution_percent":frac_contribution_percent,
+                                  "mean_error":mse,"total_error":se,"fractional_contribution":frac_se,
+                                  "largest_contributor":biggest_contributor,
+                                  "largest_contrib_error_percent":largest_contrib_error_percent,
+                                  "largest_contrib_actual_value":largest_contrib_actual_value})
+
+    return (errors,actual,unmasked_actual_cols,description_df)
