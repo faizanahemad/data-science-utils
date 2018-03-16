@@ -7,7 +7,6 @@ setup(name='data_science_utils',
       author='Faizan Ahemad',
       author_email='fahemad3@gmail.com',
       license='MIT',
-      packages=['data_science_utils'],
       install_requires=[
           'numpy','pandas',
       ],
