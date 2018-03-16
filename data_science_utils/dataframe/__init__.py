@@ -152,6 +152,7 @@ def drop_specific_cols(df,prefix=None,suffix=None,substring=None,inplace=False):
 
 
 def drop_columns_safely(df,columns,inplace=False):
+    assert len(columns)>0,"Column list passed for dropping is empty"
     _check_df(df)
     cur_cols=set(df.columns)
     drop_columns = list(set(columns).intersection(cur_cols))
@@ -163,7 +164,6 @@ def drop_columns_safely(df,columns,inplace=False):
 
 def find_correlated_pairs(df,thres):
     _check_df(df)
-    df_nulls = count_nulls(df).transpose()
     df_corr=df.corr()
     correlated_pairs = list()
     processed_pair = set()
@@ -198,7 +198,7 @@ def remove_correlated_pairs(df,thres,inplace=False):
                 dropped_cols.add(p2)
             else:
                 dropped_cols.add(p1)
-    return (drop_columns_safely(df,dropped_cols,inplace),list(np.sort(dropped_cols)))
+    return (drop_columns_safely(df,dropped_cols,inplace),list(np.sort(list(dropped_cols))))
 
 def detect_nan_columns(df):
     _check_df(df)
