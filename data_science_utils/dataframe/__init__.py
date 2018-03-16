@@ -198,7 +198,9 @@ def remove_correlated_pairs(df,thres,inplace=False):
                 dropped_cols.add(p2)
             else:
                 dropped_cols.add(p1)
-    return (drop_columns_safely(df,dropped_cols,inplace),list(np.sort(list(dropped_cols))))
+    dropped_cols = list(np.sort(list(dropped_cols)))
+    new_df = drop_columns_safely(df,dropped_cols,inplace)
+    return (new_df,dropped_cols)
 
 def detect_nan_columns(df):
     _check_df(df)
