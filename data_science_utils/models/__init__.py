@@ -3,6 +3,7 @@ import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
 from sklearn.metrics import precision_recall_fscore_support
 from sklearn.metrics import mean_squared_log_error
 from sklearn.metrics import mean_squared_error
+from sklearn.metrics import confusion_matrix
 
 
 
@@ -69,6 +70,46 @@ def baseline_logistic_random(df,predicted_column,df_test=None,id_col=None,verbos
         print(classification_report(df[predicted_column],random_preds_train))
         
     return (classification_report(df[predicted_column],random_preds_train),df_test)
+
+def confusion_matrix_frame(y_true,y_pred,labels=None,sample_weight=None):
+    y_true = np.asarray(y_true)
+    y_pred = np.asarray(y_pred)
+    if labels is None:
+        labels=np.unique(np.concatenate((y_true,y_pred)))
+    matrix = confusion_matrix(y_true,y_pred,labels,sample_weight)
+    matrix = pd.DataFrame(matrix,index=labels,columns=labels)
+    
+    matrix["Actual Counts"]=matrix.sum(axis=1)
+    predicted_counts = pd.DataFrame(matrix.sum(axis=0)).T
+    matrix = pd.concat([matrix, predicted_counts], ignore_index=True)
+    
+    new_index = list(labels)
+    new_index.append("Predicted Counts")
+    matrix.index = new_index
+    matrix.index.names = ["Actual"]
+    matrix.columns.names = ["Predicted"]
+    
+    
+    actual_counts=matrix["Actual Counts"].values[:-1]
+    predicted_counts = matrix[matrix.index=="Predicted Counts"].values[0][:-1]
+    good_predictions = list()
+    for label in labels:
+        good_predictions.append(matrix[label].values[label])
+
+    recall = 100*np.array(good_predictions)/actual_counts
+    precision = 100*np.array(good_predictions)/predicted_counts
+    recall = np.append(recall,[np.nan])
+    matrix["Recall %"] = recall
+    precision = pd.DataFrame(precision).T
+    matrix = pd.concat([matrix, precision], ignore_index=True)
+    new_index.append("Precision %")
+    matrix.index = new_index
+    matrix.index.names = ["Actual"]
+    matrix.columns.names = ["Predicted"]
+    matrix.fillna(-997,inplace=True)
+    matrix = matrix.astype(int)
+    matrix.replace(-997,np.nan,inplace=True)
+    return matrix
 
 
 def autoencoder_provide_reasons(actual,scaler,thres,autoencoder,features,top_error_cols=3):
