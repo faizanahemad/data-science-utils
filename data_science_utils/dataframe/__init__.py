@@ -189,15 +189,15 @@ def remove_correlated_pairs(df,thres,inplace=False):
     _check_df(df)
     df_nulls = count_nulls(df).transpose()
     correlated_pairs = find_correlated_pairs(df,thres)
-    dropped_cols = set()
+    dropped_cols = list()
     for (p1,p2) in correlated_pairs:
         if(p1 not in dropped_cols and p2 not in dropped_cols):
             p1_nulls = df_nulls[p1].values[0]
             p2_nulls = df_nulls[p2].values[0]
             if(p1_nulls < p2_nulls):
-                dropped_cols.add(p2)
+                dropped_cols.append(p2)
             else:
-                dropped_cols.add(p1)
+                dropped_cols.append(p1)
     print(dropped_cols)
     print(len(dropped_cols))
     dropped_cols = list(dropped_cols)
