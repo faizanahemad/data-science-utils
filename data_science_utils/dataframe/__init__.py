@@ -189,6 +189,8 @@ def remove_correlated_pairs(df,thres,inplace=False):
     _check_df(df)
     df_nulls = count_nulls(df).transpose()
     correlated_pairs = find_correlated_pairs(df,thres)
+    from IPython.core.debugger import Tracer; Tracer()() 
+    print(correlated_pairs)
     dropped_cols = list()
     for (p1,p2) in correlated_pairs:
         if(p1 not in dropped_cols and p2 not in dropped_cols):
