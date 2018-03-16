@@ -195,8 +195,12 @@ def remove_correlated_pairs(df,thres,inplace=False):
             p1_nulls = df_nulls[p1].values[0]
             p2_nulls = df_nulls[p2].values[0]
             if(p1_nulls < p2_nulls):
+                print(type(p2))
+                print(p2)
                 dropped_cols.append(p2)
             else:
+                print(type(p1))
+                print(p1)
                 dropped_cols.append(p1)
     from IPython.core.debugger import Tracer; Tracer()() 
     print(len(dropped_cols))
