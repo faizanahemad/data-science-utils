@@ -11,7 +11,7 @@ setup(name='data_science_utils',
           'numpy','pandas',
       ],
       keywords=['Pandas','numpy','data-science','IPython', 'Jupyter'],
-      packages=find_packages('data_science_utils'),
+      packages=find_packages(),
       test_suite='nose.collector',
       tests_require=['nose'],
       zip_safe=False)
