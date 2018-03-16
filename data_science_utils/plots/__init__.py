@@ -1,4 +1,4 @@
-from data_science_utils import df as utils
+from data_science_utils import dataframe as utils
 
 import numpy as np # linear algebra
 import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)

@@ -11,6 +11,7 @@ setup(name='data_science_utils',
       install_requires=[
           'numpy','pandas',
       ],
+      keywords=['Pandas','numpy','data-science','IPython', 'Jupyter'],
       test_suite='nose.collector',
       tests_require=['nose'],
       zip_safe=False)

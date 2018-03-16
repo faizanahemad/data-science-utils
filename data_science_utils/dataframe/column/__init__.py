@@ -26,11 +26,11 @@ def label_encode_text_column(df,field,df_test=None,fillna="-1"):
     df[field+"_encoded"] = encoded_df
     return encoder
 
-def store_encoder_as_file(le,column_name):
+def store_encoder_as_file(le,column_name,location):
     ids =np.arange(0,len(list(le.classes_))).astype(int)
     my_encoding = pd.DataFrame(list(le.classes_), ids, columns = [column_name])
     print(my_encoding.shape)
-    my_encoding.to_csv(get_file_location("%s-encoding.csv" % column_name), index_label = ["id"])
+    my_encoding.to_csv("%s/%s-encoding.csv" % (location,column_name), index_label = ["id"])
 
 def lagged_variance(series,lag):
     arr=series.values
