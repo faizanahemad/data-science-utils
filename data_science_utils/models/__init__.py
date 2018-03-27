@@ -8,7 +8,13 @@ from sklearn.metrics import confusion_matrix
 
 
 def feature_importance(model,df,features):
-    fi=model.feature_importances_
+    fi = None
+    if hasattr(model, 'feature_importances_'):
+        fi=model.feature_importances_
+    elif hasattr(model, 'coef_'):
+        fi = model.coef_
+    else:
+        raise AttributeError('No attribute: feature_importances_ or  coef_')
     fn=df[features].columns.values
     df_i=pd.DataFrame({"feature":fn,"importance":fi})
     df_i["importance"] = df_i["importance"]*100
