@@ -24,12 +24,12 @@ def feature_importance(model,df,features):
 def rmsle(y_true,y_pred):
     y_true = np.asarray(y_true)
     y_pred = np.asarray(y_pred)
-    return np.square(np.log(y_pred + 1) - np.log(y_true + 1)).mean() ** 0.5
+    return mean_squared_error(np.log(y_pred + 1) - np.log(y_true + 1)) ** 0.5
 
 def rmse(y_true,y_pred):
     y_true = np.asarray(y_true)
     y_pred = np.asarray(y_pred)
-    return np.square(y_pred - y_true).mean() ** 0.5
+    return mean_squared_error(y_pred - y_true) ** 0.5
 
 def gini(actual, pred, cmpcol = 0, sortcol = 1):
     assert( len(actual) == len(pred) )
