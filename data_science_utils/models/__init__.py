@@ -9,6 +9,7 @@ from sklearn.metrics import confusion_matrix
 
 def feature_importance(model,df,features):
     fi = None
+    df = df.head()
     if hasattr(model, 'feature_importances_'):
         fi=model.feature_importances_
     elif hasattr(model, 'coef_'):
