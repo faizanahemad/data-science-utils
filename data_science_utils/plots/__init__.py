@@ -62,7 +62,6 @@ def plot_ts(df_test, columns=[], time_col='week', freq='7D',figsize=(24,8)):
     df_preds = df_preds.sort_values([time_col])
     idx = pd.date_range(df_preds[time_col].min(), df_preds[time_col].max(), freq=freq)
     df_preds.set_index(time_col, inplace=True)
-    # scaler = RobustScaler()
     scaler = MinMaxScaler()
     df_preds[columns] = scaler.fit_transform(df_preds[columns])
     fg = plt.rcParams["figure.figsize"]
@@ -79,7 +78,7 @@ def plot_ts(df_test, columns=[], time_col='week', freq='7D',figsize=(24,8)):
     plt.rcParams["figure.figsize"] = fg
 
 
-def plot_ts_single_column(df_test, time_col, ewma_diff_plot=False, ewma_range=2, freq='7D', target='target',
+def plot_ts_single_column(df_test, time_col,freq='7D', target='target', ewma_diff_plot=True, ewma_range=3,ewma_shift=1,
                           figsize=(24, 8)):
     df_preds = df_test.copy()
     idx = pd.date_range(df_preds[time_col].min(), df_preds[time_col].max(), freq=freq)
@@ -89,7 +88,7 @@ def plot_ts_single_column(df_test, time_col, ewma_diff_plot=False, ewma_range=2,
     plt.rcParams["figure.figsize"] = figsize
     tsSparseActual = df_preds[target]
     tsActual = tsSparseActual.reindex(idx, fill_value=1)
-    df_preds['ewma'] = pd.ewma(tsActual.shift(1).fillna(tsActual.min()), span=ewma_range)
+    df_preds['ewma'] = pd.ewma(tsActual.shift(ewma_shift).fillna(tsActual.min()), span=ewma_range)
     tsSparse = df_preds['ewma']
     ts = tsSparse.reindex(idx, fill_value=1)
     tsDiff = (tsActual - ts) / ts
