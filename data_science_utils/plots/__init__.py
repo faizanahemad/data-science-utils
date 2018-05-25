@@ -269,8 +269,8 @@ def analyze_ts_results(test_true, test_pred, train_true=[], train_pred=[], times
         fig.tight_layout()
         plt.show()
         plt.rcParams["figure.figsize"] = fg
+
     result = {"mean_absolute_percent_change": mean_absolute_percent_change, "rmse": rmse, "perc_error": perc_error,
               "mae": mae, "mape": mape, "aep": aep_metric, "sample_percentile": sample_percentile_metric,
               "error_percent_summary": error_percent_summary, "sample_summary": sample_summary}
     return result
-
