@@ -16,7 +16,6 @@ def label_encode_text_column(df,field,df_test=None,fillna="-1"):
     if(df_test is not None):
     	encoded_df = encoded_df.append(df_test[field].fillna(fillna))
     label_encoder = LabelEncoder()
-    print(encoded_df.values)
     encoder = label_encoder.fit(encoded_df.values)
     
     if(df_test is not None):
