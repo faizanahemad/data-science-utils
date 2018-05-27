@@ -4,6 +4,10 @@ from sklearn.metrics import precision_recall_fscore_support
 from sklearn.metrics import mean_squared_log_error
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import confusion_matrix
+from sklearn.metrics import roc_auc_score
+from sklearn.model_selection import StratifiedKFold
+from sklearn.model_selection import cross_val_score
+from sklearn.model_selection import cross_validate
 
 
 
@@ -174,3 +178,22 @@ def autoencoder_provide_reasons(actual,scaler,thres,autoencoder,features,top_err
                                   "largest_contrib_actual_value":largest_contrib_actual_value})
 
     return (errors,actual,unmasked_actual_cols,description_df)
+
+
+def generate_results(model,df_test,features,id_col,target,file):
+    dft = df_test[features]
+    results = df_test[[id_col]]
+    results[target] = model.predict_proba(dft)[:,1]
+    results.to_csv(file,index=False,columns=results.columns)
+
+
+def cross_validate_classifier(model,X,y,scoring=['roc_auc','f1','f1_weighted','recall','precision','neg_log_loss'],cv=4,return_train_score=True):
+    scores = cross_validate(model, X, y, scoring=scoring,cv=cv, return_train_score=return_train_score)
+    for score in scoring:
+        if return_train_score:
+            scores['train_'+score+'_mean'] = scores['train_'+score].mean()
+            scores['train_'+score+'_std'] = scores['train_'+score].std()
+        scores['test_'+score+'_mean'] = scores['test_'+score].mean()
+        scores['test_'+score+'_std'] = scores['test_'+score].std()
+    return scores
+
