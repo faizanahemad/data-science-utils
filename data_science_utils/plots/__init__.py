@@ -59,7 +59,7 @@ def plot_numeric_features_filtered(f_name,predicted_column,df,filter_columns,str
         plot_numeric_feature(colname,predicted_column,df)
 
 
-def plot_ts(df_test, columns=[], time_col='week',ewma_span=None, freq='7D',time_format="%Y-%m-%d", xtick_interval=None,figsize=(24,8)):
+def plot_ts(df_test, columns=[], time_col='week',ewma_span=-1, freq='7D',time_format="%Y-%m-%d", xtick_interval=None,figsize=(24,8)):
     df_preds = df_test.sort_values([time_col])
     idx = pd.date_range(df_test[time_col].min(), df_test[time_col].max(), freq=freq)
     df_preds.set_index(time_col, inplace=True)
@@ -73,7 +73,7 @@ def plot_ts(df_test, columns=[], time_col='week',ewma_span=None, freq='7D',time_
     for column in columns:
         tsSparseActual = df_preds[column]
         tsActual = tsSparseActual.reindex(idx, fill_value=0)
-        if ewma_span is not None:
+        if ewma_span >1:
             tsActual=pd.ewma(tsActual,span=ewma_span)
         p1, = plt.plot(idx, tsActual, linestyle='--', marker='o', label=column)
         handles.append(p1)
