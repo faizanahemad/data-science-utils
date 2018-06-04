@@ -59,7 +59,7 @@ def plot_numeric_features_filtered(f_name,predicted_column,df,filter_columns,str
         plot_numeric_feature(colname,predicted_column,df)
 
 
-def plot_ts(df_test, columns=[], time_col='week', freq='7D', xtick_interval=None,figsize=(24,8)):
+def plot_ts(df_test, columns=[], time_col='week', freq='7D',time_format="%Y-%m-%d", xtick_interval=None,figsize=(24,8)):
     df_preds = df_test.sort_values([time_col])
     idx = pd.date_range(df_test[time_col].min(), df_test[time_col].max(), freq=freq)
     df_preds.set_index(time_col, inplace=True)
@@ -68,22 +68,24 @@ def plot_ts(df_test, columns=[], time_col='week', freq='7D', xtick_interval=None
     fg = plt.rcParams["figure.figsize"]
     plt.rcParams["figure.figsize"] = figsize
     fig, ax1 = plt.subplots()
-
+    timestamps = idx.strftime(time_format)
     handles = []
     for column in columns:
         tsSparseActual = df_preds[column]
         tsActual = tsSparseActual.reindex(idx, fill_value=0)
-        p1, = plt.plot(tsActual.index, tsActual, linestyle='--', marker='o', label=column)
+        p1, = plt.plot(idx, tsActual, linestyle='--', marker='o', label=column)
         handles.append(p1)
     # showing right number of x labels
     if xtick_interval is None:
-        xtick_interval = np.ceil(len(df_preds) / (fg[1] * 4.0))
+        xtick_interval = np.ceil(len(df_preds) / (fg[1] * 4))
     fig.autofmt_xdate(rotation=60, bottom=0.2)
+    plt.legend(handles=handles)
+    plt.xticks(timestamps)
+    ax1.set_xticklabels(timestamps)
     for n, label in enumerate(ax1.xaxis.get_ticklabels()):
         if n % xtick_interval != 0:
             label.set_visible(False)
-
-    plt.legend(handles=handles)
+    fig.tight_layout()
     plt.show()
     plt.rcParams["figure.figsize"] = fg
 
@@ -121,20 +123,17 @@ def plot_ts_single_column(df_test, time_col,freq='7D', target='target', ewma_dif
     return pd.DataFrame({"target": tsActual, "EWMA": ts, "Diff": tsDiff, time_col: df_preds.index})
 
 
-def analyze_ts_results(test_true, test_pred, train_true=[], train_pred=[], timestamps=[], aep_line=20,
-                       sample_percentile=80, plot=True, plot_error=False, xtick_interval=None, figsize=(24, 8)):
+def analyze_ts_results(test_true, test_pred, train_true=[], train_pred=[], timestamps=[], train_weights=None,
+                       test_weights=None, aep_line=20, sample_percentile=80, plot=True, plot_error=False,
+                       plot_static_measures=False, xtick_interval=None, figsize=(24, 12)):
     assert len(test_true) == len(test_pred)
     assert len(train_true) >= len(train_pred)
 
-    train_ts = None
-    test_ts = None
     if len(timestamps) == 0:
         timestamps = np.arange(0, len(test_true) + len(train_true))
 
     assert len(test_true) + len(train_true) == len(timestamps)
     train_ts = timestamps[:len(train_true)]
-    test_ts = timestamps[len(train_true):]
-    import matplotlib.ticker as ticker
 
     test_true = np.array(test_true)
     test_pred = np.array(test_pred)
@@ -144,9 +143,21 @@ def analyze_ts_results(test_true, test_pred, train_true=[], train_pred=[], times
     assert np.all(test_true >= 0)
     assert np.all(train_true >= 0)
 
+    if train_weights is None:
+        train_weights = np.ones(len(train_true))
+    else:
+        train_weights = np.array(train_weights)
+        assert len(train_weights) == len(train_true)
+
+    if test_weights is None:
+        test_weights = np.ones(len(test_true))
+    else:
+        test_weights = np.array(test_weights)
+        assert len(test_weights) == len(test_true)
+
     errors = np.absolute(test_true - test_pred)
     mae = np.mean(errors)
-
+    testMean = np.mean(test_true)
     #
     rmse = mean_squared_error(test_true, test_pred) ** (.5)
     train_rmse = np.nan
@@ -161,16 +172,25 @@ def analyze_ts_results(test_true, test_pred, train_true=[], train_pred=[], times
     tt[tt <= 1e-8] = 1
     tp[tp <= 1e-8] = 1
     absolute_percent_errors_test = 100 * np.abs(tt - tp) / tt
+
+    #
+    weighted_ape_test = np.dot(absolute_percent_errors_test, test_weights)
+    #
+    mean_weighted_ape_test = np.dot(absolute_percent_errors_test, test_weights) / np.sum(test_weights)
     #
     mape = np.mean(absolute_percent_errors_test)
 
     train_mape = np.nan
+    absolute_percent_errors_train = np.nan
+    mean_weighted_ape_train = np.nan
     if len(train_true) == len(train_pred):
         # tt,tp = scaler.transform(train_true.reshape(-1, 1)).flatten(),scaler.transform(train_pred.reshape(-1, 1)).flatten()
         tt, tp = train_true, train_pred
         tt[tt <= 1e-8] = 1
         tp[tp <= 1e-8] = 1
-        train_mape = np.mean(100 * np.abs(tt - tp) / tt)
+        absolute_percent_errors_train = 100 * np.abs(tt - tp) / tt
+        mean_weighted_ape_train = np.dot(absolute_percent_errors_train, train_weights) / np.sum(train_weights)
+        train_mape = np.mean(absolute_percent_errors_train)
 
     length = len(test_true)
     below_percents = [0.1, 0.5, 1, 5, 10, 15, 20, 25, 30, 35, 40]
@@ -219,9 +239,7 @@ def analyze_ts_results(test_true, test_pred, train_true=[], train_pred=[], times
     td = td[idx]
     tp = tp[idx]
     tp[np.all([(tp <= 1e-6), (tp >= -1e-6)], axis=0)] = 1
-    mean_absolute_percent_change = 100 * np.mean(np.abs(td / tp))
-
-    testMean = np.mean(test_true)
+    mean_absolute_percent_change = 100 * np.sum(np.abs(td / tp)) / len(test_true)
 
     #
     perc_error = (rmse * 100.0) / testMean
@@ -240,12 +258,16 @@ def analyze_ts_results(test_true, test_pred, train_true=[], train_pred=[], times
 
         ax1.plot(timestamps, np.concatenate((padding, test_true)), marker='o', linestyle=':', color='grey',
                  label='Test True')
-        ax1.axhline(y=testMean, linestyle='--', color='brown', label='Test Mean')
+
         ax1.plot(timestamps, np.concatenate((padding, test_pred)), marker='d', color='blue', label='Prediction')
         if plot_error:
             ax1.plot(timestamps, np.concatenate((padding, errors)), color='red', label='Error')
-        ax1.axhline(y=mae, linestyle='--', color='lightsalmon', label='Mean Absolute Error')
-        ax1.axhline(y=rmse, linestyle='--', color='green', label='RMSE')
+
+        if plot_static_measures:
+            ax1.axhline(y=testMean, linestyle='--', color='brown', label='Test Mean')
+            ax1.axhline(y=mae, linestyle='--', color='lightsalmon', label='Mean Absolute Error')
+            ax1.axhline(y=rmse, linestyle='--', color='green', label='RMSE')
+
         ax1.legend(loc=2)
 
         # showing right number of x labels
@@ -258,13 +280,14 @@ def analyze_ts_results(test_true, test_pred, train_true=[], train_pred=[], times
 
         str0 = "Data Stats: Test samples= %i, for test mean %.3f, Mean Absolute Percent change across consecutive samples: %.3f%%\n" % (
         len(test_true), testMean, mean_absolute_percent_change)
-        str1 = 'RMSE of %.3f giving RMSE error %% of +/- %.3f%%, Mean absolute error of %.3f and Mean Absolute percent error of %.3f' % (
-        rmse, perc_error, mae, mape)
+        str1 = 'RMSE of %.3f giving RMSE error %% of +/- %.3f%%, Mean absolute error of %.3f and Mean Absolute percent error of %.3f, Weighted MAPE of %.3f' % (
+        rmse, perc_error, mae, mape, mean_weighted_ape_test)
         str2 = "samples with error below %s %% = %.3f%%, " % (
         aep_line, aep_metric) + "%s%% samples have error <= %.3f%%" % (sample_percentile, sample_percentile_metric)
         str3 = "\n"
         if len(train_true) == len(train_pred):
-            str3 = "Training RMSE = %.3f, Training Mean Absolute percent error = %.3f\n" % (train_rmse, train_mape)
+            str3 = "Training RMSE = %.3f, Training Mean Absolute percent error = %.3f, Weighted MAPE of %.3f\n" % (
+            train_rmse, train_mape, mean_weighted_ape_train)
         plt.title(str0 + str3 + str1 + "\n" + str2)
         fig.tight_layout()
         plt.show()
@@ -272,5 +295,7 @@ def analyze_ts_results(test_true, test_pred, train_true=[], train_pred=[], times
 
     result = {"mean_absolute_percent_change": mean_absolute_percent_change, "rmse": rmse, "perc_error": perc_error,
               "mae": mae, "mape": mape, "aep": aep_metric, "sample_percentile": sample_percentile_metric,
-              "error_percent_summary": error_percent_summary, "sample_summary": sample_summary}
+              "error_percent_summary": error_percent_summary, "sample_summary": sample_summary,
+              "mean_weighted_ape": mean_weighted_ape_test, "weighted_ape_sum": weighted_ape_test,
+              "absolute_percent_errors": absolute_percent_errors_test}
     return result
