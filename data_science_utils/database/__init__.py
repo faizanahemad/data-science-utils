@@ -1,5 +1,3 @@
-from mysql.connector import MySQLConnection, Error
-from datetime import date, datetime, timedelta
 import numpy as np  # linear algebra
 import pandas as pd
 class MySQLDataBaseConnection:
@@ -14,6 +12,7 @@ class MySQLDataBaseConnection:
     def __init__(self, conn_details, connect_each_call=True):
         from mysql.connector import MySQLConnection, Error
         self.connect_each_call = connect_each_call
+        self.conn_details = conn_details
         conn = MySQLConnection(**conn_details)
         if not conn.is_connected():
             raise AssertionError("Could not connect to DB")
@@ -27,7 +26,7 @@ class MySQLDataBaseConnection:
         else:
             if self.conn is not None and self.conn.is_connected():
                 self.conn.close()
-            conn = MySQLConnection(**conn_details)
+            conn = MySQLConnection(**self.conn_details)
             if not conn.is_connected():
                 raise AssertionError("Could not connect to DB")
             self.conn = conn
@@ -177,10 +176,3 @@ class MySQLDataBaseConnection:
         if df is None or len(df) == 0:
             raise ValueError("Empty Dataframe passed")
         self.insert_or_update_rows(table_name, cols, df[cols].values)
-
-
-
-
-
-
-
