@@ -63,8 +63,9 @@ class MySQLDataBaseConnection:
         if not bool(cols):
             raise ValueError("Empty Columns list passed for writing")
         if cols is not None and len(cols) > 0:
-            cols = ",".join(cols)
-        query = "select %s from example_table %s" % (cols, where_clause)
+            cols = "`,`".join(cols)
+        cols = "`"+cols+"`"
+        query = "select %s from %s %s" % (cols,table_name, where_clause)
         rows = self.read_rows_raw_query(query)
         return rows
 
@@ -101,9 +102,9 @@ class MySQLDataBaseConnection:
             raise ValueError("Empty key value pair passed for writing")
         try:
             self._create_connection()
-            colnames = ",".join([key for key in key_value_pairs.keys()])
+            colnames = "`,`".join([key for key in key_value_pairs.keys()])
             placeholders = ",".join(["%%(%s)s" % key for key in key_value_pairs.keys()])
-
+            colnames = "`" + colnames + "`"
             query = "INSERT INTO %s (%s)" % (table_name, colnames)
             query = query + " VALUES (%s)" % (placeholders)
             cursor = self.conn.cursor()
@@ -124,9 +125,9 @@ class MySQLDataBaseConnection:
             values = [tuple(x) for x in values]
         try:
             self._create_connection()
-            colnames = ",".join([key for key in cols])
+            colnames = "`,`".join([key for key in cols])
             placeholders = ",".join(["%s" for key in cols])
-
+            colnames = "`" + colnames + "`"
             query = "INSERT INTO %s (%s)" % (table_name, colnames)
             query = query + " VALUES (%s)" % (placeholders)
             conn = self.conn
@@ -155,8 +156,8 @@ class MySQLDataBaseConnection:
             values = [tuple(x) for x in values]
         try:
             self._create_connection()
-            colnames = "(" + ",".join(cols) + ")"
-            assignments = ",".join(["{x} = VALUES({x})".format(x=x) for x in cols])
+            colnames = "(`" + "`,`".join(cols) + "`)"
+            assignments = ",".join(["`{x}` = VALUES(`{x}`)".format(x=x) for x in cols])
             placeholders = ["%s" for x in cols]
             placeholders = "(" + ",".join(placeholders) + ")"
 
