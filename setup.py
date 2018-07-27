@@ -8,7 +8,7 @@ setup(name='data_science_utils',
       author_email='fahemad3@gmail.com',
       license='MIT',
       install_requires=[
-          'numpy','pandas','beautifulsoup4','fastnumbers','more-itertools',
+          'numpy','pandas','beautifulsoup4','fastnumbers','more-itertools','dill',
       ],
       keywords=['Pandas','numpy','data-science','IPython', 'Jupyter'],
       packages=find_packages(),
