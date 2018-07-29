@@ -5,6 +5,7 @@ from sklearn.metrics import mean_squared_log_error
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import roc_auc_score
+from sklearn.metrics import classification_report
 from sklearn.model_selection import StratifiedKFold
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import cross_validate
@@ -71,16 +72,12 @@ def baseline_regression_by_category(df,df_cv,categorical_column,predicted_column
     return (baseline_cv,df_merged_test)
 
 
-def baseline_logistic_random(df,predicted_column,df_test=None,id_col=None,verbose=True):
+def baseline_logistic_random(df,predicted_column,verbose=True):
     random_preds_train = np.random.randint(0, high=2, size=df.shape[0])
-    if(df_test is not None and id_col is not None):
-        random_preds_test = np.random.randint(0, high=2, size=df_test.shape[0])
-        df_test[predicted_column] = random_preds_test
-        df_test = df_test[[id_col,predicted_column]]
     if(verbose):
         print(classification_report(df[predicted_column],random_preds_train))
         
-    return (classification_report(df[predicted_column],random_preds_train),df_test)
+    return classification_report(df[predicted_column],random_preds_train)
 
 def confusion_matrix_frame(y_true,y_pred,labels=None,sample_weight=None):
     y_true = np.asarray(y_true)
