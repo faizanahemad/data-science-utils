@@ -943,6 +943,49 @@ def score_company_on_filters(all_scrips, filters={}):
     return scrip_details
 
 
+def generate_price_chart(stock_df, name, days=1095, ewmas=[], other_technical_indicators=[]):
+    plt.figure(figsize=(16, 8))
+    ts_df = stock_df.tail(days)
+    handles = []
+    p1, = plt.plot(ts_df.index, ts_df['close'], label="price")
+    handles.append(p1)
+    for ewma in ewmas:
+        y = ts_df['close'].ewm(span=ewma).mean()
+        p2, = plt.plot(ts_df.index, y, label="%s day ewma" % ewma)
+        handles.append(p2)
+    plt.legend(handles=handles)
+    plt.title(name)
+    plt.ylabel('Closing Price')
+    plt.show()
+
+
+def generate_price_volume_chart(stock_df, name, days=1095, ewmas=[], other_technical_indicators=[]):
+    plt.figure(figsize=(16, 8))
+    top = plt.subplot2grid((6, 6), (0, 0), rowspan=4, colspan=6)
+    bottom = plt.subplot2grid((6, 6), (4, 0), rowspan=2, colspan=6)
+    ts_df = stock_df.tail(days)
+    handles = []
+    p1, = top.plot(ts_df.index, ts_df['close'], label="price")
+    handles.append(p1)
+    for ewma in ewmas:
+        y = ts_df['close'].ewm(span=ewma).mean()
+        p2, = top.plot(ts_df.index, y, label="%s day ewma" % ewma)
+        handles.append(p2)
+    top.legend(handles=handles)
+    bottom.bar(ts_df.index, ts_df['volume'])
+    bottom.set_ylim([ts_df['volume'].min(), ts_df['volume'].max()])
+    #     sns.lineplot(x="index", y="close", data=ts_df.reset_index(),ax=top)
+    #     sns.barplot(x="index", y="volume", data=ts_df.reset_index(),ax=bottom)
+
+    # set the labels
+    top.axes.get_xaxis().set_visible(False)
+    top.set_title(name)
+    top.set_ylabel('Closing Price')
+    bottom.set_ylabel('Volume')
+
+    plt.show()
+
+
 def generate_returns_chart(stocks, days=1095):
     plt.figure(figsize=(16, 8))
     stocks = {key: stocks[key].tail(days).apply(lambda x: x / x[0]) for key in stocks.keys()}
