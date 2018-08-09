@@ -1,5 +1,6 @@
 import numpy as np # linear algebra
 import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
+from stockstats import StockDataFrame
 
 import warnings
 import traceback
@@ -292,7 +293,9 @@ def get_ratios(url):
                    ('Asset Turnover Ratio (%)', 'ratios_asset_turnover_ratio'),
                    ('Current Ratio (X)', 'ratios_cr'),
                    ('EV/EBITDA (X)', 'ratios_ev_by_ebitda'),
-                   ('Price/BV (X)', 'ratios_pb')]
+                   ('Price/BV (X)', 'ratios_pb'),
+                   ('MarketCap/Net Operating Revenue (X)','mcap/revenue'),
+                   ('Price/Net Operating Revenue','price/revenue')]
 
     ratios = {your_key[1]: ratios[your_key[0]] if your_key[0] in ratios else [] for your_key in needed_keys}
     return ratios
@@ -416,6 +419,49 @@ def get_past_prices(sc_id):
         past_prices = past_prices_nse
     else:
         past_prices = past_prices_bse
+    stock = StockDataFrame.retype(past_prices)
+    past_prices['rsi_15'] = stock['rsi_15']
+    past_prices['rsi_45'] = stock['rsi_45']
+    past_prices['rsi_75'] = stock['rsi_75']
+    past_prices['rsi_130'] = stock['rsi_130']
+    past_prices['boll_ub'] = stock['boll_ub']
+    past_prices['boll_lb'] = stock['boll_lb']
+
+    past_prices['boll_ub_gap'] = (past_prices['boll_lb'] - past_prices['close']) / past_prices['boll_lb']
+    past_prices['boll_lb_gap'] = (past_prices['close'] - past_prices['boll_ub']) / past_prices['boll_ub']
+    past_prices["weekly_change"] = past_prices[["close"]].rolling(6).agg({"close": lambda x: (x[-1] - x[0]) / x[0]})
+    past_prices["monthly_change"] = past_prices[["close"]].rolling(21).agg({"close": lambda x: (x[-1] - x[0]) / x[0]})
+    past_prices["3m_change"] = past_prices[["close"]].rolling(65).agg({"close": lambda x: (x[-1] - x[0]) / x[0]})
+    past_prices["6m_change"] = past_prices[["close"]].rolling(130).agg({"close": lambda x: (x[-1] - x[0]) / x[0]})
+
+    past_prices["ewm_7_close"] = past_prices['close'].ewm(span=7).mean()
+    past_prices["ewm_30_close"] = past_prices['close'].ewm(span=30).mean()
+    past_prices["ewm_120_close"] = past_prices['close'].ewm(span=120).mean()
+
+    past_prices["ewm_7_close_diff"] = (past_prices['close'] - past_prices["ewm_7_close"]) / past_prices["ewm_7_close"]
+    past_prices["ewm_30_close_diff"] = (past_prices['close'] - past_prices["ewm_30_close"]) / past_prices["ewm_30_close"]
+    past_prices["ewm_120_close_diff"] = (past_prices['close'] - past_prices["ewm_120_close"]) / past_prices["ewm_120_close"]
+
+    past_prices["std_7_close"] = past_prices['close'].ewm(span=7).std()
+    past_prices["std_30_close"] = past_prices['close'].ewm(span=30).std()
+    past_prices["std_120_close"] = past_prices['close'].ewm(span=120).std()
+
+    past_prices["ewm_7_volume"] = past_prices['volume'].ewm(span=7).mean()
+    past_prices["ewm_30_volume"] = past_prices['volume'].ewm(span=30).mean()
+    past_prices["ewm_120_volume"] = past_prices['volume'].ewm(span=120).mean()
+
+    past_prices["ewm_7_volume_diff"] = (past_prices['volume'] - past_prices["ewm_7_volume"]) / past_prices["ewm_7_volume"]
+    past_prices["ewm_30_volume_diff"] = (past_prices['volume'] - past_prices["ewm_30_volume"]) / past_prices["ewm_30_volume"]
+    past_prices["ewm_120_volume_diff"] = (past_prices['volume'] - past_prices["ewm_120_volume"]) / past_prices["ewm_120_volume"]
+
+    past_prices["std_7_volume"] = past_prices['volume'].ewm(span=7).std()
+    past_prices["std_30_volume"] = past_prices['volume'].ewm(span=30).std()
+    past_prices["std_120_volume"] = past_prices['volume'].ewm(span=120).std()
+
+    past_prices.fillna(0, inplace=True)
+    df_utils.drop_columns_safely(past_prices, ["close_-1_d", 'close_-1_s', 'rs_45', 'rs_15', 'close_20_sma', 'close_20_mstd',
+                                      'boll'], inplace=True)
+
     res = {"all_past_prices": past_prices, "last_year": ly, "two_year_ago": two_year_ago,
            "three_year_ago": three_year_ago, "five_year_ago": five_year_ago}
     return res
@@ -456,6 +502,10 @@ def get_scrip_info(url):
         low = ffloat(page_content.find('span', attrs={'id': 'b_low_sh'}).text.split(" ")[0])
         high = ffloat(page_content.find('span', attrs={'id': 'b_high_sh'}).text.split(" ")[0])
         open_price = ffloat(page_content.find('div', attrs={'id': 'n_open'}).text.split(" ")[0].replace(',', ''))
+
+        today_change = page_content.find('div',attrs={'id':'n_changetext'}).text.strip().split(" ")
+        today_change_value = ffloat(today_change[0])
+        today_change_percent = ffloat(today_change[1])
 
         name = page_content.find('h1', attrs={'class': 'company_name'}).text
 
@@ -604,6 +654,8 @@ def get_scrip_info(url):
         key_val_pairs["pb"] = ffloat(key_val_pairs.pop('PRICE/BOOK'))
         key_val_pairs["pc"] = ffloat(key_val_pairs.pop('P/C'))
         key_val_pairs['price'] = ffloat(price)
+        key_val_pairs['today_change_value'] = today_change_value
+        key_val_pairs['today_change_percent'] = today_change_percent
         key_val_pairs['low'] = low
         key_val_pairs['high'] = high
         key_val_pairs['open'] = open_price
@@ -1000,6 +1052,37 @@ def generate_returns_chart(stocks, days=1095):
 
     plt.show()
 
+
+def generate_rolling_returns_chart(stocks, days=1095, rolling=252):
+    plt.figure(figsize=(16, 8))
+    stocks = {key: stocks[key][['close']] for key in stocks.keys()}
+    for df in stocks.values():
+        df[["close"]] = df[["close"]].rolling(rolling).agg({"close": lambda x: (x[-1] - x[0]) * 100 / x[0]})
+
+    stocks = {key: stocks[key].tail(days)[['close']] for key in stocks.keys()}
+    handles = []
+    for key in stocks.keys():
+        y = stocks[key]['close']
+        p2, = plt.plot(stocks[key].index, y, label=key)
+        handles.append(p2)
+    plt.legend(handles=handles)
+    plt.title("Rolling returns")
+    plt.ylabel('Rolling Returns')
+    plt.show()
+
+
+    for key in stocks.keys():
+        stocks[key]['name'] = key
+
+    all_stocks = pd.concat(list(stocks.values()))
+
+    fig, ax = plt.subplots(figsize=(16, 8))
+    sns.boxplot(x="name", y="close", data=all_stocks, ax=ax);
+    ax.xaxis.set_tick_params(rotation=90)
+    plt.title("Rolling Returns variation")
+    plt.show()
+
+
 def generate_percent_change_chart(stocks,days=1095):
     plt.figure(figsize=(16,8))
     stocks = {key:stocks[key].tail(days).pct_change()*100 for key in stocks.keys()}
@@ -1021,7 +1104,6 @@ def generate_percent_change_chart(stocks,days=1095):
 
 
 def get_all_details_for_mf(scrip_links_table, percent_col=4, scrip_col=0, threadpool_size=8):
-    scrip_details = list()
     percent_col = 4
     scrip_col = 0
     qty_col = 2
@@ -1056,7 +1138,7 @@ def get_all_details_for_mf(scrip_links_table, percent_col=4, scrip_col=0, thread
     return scrip_details
 
 
-def fund_price_analysis(fund_list, benchmark_index_prices={}, days=1095):
+def fund_returns_analysis(fund_list, benchmark_index_prices={}, days=1095):
     fund_prices = {}
     for fund in fund_list:
         portfolio_table, fund_name = get_portfolio(mfid=fund)
@@ -1065,8 +1147,9 @@ def fund_price_analysis(fund_list, benchmark_index_prices={}, days=1095):
             ['open', 'high', 'low', 'close', 'volume']]
         prices_df.index = pd.to_datetime(prices_df.index)
         fund_prices[fund_name] = prices_df
-    generate_returns_chart({**fund_prices, **benchmark_index_prices}, days=1095)
-    generate_percent_change_chart({**fund_prices, **benchmark_index_prices}, days=1095)
+    generate_returns_chart({**fund_prices, **benchmark_index_prices}, days=days)
+    generate_percent_change_chart({**fund_prices, **benchmark_index_prices}, days=days)
+    generate_rolling_returns_chart({**fund_prices, **benchmark_index_prices}, days=days,rolling=252*2)
 
 def comparative_analysis(fund_list,threadpool_size=8):
     fund_details = list()

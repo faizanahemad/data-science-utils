@@ -6,6 +6,7 @@ import pandas as pd
 
 from fastnumbers import isfloat
 from fastnumbers import fast_float
+import re
 
 def print_function_code(func):
     print("".join(inspect.getsourcelines(func)[0]))
@@ -37,7 +38,8 @@ def ffloat(string):
         return np.nan
     if type(string)==float or type(string)==int or type(string)==np.int64 or type(string)==np.float64:
         return string
-    return fast_float(string.split(" ")[0].replace(',','').replace('%',''),default=np.nan)
+    string = re.sub('[^0-9\.]','',string.split(" ")[0])
+    return fast_float(string,default=np.nan)
 
 def ffloat_list(string_list):
     return list(map(ffloat,string_list))
