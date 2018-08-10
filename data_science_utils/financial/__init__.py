@@ -1056,6 +1056,20 @@ def generate_returns_chart(stocks, days=1095):
 def generate_rolling_returns_chart(stocks, days=1095, rolling=252):
     plt.figure(figsize=(16, 8))
     stocks = {key: stocks[key][['close']] for key in stocks.keys()}
+
+    # Only take intersection of all indexes (dates) else rolling calculation will be screwed up
+    indexes = None
+    for key in stocks.keys():
+        stock = stocks[key].tail(days + rolling)
+        if indexes is None:
+            indexes = set(stock.index)
+        else:
+            indexes = indexes.intersection(set(stock.index))
+    for key in stocks.keys():
+        stock = stocks[key]
+        stock = stock[stock.index.isin(indexes)]
+        stocks[key] = stock
+
     for df in stocks.values():
         df[["close"]] = df[["close"]].rolling(rolling).agg({"close": lambda x: (x[-1] - x[0]) * 100 / x[0]})
 
@@ -1069,8 +1083,6 @@ def generate_rolling_returns_chart(stocks, days=1095, rolling=252):
     plt.title("Rolling returns")
     plt.ylabel('Rolling Returns')
     plt.show()
-
-
     for key in stocks.keys():
         stocks[key]['name'] = key
 
