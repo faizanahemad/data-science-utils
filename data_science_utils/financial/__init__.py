@@ -1138,7 +1138,7 @@ def get_all_details_for_mf(scrip_links_table, percent_col=4, scrip_col=0, thread
     return scrip_details
 
 
-def fund_returns_analysis(fund_list, benchmark_index_prices={}, days=1095):
+def fund_returns_analysis(fund_list, benchmark_index_prices={}, days=1095,rolling=252):
     fund_prices = {}
     for fund in fund_list:
         portfolio_table, fund_name = get_portfolio(mfid=fund)
@@ -1149,7 +1149,7 @@ def fund_returns_analysis(fund_list, benchmark_index_prices={}, days=1095):
         fund_prices[fund_name] = prices_df
     generate_returns_chart({**fund_prices, **benchmark_index_prices}, days=days)
     generate_percent_change_chart({**fund_prices, **benchmark_index_prices}, days=days)
-    generate_rolling_returns_chart({**fund_prices, **benchmark_index_prices}, days=days,rolling=252*2)
+    generate_rolling_returns_chart({**fund_prices, **benchmark_index_prices}, days=days,rolling=rolling)
 
 def comparative_analysis(fund_list,threadpool_size=8):
     fund_details = list()
