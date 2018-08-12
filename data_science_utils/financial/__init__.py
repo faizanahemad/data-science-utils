@@ -129,8 +129,9 @@ def get_year_when_cumulative_profit_over_pe(pe,cpg):
     return int(np.ceil(pe))
 
 
+
 def get_children(html_content):
-    return [item for item in html_content.children if type(item) == bs4.element.Tag]
+    return [item for item in html_content.children if type(item)==bs4.element.Tag or len(str(item).replace("\n","").strip())>0]
 
 
 def get_portfolio(mfid):
