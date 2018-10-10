@@ -8,6 +8,7 @@ from sklearn.preprocessing import RobustScaler
 from sklearn.preprocessing import MinMaxScaler
 import matplotlib.ticker as ticker
 from sklearn.metrics import mean_squared_error
+import seaborn as sns
 
 
 def scatter_plot_exclude_outliers(f_name,predicted_column,df,title=None,percentile=[0.01,0.99],logy=False,logx=False):
@@ -301,3 +302,49 @@ def analyze_ts_results(test_true, test_pred, train_true=[], train_pred=[], times
               "mean_weighted_ape": mean_weighted_ape_test, "weighted_ape_sum": weighted_ape_test,
               "absolute_percent_errors": absolute_percent_errors_test}
     return result
+
+
+def plot_correlation_heatmap(df, threshold=0, figsize=(10, 8)):
+    corr = df.corr()
+    corr = corr.where(np.abs(corr) > threshold, 0)
+
+    # Generate a mask for the upper triangle
+    mask = np.zeros_like(corr, dtype=np.bool)
+    mask[np.triu_indices_from(mask)] = True
+
+    # Set up the matplotlib figure
+    f, ax = plt.subplots(figsize=figsize)
+
+    # Generate a custom diverging colormap
+    cmap = sns.diverging_palette(240, 10, as_cmap=True)
+
+    # Draw the heatmap with the mask and correct aspect ratio
+    sns.heatmap(corr, mask=mask, cmap=cmap, vmax=1.0, vmin=-1.0, cbar_kws={"shrink": .8}, center=0,
+                square=True, linewidths=.5, annot=True, fmt='.2f')
+    plt.title("Column Correlation Heatmap")
+    plt.show()
+    return corr
+
+def sorted_barplot(df,x,y,limit=50,ascending=True,figsize=(16, 6),logy=False):
+    plt.figure(figsize=figsize)
+    df = df.sort_values(by=[y], ascending=ascending).reset_index(drop=True)
+    tf = df.head(50)[[x,y]]
+    ax = sns.barplot(tf[x], tf[y])
+    plt.title("%s vs %s Plot"%(x,y))
+    plt.xticks(rotation='vertical')
+    plt.show()
+
+
+from collections import Counter
+import itertools
+def get_pairwise_co_occurence(array_of_arrays,items_taken_together=2):
+    counter = Counter()
+    for v in array_of_arrays:
+        permuted_values = list(itertools.combinations(v, items_taken_together))
+        counter.update(permuted_values)
+    # The key in the dict being a list cannot be possible unless it's converted to a string.
+    co_oc = pd.DataFrame(np.array([[key,value] for key,value in counter.items()]),columns=['items_taken_together','frequency'])
+    co_oc['frequency'] = co_oc['frequency'].astype(int)
+    co_oc = co_oc[co_oc['frequency']>0]
+    co_oc = co_oc.sort_values(['frequency'], ascending=False)
+    return co_oc

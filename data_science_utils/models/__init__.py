@@ -37,6 +37,16 @@ def rmse(y_true,y_pred):
     y_pred = np.asarray(y_pred)
     return mean_squared_error(y_true,y_pred) ** 0.5
 
+
+def mean_absolute_percentage_error(y_true, y_pred, epsilon=1e-4):
+    y_true = np.asarray(y_true)
+    y_pred = np.asarray(y_pred)
+    diff = np.abs((y_true - y_pred) / np.clip(np.abs(y_true),
+                                              epsilon,
+                                            None))
+    return 100. * np.mean(diff)
+
+
 def gini(actual, pred, cmpcol = 0, sortcol = 1):
     assert( len(actual) == len(pred) )
     all = np.asarray(np.c_[ actual, pred, np.arange(len(actual)) ], dtype=np.float)

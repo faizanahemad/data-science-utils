@@ -7,6 +7,10 @@ import pandas as pd
 from fastnumbers import isfloat
 from fastnumbers import fast_float
 import re
+import os
+from multiprocessing import Pool
+import functools
+
 
 def print_function_code(func):
     print("".join(inspect.getsourcelines(func)[0]))
@@ -48,5 +52,17 @@ def remove_multiple_spaces(string):
     if type(string)==str:
         return ' '.join(string.split())
     return string
+
+
+def parallel_map_reduce(initial_values,map_fn,reduce_fn=None,reduce_initializer=None,cores=os.cpu_count()-1):
+    with Pool(processes=cores) as pool:
+        result = pool.map(map_fn, initial_values)
+    if reduce_fn is None:
+        return result
+    else:
+        if reduce_initializer is not None:
+            return functools.reduce(reduce_fn, result,reduce_initializer)
+        else:
+            return functools.reduce(reduce_fn, result)
 
 
