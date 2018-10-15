@@ -134,9 +134,12 @@ class MySQLDataBaseConnection:
             splits = int(len(values)/100)
             splitted = np.array_split(values, splits)
             for split in splitted:
-                cursor = conn.cursor()
-                cursor.executemany(query, split)
-                conn.commit()
+                try:
+                    cursor = conn.cursor()
+                    cursor.executemany(query, split)
+                    conn.commit()
+                finally:
+                    cursor.close()
         finally:
             cursor.close()
             self._handle_connection()
@@ -171,12 +174,14 @@ class MySQLDataBaseConnection:
             splits = int(len(values) / 100)
             splitted = np.array_split(values, splits)
             for split in splitted:
-                cursor = conn.cursor()
-                cursor.executemany(query, split)
-                conn.commit()
+                try:
+                    cursor = conn.cursor()
+                    cursor.executemany(query, split)
+                    conn.commit()
+                finally:
+                    cursor.close()
 
         finally:
-            cursor.close()
             self._handle_connection()
 
     def insert_or_update_dataframe(self, table_name, df, cols):
