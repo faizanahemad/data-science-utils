@@ -131,12 +131,12 @@ class MySQLDataBaseConnection:
             query = "INSERT INTO %s (%s)" % (table_name, colnames)
             query = query + " VALUES (%s)" % (placeholders)
             conn = self.conn
-            cursor = conn.cursor()
-            splits = int(len(values)/1000)
+            splits = int(len(values)/100)
             splitted = np.array_split(values, splits)
             for split in splitted:
+                cursor = conn.cursor()
                 cursor.executemany(query, split)
-            conn.commit()
+                conn.commit()
         finally:
             cursor.close()
             self._handle_connection()
@@ -167,13 +167,13 @@ class MySQLDataBaseConnection:
             query = "INSERT INTO %s %s  VALUES %s ON DUPLICATE KEY UPDATE %s" % (
             table_name, colnames, placeholders, assignments)
             conn = self.conn
-            cursor = conn.cursor()
 
-            splits = int(len(values) / 1000)
+            splits = int(len(values) / 100)
             splitted = np.array_split(values, splits)
             for split in splitted:
+                cursor = conn.cursor()
                 cursor.executemany(query, split)
-            conn.commit()
+                conn.commit()
 
         finally:
             cursor.close()
