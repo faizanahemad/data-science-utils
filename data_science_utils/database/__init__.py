@@ -115,7 +115,7 @@ class MySQLDataBaseConnection:
             self._handle_connection()
 
     def insert_multiple_rows(self, table_name, cols, values):
-        if not bool(cols):
+        if cols is None or len(cols) == 0:
             raise ValueError("Empty Columns list passed for writing")
         if values is None or len(values) == 0:
             raise ValueError("Empty Values list passed for writing")
@@ -146,7 +146,7 @@ class MySQLDataBaseConnection:
         self.insert_multiple_rows(table_name, cols, df[cols].values)
 
     def insert_or_update_rows(self, table_name, cols, values):
-        if not bool(cols):
+        if cols is None or len(cols) == 0:
             raise ValueError("Empty Columns list passed for writing")
         if values is None or len(values) == 0:
             raise ValueError("Empty Values list passed for writing")
