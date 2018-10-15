@@ -132,7 +132,10 @@ class MySQLDataBaseConnection:
             query = query + " VALUES (%s)" % (placeholders)
             conn = self.conn
             cursor = conn.cursor()
-            cursor.executemany(query, values)
+            splits = int(len(values)/1000)
+            splitted = np.array_split(values, splits)
+            for split in splitted:
+                cursor.executemany(query, split)
             conn.commit()
         finally:
             cursor.close()
@@ -165,8 +168,13 @@ class MySQLDataBaseConnection:
             table_name, colnames, placeholders, assignments)
             conn = self.conn
             cursor = conn.cursor()
-            cursor.executemany(query, values)
+
+            splits = int(len(values) / 1000)
+            splitted = np.array_split(values, splits)
+            for split in splitted:
+                cursor.executemany(query, split)
             conn.commit()
+
         finally:
             cursor.close()
             self._handle_connection()
