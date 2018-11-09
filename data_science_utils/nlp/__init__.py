@@ -235,11 +235,11 @@ def replace_measurement(text):
 
 
 def tokenize_lemmatize(text, external_text_processing_funcs=[replace_numbers], lemmatizer=None):
+    if text is None:
+        return []
     if external_text_processing_funcs is not None:
         for fn in external_text_processing_funcs:
             text = fn(text)
-    if text is None:
-        return []
     if lemmatizer is None:
         lemmatizer = WordNetLemmatizer()
     tokens = word_tokenize(text)
