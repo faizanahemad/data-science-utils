@@ -18,7 +18,7 @@ def get_column_names(df,sorted=True):
 def count_nulls(df):
     """Missing value count per column grouped by column name"""
     df_t = pd.DataFrame(df.isnull().sum()).rename(columns={0:"count"})
-    df_t["percent_null"] = df_t["count"]/df.shape[0]
+    df_t["percent_null"] = 100.0*df_t["count"]/df.shape[0]
     df_t.index.names = ["Column"]
     return df_t.sort_values("percent_null",ascending=False)
 
