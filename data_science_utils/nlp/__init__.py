@@ -235,7 +235,7 @@ def replace_measurement(text):
 
 
 def tokenize_lemmatize(text, external_text_processing_funcs=[replace_numbers], lemmatizer=None):
-    if text is None:
+    if text is None or type(text) is not str:
         return []
     if external_text_processing_funcs is not None:
         for fn in external_text_processing_funcs:
