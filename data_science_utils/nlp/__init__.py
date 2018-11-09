@@ -43,6 +43,7 @@ def get_number_base_words():
                "ninety-one", "ninety-two", "ninety-three", "ninety-four", "ninety-five", "ninety-six", "ninety-seven",
                "ninety-eight", "ninety-nine", ]
 
+    nums = list(range(0, 100))
     n2 = [l.replace("-", "") for l in numbers]
     n3 = [l.replace("-", " ") for l in numbers]
     scales = ["hundred", "thousand", "lakh", "million", "crore", "billion", "trillion"]
