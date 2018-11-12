@@ -186,13 +186,14 @@ def get_measurement_translators():
                               "milli-metre","mili-meter","mili-metre","mili-meters","mili-metres"
                               "kilo-meter", "kilo-metre", "meters", "metres", "centi-meters", "milli-meters",
                               "centi-metres", "milli-metres","mtr",
-                              "kilo-meters", "kilo-metres", "mile", "miles","inch","inches","in","cms"]
+                              "kilo-meters", "kilo-metres", "mile", "miles","inch","inches","in","cms","foot","feet","ft"]
     length_translator = __get_translator_from_representation(length_representations, UNIT_OF_LENGTH)
-    volume_representations = ["ml", "l", "liter", "litre", "liters", "litres", "meter-cube", "m3", "cm3", "metre-cube",
-                              "cubic-meter", "cubic-metre","lit","mili-liters","mili-liter","barrel","barrels","ltr"]
+    volume_representations = ["ml", "l","lt","ltrs","ltr", "liter", "litre", "liters", "litres", "meter-cube", "m3", "cm3", "metre-cube",
+                              "cubic-meter", "cubic-metre","lit","mili-liters","mili-liter","milli-litres","milli-liters",
+                              "milli-litre", "milli-liter","barrel","barrels","cc"]
     volume_translator = __get_translator_from_representation(volume_representations, UNIT_OF_VOLUME)
     time_representations = ["s", "secs", "second", "seconds", "min", "minute", "minutes", "hour", "hours", "hr", "hrs",
-                            "day", "days", "d", "week", "weeks", "month", "months", "year", "y", "years"]
+                            "day", "days", "d", "week", "weeks", "month", "months", "year", "y", "years","yrs","yr"]
     time_translator = __get_translator_from_representation(time_representations, UNIT_OF_TIME)
     mass_representations = ["mg", "milli-gram", "milli-grams", "gram", "gm", "grams", "gms", "g", "kilo", "kilos", "kg",
                             "kgs","lb","ounce","ounces",
