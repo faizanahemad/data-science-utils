@@ -164,7 +164,7 @@ def replace_numbers(text):
     if text is None or type(text) is not str:
         return text
     base_words = get_number_base_words()
-    text = translate(text, {" "+k+" ": "_NUM_" for k, v in base_words.items()})
+    text = translate(text, {" "+k+" ": " _NUM_ " for k, v in base_words.items()})
     text = re.sub(r"[0-9]+.[0-9]+", "_NUM_", text)
     return re.sub(r"[0-9]+", "_NUM_", text)
 
@@ -212,9 +212,9 @@ def get_measurement_translators():
 
 
 def replace_measurement(text):
-    text = text + " "
-    # adding above line here since we check space before adding units
-    # so if the number+unit occur at end of string they may get missed
+    text = " "+text + " "
+    # adding above line here since we check space before and after adding units
+    # so if the number+unit occur at start or end of string they may get missed
     if text is None or type(text) is not str:
         return text
     text = replace_numbers(text)
