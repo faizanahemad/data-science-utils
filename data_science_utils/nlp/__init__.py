@@ -183,20 +183,20 @@ def __get_translator_from_representation(representations, unit):
 
 def get_measurement_translators():
     length_representations = ["m", "cm", "mm", "km", "meter", "metre", "centi-meter", "milli-meter", "centi-metre",
-                              "milli-metre",
+                              "milli-metre","mili-meter","mili-metre","mili-meters","mili-metres"
                               "kilo-meter", "kilo-metre", "meters", "metres", "centi-meters", "milli-meters",
-                              "centi-metres", "milli-metres",
-                              "kilo-meters", "kilo-metres", "mile", "miles"]
+                              "centi-metres", "milli-metres","mtr",
+                              "kilo-meters", "kilo-metres", "mile", "miles","inch","inches","in","cms"]
     length_translator = __get_translator_from_representation(length_representations, UNIT_OF_LENGTH)
     volume_representations = ["ml", "l", "liter", "litre", "liters", "litres", "meter-cube", "m3", "cm3", "metre-cube",
-                              "cubic-meter", "cubic-metre"]
+                              "cubic-meter", "cubic-metre","lit","mili-liters","mili-liter","barrel","barrels","ltr"]
     volume_translator = __get_translator_from_representation(volume_representations, UNIT_OF_VOLUME)
     time_representations = ["s", "secs", "second", "seconds", "min", "minute", "minutes", "hour", "hours", "hr", "hrs",
                             "day", "days", "d", "week", "weeks", "month", "months", "year", "y", "years"]
     time_translator = __get_translator_from_representation(time_representations, UNIT_OF_TIME)
     mass_representations = ["mg", "milli-gram", "milli-grams", "gram", "gm", "grams", "gms", "g", "kilo", "kilos", "kg",
-                            "kgs",
-                            "kilo-gram", "kilo-grams", "ton", "tonnes", "quintal", "quintals"]
+                            "kgs","lb","ounce","ounces",
+                            "kilo-gram", "kilo-grams", "ton", "tonnes", "quintal", "quintals","oz","pound","pounds"]
     mass_translator = __get_translator_from_representation(mass_representations, UNIT_OF_MASS)
     electricity_representations = ["watt", "w", "kw", "kilo-watt", "kilo-watts", "v", "volt", "volts", "ampere", "a",
                                    "amperes", "kwh", "wh",
