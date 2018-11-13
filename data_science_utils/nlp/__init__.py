@@ -193,7 +193,7 @@ def get_measurement_translators():
                               "milli-litre", "milli-liter","barrel","barrels","cc"]
     volume_translator = __get_translator_from_representation(volume_representations, UNIT_OF_VOLUME)
     time_representations = ["s", "secs", "second", "seconds", "min", "minute", "minutes", "hour", "hours", "hr", "hrs",
-                            "day", "days", "d", "week", "weeks", "month", "months", "year", "y", "years","yrs","yr"]
+                            "day", "days", "d", "week", "weeks", "month", "months", "year", "y", "years","yrs","yr","monhs"]
     time_translator = __get_translator_from_representation(time_representations, UNIT_OF_TIME)
     mass_representations = ["mg", "milli-gram", "milli-grams", "gram", "gm", "grams", "gms", "g", "kilo", "kilos", "kg",
                             "kgs","lb","ounce","ounces",

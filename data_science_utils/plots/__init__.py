@@ -10,6 +10,10 @@ import matplotlib.ticker as ticker
 from sklearn.metrics import mean_squared_error
 import seaborn as sns
 
+from sklearn.metrics import precision_recall_curve
+from sklearn.utils.fixes import signature
+from sklearn.metrics import average_precision_score
+
 
 def scatter_plot_exclude_outliers(f_name,predicted_column,df,title=None,percentile=[0.01,0.99],logy=False,logx=False):
     df = utils.filter_dataframe_percentile(df,{f_name:percentile,predicted_column:percentile})
@@ -348,3 +352,21 @@ def get_pairwise_co_occurence(array_of_arrays,items_taken_together=2):
     co_oc = co_oc[co_oc['frequency']>0]
     co_oc = co_oc.sort_values(['frequency'], ascending=False)
     return co_oc
+
+
+def precision_recall_curve_binary(y_eval, y_score):
+    precision, recall, _ = precision_recall_curve(y_eval, y_score)
+    step_kwargs = ({'step': 'post'}
+                   if 'step' in signature(plt.fill_between).parameters
+                   else {})
+    plt.figure(figsize=(8, 8))
+    plt.step(recall, precision, color='b', alpha=0.2,
+             where='post')
+    ap = average_precision_score(y_eval, y_score)
+    plt.fill_between(recall, precision, alpha=0.2, color='b', **step_kwargs)
+    plt.xlabel('Recall')
+    plt.ylabel('Precision')
+    plt.ylim([0.0, 1.05])
+    plt.xlim([0.0, 1.0])
+    plt.title('Precision-Recall curve: Average Precision = %.4f' % (ap));
+    plt.show()
