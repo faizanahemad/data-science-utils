@@ -13,6 +13,7 @@ Import the following for use
 from data_science_utils import dataframe as df_utils
 from data_science_utils import models as model_utils
 from data_science_utils import plots as plot_utils
+from data_science_utils import preprocessing as pp_utils
 from data_science_utils.dataframe import column as column_utils
 from data_science_utils import misc as misc
 from data_science_utils import nlp as nlp_utils
