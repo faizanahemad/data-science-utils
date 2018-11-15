@@ -235,7 +235,7 @@ def replace_measurement(text):
     return text
 
 
-def tokenize_lemmatize(text, external_text_processing_funcs=[replace_numbers], lemmatizer=None):
+def tokenize_lemmatize(text, external_text_processing_funcs=[replace_numbers], lemmatizer=None, token_postprocessor=[]):
     if text is None or type(text) is not str:
         return []
     if external_text_processing_funcs is not None:
@@ -246,6 +246,9 @@ def tokenize_lemmatize(text, external_text_processing_funcs=[replace_numbers], l
     tokens = word_tokenize(text)
     pos_tags = nltk.pos_tag(tokens)
     tokens = list(map(lambda x: lemmatizer.lemmatize(x[0], get_wordnet_pos(x[1])), pos_tags))
+    if token_postprocessor is not None:
+        for fn in token_postprocessor:
+            tokens = [fn(token) for token in tokens]
     return tokens
 
 
@@ -268,8 +271,8 @@ def ngram_stopword(tokens, word_length_filter=3, ngram_limit=3):
 
 
 def combined_text_processing(text, external_text_processing_funcs=[replace_numbers], lemmatizer=None,
-                             word_length_filter=3, ngram_limit=3):
-    tokens = tokenize_lemmatize(text, external_text_processing_funcs, lemmatizer)
+                             word_length_filter=3, ngram_limit=3,token_postprocessor=[]):
+    tokens = tokenize_lemmatize(text, external_text_processing_funcs, lemmatizer,token_postprocessor)
     tokens = ngram_stopword(tokens, word_length_filter, ngram_limit)
     return tokens
 
