@@ -250,6 +250,7 @@ def tokenize_lemmatize(text, external_text_processing_funcs=[replace_numbers], l
 
 
 def ngram_stopword(tokens, word_length_filter=3, ngram_limit=3):
+    tokens = list(map(lambda x: re.sub('[^ a-zA-Z0-9]', '', x), tokens))
     tokens = list(map(lambda x: x.strip(), tokens))
     if ngram_limit is not None and ngram_limit >= 2:
         grams = list(more_itertools.flatten([ngrams(tokens, i) for i in range(2, ngram_limit + 1)]))
