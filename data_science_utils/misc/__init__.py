@@ -65,4 +65,10 @@ def parallel_map_reduce(initial_values,map_fn,reduce_fn=None,reduce_initializer=
         else:
             return functools.reduce(reduce_fn, result)
 
+def deep_map(fn,elems):
+    if isinstance(elems,list) or isinstance(elems,np.ndarray):
+        return list(map(lambda t:deep_map(fn,t), elems))
+    else:
+        return fn(elems)
+
 

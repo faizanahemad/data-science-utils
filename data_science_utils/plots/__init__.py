@@ -338,6 +338,14 @@ def sorted_barplot(df,x,y,limit=50,ascending=True,figsize=(16, 6),logy=False):
     plt.xticks(rotation='vertical')
     plt.show()
 
+def scatter_plot_labelled(x,y,labels,figsize=(12,12)):
+
+    fig, ax = plt.subplots(figsize=figsize)
+    ax.scatter(x, y)
+    for i, txt in enumerate(labels):
+        ax.annotate(txt, (x[i], y[i]))
+    plt.show()
+
 
 from collections import Counter
 import itertools
