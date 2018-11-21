@@ -278,3 +278,240 @@ def combined_text_processing(text, external_text_processing_funcs=[replace_numbe
 
 
 
+from gensim import models, corpora
+from nltk import word_tokenize
+from nltk.corpus import stopwords
+from gensim.corpora import MmCorpus
+from gensim.models.ldamodel import LdaModel
+from nltk import bigrams
+from nltk import trigrams
+from nltk.stem import WordNetLemmatizer
+from data_science_utils import dataframe as df_utils
+
+
+class LDATransformer:
+    def __init__(self, token_column="tokens", lda_prefix="lda_", no_below=10, no_above=0.2,
+                 iterations=100, num_topics=100, passes=10):
+        """
+        For pca strategy n_components,n_iter parameters are used. n_components determine
+        how many columns resulting transformation will have
+
+        :param strategy determines which strategy to take for reducing categorical variables
+            Supported values are pca and label_encode
+
+        :param n_components Valid for strategy="pca"
+
+        :param n_iter Valid for strategy="pca"
+
+        :param label_encode_combine Decides whether we combine all categorical column into 1 or not.
+        """
+
+        self.token_column = token_column
+        self.lda_prefix = lda_prefix
+        import multiprocessing
+        self.cpus = int((multiprocessing.cpu_count() / 2) - 1)
+        self.dictionary = None
+        self.model = None
+        self.no_below = no_below
+        self.no_above = no_above
+        self.iterations = iterations
+        self.num_topics = num_topics
+        self.passes = passes
+
+    def fit(self, X, y=None):
+        tokens = list(X[self.token_column].values)
+        dictionary = corpora.Dictionary(tokens)
+        self.dictionary = dictionary
+        self.dictionary.filter_extremes(no_below=self.no_below, no_above=self.no_above)
+        print('Number of unique tokens after filtering: %d' % len(dictionary))
+        X = X.copy()
+        X['bow'] = X[self.token_column].apply(dictionary.doc2bow)
+        from gensim.models.ldamulticore import LdaMulticore
+        eval_every = None
+        temp = dictionary[0]
+        id2word = dictionary.id2token
+        corpus = list(X['bow'].values)
+        num_topics = 120
+
+        model = LdaMulticore(corpus=corpus, id2word=id2word, chunksize=750, \
+                             eta='auto', \
+                             iterations=self.iterations, num_topics=self.num_topics, \
+                             passes=self.passes, eval_every=eval_every, workers=self.cpus)
+        self.model = model
+
+    def partial_fit(self, X, y=None):
+        self.fit(X, y)
+
+    def transform(self, X, y='deprecated', copy=None):
+        import pandas as pd
+        X = X.copy()
+        dictionary = self.dictionary
+        X['bow'] = X[self.token_column].apply(dictionary.doc2bow)
+
+        def bow_to_topics(bow):
+            return self.model[bow]
+
+        X['lda_topics'] = X.bow.apply(bow_to_topics)
+
+        lda_df = pd.DataFrame.from_records(X['lda_topics'].apply(lambda x: {k: v for k, v in x}).values)
+        lda_df.index = X['lda_topics'].index
+        lda_df.columns = [self.lda_prefix + str(i) for i in range(0, self.num_topics)]
+        X[list(lda_df.columns)] = lda_df
+        df_utils.drop_columns_safely(X, ['bow', 'lda_topics', self.token_column], inplace=True)
+        return X
+
+    def inverse_transform(self, X, copy=None):
+        raise NotImplementedError()
+
+    def fit_transform(self, X, y=None):
+        self.fit(X, y)
+        return self.transform(X, y)
+
+from gensim.test.utils import common_texts
+from gensim.models import FastText
+import multiprocessing
+import pandas as pd
+
+from data_science_utils.misc import deep_map
+
+
+class FasttextTransformer:
+    def __init__(self, size=128, window=3, min_count=1, iter=20, min_n=2, max_n=5, word_ngrams=1,
+                 workers=int(multiprocessing.cpu_count() / 2), ft_prefix="ft_", token_column=None, model=None):
+        self.size = size
+        self.window = window
+        self.min_count = min_count
+        self.iter = iter
+        self.min_n = min_n
+        self.max_n = max_n
+        self.word_ngrams = word_ngrams
+        self.workers = workers
+        self.token_column = token_column
+        self.model = model
+        assert type(self.token_column) == str
+        self.ft_prefix = ft_prefix
+
+    def fit(self, X, y='ignored'):
+        if type(X) == pd.DataFrame:
+            X = X[self.token_column].values
+
+        if self.model is None:
+            self.model = FastText(sentences=X, size=self.size, window=self.window, min_count=self.min_count,
+                                  iter=self.iter, min_n=self.min_n, max_n=self.max_n, word_ngrams=self.word_ngrams,
+                                  workers=self.workers)
+
+    def partial_fit(self, X, y=None):
+        self.fit(X, y='ignored')
+
+    def transform(self, X, y='ignored'):
+        if type(X) == pd.DataFrame:
+            Input = X[self.token_column].values
+        else:
+            raise ValueError()
+        tnsfr = lambda t: self.model.wv[t]
+        X = X.copy()
+        results = deep_map(tnsfr, Input)
+
+        X[self.token_column] = results
+        return X
+
+    def inverse_transform(self, X, copy=None):
+        raise NotImplementedError()
+
+    def fit_transform(self, X, y='ignored'):
+        self.fit(X)
+        return self.transform(X)
+
+
+
+from gensim.test.utils import common_texts
+from gensim.models import FastText
+import multiprocessing
+import pandas as pd
+import numpy as np
+from gensim import models, corpora
+from data_science_utils import dataframe as df_utils
+
+
+class FasttextTfIdfTransformer:
+    def __init__(self, size=128, window=3, min_count=1, iter=20, min_n=2, max_n=5, word_ngrams=2,
+                 workers=int(multiprocessing.cpu_count() / 2), ft_prefix="ft_", token_column=None,
+                 model=None, dictionary=None, tfidf=None):
+        self.size = size
+        self.window = window
+        self.min_count = min_count
+        self.iter = iter
+        self.min_n = min_n
+        self.max_n = max_n
+        self.word_ngrams = word_ngrams
+        self.workers = workers
+        self.token_column = token_column
+        self.model = model
+        self.tfidf = tfidf
+        assert type(self.token_column) == str
+        self.ft_prefix = ft_prefix
+        self.dictionary = dictionary
+
+    def fit(self, X, y='ignored'):
+        from gensim.models import TfidfModel
+        if type(X) == pd.DataFrame:
+            X = X[self.token_column].values
+
+        if self.model is None:
+            self.model = FastText(sentences=X, size=self.size, window=self.window, min_count=self.min_count,
+                                  iter=self.iter, min_n=self.min_n, max_n=self.max_n, word_ngrams=self.word_ngrams,
+                                  workers=self.workers)
+        if self.dictionary is None:
+            dictionary = corpora.Dictionary(X)
+            self.dictionary = dictionary
+            self.dictionary.filter_extremes(no_below=3, no_above=0.25)
+        if self.tfidf is None:
+            bows = list(map(self.dictionary.doc2bow, X))
+            tfidf = TfidfModel(bows, normalize=True)
+            self.tfidf = tfidf
+
+    def partial_fit(self, X, y=None):
+        self.fit(X, y='ignored')
+
+    def transform(self, X, y='ignored'):
+        if type(X) == pd.DataFrame:
+            Input = X[self.token_column].values
+        else:
+            raise ValueError()
+        X = X.copy()
+
+        def tokens2tfidf(token_array, tfidf, dictionary):
+            id2tfidf = {k: v for k, v in tfidf[dictionary.doc2bow(token_array)]}
+            token2tfidf = {dictionary.id2token[k]: v for k, v in id2tfidf.items()}
+            return [token2tfidf[token] if token in token2tfidf else 0 for token in token_array]
+
+        def tokens2vec(token_array, fasttext_model):
+            if len(token_array) == 0:
+                return np.full(self.size, 0)
+            return [fasttext_model.wv[token] for token in token_array]
+
+        t2tfn = lambda tokens: tokens2tfidf(tokens, self.tfidf, self.dictionary)
+        tfidfs = list(map(t2tfn, Input))
+        ft_fn = lambda tokens: tokens2vec(tokens, self.model)
+        ft_vecs = list(map(ft_fn, Input))
+
+        def doc2vec(ftv, tfidf_rep):
+            if np.sum(ftv) == 0:
+                return np.full(self.size, 0)
+            if np.sum(tfidf_rep) == 0:
+                return np.average(ftv, axis=0)
+            return np.average(ftv, axis=0, weights=tfidf_rep)
+
+        results = list(map(lambda x: doc2vec(x[0], x[1]), zip(ft_vecs, tfidfs)))
+        text_df = pd.DataFrame(list(map(list, results)))
+        text_df.columns = [self.ft_prefix + str(i) for i in range(0, self.size)]
+        X[list(text_df.columns)] = text_df
+        df_utils.drop_columns_safely(X, [self.token_column], inplace=True)
+        return X
+
+    def inverse_transform(self, X, copy=None):
+        raise NotImplementedError()
+
+    def fit_transform(self, X, y='ignored'):
+        self.fit(X)
+        return self.transform(X)
