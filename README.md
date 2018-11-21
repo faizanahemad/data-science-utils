@@ -21,6 +21,16 @@ from data_science_utils.models.IdentityScaler import IdentityScaler
 
 ```
 
+Reloading Modules on Fly
+```python
+
+import importlib
+importlib.reload(misc)
+importlib.reload(nlp_utils)
+importlib.reload(pp_utils)
+
+```
+
 ### References or Resources
 - [find-the-column-name-which-has-the-maximum-value-for-each-row](https://stackoverflow.com/questions/29919306/find-the-column-name-which-has-the-maximum-value-for-each-row)
 - For setting debug points and debugging [read this about Ipython Tracer](http://kawahara.ca/how-to-debug-a-jupyter-ipython-notebook/)

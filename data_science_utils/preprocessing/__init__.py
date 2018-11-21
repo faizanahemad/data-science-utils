@@ -132,7 +132,7 @@ from data_science_utils import dataframe as df_utils
 import numpy as np
 
 class TargetBasedStatCategoricals:
-    def __init__(self,colnames,target,stat_fn=np.mean,suffix="_agg",fill_na=0):
+    def __init__(self,colnames,target,stat_fn=np.mean,suffix="_agg",nan_fill=0):
         """
         """
         import multiprocessing
@@ -140,15 +140,15 @@ class TargetBasedStatCategoricals:
         self.colnames=colnames
         self.target=target
         self.stat_fn=stat_fn
-        self.fill_na=fill_na
+        self.nan_fill=nan_fill
         self.group_values=None
         self.suffix = suffix
     def fit(self, X, y=None):
         if not type(X)==pd.DataFrame:
             raise ValueError()
         X=X.copy()
-        if self.fill_na is not None:
-            X[self.target] = X[self.target].fillna(self.fill_na)
+        if self.nan_fill is not None:
+            X[self.target] = X[self.target].fillna(self.nan_fill)
         gpv = X.groupby(self.colnames)[[self.target]].agg(self.stat_fn).reset_index(level=self.colnames)
         self.group_values = gpv
     def partial_fit(self, X, y=None):
