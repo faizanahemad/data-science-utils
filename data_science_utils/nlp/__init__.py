@@ -479,7 +479,7 @@ class FasttextTfIdfTransformer:
         else:
             raise ValueError()
         X = X.copy()
-
+        temp = self.dictionary[0]
         def tokens2tfidf(token_array, tfidf, dictionary):
             id2tfidf = {k: v for k, v in tfidf[dictionary.doc2bow(token_array)]}
             token2tfidf = {dictionary.id2token[k]: v for k, v in id2tfidf.items()}
@@ -515,3 +515,4 @@ class FasttextTfIdfTransformer:
     def fit_transform(self, X, y='ignored'):
         self.fit(X)
         return self.transform(X)
+
