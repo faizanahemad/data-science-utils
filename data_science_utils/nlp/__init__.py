@@ -464,7 +464,7 @@ class FasttextTfIdfTransformer:
         if self.dictionary is None:
             dictionary = corpora.Dictionary(X)
             self.dictionary = dictionary
-            self.dictionary.filter_extremes(no_below=3, no_above=0.25)
+            self.dictionary.filter_extremes(no_below=self.min_count)
         if self.tfidf is None:
             bows = list(map(self.dictionary.doc2bow, X))
             tfidf = TfidfModel(bows, normalize=True)
