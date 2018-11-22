@@ -161,6 +161,7 @@ class TargetBasedStatCategoricals:
         Input = X[self.colnames]
         result = Input.merge(self.group_values,on=self.colnames,how="left")
         result.rename(columns={self.target:"_".join(self.group_values)+self.suffix},inplace=True)
+        result.index = X.index
         df_utils.drop_columns_safely(result,self.group_values,inplace=True)
         X[result.columns] = result
         return X

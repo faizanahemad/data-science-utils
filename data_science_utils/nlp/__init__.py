@@ -506,6 +506,7 @@ class FasttextTfIdfTransformer:
         results = list(map(lambda x: doc2vec(x[0], x[1]), zip(ft_vecs, tfidfs)))
         text_df = pd.DataFrame(list(map(list, results)))
         text_df.columns = [self.ft_prefix + str(i) for i in range(0, self.size)]
+        text_df.index = X.index
         X[list(text_df.columns)] = text_df
         df_utils.drop_columns_safely(X, [self.token_column], inplace=True)
         return X
