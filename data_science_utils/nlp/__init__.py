@@ -489,7 +489,7 @@ class FasttextTfIdfTransformer:
         def tokens2vec(token_array, fasttext_model):
             if len(token_array) == 0:
                 return np.full(self.size, 0)
-            return [fasttext_model.wv[token] for token in token_array]
+            return [fasttext_model.wv[token] if token in fasttext_model.wv else np.full(self.size, 0) for token in token_array]
 
         t2tfn = lambda tokens: tokens2tfidf(tokens, self.tfidf, self.dictionary)
         tfidfs = list(map(t2tfn, Input))
