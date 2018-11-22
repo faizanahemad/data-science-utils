@@ -171,3 +171,38 @@ class TargetBasedStatCategoricals:
     def fit_transform(self, X,y=None):
         self.fit(X,y)
         return self.transform(X,y)
+
+
+import pandas as pd
+import numpy as np
+from gensim import models, corpora
+from data_science_utils import dataframe as df_utils
+
+
+class NamedColumnSelector:
+    def __init__(self, include_columns=None,exclude_columns=None):
+        self.include_columns = include_columns
+        self.exclude_columns = exclude_columns
+
+    def fit(self, X, y='ignored'):
+        pass
+
+    def partial_fit(self, X, y=None):
+        self.fit(X, y='ignored')
+
+    def transform(self, X, y='ignored'):
+        if type(X) != pd.DataFrame:
+            raise ValueError()
+        if self.include_columns is not None:
+            X=X[self.include_columns]
+        if self.exclude_columns is not None:
+            df_utils.drop_columns_safely(X,self.exclude_columns,inplace=True)
+        return X
+
+    def inverse_transform(self, X, copy=None):
+        raise NotImplementedError()
+
+    def fit_transform(self, X, y='ignored'):
+        self.fit(X)
+        return self.transform(X,y)
+
