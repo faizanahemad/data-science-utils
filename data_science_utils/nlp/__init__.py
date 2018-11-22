@@ -481,6 +481,7 @@ class FasttextTfIdfTransformer:
         X = X.copy()
         temp = self.dictionary[0]
         def tokens2tfidf(token_array, tfidf, dictionary):
+            tmp = self.dictionary[0]
             id2tfidf = {k: v for k, v in tfidf[dictionary.doc2bow(token_array)]}
             token2tfidf = {dictionary.id2token[k]: v for k, v in id2tfidf.items()}
             return [token2tfidf[token] if token in token2tfidf else 0 for token in token_array]
