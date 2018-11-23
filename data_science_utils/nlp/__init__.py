@@ -434,7 +434,7 @@ from data_science_utils import dataframe as df_utils
 
 
 class FasttextTfIdfTransformer:
-    def __init__(self, size=128, window=3, min_count=1, iter=20, min_n=2, max_n=5, word_ngrams=2,
+    def __init__(self, size=128, window=3, min_count=1, iter=20, min_n=2, max_n=5, word_ngrams=0,
                  workers=int(multiprocessing.cpu_count() / 2), ft_prefix="ft_", token_column=None,
                  model=None, dictionary=None, tfidf=None):
         self.size = size
@@ -452,6 +452,20 @@ class FasttextTfIdfTransformer:
         self.ft_prefix = ft_prefix
         self.dictionary = dictionary
 
+    def tokenise_for_fasttext_(self, X):
+        token_acc = []
+        for tarr in X:
+            new_tarr = []
+            for token in tarr:
+                new_tarr.append(token)
+                for tsize in range(self.min_n,self.max_n+1):
+                    if tsize>=len(token):
+                        continue
+                    new_tokens = list(map(lambda x:''.join(x),more_itertools.windowed(token,n=tsize, step=1)))
+                    new_tarr.extend(new_tokens)
+            token_acc.append(np.array(new_tarr))
+        return np.array(token_acc)
+
     def fit(self, X, y='ignored'):
         from gensim.models import TfidfModel
         if type(X) == pd.DataFrame:
@@ -461,6 +475,9 @@ class FasttextTfIdfTransformer:
             self.model = FastText(sentences=X, size=self.size, window=self.window, min_count=self.min_count,
                                   iter=self.iter, min_n=self.min_n, max_n=self.max_n, word_ngrams=self.word_ngrams,
                                   workers=self.workers)
+        if self.word_ngrams == 1 and self.min_n <= self.max_n:
+            X = self.tokenise_for_fasttext_(X)
+
         if self.dictionary is None:
             dictionary = corpora.Dictionary(X)
             self.dictionary = dictionary
