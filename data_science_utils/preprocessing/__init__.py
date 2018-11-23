@@ -158,6 +158,7 @@ class TargetBasedStatCategoricals:
         import pandas as pd
         if not type(X)==pd.DataFrame:
             raise ValueError()
+        X = X.copy()
         Input = X[self.colnames]
         result = Input.merge(self.group_values,on=self.colnames,how="left")
         result.rename(columns={self.target:"_".join(self.group_values)+self.suffix},inplace=True)
