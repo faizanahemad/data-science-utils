@@ -6,6 +6,8 @@ from sklearn.pipeline import Pipeline
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import FunctionTransformer
 from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.impute import SimpleImputer
 def reduce_dimensions_by_ohe_svd(frame,n_components=2,n_iter=10):
     """
 
@@ -72,12 +74,12 @@ class CategoricalFeatureTransformer:
         else:
             raise NotImplementedError()
 
+        enc = OneHotEncoder(handle_unknown='ignore')
+        scaler = StandardScaler()
+        ft = FunctionTransformer()
         if self.strategy == "pca":
             assert X.shape[1] > 1
             pca = TruncatedSVD(n_components=self.n_components, n_iter=self.n_iter)
-            enc = OneHotEncoder(handle_unknown='ignore')
-            scaler = StandardScaler()
-            ft = FunctionTransformer()
             pipeline = make_pipeline(enc, pca, scaler, ft)
             pipeline.fit(X)
         elif self.strategy == "label_encode":
@@ -104,7 +106,6 @@ class CategoricalFeatureTransformer:
             results = pd.DataFrame(results, columns=columns)
             results.index = X.index
             X = X.copy()
-            df_utils.drop_columns_safely(X, self.colidx, inplace=True)
             X[results.columns] = results
             return X
         else:

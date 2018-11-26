@@ -525,7 +525,6 @@ class FasttextTfIdfTransformer:
         text_df.columns = [self.ft_prefix + str(i) for i in range(0, self.size)]
         text_df.index = X.index
         X[list(text_df.columns)] = text_df
-        df_utils.drop_columns_safely(X, [self.token_column], inplace=True)
         return X
 
     def inverse_transform(self, X, copy=None):
