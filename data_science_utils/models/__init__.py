@@ -9,7 +9,15 @@ from sklearn.metrics import classification_report
 from sklearn.model_selection import StratifiedKFold
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import cross_validate
+from sklearn.pipeline import Pipeline
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import FunctionTransformer
+from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.impute import SimpleImputer
+import gc
 
+from data_science_utils.dataframe import get_specific_cols
 
 
 def feature_importance(model,df,features):
@@ -321,10 +329,10 @@ class BinaryClassifierToTransformer:
 
         if self.prefixes is not None:
             for pf in self.prefixes:
-                cols.extend(df_utils.get_specific_cols(X, prefix=pf))
+                cols.extend(get_specific_cols(X, prefix=pf))
         if self.suffixes is not None:
             for pf in self.suffixes:
-                cols.extend(df_utils.get_specific_cols(X, suffix=pf))
+                cols.extend(get_specific_cols(X, suffix=pf))
         cols = list(set(cols))
         return cols
 
@@ -361,6 +369,7 @@ class BinaryClassifierToTransformer:
             self.check_null_(Inp)
         probas = self.classifier.predict_proba(Inp)[:, 1]
         X[self.output_col] = probas
+        gc.collect()
         return X
 
     def inverse_transform(self, X, copy=None):
