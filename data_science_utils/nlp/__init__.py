@@ -327,7 +327,7 @@ class LDATransformer:
         X = X.copy()
         X['bow'] = X[self.token_column].apply(dictionary.doc2bow)
         from gensim.models.ldamulticore import LdaMulticore
-        eval_every = None
+        eval_every = int(self.iterations/10)+1
         temp = dictionary[0]
         id2word = dictionary.id2token
         corpus = list(X['bow'].values)

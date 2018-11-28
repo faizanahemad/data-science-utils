@@ -204,3 +204,168 @@ def cross_validate_classifier(model,X,y,scoring=['roc_auc','f1','f1_weighted','r
         scores['test_'+score+'_std'] = scores['test_'+score].std()
     return scores
 
+
+class ClassifierColumnCombiner():
+    def __init__(self, columns, voting='hard', voting_strategy="or", weights=None, classification_threshold=0.5):
+        self.voting = voting
+        self.weights = weights
+        if self.weights is None:
+            self.weights = np.full(len(columns), 1)
+        self.classification_threshold = classification_threshold
+        self.voting_strategy = voting_strategy
+        self.columns = columns
+
+    def set_weights(self, weights):
+        assert len(weights) == len(self.columns)
+        self.weights = weights
+
+    def fit(self, X, y):
+
+        if isinstance(y, np.ndarray) and len(y.shape) > 1 and y.shape[1] > 1:
+            raise NotImplementedError('Multilabel and multi-output'
+                                      ' classification is not supported.')
+
+        if self.voting not in ('soft', 'hard'):
+            raise ValueError("Voting must be 'soft' or 'hard'; got (voting=%r)"
+                             % self.voting)
+
+    def predict(self, X, voting=None, voting_strategy=None):
+        """ Predict class labels for X.
+        Parameters
+        ----------
+        X : {array-like, sparse matrix}, shape = [n_samples, n_features]
+            Training vectors, where n_samples is the number of samples and
+            n_features is the number of features.
+        Returns
+        ----------
+        maj : array-like, shape = [n_samples]
+            Predicted class labels.
+        """
+
+        if voting is None:
+            voting = self.voting
+
+        if voting_strategy is None:
+            voting_strategy = self.voting_strategy
+        if voting == 'soft':
+            maj = np.argmax(self.predict_proba(X), axis=1)
+
+        else:
+            predictions = self._predict(X)
+            # 'hard' voting
+            if voting_strategy == "or":
+                maj = np.apply_along_axis(lambda x: 1 if any(x) else 0, axis=2, arr=predictions).reshape((-1, 1))
+            elif voting_strategy == "majority":
+                maj = np.apply_along_axis(lambda x: np.argmax(np.bincount(x, weights=self.weights)),
+                                          axis=1, arr=predictions)
+            elif voting_strategy == "and":
+                maj = np.apply_along_axis(lambda x: 1 if all(x) else 0, axis=2, arr=predictions).reshape((-1, 1))
+            else:
+                raise ValueError()
+        return maj
+
+    def _predict_proba(self, X):
+        """Predict class probabilities for X in 'soft' voting """
+
+        weights = self.weights
+
+        assert len(weights) == len(self.columns)
+        avg = np.average(X[self.columns], axis=1, weights=weights)
+        return avg
+
+    @property
+    def predict_proba(self):
+        """Compute probabilities of possible outcomes for samples in X.
+        Parameters
+        ----------
+        X : {array-like, sparse matrix}, shape = [n_samples, n_features]
+            Training vectors, where n_samples is the number of samples and
+            n_features is the number of features.
+        Returns
+        ----------
+        avg : array-like, shape = [n_samples, n_classes]
+            Weighted average probability for each class per sample.
+        """
+        return self._predict_proba
+
+    def _predict(self, X):
+        """Collect results from clf.predict calls. """
+        return np.asarray([X[clf].values.reshape((-1, 1)) for clf in self.columns]).T
+
+
+class BinaryClassifierToTransformer:
+    def __init__(self, classifier, output_col, columns=[], prefixes=None, suffixes=None,
+                 scale_input=False, impute=False, raise_null=False):
+        self.classifier = classifier
+        self.columns = columns
+        self.prefixes = prefixes
+        self.suffixes = suffixes
+        self.output_col = output_col
+        assert len(columns) > 0 or prefixes is not None
+        self.scale_input = scale_input
+        self.scaler = StandardScaler()
+        self.impute = impute
+        self.imp = SimpleImputer(missing_values=np.nan, strategy='mean')
+        self.imp_inf = SimpleImputer(missing_values=np.inf, strategy='mean')
+        self.raise_null = raise_null
+
+    def check_null_(self, X):
+        nans = np.isnan(X)
+        infs = np.isinf(X)
+        nan_summary = np.sum(np.logical_or(nans, infs))
+        if nan_summary > 0:
+            raise ValueError("nans/inf in frame = %s" % (nan_summary))
+
+    def get_cols_(self, X):
+        cols = list(self.columns)
+
+        if self.prefixes is not None:
+            for pf in self.prefixes:
+                cols.extend(df_utils.get_specific_cols(X, prefix=pf))
+        if self.suffixes is not None:
+            for pf in self.suffixes:
+                cols.extend(df_utils.get_specific_cols(X, suffix=pf))
+        cols = list(set(cols))
+        return cols
+
+    def fit(self, X, y):
+        X = X.copy()
+        cols = self.get_cols_(X)
+        X = X[cols]
+        if self.impute:
+            X = self.imp.fit_transform(X)
+            X = self.imp_inf.fit_transform(X)
+        if self.scale_input:
+            X = self.scaler.fit_transform(X)
+        if self.raise_null:
+            self.check_null_(X)
+
+        self.classifier.fit(X, y)
+        gc.collect()
+        return self
+
+    def partial_fit(self, X, y):
+        return self.fit(X, y)
+
+    def transform(self, X, y='ignored'):
+        Inp = X.copy()
+        cols = self.get_cols_(Inp)
+        Inp = Inp[cols]
+        if self.impute:
+            Inp = self.imp.transform(Inp)
+            Inp = self.imp_inf.transform(Inp)
+        if self.scale_input:
+            Inp = self.scaler.transform(Inp)
+
+        if self.raise_null:
+            self.check_null_(Inp)
+        probas = self.classifier.predict_proba(Inp)[:, 1]
+        X[self.output_col] = probas
+        return X
+
+    def inverse_transform(self, X, copy=None):
+        raise NotImplementedError()
+
+    def fit_transform(self, X, y):
+        self.fit(X, y)
+        return self.transform(X, y)
