@@ -558,130 +558,64 @@ class FasttextTfIdfTransformer:
         return self.transform(X)
 
 
-from keras.layers import Input, Dense
-from keras.models import Model
-from keras import regularizers
-from sklearn.preprocessing import OneHotEncoder
-from sklearn.preprocessing import MinMaxScaler
-from keras.callbacks import EarlyStopping
-from keras.wrappers.scikit_learn import KerasClassifier
-from keras.wrappers.scikit_learn import BaseWrapper
-from keras.layers import Dense, Activation
-from keras import optimizers
-
-
-class NeuralCategoricalFeatureTransformer:
-
-    def __init__(self, cols,
-                 include_input_as_output=True, target_columns=None,
-                 n_layers=2, n_components=16, n_iter=100, nan_fill="", verbose=0,
-                 prefix="nncat_",
-                 fasttext_file=None,dictionary_file=None):
+class TextProcessorTransformer:
+    def __init__(self,source_cols,word_length_filter=2,ngram_limit=2,
+                 combined_token_column="tokens",
+                 external_text_processing_funcs=[],
+                    token_postprocessor=[],parallel=True):
         """
         """
-        self.model = None
-        self.n_components = n_components
-        self.n_iter = n_iter
-        self.cols = cols
-        assert type(self.cols) == list
-        if type(self.cols[0]) == int:
-            raise NotImplementedError()
-        self.n_layers = n_layers
-        self.target_columns = target_columns
-        self.nan_fill = nan_fill
-        self.include_input_as_output = include_input_as_output
-        self.enc = None
-        self.verbose = verbose
-        self.prefix = prefix
-        self.fasttext_file = fasttext_file
-        self.dictionary_file = dictionary_file
-        if dictionary_file is not None and fasttext_file is not None:
-            self.fasttext = FasttextTfIdfTransformer(model_file=fasttext_file, dictionary_file=dictionary_file)
+        from data_science_utils import nlp as nlp_utils
+        from data_science_utils import misc as misc
+        self.word_length_filter=word_length_filter
+        self.ngram_limit=ngram_limit
+        self.external_text_processing_funcs=external_text_processing_funcs
+        self.token_postprocessor=token_postprocessor
+        self.parallel=parallel
+        self.source_cols=source_cols
+        self.combined_token_column=combined_token_column
+        import multiprocessing
+        self.cpus = int((multiprocessing.cpu_count()/2)-1)
+    def text_processor_(self,text):
+        return combined_text_processing(text,word_length_filter=self.word_length_filter,
+                                                  ngram_limit=self.ngram_limit,
+                                                  external_text_processing_funcs=self.external_text_processing_funcs,
+                                         token_postprocessor=self.token_postprocessor)
+
 
     def fit(self, X, y=None):
-        if type(X) == pd.DataFrame:
-            if type(self.cols[0]) == str:
-                X = X.copy()
-                X[self.cols] = X[self.cols].fillna(self.nan_fill)
-                Inp = X[self.cols]
-                ouput_cols = list(self.target_columns)
-                if self.include_input_as_output:
-                    ouput_cols = list(self.cols) + (self.target_columns if self.target_columns is not None else [])
-                if self.target_columns is not None:
-                    X[self.target_columns] = X[self.target_columns].fillna(X[self.target_columns].mean())
-                Output = X[ouput_cols]
-            else:
-                raise ValueError("Please provide colidx parameter")
-        else:
-            raise NotImplementedError()
-
-        enc = OneHotEncoder(handle_unknown='ignore', sparse=False)
-        scaler = MinMaxScaler()
-        numeric_cols_target = []
-        string_cols_target = []
-        for colname, dtype in Output.dtypes.reset_index(level=0).values:
-            if dtype != "object":
-                numeric_cols_target.append(colname)
-            else:
-                string_cols_target.append(colname)
-        assert X.shape[1] > 1
-
-        out_enc = OneHotEncoder(sparse=False)
-        Output[numeric_cols_target] = scaler.fit_transform(Output[numeric_cols_target])
-        ohe_ouputs = out_enc.fit_transform(Output[string_cols_target])
-        outout_string_dummies = pd.DataFrame(ohe_ouputs)
-        outout_string_dummies.index = Output.index
-        outout_string_dummies[numeric_cols_target] = Output[numeric_cols_target]
-        Output = outout_string_dummies
-        Inp = enc.fit_transform(Inp)
-
-        input_layer = Input(shape=(Inp.shape[1],))
-        encoded = Dense(self.n_components * 2, activation='elu')(input_layer)
-
-        encoded = Dense(self.n_components, activation='elu')(encoded)
-
-        decoded = Dense(self.n_components * 2, activation='elu')(encoded)
-        decoded = Dense(Output.shape[1], activation='sigmoid')(decoded)
-
-        autoencoder = Model(input_layer, decoded)
-        encoder = Model(input_layer, encoded)
-
-        es = EarlyStopping(monitor='val_loss', min_delta=0.0001, patience=5, verbose=0, )
-        adam = optimizers.Adam(lr=0.001, clipnorm=1, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0, amsgrad=False)
-        autoencoder.compile(optimizer=adam, loss='binary_crossentropy')
-        autoencoder.fit(Inp, Output,
-                        epochs=self.n_iter,
-                        batch_size=1024,
-                        shuffle=True,
-                        validation_split=0.1,
-                        verbose=self.verbose,
-                        callbacks=[es])
-        self.model = encoder
-        self.enc = enc
+        pass
 
     def partial_fit(self, X, y=None):
-        self.fit(X, y)
+        pass
 
     def transform(self, X, y='deprecated', copy=None):
-        if type(X) == pd.DataFrame:
-            if type(self.cols[0]) == str:
-                Inp = X[self.cols].fillna(self.nan_fill)
-        else:
-            raise NotImplementedError()
-        Inp = self.enc.transform(Inp)
-        results = pd.DataFrame(self.model.predict(Inp))
-        results.index = X.index
-
-        columns = list(map(lambda x: self.prefix + str(x), range(0, results.shape[1])))
-        results.columns = columns
-        X = X.copy()
-        X[results.columns] = results
+        import pandas as pd
+        if type(X)!=pd.DataFrame:
+            raise TypeError()
+        X=X.copy()
+        from data_science_utils import misc as misc
+        from joblib import Parallel, delayed
+        jobs = min(self.cpus,int(np.log2(len(X))+6))
+        combined_token_column = self.combined_token_column
+        extra_cols = []
+        for col in self.source_cols:
+            vals = list(X[col].values)
+            if self.parallel:
+                vals =  Parallel(n_jobs=jobs,backend="loky")(delayed(self.text_processor_)(x) for x in vals)
+            else:
+                vals = list(map(self.text_processor_,vals))
+            X[col+"_tokens"]=vals
+            extra_cols.append(col+"_tokens")
+        X[combined_token_column] = X[self.source_cols[0]+"_tokens"]
+        for col in self.source_cols[1:]:
+            X[combined_token_column] = X[combined_token_column]+ X[col+"_tokens"]
+        df_utils.drop_columns_safely(X,extra_cols,inplace=True)
         return X
 
     def inverse_transform(self, X, copy=None):
         raise NotImplementedError()
 
-    def fit_transform(self, X, y=None):
-        self.fit(X, y)
-        return self.transform(X, y)
-
+    def fit_transform(self, X,y=None):
+        self.fit(X,y)
+        return self.transform(X,y)
