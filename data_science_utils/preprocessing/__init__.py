@@ -233,7 +233,6 @@ class NeuralCategoricalFeatureTransformer:
                  include_input_as_output=True, target_columns=None,
                  n_layers=2, n_components=16, n_iter=100, nan_fill="", verbose=0,
                  prefix="nncat_",
-                 fasttext_file=None,dictionary_file=None, use_fasttext=False,
                  save_file=None):
         """
         """
@@ -251,10 +250,6 @@ class NeuralCategoricalFeatureTransformer:
         self.enc = None
         self.verbose = verbose
         self.prefix = prefix
-        self.fasttext_file = fasttext_file
-        self.dictionary_file = dictionary_file
-        if dictionary_file is not None and fasttext_file is not None:
-            self.fasttext = FasttextTfIdfTransformer(model_file=fasttext_file, dictionary_file=dictionary_file)
         self.save_file = save_file
 
     def fit(self, X, y=None):
@@ -305,12 +300,12 @@ class NeuralCategoricalFeatureTransformer:
         autoencoder = Model(input_layer, decoded)
         encoder = Model(input_layer, encoded)
 
-        es = EarlyStopping(monitor='val_loss', min_delta=0.0001, patience=5, verbose=0, )
-        adam = optimizers.Adam(lr=0.001, clipnorm=1, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0, amsgrad=False)
+        es = EarlyStopping(monitor='val_loss', min_delta=0.00001, patience=6, verbose=0, )
+        adam = optimizers.Adam(lr=0.002, clipnorm=3, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0, amsgrad=False)
         autoencoder.compile(optimizer=adam, loss='binary_crossentropy')
         autoencoder.fit(Inp, Output,
                         epochs=self.n_iter,
-                        batch_size=1024,
+                        batch_size=4096,
                         shuffle=True,
                         validation_split=0.1,
                         verbose=self.verbose,
