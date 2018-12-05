@@ -212,6 +212,30 @@ def cross_validate_classifier(model,X,y,scoring=['roc_auc','f1','f1_weighted','r
         scores['test_'+score+'_std'] = scores['test_'+score].std()
     return scores
 
+from sklearn.utils import shuffle
+from sklearn.model_selection import KFold
+def cross_validate_classifier_find_misclassified(build_model,X,y,scoring_fn,cv=4):
+    X, y = shuffle(X, y)
+    kf = KFold(n_splits=cv)
+    results = {}
+    i = 0
+    for train_index, test_index in kf.split(X):
+        X_train,y_train = X.iloc[train_index],y.iloc[train_index]
+        X_test, y_test = X.iloc[test_index], y.iloc[test_index]
+        model = build_model()
+        print("Starting Processing for GRoup %s of %s."%((i+1),cv))
+        model.fit(X_train,y_train)
+        y_score = model.predict_proba(X_test)
+        res = scoring_fn(y_test, y_score, data=X_test)
+        results[i] = res
+        print("Group %s of %s done."%((i+1),cv))
+        i = i+1
+        gc.collect()
+    gc.collect()
+    return results
+
+
+
 
 class ClassifierColumnCombiner():
     def __init__(self, columns, voting='hard', voting_strategy="or", weights=None, classification_threshold=0.5):
