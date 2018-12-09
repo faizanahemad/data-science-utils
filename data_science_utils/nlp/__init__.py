@@ -17,6 +17,13 @@ from nltk.corpus import wordnet
 from nltk import ngrams
 import more_itertools
 
+import nltk
+nltk.download('punkt')
+nltk.download('stopwords')
+nltk.download('wordnet')
+nltk.download('averaged_perceptron_tagger')
+nltk.download('omw')
+
 NUM = "_NUM_"
 UNIT_OF_LENGTH = "_UNIT_OF_LENGTH_"
 UNIT_OF_VOLUME = "_UNIT_OF_VOLUME_"
