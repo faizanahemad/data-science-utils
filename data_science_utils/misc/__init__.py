@@ -12,7 +12,7 @@ from multiprocessing import Pool
 import functools
 
 
-def print_function_code(func):
+def print_code(func):
     print("".join(inspect.getsourcelines(func)[0]))
 
 

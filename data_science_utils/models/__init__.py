@@ -403,6 +403,6 @@ class BinaryClassifierToTransformer:
     def inverse_transform(self, X, copy=None):
         raise NotImplementedError()
 
-    def fit_transform(self, X, y):
-        self.fit(X, y)
+    def fit_transform(self, X, y, sample_weight=None):
+        self.fit(X, y, sample_weight=sample_weight)
         return self.transform(X, y)
