@@ -364,7 +364,7 @@ class BinaryClassifierToTransformer:
         cols = list(set(cols))
         return cols
 
-    def fit(self, X, y):
+    def fit(self, X, y, sample_weight=None):
         X = X.copy()
         cols = self.get_cols_(X)
         X = X[cols]
@@ -376,7 +376,7 @@ class BinaryClassifierToTransformer:
         if self.raise_null:
             self.check_null_(X)
 
-        self.classifier.fit(X, y)
+        self.classifier.fit(X, y, sample_weight=sample_weight)
         gc.collect()
         return self
 
