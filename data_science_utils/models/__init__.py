@@ -20,17 +20,20 @@ import gc
 from data_science_utils.dataframe import get_specific_cols
 
 
-def feature_importance(model,df,features):
-    fi = None
-    df = df.head()
+def feature_importance(model,features):
+    """
+
+    :param model: Model object which has `feature_importances_`
+    :param features: features/columns that were given to model, these must be in same order as given to model
+    :return: DataFrame with sorted feature importances
+    """
     if hasattr(model, 'feature_importances_'):
         fi=model.feature_importances_
     elif hasattr(model, 'coef_'):
         fi = model.coef_
     else:
         raise AttributeError('No attribute: feature_importances_ or  coef_')
-    fn=df[features].columns.values
-    df_i=pd.DataFrame({"feature":fn,"importance":fi})
+    df_i=pd.DataFrame({"feature":features,"importance":fi})
     df_i["importance"] = df_i["importance"]*100
     return df_i.sort_values("importance",ascending=False)
 
@@ -344,6 +347,7 @@ class BinaryClassifierToTransformer:
         self.imp = SimpleImputer(missing_values=np.nan, strategy='mean')
         self.imp_inf = SimpleImputer(missing_values=np.inf, strategy='mean')
         self.raise_null = raise_null
+        self.cols = None
 
     def check_null_(self, X):
         nans = np.isnan(X)
@@ -354,7 +358,6 @@ class BinaryClassifierToTransformer:
 
     def get_cols_(self, X):
         cols = list(self.columns)
-
         if self.prefixes is not None:
             for pf in self.prefixes:
                 cols.extend(get_specific_cols(X, prefix=pf))
@@ -365,8 +368,8 @@ class BinaryClassifierToTransformer:
         return cols
 
     def fit(self, X, y, sample_weight=None):
-        X = X.copy()
         cols = self.get_cols_(X)
+        self.cols = cols
         X = X[cols]
         if self.impute:
             X = self.imp.fit_transform(X)
@@ -384,8 +387,8 @@ class BinaryClassifierToTransformer:
         return self.fit(X, y)
 
     def transform(self, X, y='ignored'):
-        Inp = X.copy()
-        cols = self.get_cols_(Inp)
+        Inp = X
+        cols = self.cols
         Inp = Inp[cols]
         if self.impute:
             Inp = self.imp.transform(Inp)
