@@ -17,19 +17,25 @@ def print_code(func):
 
 
 def get_timer(printer=print):
-    ctr=1
-    pv = -1e8
+    ctr = 1
+    start = time.time() % 1000000
+    pv = start
     if printer is None:
         printer = lambda x: x
+
     def timer(text=""):
         nonlocal ctr
         nonlocal pv
-        tc = time.time()%10000
+        tc = time.time() % 1000000
+        time_elapsed = tc - start
         diff = tc - pv
-        diff = 0 if diff>1e6 else diff
-        pv=tc
-        printer("%s: %.3f, %.3f, %s "%(ctr,tc,diff,text))
-        ctr=ctr+1
+        diff = 0 if diff > 1e7 else diff
+        pv = tc
+        event_text = "{:<8}".format("Event %s" % ctr)
+        text = " {:<10}".format(text)
+        printer("%s|%s |%s" % (event_text, "{:<9}".format("%.2f" % diff), text))
+        ctr = ctr + 1
+
     return timer
 
 def is_dataframe(df):
