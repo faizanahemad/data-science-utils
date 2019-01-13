@@ -329,12 +329,12 @@ class LDATransformer:
         tokens = list(X[self.token_column].values)
         dictionary = corpora.Dictionary(tokens)
         self.dictionary = dictionary
-        self.dictionary.filter_extremes(no_below=self.no_below, no_above=self.no_above)
-        print('Number of unique tokens after filtering: %d' % len(dictionary))
+        self.dictionary.filter_extremes(no_below=self.no_below, no_above=self.no_above, keep_n=1000000,)
+        print('Number of unique tokens after filtering for LDA: %d' % len(dictionary))
         X = X.copy()
         X['bow'] = X[self.token_column].apply(dictionary.doc2bow)
         from gensim.models.ldamulticore import LdaMulticore
-        eval_every = int(self.iterations/10)+1
+        eval_every = int(self.iterations/20)+1
         temp = dictionary[0]
         id2word = dictionary.id2token
         corpus = list(X['bow'].values)
@@ -609,7 +609,7 @@ class TextProcessorTransformer:
         for col in self.source_cols:
             vals = list(X[col].values)
             if self.parallel:
-                vals =  Parallel(n_jobs=jobs,backend="loky")(delayed(self.text_processor_)(x) for x in vals)
+                vals = Parallel(n_jobs=jobs,backend="loky")(delayed(self.text_processor_)(x) for x in vals)
             else:
                 vals = list(map(self.text_processor_,vals))
             X[col+"_tokens"]=vals

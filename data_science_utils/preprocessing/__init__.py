@@ -247,10 +247,14 @@ class NeuralCategoricalFeatureTransformer:
         self.target_columns = target_columns
         self.nan_fill = nan_fill
         self.include_input_as_output = include_input_as_output
+        if not include_input_as_output and target_columns is None:
+            raise ValueError("We need either input columns as targets or a different target column atleast")
         self.enc = None
         self.verbose = verbose
         self.prefix = prefix
         self.save_file = save_file
+        if save_file is not None:
+            raise NotImplementedError()
 
     def fit(self, X, y=None):
         if type(X) == pd.DataFrame:
@@ -281,12 +285,17 @@ class NeuralCategoricalFeatureTransformer:
         assert X.shape[1] > 1
 
         out_enc = OneHotEncoder(sparse=False)
-        Output[numeric_cols_target] = scaler.fit_transform(Output[numeric_cols_target])
-        ohe_ouputs = out_enc.fit_transform(Output[string_cols_target])
-        outout_string_dummies = pd.DataFrame(ohe_ouputs)
-        outout_string_dummies.index = Output.index
-        outout_string_dummies[numeric_cols_target] = Output[numeric_cols_target]
-        Output = outout_string_dummies
+
+        if len(numeric_cols_target)>0:
+            Output[numeric_cols_target] = scaler.fit_transform(Output[numeric_cols_target])
+        if len(string_cols_target)>0:
+            ohe_ouputs = out_enc.fit_transform(Output[string_cols_target])
+            outout_string_dummies = pd.DataFrame(ohe_ouputs)
+            outout_string_dummies.index = Output.index
+            if len(numeric_cols_target) > 0:
+                outout_string_dummies[numeric_cols_target] = Output[numeric_cols_target]
+        if len(string_cols_target)>0:
+            Output = outout_string_dummies
         Inp = enc.fit_transform(Inp)
 
         input_layer = Input(shape=(Inp.shape[1],))
