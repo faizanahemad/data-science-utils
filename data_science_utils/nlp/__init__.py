@@ -298,7 +298,7 @@ from data_science_utils import dataframe as df_utils
 
 class LDATransformer:
     def __init__(self, token_column="tokens", lda_prefix="lda_", no_below=10, no_above=0.2,
-                 iterations=100, num_topics=100, passes=10):
+                 iterations=100, num_topics=100, passes=10,inplace=True):
         """
         For pca strategy n_components,n_iter parameters are used. n_components determine
         how many columns resulting transformation will have
@@ -324,6 +324,7 @@ class LDATransformer:
         self.iterations = iterations
         self.num_topics = num_topics
         self.passes = passes
+        self.inplace=inplace
 
     def fit(self, X, y=None):
         tokens = list(X[self.token_column].values)
@@ -331,7 +332,8 @@ class LDATransformer:
         self.dictionary = dictionary
         self.dictionary.filter_extremes(no_below=self.no_below, no_above=self.no_above, keep_n=1000000,)
         print('Number of unique tokens after filtering for LDA: %d' % len(dictionary))
-        X = X.copy()
+        if not self.inplace:
+            X = X.copy()
         X['bow'] = X[self.token_column].apply(dictionary.doc2bow)
         from gensim.models.ldamulticore import LdaMulticore
         eval_every = int(self.iterations/20)+1
@@ -351,7 +353,8 @@ class LDATransformer:
 
     def transform(self, X, y='deprecated', copy=None):
         import pandas as pd
-        X = X.copy()
+        if not self.inplace:
+            X = X.copy()
         dictionary = self.dictionary
         X['bow'] = X[self.token_column].apply(dictionary.doc2bow)
 
@@ -445,7 +448,7 @@ class FasttextTfIdfTransformer:
     def __init__(self, size=156, window=3, min_count=1, iter=20, min_n=2, max_n=6, word_ngrams=0,
                  workers=int(multiprocessing.cpu_count() / 2)-1, ft_prefix="ft_", token_column=None,
                 tfidf=None,use_tfidf=True,
-                 model_file=None, dictionary_file=None):
+                 model_file=None, dictionary_file=None,inplace=True):
         self.size = size
         self.window = window
         self.min_count = min_count
@@ -463,6 +466,7 @@ class FasttextTfIdfTransformer:
         self.model_file = model_file
         self.dictionary_file = dictionary_file
         self.use_tfidf = use_tfidf
+        self.inplace = inplace
 
     def tokenise_for_fasttext_(self, X):
         token_acc = []
@@ -482,6 +486,22 @@ class FasttextTfIdfTransformer:
         from gensim.models import TfidfModel
         if type(X) == pd.DataFrame:
             X = X[self.token_column].values
+
+
+        if self.model_file is None:
+            self.model = FastText(sentences=X, size=self.size, window=self.window, min_count=self.min_count,
+                                  iter=self.iter, min_n=self.min_n, max_n=self.max_n, word_ngrams=self.word_ngrams,
+                                  workers=self.workers,bucket=4000000,alpha=0.03)
+        else:
+            if os.path.exists(self.model_file):
+                self.model = FastText.load(get_tmpfile(self.model_file))
+            else:
+                self.model = FastText(sentences=X, size=self.size, window=self.window, min_count=self.min_count,
+                                      iter=self.iter, min_n=self.min_n, max_n=self.max_n, word_ngrams=self.word_ngrams,
+                                      workers=self.workers,bucket=4000000,alpha=0.03)
+                self.model.save(get_tmpfile(self.model_file))
+
+        print("FastText Vocab Length = %s, Ngrams length = %s"%(len(self.model.wv.vectors_ngrams),len(self.model.wv.vectors_vocab)))
 
         if self.word_ngrams == 1 and self.min_n <= self.max_n:
             X = self.tokenise_for_fasttext_(X)
@@ -505,19 +525,6 @@ class FasttextTfIdfTransformer:
             bows = list(map(self.dictionary.doc2bow, X))
             tfidf = TfidfModel(bows, normalize=True)
             self.tfidf = tfidf
-
-        if self.model_file is None:
-            self.model = FastText(sentences=X, size=self.size, window=self.window, min_count=self.min_count,
-                                  iter=self.iter, min_n=self.min_n, max_n=self.max_n, word_ngrams=self.word_ngrams,
-                                  workers=self.workers,bucket=4000000,alpha=0.03)
-        else:
-            if os.path.exists(self.model_file):
-                self.model = FastText.load(get_tmpfile(self.model_file))
-            else:
-                self.model = FastText(sentences=X, size=self.size, window=self.window, min_count=self.min_count,
-                                      iter=self.iter, min_n=self.min_n, max_n=self.max_n, word_ngrams=self.word_ngrams,
-                                      workers=self.workers,bucket=4000000,alpha=0.03)
-                self.model.save(get_tmpfile(self.model_file))
 
 
 
@@ -543,7 +550,8 @@ class FasttextTfIdfTransformer:
             Input = X[self.token_column].values
         else:
             raise ValueError()
-        X = X.copy()
+        if not self.inplace:
+            X = X.copy()
         temp = self.dictionary[0]
         def tokens2tfidf(token_array, tfidf, dictionary):
             tmp = self.dictionary[0]
@@ -589,7 +597,8 @@ class TextProcessorTransformer:
     def __init__(self, source_cols, word_length_filter=2, ngram_limit=2,
                  combined_token_column="tokens",
                  text_fns=[], column_text_fns=None,
-                 token_postprocessor=[], parallel=True):
+                 token_postprocessor=[], parallel=True,
+                 inplace=True):
         """
         """
         from data_science_utils import nlp as nlp_utils
@@ -605,6 +614,7 @@ class TextProcessorTransformer:
         self.cpus = int((multiprocessing.cpu_count()/2)-1)
         self.column_text_fns = column_text_fns
         assert column_text_fns is None or type(column_text_fns)==dict
+        self.inplace=inplace
     def text_processor_(self,text):
         return combined_text_processing(text,word_length_filter=self.word_length_filter,
                                                   ngram_limit=self.ngram_limit,
@@ -622,7 +632,8 @@ class TextProcessorTransformer:
         import pandas as pd
         if type(X)!=pd.DataFrame:
             raise TypeError()
-        X=X.copy()
+        if not self.inplace:
+            X=X.copy()
         from data_science_utils import misc as misc
         from joblib import Parallel, delayed
         jobs = min(self.cpus,int(np.log2(len(X))+6))

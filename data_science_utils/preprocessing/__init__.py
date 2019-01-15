@@ -137,7 +137,7 @@ from data_science_utils import dataframe as df_utils
 import numpy as np
 
 class TargetBasedStatCategoricals:
-    def __init__(self,colnames,target,stat_fn=np.mean,suffix="_agg",nan_fill=0):
+    def __init__(self,colnames,target,stat_fn=np.mean,suffix="_agg",nan_fill=0,inplace=True):
         """
         """
         import multiprocessing
@@ -148,10 +148,12 @@ class TargetBasedStatCategoricals:
         self.nan_fill=nan_fill
         self.group_values=None
         self.suffix = suffix
+        self.inplace=inplace
     def fit(self, X, y=None):
         if not type(X)==pd.DataFrame:
             raise ValueError()
-        X=X.copy()
+        if not self.inplace:
+            X = X.copy()
         if self.nan_fill is not None:
             X[self.target] = X[self.target].fillna(self.nan_fill)
         gpv = X.groupby(self.colnames)[[self.target]].agg(self.stat_fn).reset_index(level=self.colnames)
@@ -163,7 +165,8 @@ class TargetBasedStatCategoricals:
         import pandas as pd
         if not type(X)==pd.DataFrame:
             raise ValueError()
-        X = X.copy()
+        if not self.inplace:
+            X = X.copy()
         Input = X[self.colnames]
         result = Input.merge(self.group_values,on=self.colnames,how="left")
         result.rename(columns={self.target:"_".join(self.group_values)+self.suffix},inplace=True)
@@ -233,7 +236,7 @@ class NeuralCategoricalFeatureTransformer:
                  include_input_as_output=True, target_columns=None,
                  n_layers=2, n_components=16, n_iter=100, nan_fill="", verbose=0,
                  prefix="nncat_",
-                 save_file=None):
+                 save_file=None,inplace=True):
         """
         """
         self.model = None
@@ -253,13 +256,15 @@ class NeuralCategoricalFeatureTransformer:
         self.verbose = verbose
         self.prefix = prefix
         self.save_file = save_file
+        self.inplace=inplace
         if save_file is not None:
             raise NotImplementedError()
 
     def fit(self, X, y=None):
         if type(X) == pd.DataFrame:
-            if type(self.cols[0]) == str:
+            if not self.inplace:
                 X = X.copy()
+            if type(self.cols[0]) == str:
                 X[self.cols] = X[self.cols].fillna(self.nan_fill)
                 Inp = X[self.cols]
                 ouput_cols = list(self.target_columns)
@@ -337,7 +342,8 @@ class NeuralCategoricalFeatureTransformer:
 
         columns = list(map(lambda x: self.prefix + str(x), range(0, results.shape[1])))
         results.columns = columns
-        X = X.copy()
+        if not self.inplace:
+            X = X.copy()
         X[results.columns] = results
         return X
 
