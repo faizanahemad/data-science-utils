@@ -32,7 +32,7 @@ UNIT_OF_MASS = "_UNIT_OF_MASS_"
 UNIT_OF_ELECTRICITY = "_UNIT_OF_ELECTRICITY_"
 
 stopwords_list = stopwords.words('english')
-
+stopwords_list.extend(["ul","li","br","hr","h1","h2","h3","h4","h5","h6"])
 
 def get_number_base_words():
     numbers = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven",
@@ -629,7 +629,6 @@ class TextProcessorTransformer:
         pass
 
     def transform(self, X, y='deprecated', copy=None):
-        import pandas as pd
         if type(X)!=pd.DataFrame:
             raise TypeError()
         if not self.inplace:
@@ -664,3 +663,5 @@ class TextProcessorTransformer:
     def fit_transform(self, X,y=None):
         self.fit(X,y)
         return self.transform(X,y)
+
+
