@@ -643,7 +643,7 @@ class TextProcessorTransformer:
             extra_cols.append(col+"_tokens")
         X[combined_token_column] = X[self.source_cols[0]+"_tokens"]
         for col in self.source_cols[1:]:
-            X[combined_token_column] = X[combined_token_column] +" "+ X[col+"_tokens"]
+            X[combined_token_column] = X[combined_token_column] + X[col+"_tokens"]
         df_utils.drop_columns_safely(X,extra_cols,inplace=True)
         return X
 
