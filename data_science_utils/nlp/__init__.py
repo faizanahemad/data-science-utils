@@ -260,8 +260,8 @@ def tokenize_lemmatize(text, external_text_processing_funcs=[replace_numbers], l
 
 
 def ngram_stopword(tokens, word_length_filter=3, ngram_limit=3):
-    tokens = list(map(lambda x: re.sub('[^ a-zA-Z0-9]', '', x), tokens))
-    tokens = list(map(lambda x: x.strip(), tokens))
+    tokens = list(map(lambda x: re.sub('[^ a-zA-Z0-9]', '', x.lower()), tokens))
+    tokens = list(filter(lambda x:len(x)>0,map(lambda x: x.strip(), tokens)))
     if ngram_limit is not None and ngram_limit >= 2:
         grams = list(more_itertools.flatten([ngrams(tokens, i) for i in range(2, ngram_limit + 1)]))
     else:
@@ -443,7 +443,7 @@ import os.path
 
 class FasttextTfIdfTransformer:
     def __init__(self, size=156, window=3, min_count=1, iter=20, min_n=2, max_n=6, word_ngrams=0,
-                 workers=int(multiprocessing.cpu_count() / 2), ft_prefix="ft_", token_column=None,
+                 workers=int(multiprocessing.cpu_count() / 2)-1, ft_prefix="ft_", token_column=None,
                 tfidf=None,
                  model_file=None, dictionary_file=None):
         self.size = size
@@ -482,39 +482,41 @@ class FasttextTfIdfTransformer:
         if type(X) == pd.DataFrame:
             X = X[self.token_column].values
 
-        if self.model_file is None:
-            self.model = FastText(sentences=X, size=self.size, window=self.window, min_count=self.min_count,
-                                  iter=self.iter, min_n=self.min_n, max_n=self.max_n, word_ngrams=self.word_ngrams,
-                                  workers=self.workers)
-        else:
-            if os.path.exists(self.model_file):
-                self.model = FastText.load(get_tmpfile(self.model_file))
-            else:
-                self.model = FastText(sentences=X, size=self.size, window=self.window, min_count=self.min_count,
-                                      iter=self.iter, min_n=self.min_n, max_n=self.max_n, word_ngrams=self.word_ngrams,
-                                      workers=self.workers)
-                self.model.save(get_tmpfile(self.model_file))
-
         if self.word_ngrams == 1 and self.min_n <= self.max_n:
             X = self.tokenise_for_fasttext_(X)
 
         if self.dictionary_file is None:
             dictionary = corpora.Dictionary(X)
             self.dictionary = dictionary
-            self.dictionary.filter_extremes(no_below=self.min_count)
+            self.dictionary.filter_extremes(no_below=self.min_count,keep_n=2000000)
         else:
             if os.path.exists(self.dictionary_file):
                 self.dictionary = corpora.Dictionary.load(self.dictionary_file)
             else:
                 dictionary = corpora.Dictionary(X)
                 self.dictionary = dictionary
-                self.dictionary.filter_extremes(no_below=self.min_count)
+                self.dictionary.filter_extremes(no_below=self.min_count,keep_n=2000000)
                 self.dictionary.save(self.dictionary_file)
 
         if self.tfidf is None:
             bows = list(map(self.dictionary.doc2bow, X))
             tfidf = TfidfModel(bows, normalize=True)
             self.tfidf = tfidf
+
+        if self.model_file is None:
+            self.model = FastText(sentences=X, size=self.size, window=self.window, min_count=self.min_count,
+                                  iter=self.iter, min_n=self.min_n, max_n=self.max_n, word_ngrams=self.word_ngrams,
+                                  workers=self.workers,bucket=4000000,alpha=0.03)
+        else:
+            if os.path.exists(self.model_file):
+                self.model = FastText.load(get_tmpfile(self.model_file))
+            else:
+                self.model = FastText(sentences=X, size=self.size, window=self.window, min_count=self.min_count,
+                                      iter=self.iter, min_n=self.min_n, max_n=self.max_n, word_ngrams=self.word_ngrams,
+                                      workers=self.workers,bucket=4000000,alpha=0.03)
+                self.model.save(get_tmpfile(self.model_file))
+
+
 
     def partial_fit(self, X, y=None):
         self.fit(X, y='ignored')
@@ -566,27 +568,29 @@ class FasttextTfIdfTransformer:
 
 
 class TextProcessorTransformer:
-    def __init__(self,source_cols,word_length_filter=2,ngram_limit=2,
+    def __init__(self, source_cols, word_length_filter=2, ngram_limit=2,
                  combined_token_column="tokens",
-                 external_text_processing_funcs=[],
-                    token_postprocessor=[],parallel=True):
+                 text_fns=[], column_text_fns=None,
+                 token_postprocessor=[], parallel=True):
         """
         """
         from data_science_utils import nlp as nlp_utils
         from data_science_utils import misc as misc
         self.word_length_filter=word_length_filter
         self.ngram_limit=ngram_limit
-        self.external_text_processing_funcs=external_text_processing_funcs
+        self.text_fns=text_fns
         self.token_postprocessor=token_postprocessor
         self.parallel=parallel
         self.source_cols=source_cols
         self.combined_token_column=combined_token_column
         import multiprocessing
         self.cpus = int((multiprocessing.cpu_count()/2)-1)
+        self.column_text_fns = column_text_fns
+        assert column_text_fns is None or type(column_text_fns)==dict
     def text_processor_(self,text):
         return combined_text_processing(text,word_length_filter=self.word_length_filter,
                                                   ngram_limit=self.ngram_limit,
-                                                  external_text_processing_funcs=self.external_text_processing_funcs,
+                                                  external_text_processing_funcs=self.text_fns,
                                          token_postprocessor=self.token_postprocessor)
 
 
@@ -608,15 +612,20 @@ class TextProcessorTransformer:
         extra_cols = []
         for col in self.source_cols:
             vals = list(X[col].values)
-            if self.parallel:
-                vals = Parallel(n_jobs=jobs,backend="loky")(delayed(self.text_processor_)(x) for x in vals)
+
+            if col in self.column_text_fns.keys():
+                text_processor = lambda text: combined_text_processing(text,word_length_filter=self.word_length_filter,
+                                                  ngram_limit=self.ngram_limit,
+                                                  external_text_processing_funcs=self.column_text_fns[col],
+                                         token_postprocessor=self.token_postprocessor)
+                vals = Parallel(n_jobs=jobs, backend="loky")(delayed(text_processor)(x) for x in vals)
             else:
-                vals = list(map(self.text_processor_,vals))
+                vals = Parallel(n_jobs=jobs,backend="loky")(delayed(self.text_processor_)(x) for x in vals)
             X[col+"_tokens"]=vals
             extra_cols.append(col+"_tokens")
         X[combined_token_column] = X[self.source_cols[0]+"_tokens"]
         for col in self.source_cols[1:]:
-            X[combined_token_column] = X[combined_token_column]+ X[col+"_tokens"]
+            X[combined_token_column] = X[combined_token_column] +" "+ X[col+"_tokens"]
         df_utils.drop_columns_safely(X,extra_cols,inplace=True)
         return X
 
