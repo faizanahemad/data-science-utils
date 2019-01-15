@@ -444,7 +444,7 @@ import os.path
 class FasttextTfIdfTransformer:
     def __init__(self, size=156, window=3, min_count=1, iter=20, min_n=2, max_n=6, word_ngrams=0,
                  workers=int(multiprocessing.cpu_count() / 2)-1, ft_prefix="ft_", token_column=None,
-                tfidf=None,
+                tfidf=None,use_tfidf=True,
                  model_file=None, dictionary_file=None):
         self.size = size
         self.window = window
@@ -462,6 +462,7 @@ class FasttextTfIdfTransformer:
         self.dictionary = None
         self.model_file = model_file
         self.dictionary_file = dictionary_file
+        self.use_tfidf = use_tfidf
 
     def tokenise_for_fasttext_(self, X):
         token_acc = []
@@ -487,8 +488,10 @@ class FasttextTfIdfTransformer:
 
         if self.dictionary_file is None:
             dictionary = corpora.Dictionary(X)
+            print('Number of unique tokens before filtering for Fasttext: %d' % len(dictionary))
             self.dictionary = dictionary
             self.dictionary.filter_extremes(no_below=self.min_count,keep_n=2000000)
+            print('Number of unique tokens after filtering for Fasttext: %d' % len(dictionary))
         else:
             if os.path.exists(self.dictionary_file):
                 self.dictionary = corpora.Dictionary.load(self.dictionary_file)
@@ -498,7 +501,7 @@ class FasttextTfIdfTransformer:
                 self.dictionary.filter_extremes(no_below=self.min_count,keep_n=2000000)
                 self.dictionary.save(self.dictionary_file)
 
-        if self.tfidf is None:
+        if self.tfidf is None and self.use_tfidf:
             bows = list(map(self.dictionary.doc2bow, X))
             tfidf = TfidfModel(bows, normalize=True)
             self.tfidf = tfidf
@@ -521,6 +524,20 @@ class FasttextTfIdfTransformer:
     def partial_fit(self, X, y=None):
         self.fit(X, y='ignored')
 
+    def transform_one(self,token_array):
+        temp = self.dictionary[0]
+        tfidf = self.tfidf
+        dictionary = self.dictionary
+        id2tfidf = {k: v for k, v in tfidf[dictionary.doc2bow(token_array)]}
+        token2tfidf = {dictionary.id2token[k]: v for k, v in id2tfidf.items()}
+        token2tfidf = [token2tfidf[token] if token in token2tfidf else 1 for token in token_array]
+        tokens2vec = [self.model.wv[token] if token in self.model.wv else np.full(self.size, 0) for token in token_array]
+        if np.sum(tokens2vec) == 0:
+            return np.full(self.size, 0)
+        if np.sum(token2tfidf) == 0:
+            return np.average(tokens2vec, axis=0)
+        return np.average(tokens2vec, axis=0, weights=token2tfidf)
+
     def transform(self, X, y='ignored'):
         if type(X) == pd.DataFrame:
             Input = X[self.token_column].values
@@ -532,14 +549,17 @@ class FasttextTfIdfTransformer:
             tmp = self.dictionary[0]
             id2tfidf = {k: v for k, v in tfidf[dictionary.doc2bow(token_array)]}
             token2tfidf = {dictionary.id2token[k]: v for k, v in id2tfidf.items()}
-            return [token2tfidf[token] if token in token2tfidf else 0 for token in token_array]
+            return [token2tfidf[token] if token in token2tfidf else 1 for token in token_array]
 
         def tokens2vec(token_array, fasttext_model):
             if len(token_array) == 0:
                 return np.full(self.size, 0)
             return [fasttext_model.wv[token] if token in fasttext_model.wv else np.full(self.size, 0) for token in token_array]
 
-        t2tfn = lambda tokens: tokens2tfidf(tokens, self.tfidf, self.dictionary)
+        if self.use_tfidf:
+            t2tfn = lambda tokens: tokens2tfidf(tokens, self.tfidf, self.dictionary)
+        else:
+            t2tfn = lambda tokens: np.ones(len(tokens))
         tfidfs = list(map(t2tfn, Input))
         ft_fn = lambda tokens: tokens2vec(tokens, self.model)
         ft_vecs = list(map(ft_fn, Input))
@@ -547,8 +567,6 @@ class FasttextTfIdfTransformer:
         def doc2vec(ftv, tfidf_rep):
             if np.sum(ftv) == 0:
                 return np.full(self.size, 0)
-            if np.sum(tfidf_rep) == 0:
-                return np.average(ftv, axis=0)
             return np.average(ftv, axis=0, weights=tfidf_rep)
 
         # parallize possible
