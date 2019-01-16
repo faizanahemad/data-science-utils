@@ -139,14 +139,22 @@ from data_science_utils import dataframe as df_utils
 import numpy as np
 
 class TargetBasedStatCategoricals:
-    def __init__(self,colnames,target,stat_fn=np.mean,suffix="_agg",nan_fill=0,inplace=True):
+    def __init__(self,colnames,target,stat="weight_of_evidence",suffix="_agg",nan_fill=0,inplace=True):
         """
+
+        :param colnames: categorical column names
+        :param target: target column
+        :param stat: weight_of_evidence or mean, default: weight_of_evidence
+            See [weight_of_evidence](https://pkghosh.wordpress.com/2017/10/09/combating-high-cardinality-features-in-supervised-machine-learning/)
+        :param suffix: new columns's suffix
+        :param nan_fill: filler value for nan
+        :param inplace:
         """
         import multiprocessing
         self.cpus = int((multiprocessing.cpu_count()/2)-1)
         self.colnames=colnames
         self.target=target
-        self.stat_fn=stat_fn
+        self.stat=stat
         self.nan_fill=nan_fill
         self.group_values=None
         self.suffix = suffix
@@ -158,7 +166,12 @@ class TargetBasedStatCategoricals:
             X = X.copy()
         if self.nan_fill is not None:
             X[self.target] = X[self.target].fillna(self.nan_fill)
-        gpv = X.groupby(self.colnames)[[self.target]].agg(self.stat_fn).reset_index(level=self.colnames)
+
+        if self.stat=="mean":
+            stat_fn = np.mean
+        elif self.stat=="weight_of_evidence":
+            pass
+        gpv = X.groupby(self.colnames)[[self.target]].agg(self.stat).reset_index(level=self.colnames)
         self.group_values = gpv
     def partial_fit(self, X, y=None):
         self.fit(X,y)
@@ -284,13 +297,19 @@ class NeuralCategoricalFeatureTransformer:
 
         validation_split = 0.2
         if only_numeric_target and only_string_input:
-            validation_split = 0
             counts = X.groupby(self.cols)[self.target_columns[0]].agg(['count'])
+            overall_means = X[self.target_columns].mean()
             X = X.groupby(self.cols)[self.target_columns].agg(['mean','std']).reset_index()
             X.columns = list(map(lambda x:x[0]+x[1],list(X.columns)))
+            woe_cols = [t+"woe" for t in self.target_columns]
+            mean_cols = [t+"mean" for t in self.target_columns]
+            X[self.target_columns] = X[mean_cols]
+            X[self.target_columns] = np.clip(np.log(X[self.target_columns]/overall_means),-1e8,1e8)
+            X.rename(columns = dict(zip(self.target_columns,woe_cols)),inplace=True)
             X['count'] = counts.values
             arr1 = list(map(lambda x: [x + "mean", x + "std"], self.target_columns))
-            self.target_columns = list(more_itertools.flatten(arr1)) + ['count']
+            self.target_columns = list(more_itertools.flatten(arr1)) + ['count'] + woe_cols
+        X = X.sample(frac=1)
         Inp = X[self.cols]
         ouput_cols = list(self.target_columns)
         if self.include_input_as_output:
@@ -305,14 +324,9 @@ class NeuralCategoricalFeatureTransformer:
         # we will add std-dev of target columns
         # we will add weight of evidence
 
-        if only_numeric_target and only_string_input:
-            loss = "binary_crossentropy"
-            es = EarlyStopping(monitor='train_loss', min_delta=0.00001, patience=6, verbose=0, )
-            scaler = MinMaxScaler()
-        else:
-            loss = 'binary_crossentropy'
-            es = EarlyStopping(monitor='val_loss', min_delta=0.00001, patience=6, verbose=0, )
-            scaler = MinMaxScaler()
+        loss = "binary_crossentropy"
+        es = EarlyStopping(monitor='val_loss', min_delta=0.00001, patience=10, verbose=0, )
+        scaler = MinMaxScaler()
 
         enc = OneHotEncoder(handle_unknown='ignore', sparse=False)
 
@@ -353,11 +367,20 @@ class NeuralCategoricalFeatureTransformer:
         adam = optimizers.Adam(lr=0.003, clipnorm=4, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0, amsgrad=False)
         autoencoder.compile(optimizer=adam, loss=loss)
         print("Shape of Input to Neural Network: %s, Output shape: %s"%(Inp.shape,Output.shape))
-        autoencoder.fit(Inp, Output,
+        validation_size=int(Inp.shape[0]*validation_split)
+        train_size = Inp.shape[0] - validation_size
+        autoencoder.fit(Inp[:train_size], Output[:train_size],
                         epochs=self.n_iter,
                         batch_size=4096,
                         shuffle=True,
-                        validation_split=validation_split,
+                        validation_data=(Inp[train_size:], Output[train_size:]),
+                        verbose=self.verbose,
+                        callbacks=[es])
+        autoencoder.fit(Inp[train_size:], Output[train_size:],
+                        epochs=self.n_iter,
+                        batch_size=4096,
+                        shuffle=True,
+                        validation_data=(Inp[:train_size], Output[:train_size]),
                         verbose=self.verbose,
                         callbacks=[es])
         self.model = encoder
