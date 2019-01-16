@@ -306,9 +306,9 @@ class NeuralCategoricalFeatureTransformer:
         # we will add weight of evidence
 
         if only_numeric_target and only_string_input:
-            loss = "mean_absolute_error"
+            loss = "binary_crossentropy"
             es = EarlyStopping(monitor='train_loss', min_delta=0.005, patience=3, verbose=0, )
-            scaler = RobustScaler()
+            scaler = MinMaxScaler()
         else:
             loss = 'binary_crossentropy'
             es = EarlyStopping(monitor='val_loss', min_delta=0.00001, patience=6, verbose=0, )
@@ -345,13 +345,14 @@ class NeuralCategoricalFeatureTransformer:
         encoded = Dense(self.n_components, activation='elu')(encoded)
 
         decoded = Dense(self.n_components * 2, activation='elu')(encoded)
-        decoded = Dense(Output.shape[1], activation='elu')(decoded)
+        decoded = Dense(Output.shape[1], activation='sigmoid')(decoded)
 
         autoencoder = Model(input_layer, decoded)
         encoder = Model(input_layer, encoded)
 
         adam = optimizers.Adam(lr=0.003, clipnorm=4, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0, amsgrad=False)
         autoencoder.compile(optimizer=adam, loss=loss)
+        print("Shape of Input to Neural Network: %s, Output shape: %s"%(Inp.shape,Output.shape))
         autoencoder.fit(Inp, Output,
                         epochs=self.n_iter,
                         batch_size=4096,
