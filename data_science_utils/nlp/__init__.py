@@ -510,7 +510,7 @@ class FasttextTfIdfTransformer:
             dictionary = corpora.Dictionary(X)
             print('Number of unique tokens before filtering for Fasttext: %d' % len(dictionary))
             self.dictionary = dictionary
-            self.dictionary.filter_extremes(no_below=self.min_count,keep_n=2000000)
+            self.dictionary.filter_extremes(no_below=self.min_count-1,keep_n=2000000)
             print('Number of unique tokens after filtering for Fasttext: %d' % len(dictionary))
         else:
             if os.path.exists(self.dictionary_file):
@@ -518,7 +518,7 @@ class FasttextTfIdfTransformer:
             else:
                 dictionary = corpora.Dictionary(X)
                 self.dictionary = dictionary
-                self.dictionary.filter_extremes(no_below=self.min_count,keep_n=2000000)
+                self.dictionary.filter_extremes(no_below=self.min_count-1,keep_n=2000000)
                 self.dictionary.save(self.dictionary_file)
 
         if self.tfidf is None and self.use_tfidf:

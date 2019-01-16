@@ -7,7 +7,9 @@ from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import FunctionTransformer
 from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import MinMaxScaler
+from sklearn.preprocessing import RobustScaler
 from sklearn.impute import SimpleImputer
+import more_itertools
 
 from data_science_utils.nlp import FasttextTfIdfTransformer
 
@@ -261,25 +263,59 @@ class NeuralCategoricalFeatureTransformer:
             raise NotImplementedError()
 
     def fit(self, X, y=None):
-        if type(X) == pd.DataFrame:
-            if not self.inplace:
-                X = X.copy()
-            if type(self.cols[0]) == str:
-                X[self.cols] = X[self.cols].fillna(self.nan_fill)
-                Inp = X[self.cols]
-                ouput_cols = list(self.target_columns)
-                if self.include_input_as_output:
-                    ouput_cols = list(self.cols) + (self.target_columns if self.target_columns is not None else [])
-                if self.target_columns is not None:
-                    X[self.target_columns] = X[self.target_columns].fillna(X[self.target_columns].mean())
-                Output = X[ouput_cols]
-            else:
-                raise ValueError("Please provide colidx parameter")
-        else:
+        if type(X) != pd.DataFrame:
             raise NotImplementedError()
 
+        if not self.inplace:
+            X = X.copy()
+        if type(self.cols[0]) == str:
+            X[self.cols] = X[self.cols].fillna(self.nan_fill)
+        else:
+            raise ValueError("Please provide colidx parameter")
+
+        only_numeric_target = True
+        for colname, dtype in X.head()[self.target_columns].dtypes.reset_index(level=0).values:
+            if dtype == 'object':
+                only_numeric_target = False
+        only_string_input = True
+        for colname, dtype in X.head()[self.cols].dtypes.reset_index(level=0).values:
+            if dtype != 'object':
+                only_string_input = False
+
+        validation_split = 0.2
+        if only_numeric_target and only_string_input:
+            validation_split = 0
+            counts = X.groupby(self.cols)[self.target_columns[0]].agg(['count'])
+            X = X.groupby(self.cols)[self.target_columns].agg(['mean','std']).reset_index()
+            X.columns = list(map(lambda x:x[0]+x[1],list(X.columns)))
+            X['count'] = counts.values
+            arr1 = list(map(lambda x: [x + "mean", x + "std"], self.target_columns))
+            self.target_columns = list(more_itertools.flatten(arr1)) + ['count']
+        Inp = X[self.cols]
+        ouput_cols = list(self.target_columns)
+        if self.include_input_as_output:
+            ouput_cols = list(self.cols) + (self.target_columns if self.target_columns is not None else [])
+        if self.target_columns is not None:
+            X[self.target_columns] = X[self.target_columns].fillna(X[self.target_columns].mean())
+        Output = X[ouput_cols]
+
+
+
+        # we will add count of each group,
+        # we will add std-dev of target columns
+        # we will add weight of evidence
+
+        if only_numeric_target and only_string_input:
+            loss = "mean_absolute_error"
+            es = EarlyStopping(monitor='train_loss', min_delta=0.005, patience=3, verbose=0, )
+            scaler = RobustScaler()
+        else:
+            loss = 'binary_crossentropy'
+            es = EarlyStopping(monitor='val_loss', min_delta=0.00001, patience=6, verbose=0, )
+            scaler = MinMaxScaler()
+
         enc = OneHotEncoder(handle_unknown='ignore', sparse=False)
-        scaler = MinMaxScaler()
+
         numeric_cols_target = []
         string_cols_target = []
         for colname, dtype in Output.dtypes.reset_index(level=0).values:
@@ -309,23 +345,23 @@ class NeuralCategoricalFeatureTransformer:
         encoded = Dense(self.n_components, activation='elu')(encoded)
 
         decoded = Dense(self.n_components * 2, activation='elu')(encoded)
-        decoded = Dense(Output.shape[1], activation='sigmoid')(decoded)
+        decoded = Dense(Output.shape[1], activation='elu')(decoded)
 
         autoencoder = Model(input_layer, decoded)
         encoder = Model(input_layer, encoded)
 
-        es = EarlyStopping(monitor='val_loss', min_delta=0.00001, patience=6, verbose=0, )
-        adam = optimizers.Adam(lr=0.002, clipnorm=3, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0, amsgrad=False)
-        autoencoder.compile(optimizer=adam, loss='binary_crossentropy')
+        adam = optimizers.Adam(lr=0.003, clipnorm=4, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0, amsgrad=False)
+        autoencoder.compile(optimizer=adam, loss=loss)
         autoencoder.fit(Inp, Output,
                         epochs=self.n_iter,
                         batch_size=4096,
                         shuffle=True,
-                        validation_split=0.1,
+                        validation_split=validation_split,
                         verbose=self.verbose,
                         callbacks=[es])
         self.model = encoder
         self.enc = enc
+        return self
 
     def partial_fit(self, X, y=None):
         self.fit(X, y)
