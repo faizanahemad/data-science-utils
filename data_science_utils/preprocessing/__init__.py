@@ -307,7 +307,7 @@ class NeuralCategoricalFeatureTransformer:
 
         if only_numeric_target and only_string_input:
             loss = "binary_crossentropy"
-            es = EarlyStopping(monitor='train_loss', min_delta=0.005, patience=3, verbose=0, )
+            es = EarlyStopping(monitor='train_loss', min_delta=0.00001, patience=6, verbose=0, )
             scaler = MinMaxScaler()
         else:
             loss = 'binary_crossentropy'
