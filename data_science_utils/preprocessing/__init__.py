@@ -251,7 +251,8 @@ class NeuralCategoricalFeatureTransformer:
                  include_input_as_output=True, target_columns=None,
                  n_layers=2, n_components=16, n_iter=100, nan_fill="", verbose=0,
                  prefix="nncat_",
-                 save_file=None,inplace=True):
+                 save_file=None,inplace=True,
+                 skip_fit=False,skip_transform=False):
         """
         """
         self.model = None
@@ -272,10 +273,14 @@ class NeuralCategoricalFeatureTransformer:
         self.prefix = prefix
         self.save_file = save_file
         self.inplace=inplace
+        self.skip_fit = skip_fit
+        self.skip_transform = skip_transform
         if save_file is not None:
             raise NotImplementedError()
 
     def fit(self, X, y=None):
+        if self.skip_fit:
+            return self
         if type(X) != pd.DataFrame:
             raise NotImplementedError()
 
@@ -391,6 +396,8 @@ class NeuralCategoricalFeatureTransformer:
         self.fit(X, y)
 
     def transform(self, X, y='deprecated', copy=None):
+        if self.skip_transform:
+            return X
         if type(X) == pd.DataFrame:
             if type(self.cols[0]) == str:
                 Inp = X[self.cols].fillna(self.nan_fill)

@@ -448,7 +448,8 @@ class FasttextTfIdfTransformer:
     def __init__(self, size=156, window=3, min_count=1, iter=20, min_n=2, max_n=6, word_ngrams=0,
                  workers=int(multiprocessing.cpu_count() / 2)-1, ft_prefix="ft_", token_column=None,
                 tfidf=None,use_tfidf=True,
-                 model_file=None, dictionary_file=None,inplace=True):
+                 model_file=None, dictionary_file=None,inplace=True,
+                 skip_fit=False, skip_transform=False):
         self.size = size
         self.window = window
         self.min_count = min_count
@@ -466,6 +467,8 @@ class FasttextTfIdfTransformer:
         self.model_file = model_file
         self.dictionary_file = dictionary_file
         self.use_tfidf = use_tfidf
+        self.skip_fit = skip_fit
+        self.skip_transform = skip_transform
         self.inplace = inplace
 
     def tokenise_for_fasttext_(self, X):
@@ -483,6 +486,8 @@ class FasttextTfIdfTransformer:
         return np.array(token_acc)
 
     def fit(self, X, y='ignored'):
+        if self.skip_fit:
+            return self
         from gensim.models import TfidfModel
         if type(X) == pd.DataFrame:
             X = X[self.token_column].values
@@ -546,6 +551,8 @@ class FasttextTfIdfTransformer:
         return np.average(tokens2vec, axis=0, weights=token2tfidf)
 
     def transform(self, X, y='ignored'):
+        if self.skip_transform:
+            return X
         if type(X) == pd.DataFrame:
             Input = X[self.token_column].values
         else:
