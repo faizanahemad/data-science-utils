@@ -371,6 +371,15 @@ class NeuralCategoricalFeatureTransformer:
             Output = outout_string_dummies
         Inp = enc.fit_transform(Inp)
 
+        # total_memory = 2*8*X.shape[0]*X.shape[0]/1000000000
+        # print("Total Memory in GB %.3f"%total_memory)
+        # https://stackoverflow.com/questions/37609892/keras-sparse-matrix-issue
+        # https://stackoverflow.com/questions/41538692/using-sparse-matrices-with-keras-and-tensorflow
+
+        # Output.memory_usage(deep=True).sum()/1000000000
+        # Inp.nbytes/1000000000
+        # 8*Inp.shape[0]*Inp.shape[1]/1000000000
+
         input_layer = Input(shape=(Inp.shape[1],))
         encoded = Dense(self.n_components * 2, activation='elu')(input_layer)
 

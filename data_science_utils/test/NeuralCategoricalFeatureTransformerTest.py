@@ -55,3 +55,13 @@ nn_cat = NeuralCategoricalFeatureTransformer(cols=["a","b"],target_columns=["x",
 nn_cat.fit(df)
 tdf = nn_cat.transform(df)
 print(tdf)
+# size = 30000
+# df = pd.DataFrame({"a":list(map(str,np.random.randint(0, high=int(size/2), size=size*2,))),
+#                    "b":list(map(str,np.random.randint(int(size/2), high=size, size=size*2,))),
+#                    "x":np.random.randint(0, high=2, size=size*2,) ,
+#                    "y":np.random.randint(0, high=2, size=size*2,)})
+#
+# nn_cat = NeuralCategoricalFeatureTransformer(cols=["a","b"],target_columns=["x","y"],verbose=1,n_components=16,n_iter=500)
+# nn_cat.fit(df)
+# tdf = nn_cat.transform(df)
+# print(tdf)
