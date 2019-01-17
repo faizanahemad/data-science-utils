@@ -35,13 +35,23 @@ import numpy as np
 # tdf = nn_cat.transform(df)
 # print(tdf)
 
+# df = pd.DataFrame({"a":["c1","c1","c1","c2","c2","c2","c1","c1","c1"],
+#                    "b":["d1","d2","d3","d1","d2","d3","d1","d2","d3"],
+#                    "x":[1,0,1,1,1,0,1,0,0],
+#                    "y": [1, 0, 1, 1, 1, 0, 1, 0, 0]})
+#
+# nn_cat = NeuralCategoricalFeatureTransformer(cols=["a","b"],target_columns=None,verbose=1,n_components=16,n_iter=500)
+# nn_cat.fit(df)
+# tdf = nn_cat.transform(df)
+# print(tdf)
+
+
 df = pd.DataFrame({"a":["c1","c1","c1","c2","c2","c2","c1","c1","c1"],
                    "b":["d1","d2","d3","d1","d2","d3","d1","d2","d3"],
-                   "x":[1,0,1,1,1,0,1,0,0]})
+                   "x":[1,0,1,1,1,0,1,0,0],
+                   "y": [0, 1, 1, 1, 0, 0, 1, 0, 1]})
 
-nn_cat = NeuralCategoricalFeatureTransformer(cols=["a","b"],target_columns=["x"],verbose=1,n_components=16,n_iter=500)
+nn_cat = NeuralCategoricalFeatureTransformer(cols=["a","b"],target_columns=["x","y"],verbose=1,n_components=16,n_iter=500)
 nn_cat.fit(df)
 tdf = nn_cat.transform(df)
 print(tdf)
-
-print("hello")

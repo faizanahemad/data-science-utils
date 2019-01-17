@@ -249,7 +249,7 @@ class NeuralCategoricalFeatureTransformer:
 
     def __init__(self, cols,
                  include_input_as_output=True, target_columns=None,
-                 n_layers=2, n_components=16, n_iter=100, nan_fill="", verbose=0,
+                 n_layers=2, n_components=32, n_iter=150, nan_fill="", verbose=0,
                  prefix="nncat_",
                  save_file=None,inplace=True,
                  skip_fit=False,skip_transform=False):
@@ -284,23 +284,25 @@ class NeuralCategoricalFeatureTransformer:
         if type(X) != pd.DataFrame:
             raise NotImplementedError()
 
-        if not self.inplace:
-            X = X.copy()
+        X = X.copy()
         if type(self.cols[0]) == str:
             X[self.cols] = X[self.cols].fillna(self.nan_fill)
         else:
             raise ValueError("Please provide colidx parameter")
 
         only_numeric_target = True
-        for colname, dtype in X.head()[self.target_columns].dtypes.reset_index(level=0).values:
-            if dtype == 'object':
-                only_numeric_target = False
+        if self.target_columns is not None:
+            for colname, dtype in X.head()[self.target_columns].dtypes.reset_index(level=0).values:
+                if dtype == 'object':
+                    only_numeric_target = False
+        else:
+            only_numeric_target = False
         only_string_input = True
         for colname, dtype in X.head()[self.cols].dtypes.reset_index(level=0).values:
             if dtype != 'object':
                 only_string_input = False
 
-        validation_split = 0.2
+        validation_split = 0.4
         if only_numeric_target and only_string_input:
             counts = X.groupby(self.cols)[self.target_columns[0]].agg(['count'])
             overall_means = X[self.target_columns].mean()
@@ -315,6 +317,16 @@ class NeuralCategoricalFeatureTransformer:
             arr1 = list(map(lambda x: [x + "mean", x + "std"], self.target_columns))
             self.target_columns = list(more_itertools.flatten(arr1)) + ['count'] + woe_cols
         X = X.sample(frac=1)
+        if self.target_columns is None:
+            extra_col = list(set(X.columns) - set(self.cols))[0]
+            X = X[self.cols+[extra_col]]
+            X = X.groupby(self.cols).agg(['count']).reset_index()
+            X.columns = list(map(lambda x: x[0] + x[1], list(X.columns)))
+            cols = list(X.columns)
+            cols[-1] = "count"
+            X.columns = cols
+            self.target_columns = ['count']
+
         Inp = X[self.cols]
         ouput_cols = list(self.target_columns)
         if self.include_input_as_output:
@@ -331,6 +343,7 @@ class NeuralCategoricalFeatureTransformer:
 
         loss = "binary_crossentropy"
         es = EarlyStopping(monitor='val_loss', min_delta=0.00001, patience=10, verbose=0, )
+        es2 = EarlyStopping(monitor='val_loss', min_delta=0.00005, patience=5, verbose=0, )
         scaler = MinMaxScaler()
 
         enc = OneHotEncoder(handle_unknown='ignore', sparse=False)
@@ -387,7 +400,7 @@ class NeuralCategoricalFeatureTransformer:
                         shuffle=True,
                         validation_data=(Inp[:train_size], Output[:train_size]),
                         verbose=self.verbose,
-                        callbacks=[es])
+                        callbacks=[es2])
         self.model = encoder
         self.enc = enc
         return self
