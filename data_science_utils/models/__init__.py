@@ -372,7 +372,7 @@ class BinaryClassifierToTransformer:
         cols = self.get_cols_(X)
         self.cols = cols
         if self.training_sampling_fn is not None:
-            X = self.training_sampling_fn(X)
+            X,sample_weight = self.training_sampling_fn(X,sample_weight)
 
         X = X[cols]
         if self.impute:
