@@ -352,9 +352,9 @@ class NeuralCategoricalFeatureTransformer:
         # we will add std-dev of target columns
         # we will add weight of evidence
 
-        loss = "binary_crossentropy"
-        es = EarlyStopping(monitor='val_loss', min_delta=0.00001, patience=6, verbose=0, )
-        es2 = EarlyStopping(monitor='val_loss', min_delta=0.00005, patience=4, verbose=0, )
+        loss = "mean_squared_error"
+        es = EarlyStopping(monitor='val_loss', min_delta=0.000001, patience=5, verbose=0, )
+        es2 = EarlyStopping(monitor='val_loss', min_delta=0.000001, patience=10, verbose=0, )
         scaler = MinMaxScaler()
 
         enc = OneHotEncoder(handle_unknown='ignore', sparse=False)
@@ -402,7 +402,7 @@ class NeuralCategoricalFeatureTransformer:
         autoencoder = Model(input_layer, decoded)
         encoder = Model(input_layer, encoded)
 
-        adam = optimizers.Adam(lr=0.003, clipnorm=4, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0, amsgrad=False)
+        adam = optimizers.Adam(lr=0.01, clipnorm=4, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.05, amsgrad=False)
         autoencoder.compile(optimizer=adam, loss=loss)
         print("Shape of Input to Neural Network: %s, Output shape: %s"%(Inp.shape,Output.shape))
         validation_size=int(Inp.shape[0]*validation_split)

@@ -46,22 +46,25 @@ import numpy as np
 # print(tdf)
 
 
-df = pd.DataFrame({"a":["c1","c1","c1","c2","c2","c2","c1","c1","c1"],
-                   "b":["d1","d2","d3","d1","d2","d3","d1","d2","d3"],
-                   "x":[1,0,1,1,1,0,1,0,0],
-                   "y": [0, 1, 1, 1, 0, 0, 1, 0, 1]})
-
-nn_cat = NeuralCategoricalFeatureTransformer(cols=["a","b"],target_columns=["x","y"],verbose=1,n_components=16,n_iter=500)
-nn_cat.fit(df)
-tdf = nn_cat.transform(df)
-print(tdf)
-# size = 30000
-# df = pd.DataFrame({"a":list(map(str,np.random.randint(0, high=int(size/2), size=size*2,))),
-#                    "b":list(map(str,np.random.randint(int(size/2), high=size, size=size*2,))),
-#                    "x":np.random.randint(0, high=2, size=size*2,) ,
-#                    "y":np.random.randint(0, high=2, size=size*2,)})
+# df = pd.DataFrame({"a":["c1","c1","c1","c2","c2","c2","c1","c1","c1"],
+#                    "b":["d1","d2","d3","d1","d2","d3","d1","d2","d3"],
+#                    "x":[1,0,1,1,1,0,1,0,0],
+#                    "y": [0, 1, 1, 1, 0, 0, 1, 0, 1]})
 #
 # nn_cat = NeuralCategoricalFeatureTransformer(cols=["a","b"],target_columns=["x","y"],verbose=1,n_components=16,n_iter=500)
 # nn_cat.fit(df)
 # tdf = nn_cat.transform(df)
 # print(tdf)
+size = 400
+size_mul = 16
+df = pd.DataFrame({"a":list(map(str,np.random.randint(0, high=int(size/16), size=size*size_mul,))),
+                   "b":list(map(str,np.random.randint(int(size/16), high=size, size=size*size_mul,))),
+                   "x":np.random.randint(0, high=25, size=size*size_mul,),
+                   "y":np.random.randint(0, high=2, size=size*size_mul,)})
+
+print(df.shape)
+
+nn_cat = NeuralCategoricalFeatureTransformer(cols=["a","b"],target_columns=["x","y"],verbose=1,n_components=16,n_iter=500)
+nn_cat.fit(df)
+tdf = nn_cat.transform(df)
+print(tdf)
