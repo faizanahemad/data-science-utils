@@ -78,3 +78,12 @@ def deep_map(fn,elems):
         return fn(elems)
 
 
+def get_week_start_date(df,date_col,format=None):
+    import datetime as dt
+    date_col = pd.to_datetime(df[date_col],format=format)
+    daysoffset = date_col.dt.weekday.apply(lambda x:dt.timedelta(days=x))
+    week_start = date_col - daysoffset
+    week_start = pd.to_datetime(week_start.dt.strftime('%Y-%m-%d'))
+    return week_start
+
+
