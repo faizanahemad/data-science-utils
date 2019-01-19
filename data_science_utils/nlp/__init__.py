@@ -16,6 +16,7 @@ import numpy as np
 from nltk.corpus import wordnet
 from nltk import ngrams
 import more_itertools
+import gc
 
 import nltk
 nltk.download('punkt')
@@ -449,7 +450,7 @@ class FasttextTfIdfTransformer:
                  workers=int(multiprocessing.cpu_count() / 2)-1, ft_prefix="ft_", token_column=None,
                 tfidf=None,use_tfidf=True,
                  model_file=None, dictionary_file=None,inplace=True,
-                 skip_fit=False, skip_transform=False):
+                 skip_fit=False, skip_transform=False,normalize_word_vectors=True):
         self.size = size
         self.window = window
         self.min_count = min_count
@@ -470,6 +471,7 @@ class FasttextTfIdfTransformer:
         self.skip_fit = skip_fit
         self.skip_transform = skip_transform
         self.inplace = inplace
+        self.normalize_word_vectors = normalize_word_vectors
 
     def tokenise_for_fasttext_(self, X):
         token_acc = []
@@ -508,10 +510,10 @@ class FasttextTfIdfTransformer:
 
         print("FastText Vocab Length = %s, Ngrams length = %s"%(len(self.model.wv.vectors_ngrams),len(self.model.wv.vectors_vocab)))
 
-        if self.word_ngrams == 1 and self.min_n <= self.max_n:
+        if self.word_ngrams == 1 and self.min_n <= self.max_n and self.use_tfidf:
             X = self.tokenise_for_fasttext_(X)
 
-        if self.dictionary_file is None:
+        if self.dictionary_file is None and self.use_tfidf:
             dictionary = corpora.Dictionary(X)
             print('Number of unique tokens before filtering for Fasttext: %d' % len(dictionary))
             self.dictionary = dictionary
@@ -520,7 +522,7 @@ class FasttextTfIdfTransformer:
         else:
             if os.path.exists(self.dictionary_file):
                 self.dictionary = corpora.Dictionary.load(self.dictionary_file)
-            else:
+            elif self.use_tfidf:
                 dictionary = corpora.Dictionary(X)
                 self.dictionary = dictionary
                 self.dictionary.filter_extremes(no_below=self.min_count-1,keep_n=2000000)
@@ -530,6 +532,8 @@ class FasttextTfIdfTransformer:
             bows = list(map(self.dictionary.doc2bow, X))
             tfidf = TfidfModel(bows, normalize=True)
             self.tfidf = tfidf
+        gc.collect()
+        return self
 
 
 
@@ -551,6 +555,7 @@ class FasttextTfIdfTransformer:
         return np.average(tokens2vec, axis=0, weights=token2tfidf)
 
     def transform(self, X, y='ignored'):
+        from joblib import Parallel, delayed
         if self.skip_transform:
             return X
         if type(X) == pd.DataFrame:
@@ -559,7 +564,6 @@ class FasttextTfIdfTransformer:
             raise ValueError()
         if not self.inplace:
             X = X.copy()
-        temp = self.dictionary[0]
         def tokens2tfidf(token_array, tfidf, dictionary):
             tmp = self.dictionary[0]
             id2tfidf = {k: v for k, v in tfidf[dictionary.doc2bow(token_array)]}
@@ -578,6 +582,10 @@ class FasttextTfIdfTransformer:
         tfidfs = list(map(t2tfn, Input))
         ft_fn = lambda tokens: tokens2vec(tokens, self.model)
         ft_vecs = list(map(ft_fn, Input))
+        if self.normalize_word_vectors:
+            jobs = int((multiprocessing.cpu_count()-1)/2)
+            normalizer = lambda v:[k / np.linalg.norm(k) for k in v]
+            ft_vecs = Parallel(n_jobs=jobs, backend="loky")(delayed(normalizer)(x) for x in ft_vecs)
 
         def doc2vec(ftv, tfidf_rep):
             if np.sum(ftv) == 0:
@@ -590,6 +598,7 @@ class FasttextTfIdfTransformer:
         text_df.columns = [self.ft_prefix + str(i) for i in range(0, self.size)]
         text_df.index = X.index
         X[list(text_df.columns)] = text_df
+        gc.collect()
         return X
 
     def inverse_transform(self, X, copy=None):

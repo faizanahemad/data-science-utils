@@ -10,6 +10,8 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.preprocessing import RobustScaler
 from sklearn.impute import SimpleImputer
 import more_itertools
+from data_science_utils.dataframe import get_specific_cols
+import gc
 
 from data_science_utils.nlp import FasttextTfIdfTransformer
 
@@ -205,9 +207,21 @@ from data_science_utils import dataframe as df_utils
 
 
 class NamedColumnSelector:
-    def __init__(self, include_columns=None,exclude_columns=None):
-        self.include_columns = include_columns
-        self.exclude_columns = exclude_columns
+    def __init__(self, columns=None,prefixes=None,suffixes=None):
+        self.columns = columns
+        self.prefixes = prefixes
+        self.suffixes = suffixes
+
+    def get_cols_(self, X):
+        cols = list(self.columns)
+        if self.prefixes is not None:
+            for pf in self.prefixes:
+                cols.extend(get_specific_cols(X, prefix=pf))
+        if self.suffixes is not None:
+            for pf in self.suffixes:
+                cols.extend(get_specific_cols(X, suffix=pf))
+        cols = list(set(cols))
+        return cols
 
     def fit(self, X, y='ignored'):
         pass
@@ -218,10 +232,7 @@ class NamedColumnSelector:
     def transform(self, X, y='ignored'):
         if type(X) != pd.DataFrame:
             raise ValueError()
-        if self.include_columns is not None:
-            X=X[self.include_columns]
-        if self.exclude_columns is not None:
-            df_utils.drop_columns_safely(X,self.exclude_columns,inplace=True)
+        X = X[self.get_cols_(X)]
         return X
 
     def inverse_transform(self, X, copy=None):
@@ -342,8 +353,8 @@ class NeuralCategoricalFeatureTransformer:
         # we will add weight of evidence
 
         loss = "binary_crossentropy"
-        es = EarlyStopping(monitor='val_loss', min_delta=0.00001, patience=10, verbose=0, )
-        es2 = EarlyStopping(monitor='val_loss', min_delta=0.00005, patience=5, verbose=0, )
+        es = EarlyStopping(monitor='val_loss', min_delta=0.00001, patience=6, verbose=0, )
+        es2 = EarlyStopping(monitor='val_loss', min_delta=0.00005, patience=4, verbose=0, )
         scaler = MinMaxScaler()
 
         enc = OneHotEncoder(handle_unknown='ignore', sparse=False)
@@ -412,6 +423,7 @@ class NeuralCategoricalFeatureTransformer:
                         callbacks=[es2])
         self.model = encoder
         self.enc = enc
+        gc.collect()
         return self
 
     def partial_fit(self, X, y=None):
@@ -434,6 +446,7 @@ class NeuralCategoricalFeatureTransformer:
         if not self.inplace:
             X = X.copy()
         X[results.columns] = results
+        gc.collect()
         return X
 
     def inverse_transform(self, X, copy=None):
