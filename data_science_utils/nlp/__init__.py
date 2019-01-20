@@ -446,10 +446,9 @@ from gensim.test.utils import get_tmpfile
 import os.path
 
 class FasttextTfIdfTransformer:
-    def __init__(self, size=156, window=3, min_count=1, iter=20, min_n=2, max_n=6, word_ngrams=0,
+    def __init__(self, size=256, window=5, min_count=4, iter=30, min_n=3, max_n=6, word_ngrams=1,
                  workers=int(multiprocessing.cpu_count() / 2)-1, ft_prefix="ft_", token_column=None,
-                tfidf=None,use_tfidf=True,
-                 model_file=None, dictionary_file=None,inplace=True,
+                 use_tfidf=False,inplace=True,
                  skip_fit=False, skip_transform=False,normalize_word_vectors=True):
         self.size = size
         self.window = window
@@ -461,12 +460,10 @@ class FasttextTfIdfTransformer:
         self.workers = workers
         self.token_column = token_column
         self.model = None
-        self.tfidf = tfidf
+        self.tfidf = None
         assert type(self.token_column) == str
         self.ft_prefix = ft_prefix
         self.dictionary = None
-        self.model_file = model_file
-        self.dictionary_file = dictionary_file
         self.use_tfidf = use_tfidf
         self.skip_fit = skip_fit
         self.skip_transform = skip_transform
@@ -495,40 +492,25 @@ class FasttextTfIdfTransformer:
             X = X[self.token_column].values
 
 
-        if self.model_file is None:
-            self.model = FastText(sentences=X, size=self.size, window=self.window, min_count=self.min_count,
-                                  iter=self.iter, min_n=self.min_n, max_n=self.max_n, word_ngrams=self.word_ngrams,
-                                  workers=self.workers,bucket=4000000,alpha=0.03)
-        else:
-            if os.path.exists(self.model_file):
-                self.model = FastText.load(get_tmpfile(self.model_file))
-            else:
-                self.model = FastText(sentences=X, size=self.size, window=self.window, min_count=self.min_count,
-                                      iter=self.iter, min_n=self.min_n, max_n=self.max_n, word_ngrams=self.word_ngrams,
-                                      workers=self.workers,bucket=4000000,alpha=0.03)
-                self.model.save(get_tmpfile(self.model_file))
+
+        self.model = FastText(sentences=X, size=self.size, window=self.window, min_count=self.min_count,
+                              iter=self.iter, min_n=self.min_n, max_n=self.max_n, word_ngrams=self.word_ngrams,
+                              workers=self.workers,bucket=8000000,alpha=0.03)
+
 
         print("FastText Vocab Length = %s, Ngrams length = %s"%(len(self.model.wv.vectors_ngrams),len(self.model.wv.vectors_vocab)))
 
         if self.word_ngrams == 1 and self.min_n <= self.max_n and self.use_tfidf:
             X = self.tokenise_for_fasttext_(X)
 
-        if self.dictionary_file is None and self.use_tfidf:
+        if self.use_tfidf:
             dictionary = corpora.Dictionary(X)
             print('Number of unique tokens before filtering for Fasttext: %d' % len(dictionary))
             self.dictionary = dictionary
             self.dictionary.filter_extremes(no_below=self.min_count-1,keep_n=2000000)
             print('Number of unique tokens after filtering for Fasttext: %d' % len(dictionary))
-        else:
-            if os.path.exists(self.dictionary_file):
-                self.dictionary = corpora.Dictionary.load(self.dictionary_file)
-            elif self.use_tfidf:
-                dictionary = corpora.Dictionary(X)
-                self.dictionary = dictionary
-                self.dictionary.filter_extremes(no_below=self.min_count-1,keep_n=2000000)
-                self.dictionary.save(self.dictionary_file)
 
-        if self.tfidf is None and self.use_tfidf:
+        if self.use_tfidf:
             bows = list(map(self.dictionary.doc2bow, X))
             tfidf = TfidfModel(bows, normalize=True)
             self.tfidf = tfidf
@@ -541,16 +523,19 @@ class FasttextTfIdfTransformer:
         self.fit(X, y='ignored')
 
     def transform_one(self,token_array):
-        temp = self.dictionary[0]
         tfidf = self.tfidf
         dictionary = self.dictionary
-        id2tfidf = {k: v for k, v in tfidf[dictionary.doc2bow(token_array)]}
-        token2tfidf = {dictionary.id2token[k]: v for k, v in id2tfidf.items()}
-        token2tfidf = [token2tfidf[token] if token in token2tfidf else 1 for token in token_array]
+        if self.use_tfidf:
+            temp = self.dictionary[0]
+            id2tfidf = {k: v for k, v in tfidf[dictionary.doc2bow(token_array)]}
+            token2tfidf = {dictionary.id2token[k]: v for k, v in id2tfidf.items()}
+            token2tfidf = [token2tfidf[token] if token in token2tfidf else 1 for token in token_array]
+        else:
+            token2tfidf = np.ones(len(token_array))
         tokens2vec = [self.model.wv[token] if token in self.model.wv else np.full(self.size, 0) for token in token_array]
         if np.sum(tokens2vec) == 0:
             return np.full(self.size, 0)
-        if np.sum(token2tfidf) == 0:
+        if self.use_tfidf and np.sum(token2tfidf) == 0:
             return np.average(tokens2vec, axis=0)
         return np.average(tokens2vec, axis=0, weights=token2tfidf)
 
