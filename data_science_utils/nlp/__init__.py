@@ -495,7 +495,7 @@ class FasttextTfIdfTransformer:
 
         self.model = FastText(sentences=X, size=self.size, window=self.window, min_count=self.min_count,
                               iter=self.iter, min_n=self.min_n, max_n=self.max_n, word_ngrams=self.word_ngrams,
-                              workers=self.workers,bucket=8000000,alpha=0.03)
+                              workers=self.workers,bucket=8000000,alpha=0.03,negative=10)
 
 
         print("FastText Vocab Length = %s, Ngrams length = %s"%(len(self.model.wv.vectors_ngrams),len(self.model.wv.vectors_vocab)))
