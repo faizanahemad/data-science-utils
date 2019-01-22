@@ -261,7 +261,7 @@ def tokenize_lemmatize(text, external_text_processing_funcs=[replace_numbers], l
 
 
 def ngram_stopword(tokens, word_length_filter=3, ngram_limit=3):
-    tokens = list(map(lambda x: re.sub('[^ a-zA-Z0-9]', '', x.lower()), tokens))
+    # tokens = list(map(lambda x: re.sub('[^ a-zA-Z0-9]', '', x.lower()), tokens))
     tokens = list(filter(lambda x:len(x)>0,map(lambda x: x.strip(), tokens)))
     if ngram_limit is not None and ngram_limit >= 2:
         grams = list(more_itertools.flatten([ngrams(tokens, i) for i in range(2, ngram_limit + 1)]))
@@ -485,13 +485,14 @@ class FasttextTfIdfTransformer:
         return np.array(token_acc)
 
     def fit(self, X, y='ignored'):
+        gc.collect()
         if self.skip_fit:
             return self
         from gensim.models import TfidfModel
         if type(X) == pd.DataFrame:
             X = X[self.token_column].values
 
-
+        print("FastText Modelling Started..")
 
         self.model = FastText(sentences=X, size=self.size, window=self.window, min_count=self.min_count,
                               iter=self.iter, min_n=self.min_n, max_n=self.max_n, word_ngrams=self.word_ngrams,
@@ -567,6 +568,7 @@ class FasttextTfIdfTransformer:
         tfidfs = list(map(t2tfn, Input))
         ft_fn = lambda tokens: tokens2vec(tokens, self.model)
         ft_vecs = list(map(ft_fn, Input))
+        gc.collect()
         if self.normalize_word_vectors:
             jobs = int((multiprocessing.cpu_count()-1)/2)
             normalizer = lambda v:[k / np.linalg.norm(k) for k in v]
@@ -598,6 +600,7 @@ class TextProcessorTransformer:
     def __init__(self, source_cols, word_length_filter=2, ngram_limit=2,
                  combined_token_column="tokens",
                  text_fns=[], column_text_fns=None,
+                 skip_fit=False, skip_transform=False,
                  token_postprocessor=[], parallel=True,
                  inplace=True):
         """
@@ -616,6 +619,8 @@ class TextProcessorTransformer:
         self.column_text_fns = column_text_fns
         assert column_text_fns is None or type(column_text_fns)==dict
         self.inplace=inplace
+        self.skip_transform = skip_transform
+
     def text_processor_(self,text):
         return combined_text_processing(text,word_length_filter=self.word_length_filter,
                                                   ngram_limit=self.ngram_limit,
@@ -630,6 +635,8 @@ class TextProcessorTransformer:
         pass
 
     def transform(self, X, y='deprecated', copy=None):
+        if self.skip_transform:
+            return X
         if type(X)!=pd.DataFrame:
             raise TypeError()
         if not self.inplace:
