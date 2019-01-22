@@ -242,8 +242,107 @@ def replace_measurement(text):
     text = translate(text, length_translator)
     return text
 
+def get_tokenize_lemmatizer(external_text_processing_funcs=None, enable_lemmatizer=False, token_postprocessor=None):
+    if external_text_processing_funcs is not None:
+        if token_postprocessor is not None:
+            if enable_lemmatizer:
+                def tokenize_lemmatize(text):
+                    if text is None or type(text) is not str:
+                        return []
+                    lemmatizer = WordNetLemmatizer()
 
-def tokenize_lemmatize(text, external_text_processing_funcs=[replace_numbers], lemmatizer=None, token_postprocessor=[]):
+                    for fn in external_text_processing_funcs:
+                        text = fn(text)
+                    tokens = word_tokenize(text)
+                    pos_tags = nltk.pos_tag(tokens)
+                    tokens = list(map(lambda x: lemmatizer.lemmatize(x[0], get_wordnet_pos(x[1])), pos_tags))
+                    for fn in token_postprocessor:
+                        tokens = [fn(token) for token in tokens]
+                    return tokens
+            else:
+                def tokenize_lemmatize(text):
+                    if text is None or type(text) is not str:
+                        return []
+
+                    for fn in external_text_processing_funcs:
+                        text = fn(text)
+                    tokens = word_tokenize(text)
+                    for fn in token_postprocessor:
+                        tokens = [fn(token) for token in tokens]
+                    return tokens
+
+        else:
+            if enable_lemmatizer:
+                def tokenize_lemmatize(text):
+                    if text is None or type(text) is not str:
+                        return []
+                    lemmatizer = WordNetLemmatizer()
+
+                    for fn in external_text_processing_funcs:
+                        text = fn(text)
+                    tokens = word_tokenize(text)
+                    pos_tags = nltk.pos_tag(tokens)
+                    tokens = list(map(lambda x: lemmatizer.lemmatize(x[0], get_wordnet_pos(x[1])), pos_tags))
+                    return tokens
+            else:
+                def tokenize_lemmatize(text):
+                    if text is None or type(text) is not str:
+                        return []
+
+                    for fn in external_text_processing_funcs:
+                        text = fn(text)
+                    tokens = word_tokenize(text)
+                    return tokens
+    else:
+        if token_postprocessor is not None:
+            if enable_lemmatizer:
+                def tokenize_lemmatize(text):
+                    if text is None or type(text) is not str:
+                        return []
+                    lemmatizer = WordNetLemmatizer()
+
+                    tokens = word_tokenize(text)
+                    pos_tags = nltk.pos_tag(tokens)
+                    tokens = list(map(lambda x: lemmatizer.lemmatize(x[0], get_wordnet_pos(x[1])), pos_tags))
+                    for fn in token_postprocessor:
+                        tokens = [fn(token) for token in tokens]
+                    return tokens
+            else:
+                def tokenize_lemmatize(text):
+                    if text is None or type(text) is not str:
+                        return []
+
+                    tokens = word_tokenize(text)
+                    for fn in token_postprocessor:
+                        tokens = [fn(token) for token in tokens]
+                    return tokens
+
+        else:
+            if enable_lemmatizer:
+                def tokenize_lemmatize(text):
+                    if text is None or type(text) is not str:
+                        return []
+                    lemmatizer = WordNetLemmatizer()
+
+                    tokens = word_tokenize(text)
+                    pos_tags = nltk.pos_tag(tokens)
+                    tokens = list(map(lambda x: lemmatizer.lemmatize(x[0], get_wordnet_pos(x[1])), pos_tags))
+                    return tokens
+            else:
+                def tokenize_lemmatize(text):
+                    if text is None or type(text) is not str:
+                        return []
+
+                    tokens = word_tokenize(text)
+                    return tokens
+    return tokenize_lemmatize
+
+
+
+
+def tokenize_lemmatize(text,
+                       external_text_processing_funcs=None,
+                       lemmatizer=None, token_postprocessor=None):
     if text is None or type(text) is not str:
         return []
     if external_text_processing_funcs is not None:
@@ -258,6 +357,28 @@ def tokenize_lemmatize(text, external_text_processing_funcs=[replace_numbers], l
         for fn in token_postprocessor:
             tokens = [fn(token) for token in tokens]
     return tokens
+
+def get_ngramm_stopword_fn(word_length_filter=3, ngram_limit=3):
+    if ngram_limit is not None and ngram_limit >= 2:
+        def ngram_stopword(tokens):
+            # tokens = list(map(lambda x: re.sub('[^ a-zA-Z0-9]', '', x.lower()), tokens))
+            tokens = list(filter(lambda x: len(x) > 0, map(lambda x: x.strip(), tokens)))
+            grams = list(more_itertools.flatten([ngrams(tokens, i) for i in range(2, ngram_limit + 1)]))
+            all_words = []
+            for w in tokens:
+                if len(w) >= word_length_filter and not is_stopword(w):
+                    all_words.append(w)
+            for w in grams:
+                is_acceptable = not any([True for spw in w if len(spw) < word_length_filter or is_stopword(spw)])
+                if is_acceptable:
+                    all_words.append(' '.join(w))
+            return all_words
+    else:
+        def ngram_stopword(tokens):
+            # tokens = list(map(lambda x: re.sub('[^ a-zA-Z0-9]', '', x.lower()), tokens))
+            tokens = list(filter(lambda x: len(x) >= word_length_filter and not is_stopword(x), map(lambda x: x.strip(), tokens)))
+            return tokens
+    return ngram_stopword
 
 
 def ngram_stopword(tokens, word_length_filter=3, ngram_limit=3):
@@ -283,6 +404,17 @@ def combined_text_processing(text, external_text_processing_funcs=[replace_numbe
     tokens = tokenize_lemmatize(text, external_text_processing_funcs, lemmatizer,token_postprocessor)
     tokens = ngram_stopword(tokens, word_length_filter, ngram_limit)
     return tokens
+
+
+def get_combined_text_processing(external_text_processing_funcs=None, enable_lemmatizer=True,
+                             word_length_filter=3, ngram_limit=1,token_postprocessor=None):
+    tokenizer_lemmatizer = get_tokenize_lemmatizer(external_text_processing_funcs,enable_lemmatizer,token_postprocessor)
+    ngram_stopword = get_ngramm_stopword_fn(word_length_filter=word_length_filter, ngram_limit=ngram_limit,)
+
+    def tp(text):
+        return ngram_stopword(tokenizer_lemmatizer(text))
+
+    return tp
 
 
 
@@ -621,12 +753,6 @@ class TextProcessorTransformer:
         self.inplace=inplace
         self.skip_transform = skip_transform
 
-    def text_processor_(self,text):
-        return combined_text_processing(text,word_length_filter=self.word_length_filter,
-                                                  ngram_limit=self.ngram_limit,
-                                                  external_text_processing_funcs=self.text_fns,
-                                         token_postprocessor=self.token_postprocessor)
-
 
     def fit(self, X, y=None):
         pass
@@ -650,19 +776,25 @@ class TextProcessorTransformer:
             vals = list(X[col].values)
 
             if col in self.column_text_fns.keys():
-                text_processor = lambda text: combined_text_processing(text,word_length_filter=self.word_length_filter,
+                text_processor = get_combined_text_processing(word_length_filter=self.word_length_filter,
                                                   ngram_limit=self.ngram_limit,
                                                   external_text_processing_funcs=self.column_text_fns[col],
                                          token_postprocessor=self.token_postprocessor)
                 vals = Parallel(n_jobs=jobs, backend="loky")(delayed(text_processor)(x) for x in vals)
             else:
-                vals = Parallel(n_jobs=jobs,backend="loky")(delayed(self.text_processor_)(x) for x in vals)
+                text_processor_ = get_combined_text_processing(word_length_filter=self.word_length_filter,
+                                                               ngram_limit=self.ngram_limit,
+                                                               external_text_processing_funcs=self.text_fns,
+                                                               token_postprocessor=self.token_postprocessor,
+                                                               enable_lemmatizer=True)
+                vals = Parallel(n_jobs=jobs,backend="loky")(delayed(text_processor_)(x) for x in vals)
             X[col+"_tokens"]=vals
             extra_cols.append(col+"_tokens")
         X[combined_token_column] = X[self.source_cols[0]+"_tokens"]
         for col in self.source_cols[1:]:
             X[combined_token_column] = X[combined_token_column] + X[col+"_tokens"]
         df_utils.drop_columns_safely(X,extra_cols,inplace=True)
+        gc.collect()
         return X
 
     def inverse_transform(self, X, copy=None):
