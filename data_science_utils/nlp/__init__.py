@@ -580,7 +580,7 @@ import os.path
 class FasttextTfIdfTransformer:
     def __init__(self, size=256, window=5, min_count=4, iter=30, min_n=3, max_n=6, word_ngrams=1,
                  workers=int(multiprocessing.cpu_count() / 2)-1, ft_prefix="ft_", token_column=None,
-                 use_tfidf=False,inplace=True,
+                 use_tfidf=False,inplace=True,store_train_data=False,
                  skip_fit=False, skip_transform=False,normalize_word_vectors=True):
         self.size = size
         self.window = window
@@ -601,6 +601,8 @@ class FasttextTfIdfTransformer:
         self.skip_transform = skip_transform
         self.inplace = inplace
         self.normalize_word_vectors = normalize_word_vectors
+        self.store_train_data = store_train_data
+        self.train = None
 
     def tokenise_for_fasttext_(self, X):
         token_acc = []
@@ -618,6 +620,8 @@ class FasttextTfIdfTransformer:
 
     def fit(self, X, y='ignored'):
         gc.collect()
+        if self.store_train_data:
+            self.train = (X,y)
         if self.skip_fit:
             return self
         from gensim.models import TfidfModel
@@ -649,6 +653,10 @@ class FasttextTfIdfTransformer:
             self.tfidf = tfidf
         gc.collect()
         return self
+
+    def fit_stored(self):
+        X,y = self.train
+        return self.fit(X,y)
 
 
 
