@@ -56,15 +56,16 @@ import numpy as np
 # tdf = nn_cat.transform(df)
 # print(tdf)
 size = 400
-size_mul = 16
-df = pd.DataFrame({"a":list(map(str,np.random.randint(0, high=int(size/16), size=size*size_mul,))),
-                   "b":list(map(str,np.random.randint(int(size/16), high=size, size=size*size_mul,))),
+size_mul = 64
+df = pd.DataFrame({"a":list(map(str,np.random.randint(0, high=int(size/8), size=size*size_mul,))),
+                   "b":list(map(str,np.random.randint(int(size/4), high=size, size=size*size_mul,))),
+                   "c":list(map(str,np.random.randint(1, high=int(size*4), size=size*size_mul,))),
                    "x":np.random.randint(0, high=25, size=size*size_mul,),
-                   "y":np.random.randint(0, high=2, size=size*size_mul,)})
+                   "y":np.random.randint(0, high=3, size=size*size_mul,)})
 
 print(df.shape)
 
-nn_cat = NeuralCategoricalFeatureTransformer(cols=["a","b"],target_columns=["x","y"],verbose=1,n_components=16,n_iter=500)
+nn_cat = NeuralCategoricalFeatureTransformer(cols=["a","b","c"],target_columns=["x","y"],verbose=1,n_components=16,n_iter=100)
 nn_cat.fit(df)
 tdf = nn_cat.transform(df)
 print(tdf)

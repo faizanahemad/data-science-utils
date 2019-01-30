@@ -141,7 +141,7 @@ from data_science_utils import dataframe as df_utils
 import numpy as np
 
 class TargetBasedStatCategoricals:
-    def __init__(self,colnames,target,stat="weight_of_evidence",suffix="_agg",nan_fill=0,inplace=True):
+    def __init__(self,colnames,target,suffix="_agg",nan_fill=0,inplace=True):
         """
 
         :param colnames: categorical column names
@@ -156,7 +156,6 @@ class TargetBasedStatCategoricals:
         self.cpus = int((multiprocessing.cpu_count()/2)-1)
         self.colnames=colnames
         self.target=target
-        self.stat=stat
         self.nan_fill=nan_fill
         self.group_values=None
         self.suffix = suffix
@@ -169,11 +168,17 @@ class TargetBasedStatCategoricals:
         if self.nan_fill is not None:
             X[self.target] = X[self.target].fillna(self.nan_fill)
 
-        if self.stat=="mean":
-            stat_fn = np.mean
-        elif self.stat=="weight_of_evidence":
-            pass
-        gpv = X.groupby(self.colnames)[[self.target]].agg(self.stat).reset_index(level=self.colnames)
+        gpv = X.groupby(self.colnames)[[self.target]].agg(["mean","std"]).reset_index(level=self.colnames)
+        overall_means = X[self.target].mean()
+        counts = X.groupby(self.cols)[self.target].agg(['count'])
+
+        gpv.columns = list(map(lambda x: x[0] + x[1], list(gpv.columns)))
+        mean_col = self.target + "mean"
+        overall_means.index = mean_col
+        std_cols = self.target + "std"
+        woe_cols = self.target + "woe"
+        gpv[woe_cols] = np.clip(np.log(gpv[mean_col] / overall_means), -1e8, 1e8)
+        gpv['count'] = counts.values
         self.group_values = gpv
     def partial_fit(self, X, y=None):
         self.fit(X,y)
@@ -315,18 +320,44 @@ class NeuralCategoricalFeatureTransformer:
 
         validation_split = 0.4
         if only_numeric_target and only_string_input:
-            counts = X.groupby(self.cols)[self.target_columns[0]].agg(['count'])
+            cnt_col = self.target_columns[0]
+            target_columns = list(self.target_columns)
             overall_means = X[self.target_columns].mean()
+            Xt = X.copy()
+            # for all cols
+            counts = X.groupby(self.cols)[cnt_col].agg(['count'])
+
             X = X.groupby(self.cols)[self.target_columns].agg(['mean','std']).reset_index()
             X.columns = list(map(lambda x:x[0]+x[1],list(X.columns)))
-            woe_cols = [t+"woe" for t in self.target_columns]
-            mean_cols = [t+"mean" for t in self.target_columns]
-            X[self.target_columns] = X[mean_cols]
-            X[self.target_columns] = np.clip(np.log(X[self.target_columns]/overall_means),-1e8,1e8)
-            X.rename(columns = dict(zip(self.target_columns,woe_cols)),inplace=True)
+            mean_cols = [t + "mean" for t in self.target_columns]
+            overall_means.index = mean_cols
+            std_cols = [t + "std" for t in self.target_columns]
+            woe_cols = [t + "woe" for t in self.target_columns]
+            X[woe_cols] = np.clip(np.log(X[mean_cols]/overall_means),-1e8,1e8)
             X['count'] = counts.values
-            arr1 = list(map(lambda x: [x + "mean", x + "std"], self.target_columns))
-            self.target_columns = list(more_itertools.flatten(arr1)) + ['count'] + woe_cols
+            self.target_columns = mean_cols + std_cols + ['count'] + woe_cols
+            # for each col
+            for col in self.cols:
+                gps = Xt.groupby([col])
+                counts = gps[cnt_col].agg(['count'])
+                gp = gps[target_columns].agg(['mean', 'std']).reset_index()
+                gp.columns = list(map(lambda x: x[0] + x[1], list(gp.columns)))
+                mean_cols = [t + "mean" for t in target_columns]
+                std_cols = [t + "std" for t in target_columns]
+
+                woe_cols = [t + "_" + col + "_" + "woe" for t in target_columns]
+                gp[woe_cols] = np.clip(np.log(gp[mean_cols] / overall_means), -1e8, 1e8)
+                gp[col + "_" + 'count'] = counts.values
+                gp.rename(columns=dict(zip(mean_cols, [col + "_" + t for t in mean_cols])), inplace=True)
+                mean_cols = [col + "_" + t for t in mean_cols]
+                gp.rename(columns=dict(zip(std_cols, [col + "_" + t for t in std_cols])), inplace=True)
+                std_cols = [col + "_" + t for t in std_cols]
+                cols = woe_cols + [col + "_" + 'count'] + mean_cols + std_cols
+                X = X.merge(gp,on=col)
+                self.target_columns = cols + self.target_columns
+
+
+
         X = X.sample(frac=1)
         if self.target_columns is None:
             extra_col = list(set(X.columns) - set(self.cols))[0]
@@ -354,7 +385,7 @@ class NeuralCategoricalFeatureTransformer:
 
         loss = "mean_squared_error"
         es = EarlyStopping(monitor='val_loss', min_delta=0.000001, patience=5, verbose=0, )
-        es2 = EarlyStopping(monitor='val_loss', min_delta=0.000001, patience=10, verbose=0, )
+        es2 = EarlyStopping(monitor='val_loss', min_delta=0.000001, patience=6, verbose=0, )
         scaler = MinMaxScaler()
 
         enc = OneHotEncoder(handle_unknown='ignore', sparse=False)
