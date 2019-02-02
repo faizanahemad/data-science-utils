@@ -335,6 +335,7 @@ class ClassifierColumnCombiner():
 class BinaryClassifierToTransformer:
     def __init__(self, classifier, output_col, columns=[], prefixes=None, suffixes=None,
                  store_train_data=False,
+                 store_transform_data=False,
                  scale_input=False, impute=False, raise_null=False,training_sampling_fn=None):
         self.classifier = classifier
         self.columns = columns
@@ -352,6 +353,8 @@ class BinaryClassifierToTransformer:
         self.training_sampling_fn = training_sampling_fn
         self.train = None
         self.store_train_data = store_train_data
+        self.store_transform_data = store_transform_data
+        self.transform_data = None
 
     def check_null_(self, X):
         nans = np.isnan(X)
@@ -400,6 +403,8 @@ class BinaryClassifierToTransformer:
         return self.fit(X, y)
 
     def transform(self, X, y='ignored'):
+        if self.store_transform_data:
+            self.transform_data = (X.copy())
         Inp = X
         cols = self.cols
         Inp = Inp[cols]
