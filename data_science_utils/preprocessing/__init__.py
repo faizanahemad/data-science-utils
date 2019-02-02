@@ -295,6 +295,7 @@ class NeuralCategoricalFeatureTransformer:
             raise NotImplementedError()
 
     def fit(self, X, y=None):
+        print("Neural Categorical fit start at: %s" % (str(pd.datetime.now())))
         if self.skip_fit:
             return self
         if type(X) != pd.DataFrame:
@@ -455,6 +456,7 @@ class NeuralCategoricalFeatureTransformer:
         self.model = encoder
         self.enc = enc
         gc.collect()
+        print("Neural Categorical fit done at: %s" % (str(pd.datetime.now())))
         return self
 
     def partial_fit(self, X, y=None):
@@ -484,6 +486,9 @@ class NeuralCategoricalFeatureTransformer:
         raise NotImplementedError()
 
     def fit_transform(self, X, y=None):
+        print("Neural Categorical fit-transforms start at: %s" % (str(pd.datetime.now())))
         self.fit(X, y)
-        return self.transform(X, y)
+        res = self.transform(X, y)
+        print("Neural Categorical fit-transforms done at: %s" % (str(pd.datetime.now())))
+        return res
 

@@ -628,13 +628,13 @@ class FasttextTfIdfTransformer:
         if type(X) == pd.DataFrame:
             X = X[self.token_column].values
 
-        print("FastText Modelling Started..")
+        print("FastText Modelling Started at %s"%(str(pd.datetime.now())))
 
         self.model = FastText(sentences=X, size=self.size, window=self.window, min_count=self.min_count,
                               iter=self.iter, min_n=self.min_n, max_n=self.max_n, word_ngrams=self.word_ngrams,
                               workers=self.workers,bucket=8000000,alpha=0.03,negative=10)
 
-
+        print("FastText Modelling done at %s" % (str(pd.datetime.now())))
         print("FastText Vocab Length = %s, Ngrams length = %s"%(len(self.model.wv.vectors_ngrams),len(self.model.wv.vectors_vocab)))
 
         if self.word_ngrams == 1 and self.min_n <= self.max_n and self.use_tfidf:
@@ -681,6 +681,7 @@ class FasttextTfIdfTransformer:
         return np.average(tokens2vec, axis=0, weights=token2tfidf)
 
     def transform(self, X, y='ignored'):
+        print("Fasttext Transforms start at: %s" % (str(pd.datetime.now())))
         from joblib import Parallel, delayed
         if self.skip_transform:
             return X
@@ -726,6 +727,7 @@ class FasttextTfIdfTransformer:
         text_df.index = X.index
         X[list(text_df.columns)] = text_df
         gc.collect()
+        print("Fasttext Transforms done at: %s" % (str(pd.datetime.now())))
         return X
 
     def inverse_transform(self, X, copy=None):
@@ -809,7 +811,10 @@ class TextProcessorTransformer:
         raise NotImplementedError()
 
     def fit_transform(self, X,y=None):
+        print("TextProcessor fit-transforms start at: %s" % (str(pd.datetime.now())))
         self.fit(X,y)
-        return self.transform(X,y)
+        res = self.transform(X,y)
+        print("TextProcessor fit-transforms done at: %s" % (str(pd.datetime.now())))
+        return res
 
 
