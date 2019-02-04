@@ -578,7 +578,7 @@ from gensim.test.utils import get_tmpfile
 import os.path
 
 class FasttextTfIdfTransformer:
-    def __init__(self, size=256, window=5, min_count=4, iter=30, min_n=3, max_n=6, word_ngrams=1,
+    def __init__(self, model=None,size=256, window=5, min_count=4, iter=30, min_n=3, max_n=6, word_ngrams=1,
                  workers=int(multiprocessing.cpu_count() / 2)-1, ft_prefix="ft_", token_column=None,
                  use_tfidf=False,inplace=True,store_train_data=False,
                  skip_fit=False, skip_transform=False,normalize_word_vectors=True):
@@ -603,6 +603,11 @@ class FasttextTfIdfTransformer:
         self.normalize_word_vectors = normalize_word_vectors
         self.store_train_data = store_train_data
         self.train = None
+        self.model = model
+        if model is None:
+            self.model = FastText(size=self.size, window=self.window, min_count=self.min_count,
+                                  iter=self.iter, min_n=self.min_n, max_n=self.max_n, word_ngrams=self.word_ngrams,
+                                  workers=self.workers, bucket=8000000, alpha=0.03, negative=10)
 
     def tokenise_for_fasttext_(self, X):
         token_acc = []
@@ -629,11 +634,8 @@ class FasttextTfIdfTransformer:
             X = X[self.token_column].values
 
         print("FastText Modelling Started at %s"%(str(pd.datetime.now())))
-
-        self.model = FastText(sentences=X, size=self.size, window=self.window, min_count=self.min_count,
-                              iter=self.iter, min_n=self.min_n, max_n=self.max_n, word_ngrams=self.word_ngrams,
-                              workers=self.workers,bucket=8000000,alpha=0.03,negative=10)
-
+        self.model.build_vocab(X,update=True)
+        self.model.train(X, total_examples=self.model.corpus_count, epochs=self.model.epochs)
         print("FastText Modelling done at %s" % (str(pd.datetime.now())))
         print("FastText Vocab Length = %s, Ngrams length = %s"%(len(self.model.wv.vectors_ngrams),len(self.model.wv.vectors_vocab)))
 
