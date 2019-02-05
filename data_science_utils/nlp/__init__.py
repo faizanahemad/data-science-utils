@@ -673,13 +673,13 @@ class TextProcessorTransformer:
             vals = list(X[col].values)
 
             if col in self.column_text_fns.keys():
-                text_processor_ = lambda text: combined_text_processing(word_length_filter=self.word_length_filter,
+                text_processor_ = lambda text: combined_text_processing(text,word_length_filter=self.word_length_filter,
                                                   ngram_limit=self.ngram_limit,
                                                   external_text_processing_funcs=self.column_text_fns[col],
                                          token_postprocessor=self.token_postprocessor)
                 vals = Parallel(n_jobs=jobs, backend="loky")(delayed(text_processor_)(x) for x in vals)
             else:
-                text_processor_ = lambda text: combined_text_processing(word_length_filter=self.word_length_filter,
+                text_processor_ = lambda text: combined_text_processing(text,word_length_filter=self.word_length_filter,
                                                                ngram_limit=self.ngram_limit,
                                                                external_text_processing_funcs=self.text_fns,
                                                                token_postprocessor=self.token_postprocessor)
