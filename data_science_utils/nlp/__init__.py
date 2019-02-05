@@ -179,7 +179,7 @@ def replace_numbers(text):
     if text is None or type(text) is not str:
         return text
     base_words = get_number_base_words()
-    text = re.sub(r"[0-9]+.[0-9]+|[0-9]+", __replace, text)
+    text = re.sub(r"[0-9]+\.[0-9]+|[0-9]+", __replace, text)
     text = translate(text, {" "+k+" ": " _NUM"+str(int(np.log2(v+1)))+"_ " for k, v in base_words.items()})
     return text
 

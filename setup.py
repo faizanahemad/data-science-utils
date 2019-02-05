@@ -1,7 +1,7 @@
 from setuptools import find_packages, setup
 
 setup(name='data_science_utils',
-      version='0.2.10',
+      version='0.2.11',
       description='Utils for use in python with pandas and numpy',
       url='https://github.com/faizanahemad/data-science-utils',
       author='Faizan Ahemad',
