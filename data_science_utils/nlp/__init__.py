@@ -154,9 +154,10 @@ def is_stopword(word):
     return word in stopwords_list
 
 
+
 def translate(text, kw, ignore_case=False):
     """Translate by changing keys mentioned in kw to values in passed text"""
-    search_keys = map(lambda x: re.escape(x), kw.keys())
+    search_keys = sorted(map(lambda x: re.escape(x), kw.keys()), key = len,reverse=True)
     if ignore_case:
         kw = {k.lower(): kw[k] for k in kw}
         regex = re.compile('|'.join(search_keys), re.IGNORECASE)
@@ -168,13 +169,19 @@ def translate(text, kw, ignore_case=False):
     return res
 
 
+def __replace(match):
+    return " _NUM"+str(int(np.log2(float(match.group())+1)))+"_ "
+
+
+
+
 def replace_numbers(text):
     if text is None or type(text) is not str:
         return text
     base_words = get_number_base_words()
-    text = translate(text, {" "+k+" ": " _NUM_ " for k, v in base_words.items()})
-    text = re.sub(r"[0-9]+.[0-9]+", "_NUM_", text)
-    return re.sub(r"[0-9]+", "_NUM_", text)
+    text = re.sub(r"[0-9]+.[0-9]+|[0-9]+", __replace, text)
+    text = translate(text, {" "+k+" ": " _NUM"+str(int(np.log2(v+1)))+"_ " for k, v in base_words.items()})
+    return text
 
 
 def __get_translator_from_representation(representations, unit):
