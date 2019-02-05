@@ -673,7 +673,7 @@ class TextProcessorTransformer:
             vals = list(X[col].values)
 
             if col in self.column_text_fns.keys():
-                text_processor = lambda text: combined_text_processing(word_length_filter=self.word_length_filter,
+                text_processor_ = lambda text: combined_text_processing(word_length_filter=self.word_length_filter,
                                                   ngram_limit=self.ngram_limit,
                                                   external_text_processing_funcs=self.column_text_fns[col],
                                          token_postprocessor=self.token_postprocessor)
