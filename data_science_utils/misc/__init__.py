@@ -97,7 +97,7 @@ def save_list_per_line(lines, filename):
 
 def load_list_per_line(filename):
     with open(filename, 'r') as file:
-        text = file.read()
+        text = file.readlines()
         return text
 
 
