@@ -170,7 +170,7 @@ def translate(text, kw, ignore_case=False):
 
 
 def __replace(match):
-    return " _NUM"+str(int(np.log2(float(match.group())+1)))+"_ "
+    return " _NUM"+str(int(np.clip(np.log2(float(match.group())+1),-10,30)))+"_ "
 
 
 
