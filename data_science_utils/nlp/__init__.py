@@ -457,9 +457,9 @@ from gensim.test.utils import get_tmpfile
 import os.path
 
 class FasttextTfIdfTransformer:
-    def __init__(self,model=None,warmup_data=None,corpus_file=None,size=256, window=5, min_count=4, iter=30, min_n=3, max_n=6, word_ngrams=1,
-                 workers=int(multiprocessing.cpu_count() / 2)-1, ft_prefix="ft_", token_column=None,
-                 use_tfidf=False,inplace=True,store_train_data=False,
+    def __init__(self,model=None,warmup_data=None,corpus_file=None,size=256, window=7, min_count=4, iter=30, min_n=3, max_n=5, word_ngrams=1,
+                 workers=multiprocessing.cpu_count()-1, ft_prefix="ft_", token_column=None,
+                 inplace=True,store_train_data=False,
                  skip_fit=False, skip_transform=False,normalize_word_vectors=True):
         self.size = size
         self.window = window
@@ -471,11 +471,8 @@ class FasttextTfIdfTransformer:
         self.workers = workers
         self.token_column = token_column
         self.model = None
-        self.tfidf = None
         assert type(self.token_column) == str
         self.ft_prefix = ft_prefix
-        self.dictionary = None
-        self.use_tfidf = use_tfidf
         self.skip_fit = skip_fit
         self.skip_transform = skip_transform
         self.inplace = inplace
@@ -486,27 +483,14 @@ class FasttextTfIdfTransformer:
         if model is None and warmup_data is not None:
             self.model = FastText(sentences=warmup_data,size=self.size, window=self.window, min_count=self.min_count,
                                   iter=self.iter, min_n=self.min_n, max_n=self.max_n, word_ngrams=self.word_ngrams,
-                                  workers=self.workers, bucket=8000000, alpha=0.03, negative=10)
+                                  workers=self.workers, bucket=8000000, alpha=0.03, negative=10, ns_exponent=0.5)
         elif model is None and corpus_file is not None:
             self.model = FastText(corpus_file=corpus_file, size=self.size, window=self.window, min_count=self.min_count,
                                   iter=self.iter, min_n=self.min_n, max_n=self.max_n, word_ngrams=self.word_ngrams,
-                                  workers=self.workers, bucket=8000000, alpha=0.03, negative=10)
+                                  workers=self.workers, bucket=8000000, alpha=0.03, negative=10, ns_exponent=0.5)
         if model is None and warmup_data is None and corpus_file is None:
             raise ValueError("No data given to initialise FastText Model")
 
-    def tokenise_for_fasttext_(self, X):
-        token_acc = []
-        for tarr in X:
-            new_tarr = []
-            for token in tarr:
-                new_tarr.append(token)
-                for tsize in range(self.min_n,self.max_n+1):
-                    if tsize>=len(token):
-                        continue
-                    new_tokens = list(map(lambda x:''.join(x),more_itertools.windowed(token,n=tsize, step=1)))
-                    new_tarr.extend(new_tokens)
-            token_acc.append(np.array(new_tarr))
-        return np.array(token_acc)
 
     def fit(self, X, y='ignored'):
         gc.collect()
@@ -524,20 +508,6 @@ class FasttextTfIdfTransformer:
         print("FastText Modelling done at %s" % (str(pd.datetime.now())))
         print("FastText Vocab Length = %s, Ngrams length = %s"%(len(self.model.wv.vectors_ngrams),len(self.model.wv.vectors_vocab)))
 
-        if self.word_ngrams == 1 and self.min_n <= self.max_n and self.use_tfidf:
-            X = self.tokenise_for_fasttext_(X)
-
-        if self.use_tfidf:
-            dictionary = corpora.Dictionary(X)
-            print('Number of unique tokens before filtering for Fasttext: %d' % len(dictionary))
-            self.dictionary = dictionary
-            self.dictionary.filter_extremes(no_below=self.min_count-1,keep_n=2000000)
-            print('Number of unique tokens after filtering for Fasttext: %d' % len(dictionary))
-
-        if self.use_tfidf:
-            bows = list(map(self.dictionary.doc2bow, X))
-            tfidf = TfidfModel(bows, normalize=True)
-            self.tfidf = tfidf
         gc.collect()
         return self
 
@@ -551,21 +521,10 @@ class FasttextTfIdfTransformer:
         self.fit(X, y='ignored')
 
     def transform_one(self,token_array):
-        tfidf = self.tfidf
-        dictionary = self.dictionary
-        if self.use_tfidf:
-            temp = self.dictionary[0]
-            id2tfidf = {k: v for k, v in tfidf[dictionary.doc2bow(token_array)]}
-            token2tfidf = {dictionary.id2token[k]: v for k, v in id2tfidf.items()}
-            token2tfidf = [token2tfidf[token] if token in token2tfidf else 1 for token in token_array]
-        else:
-            token2tfidf = np.ones(len(token_array))
         tokens2vec = [self.model.wv[token] if token in self.model.wv else np.full(self.size, 0) for token in token_array]
         if np.sum(tokens2vec) == 0:
             return np.full(self.size, 0)
-        if self.use_tfidf and np.sum(token2tfidf) == 0:
-            return np.average(tokens2vec, axis=0)
-        return np.average(tokens2vec, axis=0, weights=token2tfidf)
+        return np.average(tokens2vec, axis=0)
 
     def transform(self, X, y='ignored'):
         print("Fasttext Transforms start at: %s" % (str(pd.datetime.now())))
@@ -578,41 +537,27 @@ class FasttextTfIdfTransformer:
             raise ValueError()
         if not self.inplace:
             X = X.copy()
-        def tokens2tfidf(token_array, tfidf, dictionary):
-            tmp = self.dictionary[0]
-            id2tfidf = {k: v for k, v in tfidf[dictionary.doc2bow(token_array)]}
-            token2tfidf = {dictionary.id2token[k]: v for k, v in id2tfidf.items()}
-            return [token2tfidf[token] if token in token2tfidf else 1 for token in token_array]
 
-        def tokens2vec(token_array, fasttext_model):
+        uniq_tokens = set(more_itertools.flatten(Input))
+        token2vec = {k: self.model.wv[k] for k in uniq_tokens}
+        token2vec = {k: v / np.linalg.norm(v) for k, v in token2vec.items()}
+
+
+        def tokens2vec(token_array):
+            empty = np.full(self.size, 0)
             if len(token_array) == 0:
-                return np.full(self.size, 0)
-            return [fasttext_model.wv[token] if token in fasttext_model.wv else np.full(self.size, 0) for token in token_array]
+                return empty
+            return [token2vec[token] if token in uniq_tokens else empty for token in token_array]
 
-        if self.use_tfidf:
-            t2tfn = lambda tokens: tokens2tfidf(tokens, self.tfidf, self.dictionary)
-        else:
-            t2tfn = lambda tokens: np.ones(len(tokens))
-        tfidfs = list(map(t2tfn, Input))
-        ft_fn = lambda tokens: tokens2vec(tokens, self.model)
-        ft_vecs = list(map(ft_fn, Input))
-        gc.collect()
-        if self.normalize_word_vectors:
-            jobs = int((multiprocessing.cpu_count()-1)/2)
-            normalizer = lambda v:[k / np.linalg.norm(k) for k in v]
-            ft_vecs = Parallel(n_jobs=jobs, backend="loky")(delayed(normalizer)(x) for x in ft_vecs)
+        ft_vecs = list(map(tokens2vec, Input))
 
-        def doc2vec(ftv, tfidf_rep):
-            if np.sum(ftv) == 0:
-                return np.full(self.size, 0)
-            return np.average(ftv, axis=0, weights=tfidf_rep)
+        results = list(map(lambda x: np.average(x, axis=0,) if np.sum(x) != 0 else np.full(300, 0), ft_vecs))
 
-        # parallize possible
-        results = list(map(lambda x: doc2vec(x[0], x[1]), zip(ft_vecs, tfidfs)))
         text_df = pd.DataFrame(list(map(list, results)))
         text_df.columns = [self.ft_prefix + str(i) for i in range(0, self.size)]
         text_df.index = X.index
         X[list(text_df.columns)] = text_df
+        text_df = None
         gc.collect()
         print("Fasttext Transforms done at: %s" % (str(pd.datetime.now())))
         return X
@@ -635,7 +580,6 @@ class TextProcessorTransformer:
         """
         """
         from data_science_utils import nlp as nlp_utils
-        from data_science_utils import misc as misc
         self.word_length_filter=word_length_filter
         self.ngram_limit=ngram_limit
         self.text_fns=text_fns
@@ -664,7 +608,6 @@ class TextProcessorTransformer:
             raise TypeError()
         if not self.inplace:
             X=X.copy()
-        from data_science_utils import misc as misc
         from joblib import Parallel, delayed
         jobs = min(self.cpus,int(np.log2(len(X))+6))
         combined_token_column = self.combined_token_column
