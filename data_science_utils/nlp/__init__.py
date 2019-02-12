@@ -619,7 +619,7 @@ class TextProcessorTransformer:
         for col in self.source_cols:
             vals = list(X[col].values)
 
-            if col in self.column_text_fns.keys():
+            if self.column_text_fns is not None and col in self.column_text_fns.keys():
                 text_processor_ = lambda text: combined_text_processing(text,word_length_filter=self.word_length_filter,
                                                   ngram_limit=self.ngram_limit,
                                                   external_text_processing_funcs=self.column_text_fns[col],
