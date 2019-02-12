@@ -273,13 +273,16 @@ def tokenize_lemmatize(text,word_length_filter=3,
 
 
 
-def ngram_stopword(tokens, ngram_limit=3):
+def ngram_stopword(tokens, ngram_limit=[1]):
+    ngram_limit = set(ngram_limit)
     # tokens = list(map(lambda x: re.sub('[^ a-zA-Z0-9]', '', x.lower()), tokens))
-    if ngram_limit is not None and ngram_limit >= 2:
-        grams = list(more_itertools.flatten([ngrams(tokens, i) for i in range(2, ngram_limit + 1)]))
+    if ngram_limit is not None and len(ngram_limit-{1}) > 0:
+        grams = list(more_itertools.flatten([ngrams(tokens, i) for i in ngram_limit - {1}]))
     else:
         grams = []
-    all_words = list(filter(lambda x: len(x) > 0,map(lambda x: x.strip(), tokens)))
+    all_words = []
+    if 1 in ngram_limit:
+        all_words = list(filter(lambda x: len(x) > 0,map(lambda x: x.strip(), tokens)))
 
     for w in grams:
         is_acceptable = not any([True for spw in w if spw == " "])
@@ -289,7 +292,7 @@ def ngram_stopword(tokens, ngram_limit=3):
 
 
 def combined_text_processing(text, external_text_processing_funcs=[replace_numbers], lemmatize=True,
-                             word_length_filter=3, ngram_limit=3,token_postprocessor=[]):
+                             word_length_filter=3, ngram_limit=[1],token_postprocessor=[]):
     tokens = tokenize_lemmatize(text,word_length_filter, external_text_processing_funcs, lemmatize,token_postprocessor)
     tokens = ngram_stopword(tokens, ngram_limit)
     return tokens
@@ -572,10 +575,10 @@ class FasttextTfIdfTransformer:
 
 
 class TextProcessorTransformer:
-    def __init__(self, source_cols, word_length_filter=2, ngram_limit=2,
+    def __init__(self, source_cols, word_length_filter=2, ngram_limit=[1],
                  combined_token_column="tokens",
                  text_fns=[], column_text_fns=None,
-                 skip_fit=False, skip_transform=False,
+                 skip_fit=True, skip_transform=False,
                  token_postprocessor=[], parallel=True,
                  inplace=True):
         """
