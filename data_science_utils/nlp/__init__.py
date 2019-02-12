@@ -540,7 +540,7 @@ class FasttextTfIdfTransformer:
 
         uniq_tokens = set(more_itertools.flatten(Input))
         empty = np.full(self.size, 0)
-        token2vec = {k: self.model.wv[k] if k in self.model.wv[k] else empty for k in uniq_tokens}
+        token2vec = {k: self.model.wv[k] if k in self.model.wv else empty for k in uniq_tokens}
         token2vec = {k: v / np.linalg.norm(v) for k, v in token2vec.items()}
 
 
