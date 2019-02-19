@@ -34,6 +34,7 @@ UNIT_OF_ELECTRICITY = "_UNIT_OF_ELECTRICITY_"
 
 stopwords_list = stopwords.words('english')
 stopwords_list.extend(["ul","li","br","hr","h1","h2","h3","h4","h5","h6"])
+stopwords_list = set(stopwords_list)
 
 def get_number_base_words():
     numbers = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven",
@@ -460,8 +461,8 @@ from gensim.test.utils import get_tmpfile
 import os.path
 
 class FasttextTfIdfTransformer:
-    def __init__(self,model=None,warmup_data=None,corpus_file=None,size=256, window=7, min_count=4, iter=30, min_n=3, max_n=5, word_ngrams=1,
-                 workers=multiprocessing.cpu_count()-1, ft_prefix="ft_", token_column=None,
+    def __init__(self,model=None,warmup_data=None,corpus_file=None,size=256, window=7, min_count=4, iter=30, min_n=4, max_n=5, word_ngrams=1,
+                 no_above=0.5,filter_n_most_frequent=100,workers=multiprocessing.cpu_count()-1, ft_prefix="ft_", token_column=None,
                  inplace=True,store_train_data=False,
                  skip_fit=False, skip_transform=False,normalize_word_vectors=True):
         self.size = size
@@ -483,6 +484,9 @@ class FasttextTfIdfTransformer:
         self.store_train_data = store_train_data
         self.train = None
         self.model = model
+        self.no_above = no_above
+        self.word_set = None
+        self.filter_n_most_frequent = filter_n_most_frequent
         if model is None and warmup_data is not None:
             self.model = FastText(sentences=warmup_data,size=self.size, window=self.window, min_count=self.min_count,
                                   iter=self.iter, min_n=self.min_n, max_n=self.max_n, word_ngrams=self.word_ngrams,
@@ -501,9 +505,18 @@ class FasttextTfIdfTransformer:
             self.train = (X,y)
         if self.skip_fit:
             return self
-        from gensim.models import TfidfModel
         if type(X) == pd.DataFrame:
             X = X[self.token_column].values
+        else:
+            raise ValueError()
+
+        from gensim.corpora import Dictionary
+        dct = Dictionary(X)
+        print("Total Unique Tokens = %s"%(len(dct)))
+        dct.filter_extremes(no_below=self.min_count, no_above=self.no_above, keep_n=1000000)
+        dct.filter_n_most_frequent(self.filter_n_most_frequent)
+        print("Total Unique Tokens after filtering = %s"%(len(dct)))
+        self.word_set = set(dct.values())
 
         print("FastText Modelling Started at %s"%(str(pd.datetime.now())))
         self.model.build_vocab(X,update=True)
@@ -542,6 +555,9 @@ class FasttextTfIdfTransformer:
             X = X.copy()
 
         uniq_tokens = set(more_itertools.flatten(Input))
+        print("Number of Unique Test Tokens for Fasttext transform %s"%len(uniq_tokens))
+        uniq_tokens = uniq_tokens.intersection(self.word_set)
+        print("Number of Unique Test Tokens after filtering for Fasttext transform %s" % len(uniq_tokens))
         empty = np.full(self.size, 0)
         token2vec = {k: self.model.wv[k] if k in self.model.wv else empty for k in uniq_tokens}
         token2vec = {k: v / np.linalg.norm(v) for k, v in token2vec.items()}
