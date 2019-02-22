@@ -12,6 +12,7 @@ from gensim.models.ldamodel import LdaModel
 from nltk import bigrams
 from nltk import trigrams
 from nltk.stem import WordNetLemmatizer
+from gensim.corpora import Dictionary
 import numpy as np
 from nltk.corpus import wordnet
 from nltk import ngrams
@@ -398,7 +399,7 @@ from gensim.models import FastText
 import multiprocessing
 import pandas as pd
 
-from data_science_utils.misc import deep_map
+from data_science_utils.misc import deep_map, load_list_per_line
 
 
 class FasttextTransformer:
@@ -461,8 +462,9 @@ from gensim.test.utils import get_tmpfile
 import os.path
 
 class FasttextTfIdfTransformer:
-    def __init__(self,model=None,warmup_data=None,corpus_file=None,size=256, window=7, min_count=4, iter=30, min_n=4, max_n=5, word_ngrams=1,
-                 no_above=0.5,filter_n_most_frequent=100,workers=multiprocessing.cpu_count()-1, ft_prefix="ft_", token_column=None,
+    def __init__(self,model=None,dictionary=None,corpus_file=None,size=256, window=7, min_count=4, iter=30, min_n=4, max_n=5, word_ngrams=1,
+                 no_above=0.5, filter_n_most_frequent=100,do_filter_tokens=True,
+                 workers=multiprocessing.cpu_count()-1, ft_prefix="ft_", token_column=None,
                  inplace=True,store_train_data=False,
                  skip_fit=False, skip_transform=False,normalize_word_vectors=True):
         self.size = size
@@ -487,17 +489,22 @@ class FasttextTfIdfTransformer:
         self.no_above = no_above
         self.word_set = None
         self.filter_n_most_frequent = filter_n_most_frequent
-        if model is None and warmup_data is not None:
-            self.model = FastText(sentences=warmup_data,size=self.size, window=self.window, min_count=self.min_count,
-                                  iter=self.iter, min_n=self.min_n, max_n=self.max_n, word_ngrams=self.word_ngrams,
-                                  workers=self.workers, bucket=8000000, alpha=0.03, negative=10, ns_exponent=0.5)
-        elif model is None and corpus_file is not None:
+        self.do_filter_tokens = do_filter_tokens
+        self.dictionary = dictionary
+        if model is None and corpus_file is not None:
+            self.dictionary = Dictionary(map(lambda s: s.split(), load_list_per_line(corpus_file)))
+            print("Total Unique Tokens = %s" % (len(self.dictionary)))
+            self.dictionary.filter_extremes(no_below=self.min_count, no_above=self.no_above, keep_n=1000000)
+            self.dictionary.filter_n_most_frequent(self.filter_n_most_frequent)
+            print("Total Unique Tokens after filtering = %s" % (len(self.dictionary)))
+            self.word_set = set(self.dictionary.values())
             self.model = FastText(corpus_file=corpus_file, size=self.size, window=self.window, min_count=self.min_count,
                                   iter=self.iter, min_n=self.min_n, max_n=self.max_n, word_ngrams=self.word_ngrams,
                                   workers=self.workers, bucket=8000000, alpha=0.03, negative=10, ns_exponent=0.5)
-        if model is None and warmup_data is None and corpus_file is None:
-            raise ValueError("No data given to initialise FastText Model")
 
+        if (model is None or dictionary is None) and corpus_file is None:
+            raise ValueError("No data given to initialise FastText Model")
+        assert self.dictionary is not None and self.model is not None
 
     def fit(self, X, y='ignored'):
         gc.collect()
@@ -510,8 +517,10 @@ class FasttextTfIdfTransformer:
         else:
             raise ValueError()
 
-        from gensim.corpora import Dictionary
-        dct = Dictionary(X)
+        assert self.dictionary is not None and self.model is not None
+
+        self.dictionary.add_documents(X)
+        dct = self.dictionary
         print("Total Unique Tokens = %s"%(len(dct)))
         dct.filter_extremes(no_below=self.min_count, no_above=self.no_above, keep_n=1000000)
         dct.filter_n_most_frequent(self.filter_n_most_frequent)
@@ -531,8 +540,6 @@ class FasttextTfIdfTransformer:
         X,y = self.train
         return self.fit(X,y)
 
-
-
     def partial_fit(self, X, y=None):
         self.fit(X, y='ignored')
 
@@ -544,7 +551,6 @@ class FasttextTfIdfTransformer:
 
     def transform(self, X, y='ignored'):
         print("Fasttext Transforms start at: %s" % (str(pd.datetime.now())))
-        from joblib import Parallel, delayed
         if self.skip_transform:
             return X
         if type(X) == pd.DataFrame:
@@ -556,7 +562,8 @@ class FasttextTfIdfTransformer:
 
         uniq_tokens = set(more_itertools.flatten(Input))
         print("Number of Unique Test Tokens for Fasttext transform %s"%len(uniq_tokens))
-        uniq_tokens = uniq_tokens.intersection(self.word_set)
+        if self.do_filter_tokens:
+            uniq_tokens = uniq_tokens.intersection(self.word_set)
         print("Number of Unique Test Tokens after filtering for Fasttext transform %s" % len(uniq_tokens))
         empty = np.full(self.size, 0)
         token2vec = {k: self.model.wv[k] if k in self.model.wv else empty for k in uniq_tokens}
@@ -577,7 +584,6 @@ class FasttextTfIdfTransformer:
         text_df.columns = [self.ft_prefix + str(i) for i in range(0, self.size)]
         text_df.index = X.index
         X[list(text_df.columns)] = text_df
-        text_df = None
         gc.collect()
         print("Fasttext Transforms done at: %s" % (str(pd.datetime.now())))
         return X
