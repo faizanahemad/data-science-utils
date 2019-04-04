@@ -63,7 +63,7 @@ def get_number_base_words():
     d2 = {tupl[0]: tupl[1] for tupl in zip(n2, nums)}
     d3 = {tupl[0]: tupl[1] for tupl in zip(n3, nums)}
     d4 = {tupl[0]: int(tupl[1]) for tupl in zip(scales, scale_nums)}
-    nw = {**d4, **d1, **d2, **d3}
+    nw = merge_dicts(d1,d2,d3,d4)
     return nw
 
 
@@ -110,7 +110,7 @@ def get_number_words():
     d1 = {tupl[0]: tupl[1] for tupl in zip(numbers, nums)}
     d2 = {tupl[0]: tupl[1] for tupl in zip(n2, nums)}
     d3 = {tupl[0]: tupl[1] for tupl in zip(n3, nums)}
-    nw = {**nw, **d1, **d2, **d3}
+    nw = merge_dicts(nw,d1,d2,d3)
     return nw
 
 
@@ -221,8 +221,9 @@ def get_measurement_translators():
                                    "w-h"]
     electricity_translator = __get_translator_from_representation(electricity_representations, UNIT_OF_ELECTRICITY)
 
-    translators = {**length_translator, **volume_translator, **time_translator, **mass_translator,
-                   **electricity_translator}
+    translators = merge_dicts(length_translator, volume_translator, time_translator, mass_translator,
+                   electricity_translator)
+
     return {"translators": translators, "electricity_translator": electricity_translator,
             "mass_translator": mass_translator,
             "time_translator": time_translator, "volume_translator": volume_translator,
@@ -399,7 +400,7 @@ from gensim.models import FastText
 import multiprocessing
 import pandas as pd
 
-from data_science_utils.misc import deep_map, load_list_per_line
+from data_science_utils.misc import deep_map, load_list_per_line, merge_dicts
 
 
 class FasttextTransformer:

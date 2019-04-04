@@ -37,6 +37,11 @@ importlib.reload(pp_utils)
 - [Counting Co-occurences](https://stackoverflow.com/questions/42272311/python-co-occurrence-of-two-items-in-different-lists)
 
 
+# TODO/Upcoming
+
+- Detecting Useless features by Covariate shift between train-test sets. 
+
+
 # LICENSE
 
 MIT License
