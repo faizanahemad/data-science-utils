@@ -13,7 +13,12 @@ import functools
 
 
 def print_code(func):
-    print("".join(inspect.getsourcelines(func)[0]))
+    from pygments import highlight
+    from pygments.lexers import PythonLexer
+    from pygments.formatters import TerminalFormatter
+
+    code = "".join(inspect.getsourcelines(func)[0])
+    print(highlight(code, PythonLexer(), TerminalFormatter()))
 
 
 def get_timer(printer=print):
