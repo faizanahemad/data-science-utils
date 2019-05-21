@@ -47,7 +47,8 @@ def get_fashion_mnist_data():
     Y_test = np_utils.to_categorical(y_test, 10)
     return X_train, Y_train, X_test, Y_test
 
-def evaluate(model,X_train, Y_train,X_test, Y_test,classes, print_results = True, plot_results = True):
+
+def evaluate(model,X_train, Y_train, X_test, Y_test, classes, print_results=False, plot_results=True):
     # TODO: Graph P-R-F1 per class for seeing where we fail most
     # TODO: print class with lowest and highest P-R-F1
     train_score = model.evaluate(X_train, Y_train, verbose=0)
@@ -167,11 +168,17 @@ def evaluate(model,X_train, Y_train,X_test, Y_test,classes, print_results = True
         print()
         plt.figure(figsize=(16,6))
         sns.barplot(x="classes",y="precision",hue="data_source",data=results[~pd.isna(results.classes)])
+        lower_bound = max(results['precision'].min() - 0.05,0)
+        upper_bound = 1.05
+        plt.ylim((lower_bound,upper_bound))
         plt.title("Precision per Class")
         plt.show()
 
         plt.figure(figsize=(16, 6))
         sns.barplot(x="classes", y="recall", hue="data_source", data=results[~pd.isna(results.classes)])
+        lower_bound = max(results['recall'].min() - 0.05, 0)
+        upper_bound = 1.05
+        plt.ylim((lower_bound, upper_bound))
         plt.title("Recall per Class")
         plt.show()
 

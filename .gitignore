@@ -458,3 +458,4 @@ Temporary Items
 
 *.pkl
 
+.idea/*
