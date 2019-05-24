@@ -14,7 +14,7 @@ import seaborn as sns
 def get_mnist_labels():
     return list(range(0, 10))
 
-def get_mnist_data(validation_split=0.1,preprocess=True):
+def get_mnist_data(preprocess=True):
     (X_train, y_train), (X_test, y_test) = mnist.load_data()
     X_train, y_train = shuffle(X_train, y_train)
     X_test, y_test = shuffle(X_test, y_test)
@@ -28,20 +28,16 @@ def get_mnist_data(validation_split=0.1,preprocess=True):
         X_train /= 255
         X_test /= 255
 
-    X_train, X_validation, y_train, y_validation = train_test_split(X_train, y_train,
-                                                                    test_size=validation_split, stratify=get_mnist_labels())
-    # Convert 1-dimensional class arrays to 10-dimensional class matrices
     Y_train = np_utils.to_categorical(y_train, 10)
-    Y_validation = np_utils.to_categorical(y_validation, 10)
     Y_test = np_utils.to_categorical(y_test, 10)
-    return X_train, Y_train,X_validation,Y_validation, X_test, Y_test
+    return X_train, Y_train, X_test, Y_test
 
 def get_fashion_mnist_labels():
     labelNames = ["top", "trouser", "pullover", "dress", "coat",
                   "sandal", "shirt", "sneaker", "bag", "ankle boot"]
     return labelNames
 
-def get_fashion_mnist_data(validation_split=0.1,preprocess=True):
+def get_fashion_mnist_data(preprocess=True):
     (X_train, y_train), (X_test, y_test) = fashion_mnist.load_data()
     X_train, y_train = shuffle(X_train, y_train)
     X_test, y_test = shuffle(X_test, y_test)
@@ -55,14 +51,9 @@ def get_fashion_mnist_data(validation_split=0.1,preprocess=True):
         X_train /= 255
         X_test /= 255
 
-    X_train, X_validation, y_train, y_validation = train_test_split(X_train, y_train,
-                                                                    test_size=validation_split, stratify=get_fashion_mnist_labels())
-
-    # Convert 1-dimensional class arrays to 10-dimensional class matrices
     Y_train = np_utils.to_categorical(y_train, 10)
-    Y_validation = np_utils.to_categorical(y_validation, 10)
     Y_test = np_utils.to_categorical(y_test, 10)
-    return X_train, Y_train,X_validation,Y_validation, X_test, Y_test
+    return X_train, Y_train, X_test, Y_test
 
 
 def evaluate(model, X_test, Y_test, classes, print_results=False, plot_results=True):
