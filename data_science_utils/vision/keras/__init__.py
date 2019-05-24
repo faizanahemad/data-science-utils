@@ -10,6 +10,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.utils import shuffle
 from IPython.display import display
 import seaborn as sns
+from .visualize_layer import visualize_layer
 
 def get_mnist_labels():
     return list(range(0, 10))
