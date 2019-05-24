@@ -202,11 +202,11 @@ def evaluate(model,X_train, Y_train, X_test, Y_test, classes, print_results=Fals
         plt.setp(ax.get_xticklabels(), rotation=45, ha="right", rotation_mode="anchor")
         fig.tight_layout()
         ax.set_title("Confusion Matrix")
-        plt.show()
         thresh = cm.max() / 2
         for i in range(len(cm[0])):
             for j in range(len(cm[1])):
                 text = ax.text(i, j, cm[i, j],ha="center", va="center", color="white" if cm[i, j] > thresh else "black")
+        plt.show()
 
     return train_score,test_score,results
 
