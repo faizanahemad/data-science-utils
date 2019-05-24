@@ -6,6 +6,7 @@ from keras.datasets import mnist
 from keras.datasets import fashion_mnist
 import matplotlib.pyplot as plt
 from sklearn.metrics import precision_recall_fscore_support, confusion_matrix, balanced_accuracy_score
+from sklearn.model_selection import train_test_split
 from IPython.display import display
 import seaborn as sns
 
@@ -17,15 +18,18 @@ def get_mnist_data(validation_split=0.1,preprocess=True):
     X_train = X_train.reshape(X_train.shape[0], 28, 28, 1)
     X_test = X_test.reshape(X_test.shape[0], 28, 28, 1)
 
-    X_train = X_train.astype('float32')
-    X_test = X_test.astype('float32')
-    X_train /= 255
-    X_test /= 255
+    if preprocess:
+        X_train = X_train.astype('float32')
+        X_test = X_test.astype('float32')
+        X_train /= 255
+        X_test /= 255
 
+    X_train, X_validation, y_train, y_validation = train_test_split(X_train, y_train, test_size=validation_split)
     # Convert 1-dimensional class arrays to 10-dimensional class matrices
     Y_train = np_utils.to_categorical(y_train, 10)
+    Y_validation = np_utils.to_categorical(y_validation, 10)
     Y_test = np_utils.to_categorical(y_test, 10)
-    return X_train, Y_train, X_test, Y_test
+    return X_train, Y_train,X_validation,Y_validation, X_test, Y_test
 
 def get_fashion_mnist_labels():
     labelNames = ["top", "trouser", "pullover", "dress", "coat",
@@ -34,6 +38,7 @@ def get_fashion_mnist_labels():
 
 def get_fashion_mnist_data(validation_split=0.1,preprocess=True):
     (X_train, y_train), (X_test, y_test) = fashion_mnist.load_data()
+
     X_train = X_train.reshape(X_train.shape[0], 28, 28, 1)
     X_test = X_test.reshape(X_test.shape[0], 28, 28, 1)
 
@@ -43,10 +48,13 @@ def get_fashion_mnist_data(validation_split=0.1,preprocess=True):
         X_train /= 255
         X_test /= 255
 
+    X_train, X_validation, y_train, y_validation = train_test_split(X_train, y_train, test_size=validation_split)
+
     # Convert 1-dimensional class arrays to 10-dimensional class matrices
     Y_train = np_utils.to_categorical(y_train, 10)
+    Y_validation = np_utils.to_categorical(y_validation, 10)
     Y_test = np_utils.to_categorical(y_test, 10)
-    return X_train, Y_train, X_test, Y_test
+    return X_train, Y_train,X_validation,Y_validation, X_test, Y_test
 
 
 def evaluate(model, X_test, Y_test, classes, print_results=False, plot_results=True):
@@ -164,7 +172,7 @@ def evaluate(model, X_test, Y_test, classes, print_results=False, plot_results=T
                 text = ax.text(i, j, cm[i, j],ha="center", va="center", color="white" if cm[i, j] > thresh else "black")
         plt.show()
 
-    return train_score,test_score,results
+    return test_score,results
 
 
 def show_examples(X,y,classes):
