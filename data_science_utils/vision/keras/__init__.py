@@ -7,6 +7,7 @@ from keras.datasets import fashion_mnist
 import matplotlib.pyplot as plt
 from sklearn.metrics import precision_recall_fscore_support, confusion_matrix, balanced_accuracy_score
 from sklearn.model_selection import train_test_split
+from sklearn.utils import shuffle
 from IPython.display import display
 import seaborn as sns
 
@@ -15,6 +16,9 @@ def get_mnist_labels():
 
 def get_mnist_data(validation_split=0.1,preprocess=True):
     (X_train, y_train), (X_test, y_test) = mnist.load_data()
+    X_train, y_train = shuffle(X_train, y_train)
+    X_test, y_test = shuffle(X_test, y_test)
+
     X_train = X_train.reshape(X_train.shape[0], 28, 28, 1)
     X_test = X_test.reshape(X_test.shape[0], 28, 28, 1)
 
@@ -24,7 +28,8 @@ def get_mnist_data(validation_split=0.1,preprocess=True):
         X_train /= 255
         X_test /= 255
 
-    X_train, X_validation, y_train, y_validation = train_test_split(X_train, y_train, test_size=validation_split)
+    X_train, X_validation, y_train, y_validation = train_test_split(X_train, y_train,
+                                                                    test_size=validation_split, stratify=get_mnist_labels())
     # Convert 1-dimensional class arrays to 10-dimensional class matrices
     Y_train = np_utils.to_categorical(y_train, 10)
     Y_validation = np_utils.to_categorical(y_validation, 10)
@@ -38,6 +43,8 @@ def get_fashion_mnist_labels():
 
 def get_fashion_mnist_data(validation_split=0.1,preprocess=True):
     (X_train, y_train), (X_test, y_test) = fashion_mnist.load_data()
+    X_train, y_train = shuffle(X_train, y_train)
+    X_test, y_test = shuffle(X_test, y_test)
 
     X_train = X_train.reshape(X_train.shape[0], 28, 28, 1)
     X_test = X_test.reshape(X_test.shape[0], 28, 28, 1)
@@ -48,7 +55,8 @@ def get_fashion_mnist_data(validation_split=0.1,preprocess=True):
         X_train /= 255
         X_test /= 255
 
-    X_train, X_validation, y_train, y_validation = train_test_split(X_train, y_train, test_size=validation_split)
+    X_train, X_validation, y_train, y_validation = train_test_split(X_train, y_train,
+                                                                    test_size=validation_split, stratify=get_fashion_mnist_labels())
 
     # Convert 1-dimensional class arrays to 10-dimensional class matrices
     Y_train = np_utils.to_categorical(y_train, 10)
