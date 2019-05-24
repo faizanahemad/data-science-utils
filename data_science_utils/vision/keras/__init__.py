@@ -12,7 +12,7 @@ import seaborn as sns
 def get_mnist_labels():
     return list(range(0, 10))
 
-def get_mnist_data():
+def get_mnist_data(validation_split=0.1,preprocess=True):
     (X_train, y_train), (X_test, y_test) = mnist.load_data()
     X_train = X_train.reshape(X_train.shape[0], 28, 28, 1)
     X_test = X_test.reshape(X_test.shape[0], 28, 28, 1)
@@ -32,15 +32,16 @@ def get_fashion_mnist_labels():
                   "sandal", "shirt", "sneaker", "bag", "ankle boot"]
     return labelNames
 
-def get_fashion_mnist_data():
+def get_fashion_mnist_data(validation_split=0.1,preprocess=True):
     (X_train, y_train), (X_test, y_test) = fashion_mnist.load_data()
     X_train = X_train.reshape(X_train.shape[0], 28, 28, 1)
     X_test = X_test.reshape(X_test.shape[0], 28, 28, 1)
 
-    X_train = X_train.astype('float32')
-    X_test = X_test.astype('float32')
-    X_train /= 255
-    X_test /= 255
+    if preprocess:
+        X_train = X_train.astype('float32')
+        X_test = X_test.astype('float32')
+        X_train /= 255
+        X_test /= 255
 
     # Convert 1-dimensional class arrays to 10-dimensional class matrices
     Y_train = np_utils.to_categorical(y_train, 10)
@@ -194,8 +195,8 @@ def evaluate(model,X_train, Y_train, X_test, Y_test, classes, print_results=Fals
         ax.set_xticks(np.arange(len(cm[0])))
         ax.set_yticks(np.arange(len(cm[1])))
 
-        #ax.set_xticklabels(classes)
-        #ax.set_yticklabels(classes)
+        ax.set_xticklabels(classes)
+        ax.set_yticklabels(classes)
 
         # Label each axis
         ax.set_ylabel("True Label")
