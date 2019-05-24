@@ -124,9 +124,9 @@ def evaluate(model, X_test, Y_test, classes, print_results=False, plot_results=T
 
 
     if print_results:
-        print("\n", " =-= " * 15)
+        print(" =-= " * 15)
         print("Score = ", test_score)
-        print("\nBalanced Accuracy={:2.2f}% ".format(balanced_accuracy * 100))
+        print("Balanced Accuracy={:2.2f}% ".format(balanced_accuracy * 100))
 
 
     if plot_results:
