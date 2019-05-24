@@ -65,13 +65,13 @@ def process_image(x, former):
 
 def visualize_layer(model,
                     layer_name,
-                    step=1.,
+                    step=0.5,
                     epochs=20,
                     upscaling_steps=10,
                     upscaling_factor=1.2,
-                    output_dim=(256, 256),
+                    output_dim=(128, 128),
                     filter_range=(0, None),
-                    grid_dimension=None,
+                    grid_columns=4,
                     show_filters=True):
     """Visualizes the most relevant filters of one conv-layer in a certain model.
 
@@ -94,7 +94,8 @@ def visualize_layer(model,
 
     def _generate_filter_image(input_img,
                                layer_output,
-                               filter_index):
+                               filter_index,
+                               channels=3):
         """Generates image for one particular filter.
 
         # Arguments
@@ -130,10 +131,10 @@ def visualize_layer(model,
             int(x / (upscaling_factor ** upscaling_steps)) for x in output_dim)
         if K.image_data_format() == 'channels_first':
             input_img_data = np.random.random(
-                (1, 3, intermediate_dim[0], intermediate_dim[1]))
+                (1, channels, intermediate_dim[0], intermediate_dim[1]))
         else:
             input_img_data = np.random.random(
-                (1, intermediate_dim[0], intermediate_dim[1], 3))
+                (1, intermediate_dim[0], intermediate_dim[1], channels))
         input_img_data = (input_img_data - 0.5) * 20 + 128
 
         # Slowly upscaling towards the original size prevents
@@ -149,15 +150,23 @@ def visualize_layer(model,
 
                 # some filters get stuck to 0, we can skip them
                 if loss_value <= K.epsilon():
-                    return None
+                    pass
+                    # return None
 
             # Calulate upscaled dimension
             intermediate_dim = tuple(
                 int(x / (upscaling_factor ** up)) for x in output_dim)
             # Upscale
+            mode = "L" if channels == 1 else None
             img = deprocess_image(input_img_data[0])
-            img = np.array(pil_image.fromarray(img).resize(intermediate_dim,
-                                                           pil_image.BICUBIC))
+            if channels == 1:
+                img = img.reshape((img.shape[0], img.shape[1]))
+                img = np.array(pil_image.fromarray(img, mode).resize(intermediate_dim,
+                                                                     pil_image.BICUBIC))
+                img = img.reshape((img.shape[0], img.shape[1], 1))
+            else:
+                img = np.array(pil_image.fromarray(img).resize(intermediate_dim,
+                                                               pil_image.BICUBIC))
             input_img_data = [process_image(img, input_img_data[0])]
 
         # decode the resulting input image
@@ -168,7 +177,7 @@ def visualize_layer(model,
                                                                   e_time - s_time))
         return img, loss_value
 
-    def _draw_filters(filters, n=None, show_filters=True):
+    def _draw_filters(filters, columns=4, show_filters=True, channels=3):
         """Draw the best filters in a nxn grid.
 
         # Arguments
@@ -177,44 +186,52 @@ def visualize_layer(model,
             n: dimension of the grid.
                If none, the largest possible square will be used
         """
-        if n is None:
-            n = int(np.floor(np.sqrt(len(filters))))
+
+        rows = int(np.ceil(len(filters) / columns))
+
+        output_dim = (filters[0][0].shape[0], filters[0][0].shape[1])
 
         # the filters that have the highest loss are assumed to be better-looking.
         # we will only keep the top n*n filters.
         filters.sort(key=lambda x: x[1], reverse=True)
-        filters = filters[:n * n]
 
         # build a black picture with enough space for
         # e.g. our 8 x 8 filters of size 412 x 412, with a 5px margin in between
         MARGIN = 5
-        width = n * output_dim[0] + (n - 1) * MARGIN
-        height = n * output_dim[1] + (n - 1) * MARGIN
-        stitched_filters = np.zeros((width, height, 3), dtype='uint8')
-
+        width = rows * output_dim[0] + (rows - 1) * MARGIN
+        height = columns * output_dim[1] + (columns - 1) * MARGIN
+        stitched_filters = np.zeros((width, height, channels), dtype='uint8')
         # fill the picture with our saved filters
-        for i in range(n):
-            for j in range(n):
-                img, _ = filters[i * n + j]
+        for i in range(rows):
+            for j in range(columns):
+                idx = min(i * columns + j, len(filters) - 1)
+                if i * columns + j > len(filters) - 1:
+                    img = np.zeros_like(filters[0][0])
+                else:
+                    img, _ = filters[idx]
                 width_margin = (output_dim[0] + MARGIN) * i
                 height_margin = (output_dim[1] + MARGIN) * j
                 stitched_filters[
-                    width_margin: width_margin + output_dim[0],
-                    height_margin: height_margin + output_dim[1], :] = img
+                width_margin: width_margin + output_dim[0],
+                height_margin: height_margin + output_dim[1], :] = img
         if show_filters:
-            fig = plt.figure(figsize=(20, 20))
+            fig_height = rows * 4
+            fig_width = columns * 4
+
+            fig = plt.figure(figsize=(fig_width, fig_height))
             plt.imshow(stitched_filters)
-            plt.title('{0:}_{1:}x{1:}.png'.format(layer_name, n))
+            plt.title('{0:}_{1:}x{2:}.png'.format(layer_name, rows, columns))
             plt.show()
         # save the result to disk
-        save_img('{0:}_{1:}x{1:}.png'.format(layer_name, n), stitched_filters)
+        save_img('{0:}_{1:}x{2:}.png'.format(layer_name, rows, columns), stitched_filters)
 
     # this is the placeholder for the input images
     assert len(model.inputs) == 1
     input_img = model.inputs[0]
+    channels = K.int_shape(model.inputs[0])[-1]
 
     # get the symbolic outputs of each "key" layer (we gave them unique names).
-    layer_dict = dict([(layer.name, layer) for layer in model.layers[1:]])
+    layer_dict = dict([(layer.name, layer) for layer in model.layers[0:]])
 
     output_layer = layer_dict[layer_name]
     assert isinstance(output_layer, layers.Conv2D)
@@ -224,22 +241,25 @@ def visualize_layer(model,
     filter_upper = (filter_range[1]
                     if filter_range[1] is not None
                     else len(output_layer.get_weights()[1]))
-    assert(filter_lower >= 0
-           and filter_upper <= len(output_layer.get_weights()[1])
-           and filter_upper > filter_lower)
+    assert (filter_lower >= 0
+            and filter_upper <= len(output_layer.get_weights()[1])
+            and filter_upper > filter_lower)
     print('Compute filters {:} to {:}'.format(filter_lower, filter_upper))
 
     # iterate through each filter and generate its corresponding image
     processed_filters = []
     for f in range(filter_lower, filter_upper):
-        img_loss = _generate_filter_image(input_img, output_layer.output, f)
+        img_loss = _generate_filter_image(input_img, output_layer.output, f, channels)
 
         if img_loss is not None:
             processed_filters.append(img_loss)
 
     print('{} filter processed.'.format(len(processed_filters)))
     # Finally draw and store the best filters to disk
-    _draw_filters(processed_filters,grid_dimension,show_filters)
+
+    print("Filter Losses\n",[loss for f, loss in processed_filters])
+    _draw_filters(processed_filters, grid_columns, show_filters)
+
 
 if __name__ == '__main__':
     # the name of the layer we want to visualize
@@ -252,4 +272,4 @@ if __name__ == '__main__':
     vgg.summary()
 
     # example function call
-    visualize_layer(vgg, LAYER_NAME)
+    visualize_layer(vgg, LAYER_NAME, filter_range=(0, 8))
