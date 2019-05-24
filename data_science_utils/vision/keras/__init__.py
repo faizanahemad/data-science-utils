@@ -186,7 +186,7 @@ def evaluate(model,X_train, Y_train, X_test, Y_test, classes, print_results=Fals
         plt.show()
 
         cmap = plt.get_cmap('Blues')
-        fig, ax = plt.subplots(nrows=1, ncols=1, sharex=True, sharey=True)
+        fig, ax = plt.subplots(nrows=1, ncols=1, sharex=True, sharey=True, figsize=(10,10))
         im = ax.imshow(cm, cmap=cmap)  # Plot the confusion matrix
 
         # Show all ticks
