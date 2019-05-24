@@ -5,7 +5,7 @@ import pandas as pd
 from keras.datasets import mnist
 from keras.datasets import fashion_mnist
 import matplotlib.pyplot as plt
-from sklearn.metrics import precision_recall_fscore_support
+from sklearn.metrics import precision_recall_fscore_support, confusion_matrix, balanced_accuracy_score
 from IPython.display import display
 import seaborn as sns
 
@@ -157,6 +157,9 @@ def evaluate(model,X_train, Y_train, X_test, Y_test, classes, print_results=Fals
                                  "data_source": ["test"]})
 
     results = pd.concat((results, results_train, results_test))
+    cm = confusion_matrix(y_test, test_predictions)
+    balanced_accuracy = balanced_accuracy_score(y_test, test_predictions)
+
 
     if print_results:
         print("\n", "=" * 80)
@@ -182,7 +185,28 @@ def evaluate(model,X_train, Y_train, X_test, Y_test, classes, print_results=Fals
         plt.title("Recall per Class")
         plt.show()
 
+        cmap = plt.get_cmap('Blues')
+        fig, ax = plt.subplots(nrows=1, ncols=1, sharex=True, sharey=True)
+        im = ax.imshow(cm, cmap=cmap)  # Plot the confusion matrix
 
+        # Show all ticks
+        ax.set_xticks(np.arange(len(cm[0])))
+        ax.set_yticks(np.arange(len(cm[1])))
+
+        #ax.set_xticklabels(classes)
+        #ax.set_yticklabels(classes)
+
+        # Label each axis
+        ax.set_ylabel("True Label")
+        ax.set_xlabel("Predicted label\n\nAccuracy={:2.2f}% ".format(balanced_accuracy * 100))
+        plt.setp(ax.get_xticklabels(), rotation=45, ha="right", rotation_mode="anchor")
+        fig.tight_layout()
+        ax.set_title("Confusion Matrix")
+        plt.show()
+        thresh = cm.max() / 2
+        for i in range(len(cm[0])):
+            for j in range(len(cm[1])):
+                text = ax.text(i, j, cm[i, j],ha="center", va="center", color="white" if cm[i, j] > thresh else "black")
 
     return train_score,test_score,results
 
