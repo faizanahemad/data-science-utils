@@ -125,6 +125,7 @@ def evaluate(model, X_test, Y_test, classes, print_results=False, plot_results=T
 
     if print_results:
         print(" =-= " * 15)
+        print("Total Model Params = ",model.count_params())
         print("Score = ", test_score)
         print("Balanced Accuracy = {:2.2f}% ".format(balanced_accuracy * 100))
 
