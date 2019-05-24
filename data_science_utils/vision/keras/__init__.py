@@ -49,57 +49,31 @@ def get_fashion_mnist_data(validation_split=0.1,preprocess=True):
     return X_train, Y_train, X_test, Y_test
 
 
-def evaluate(model,X_train, Y_train, X_test, Y_test, classes, print_results=False, plot_results=True):
+def evaluate(model, X_test, Y_test, classes, print_results=False, plot_results=True):
     # TODO: Graph P-R-F1 per class for seeing where we fail most
     # TODO: print class with lowest and highest P-R-F1
-    train_score = model.evaluate(X_train, Y_train, verbose=0)
     test_score = model.evaluate(X_test, Y_test, verbose=0)
 
 
-    train_predictions = model.predict(X_train)
     test_predictions = model.predict(X_test)
 
-    train_predictions = np.argmax(train_predictions,axis=1)
     test_predictions = np.argmax(test_predictions, axis=1)
-    train_predictions = [classes[p] for p in train_predictions]
     test_predictions = [classes[p] for p in test_predictions]
 
-    y_train = np.argmax(Y_train,axis=1)
-    y_train = [classes[p] for p in y_train]
     y_test = np.argmax(Y_test, axis=1)
     y_test = [classes[p] for p in y_test]
 
-    train_precision,train_recall,train_f1,train_support = precision_recall_fscore_support(y_train, train_predictions, average=None,labels=classes)
     test_precision,test_recall,test_f1,test_support = precision_recall_fscore_support(y_test, test_predictions, average=None, labels=classes)
 
-    results_train = pd.DataFrame({"classes":classes,
-                                  "average": [None] * len(train_precision),
-                                "precision":train_precision,
-                                "recall":train_recall,
-                                "support":train_support,
-                                "data_source":["train"]*len(train_precision)})
-
-    results_test = pd.DataFrame({"classes": classes,
+    results = pd.DataFrame({"classes": classes,
                                  "average":[None]*len(test_precision),
                                   "precision": test_precision,
                                   "recall": test_recall,
                                   "support": test_support,
                                   "data_source": ["test"] * len(test_precision)})
 
-    results = pd.concat((results_train,results_test))
-
-    train_precision, train_recall, train_f1, train_support = precision_recall_fscore_support(y_train, train_predictions,
-                                                                                             average='micro',
-                                                                                             labels=classes)
     test_precision, test_recall, test_f1, test_support = precision_recall_fscore_support(y_test, test_predictions,
                                                                                          average='micro', labels=classes)
-
-    results_train = pd.DataFrame({"classes":[None],
-                                  "average": ['micro'],
-                                "precision":[train_precision],
-                                "recall":[train_recall],
-                                "support":[train_support],
-                                "data_source":["train"]})
 
     results_test = pd.DataFrame({"classes": [None],
                                  "average":['micro'],
@@ -108,23 +82,13 @@ def evaluate(model,X_train, Y_train, X_test, Y_test, classes, print_results=Fals
                                   "support": [test_support],
                                   "data_source": ["test"]})
 
-    results = pd.concat((results,results_train,results_test))
+    results = pd.concat((results,results_test))
 
     # =======
 
-    train_precision, train_recall, train_f1, train_support = precision_recall_fscore_support(y_train, train_predictions,
-                                                                                             average='macro',
-                                                                                             labels=classes)
     test_precision, test_recall, test_f1, test_support = precision_recall_fscore_support(y_test, test_predictions,
                                                                                          average='macro',
                                                                                          labels=classes)
-
-    results_train = pd.DataFrame({"classes": [None],
-                                  "average": ['macro'],
-                                  "precision": [train_precision],
-                                  "recall": [train_recall],
-                                  "support": [train_support],
-                                  "data_source": ["train"]})
 
     results_test = pd.DataFrame({"classes": [None],
                                  "average": ['macro'],
@@ -133,22 +97,12 @@ def evaluate(model,X_train, Y_train, X_test, Y_test, classes, print_results=Fals
                                  "support": [test_support],
                                  "data_source": ["test"]})
 
-    results = pd.concat((results, results_train, results_test))
+    results = pd.concat((results, results_test))
 
     # ==============
-    train_precision, train_recall, train_f1, train_support = precision_recall_fscore_support(y_train, train_predictions,
-                                                                                             average='weighted',
-                                                                                             labels=classes)
     test_precision, test_recall, test_f1, test_support = precision_recall_fscore_support(y_test, test_predictions,
                                                                                          average='weighted',
                                                                                          labels=classes)
-
-    results_train = pd.DataFrame({"classes": [None],
-                                  "average": ['weighted'],
-                                  "precision": [train_precision],
-                                  "recall": [train_recall],
-                                  "support": [train_support],
-                                  "data_source": ["train"]})
 
     results_test = pd.DataFrame({"classes": [None],
                                  "average": ['weighted'],
@@ -157,21 +111,20 @@ def evaluate(model,X_train, Y_train, X_test, Y_test, classes, print_results=Fals
                                  "support": [test_support],
                                  "data_source": ["test"]})
 
-    results = pd.concat((results, results_train, results_test))
+    results = pd.concat((results, results_test))
     cm = confusion_matrix(y_test, test_predictions)
     balanced_accuracy = balanced_accuracy_score(y_test, test_predictions)
 
 
     if print_results:
         print("\n", "=" * 80)
-        print("Train Score = ", train_score)
-        print("Test Score = ", test_score)
+        print("Score = ", test_score)
         display(results)
 
     if plot_results:
         print()
         plt.figure(figsize=(16,6))
-        sns.barplot(x="classes",y="precision",hue="data_source",data=results[~pd.isna(results.classes)])
+        sns.barplot(x="classes",y="precision",data=results[~pd.isna(results.classes)])
         lower_bound = max(results['precision'].min() - 0.05,0)
         upper_bound = 1.05
         plt.ylim((lower_bound,upper_bound))
@@ -179,7 +132,7 @@ def evaluate(model,X_train, Y_train, X_test, Y_test, classes, print_results=Fals
         plt.show()
 
         plt.figure(figsize=(16, 6))
-        sns.barplot(x="classes", y="recall", hue="data_source", data=results[~pd.isna(results.classes)])
+        sns.barplot(x="classes", y="recall", data=results[~pd.isna(results.classes)])
         lower_bound = max(results['recall'].min() - 0.05, 0)
         upper_bound = 1.05
         plt.ylim((lower_bound, upper_bound))
