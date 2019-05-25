@@ -158,7 +158,8 @@ def visualize_layer(model,
 
                 # some filters get stuck to 0, we can skip them
                 if np.sum(losses) <= 1e-06:
-                    input_img_data = _get_input_random_image()
+                    # input_img_data = _get_input_random_image()
+                    pass
                     # return None
                 input_img_data += grads_value * step
 
