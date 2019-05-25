@@ -147,16 +147,20 @@ def visualize_layer(model,
         # as it would occur if we directly compute the 412d-image.
         # Behaves as a better starting point for each following dimension
         # and therefore avoids poor local minima
+        losses, grads = [],[]
         for up in reversed(range(upscaling_steps)):
             # we run gradient ascent for e.g. 20 steps
             for _ in range(epochs):
                 loss_value, grads_value = iterate([input_img_data])
-                input_img_data += grads_value * step
+                losses.append(loss_value)
+                grads.append(np.sum(np.abs(grads_value)))
+
 
                 # some filters get stuck to 0, we can skip them
-                if loss_value <= K.epsilon():
+                if np.sum(losses) <= 1e-06:
                     input_img_data = _get_input_random_image()
                     # return None
+                input_img_data += grads_value * step
 
             # Calulate upscaled dimension
             intermediate_dim = tuple(
