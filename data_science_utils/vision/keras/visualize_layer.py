@@ -72,7 +72,8 @@ def visualize_layer(model,
                     output_dim=(128, 128),
                     filter_range=(0, None),
                     grid_columns=8,
-                    show_filters=True):
+                    show_filters=True,
+                    image_size_multiplier=2):
     """Visualizes the most relevant filters of one conv-layer in a certain model.
 
     # Arguments
@@ -221,8 +222,8 @@ def visualize_layer(model,
                 width_margin: width_margin + output_dim[0],
                 height_margin: height_margin + output_dim[1], :] = img
         if show_filters:
-            fig_height = rows * 2
-            fig_width = columns * 2
+            fig_height = rows * image_size_multiplier
+            fig_width = columns * image_size_multiplier
 
             fig = plt.figure(figsize=(fig_width, fig_height))
             plt.imshow(stitched_filters)
