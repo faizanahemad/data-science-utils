@@ -151,6 +151,7 @@ def visualize_layer(model,
         # Behaves as a better starting point for each following dimension
         # and therefore avoids poor local minima
         losses, grads = [], []
+        reinit_enabled = True
         for up in reversed(range(upscaling_steps)):
 
             # we run gradient ascent for e.g. 20 steps
@@ -160,8 +161,9 @@ def visualize_layer(model,
                 grads.append(np.mean(np.abs(grads_value)))
                 input_img_data += grads_value * step
 
-            if np.sum(losses) <= 1e-04 or (len(losses) > 1 and np.diff(losses)[-1] < 0.5):
+            if reinit_enabled and (np.sum(losses) <= 1e-04 or (len(losses) > 1 and np.diff(losses)[-1] < 0.5)):
                 input_img_data = input_img_data + _get_random_noise(input_img_data)
+                reinit_enabled = False
             intermediate_dim = tuple(
                 int(x / (upscaling_factor ** up)) for x in output_dim)
             # Upscale
