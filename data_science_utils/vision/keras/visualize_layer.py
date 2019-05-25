@@ -221,8 +221,8 @@ def visualize_layer(model,
                 width_margin: width_margin + output_dim[0],
                 height_margin: height_margin + output_dim[1], :] = img
         if show_filters:
-            fig_height = rows * 4
-            fig_width = columns * 4
+            fig_height = rows * 2
+            fig_width = columns * 2
 
             fig = plt.figure(figsize=(fig_width, fig_height))
             plt.imshow(stitched_filters)
