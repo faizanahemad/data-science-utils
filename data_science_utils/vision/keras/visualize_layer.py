@@ -129,13 +129,18 @@ def visualize_layer(model,
         # we start from a gray image with some random noise
         intermediate_dim = tuple(
             int(x / (upscaling_factor ** upscaling_steps)) for x in output_dim)
-        if K.image_data_format() == 'channels_first':
-            input_img_data = np.random.random(
-                (1, channels, intermediate_dim[0], intermediate_dim[1]))
-        else:
-            input_img_data = np.random.random(
-                (1, intermediate_dim[0], intermediate_dim[1], channels))
-        input_img_data = (input_img_data - 0.5) * 20 + 128
+
+        def _get_input_random_image():
+            if K.image_data_format() == 'channels_first':
+                input_img_data = np.random.random(
+                    (1, channels, intermediate_dim[0], intermediate_dim[1]))
+            else:
+                input_img_data = np.random.random(
+                    (1, intermediate_dim[0], intermediate_dim[1], channels))
+            input_img_data = (input_img_data - 0.5) * 20 + 128
+            return input_img_data
+
+        input_img_data = _get_input_random_image()
 
         # Slowly upscaling towards the original size prevents
         # a dominating high-frequency of the to visualized structure
@@ -150,7 +155,7 @@ def visualize_layer(model,
 
                 # some filters get stuck to 0, we can skip them
                 if loss_value <= K.epsilon():
-                    pass
+                    input_img_data = _get_input_random_image()
                     # return None
 
             # Calulate upscaled dimension
