@@ -140,6 +140,9 @@ def visualize_layer(model,
             input_img_data = (input_img_data - 0.5) * 20 + 128
             return input_img_data
 
+        def _get_random_noise(array):
+            return np.random.randn(*array.shape) * 0.1
+
         input_img_data = _get_input_random_image()
 
         # Slowly upscaling towards the original size prevents
@@ -147,23 +150,18 @@ def visualize_layer(model,
         # as it would occur if we directly compute the 412d-image.
         # Behaves as a better starting point for each following dimension
         # and therefore avoids poor local minima
-        losses, grads = [],[]
+        losses, grads = [], []
         for up in reversed(range(upscaling_steps)):
+
             # we run gradient ascent for e.g. 20 steps
-            for _ in range(epochs):
+            for epoch in range(epochs):
                 loss_value, grads_value = iterate([input_img_data])
                 losses.append(loss_value)
-                grads.append(np.sum(np.abs(grads_value)))
-
-
-                # some filters get stuck to 0, we can skip them
-                if np.sum(losses) <= 1e-06:
-                    # input_img_data = _get_input_random_image()
-                    pass
-                    # return None
+                grads.append(np.mean(np.abs(grads_value)))
                 input_img_data += grads_value * step
 
-            # Calulate upscaled dimension
+            if np.sum(losses) <= 1e-04 or (len(losses) > 1 and np.diff(losses)[-1] < 0.5):
+                input_img_data = input_img_data + _get_random_noise(input_img_data)
             intermediate_dim = tuple(
                 int(x / (upscaling_factor ** up)) for x in output_dim)
             # Upscale
@@ -200,10 +198,6 @@ def visualize_layer(model,
         rows = int(np.ceil(len(filters) / columns))
 
         output_dim = (filters[0][0].shape[0], filters[0][0].shape[1])
-
-        # the filters that have the highest loss are assumed to be better-looking.
-        # we will only keep the top n*n filters.
-        filters.sort(key=lambda x: x[1], reverse=True)
 
         # build a black picture with enough space for
         # e.g. our 8 x 8 filters of size 412 x 412, with a 5px margin in between
@@ -267,7 +261,7 @@ def visualize_layer(model,
     print('{} filter processed.'.format(len(processed_filters)))
     # Finally draw and store the best filters to disk
 
-    print("Filter Losses\n",[loss for f, loss in processed_filters])
+    print("Filter Losses\n", [loss for f, loss in processed_filters])
     _draw_filters(processed_filters, grid_columns, show_filters)
 
 
