@@ -66,12 +66,12 @@ def process_image(x, former):
 def visualize_layer(model,
                     layer_name,
                     step=0.5,
-                    epochs=20,
+                    epochs=25,
                     upscaling_steps=10,
-                    upscaling_factor=1.2,
+                    upscaling_factor=1.1,
                     output_dim=(128, 128),
                     filter_range=(0, None),
-                    grid_columns=4,
+                    grid_columns=8,
                     show_filters=True):
     """Visualizes the most relevant filters of one conv-layer in a certain model.
 
@@ -187,7 +187,7 @@ def visualize_layer(model,
                                                                   e_time - s_time))
         return img, loss_value
 
-    def _draw_filters(filters, columns=4, show_filters=True, channels=3):
+    def _draw_filters(filters, columns=8, show_filters=True, channels=3):
         """Draw the best filters in a nxn grid.
 
         # Arguments
@@ -203,7 +203,7 @@ def visualize_layer(model,
 
         # build a black picture with enough space for
         # e.g. our 8 x 8 filters of size 412 x 412, with a 5px margin in between
-        MARGIN = 5
+        MARGIN = 3
         width = rows * output_dim[0] + (rows - 1) * MARGIN
         height = columns * output_dim[1] + (columns - 1) * MARGIN
         stitched_filters = np.zeros((width, height, channels), dtype='uint8')
