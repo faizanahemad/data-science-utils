@@ -183,10 +183,7 @@ def visualize_layer(model,
         # decode the resulting input image
         img = deprocess_image(input_img_data[0])
         e_time = time.time()
-        print('Costs of filter {:3}: {:5.0f} ( {:4.2f}s )'.format(filter_index,
-                                                                  loss_value,
-                                                                  e_time - s_time))
-        print("\r")
+        print('{:3}'.format(filter_index,),end =" ")
         return img, loss_value
 
     def _draw_filters(filters, columns=8, show_filters=True, channels=3):
