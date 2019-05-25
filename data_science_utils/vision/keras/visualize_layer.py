@@ -203,7 +203,7 @@ def visualize_layer(model,
 
         # build a black picture with enough space for
         # e.g. our 8 x 8 filters of size 412 x 412, with a 5px margin in between
-        MARGIN = 3
+        MARGIN = 1
         width = rows * output_dim[0] + (rows - 1) * MARGIN
         height = columns * output_dim[1] + (columns - 1) * MARGIN
         stitched_filters = np.zeros((width, height, channels), dtype='uint8')
