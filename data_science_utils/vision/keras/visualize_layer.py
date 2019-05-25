@@ -265,7 +265,7 @@ def visualize_layer(model,
     print('{} filter processed.'.format(len(processed_filters)))
     # Finally draw and store the best filters to disk
 
-    print("Filter Losses\n", [loss for f, loss in processed_filters])
+    print("Filter Losses: ", [loss for f, loss in processed_filters])
     _draw_filters(processed_filters, grid_columns, show_filters)
 
 
