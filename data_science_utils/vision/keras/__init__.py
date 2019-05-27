@@ -11,6 +11,7 @@ from sklearn.utils import shuffle
 from IPython.display import display
 import seaborn as sns
 from .visualize_layer import visualize_layer
+from .adabound import AdaBound
 
 def get_mnist_labels():
     return list(range(0, 10))
