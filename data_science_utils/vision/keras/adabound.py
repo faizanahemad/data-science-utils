@@ -1,6 +1,8 @@
 from keras import backend as K
 from keras.optimizers import Optimizer
 
+# https://github.com/titu1994/keras-adabound
+
 
 class AdaBound(Optimizer):
     """AdaBound optimizer.
@@ -23,6 +25,7 @@ class AdaBound(Optimizer):
           (https://arxiv.org/abs/1412.6980v8)
         - [On the Convergence of Adam and Beyond]
           (https://openreview.net/forum?id=ryQu7f-RZ)
+        - [Keras Implementation](https://github.com/titu1994/keras-adabound)
     """
 
     def __init__(self, lr=0.001, final_lr=0.1, beta_1=0.9, beta_2=0.999, gamma=1e-3,
