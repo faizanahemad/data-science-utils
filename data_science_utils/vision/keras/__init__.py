@@ -230,13 +230,14 @@ def show_misclassified(X, Y_ohe, Y_pred, classes,
     fig_width = columns * image_size_multiplier
 
     fig = plt.figure(figsize=(fig_width, fig_height))
-    idx = 0
+    idx1 = 0
+    idx2 = 0
     jdx = 0
     for row in range(rows):
         for column in range(columns):
-            if idx >= len(X):
+            if idx1 >= len(X):
                 break
-            img = X[idx]
+            img = X[idx1]
             assert (len(img.shape) == 3 and img.shape[2] in [1, 3, 4]) or len(img.shape) == 2
             ax = fig.add_subplot(rows * 2, columns, jdx + 1, xticks=[], yticks=[])
             cmap = None
@@ -245,14 +246,14 @@ def show_misclassified(X, Y_ohe, Y_pred, classes,
             if len(img.shape) == 3 and img.shape[2] == 1:
                 img = img.reshape((img.shape[0], img.shape[1]))
             ax.imshow(img, cmap=cmap)
-            ax.set_title("Predicted = %s, Actual = %s" % (classes[yp[idx]], classes[y_true[idx]]))
-            idx += 1
+            ax.set_title("Predicted = %s, Actual = %s" % (classes[yp[idx1]], classes[y_true[idx1]]))
+            idx1 += 1
             jdx += 1
 
         for column in range(columns):
-            if jdx - columns >= len(Y_pred):
+            if idx2 >= len(Y_pred):
                 break
-            yps = Y_pred[jdx - columns]
+            yps = Y_pred[idx2]
             ax = fig.add_subplot(rows * 2, columns, jdx + 1, xticks=[], yticks=[])
             ind = np.arange(len(classes))
             rects = ax.bar(ind, yps, 0.25, label='Labels')
@@ -262,6 +263,7 @@ def show_misclassified(X, Y_ohe, Y_pred, classes,
             ax.set_xticks(ind)
             ax.set_xticklabels(classes)
             ax.legend()
+            idx2 += 1
             jdx += 1
     plt.show()
 
