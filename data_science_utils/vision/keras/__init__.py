@@ -58,12 +58,14 @@ def get_fashion_mnist_data(preprocess=True):
     return X_train, Y_train, X_test, Y_test
 
 
-def evaluate(model, X_test, Y_test, classes, print_results=False, plot_results=True):
+def evaluate(model, X_test, Y_test, classes,datagen=None, print_results=False, plot_results=True):
     # TODO: Graph P-R-F1 per class for seeing where we fail most
     # TODO: print class with lowest and highest P-R-F1
+
+    assert (X_test is not None and Y_test is not None) or (datagen is not None)
+    if datagen is not None:
+        X_test, Y_test = datagen.next()
     test_score = model.evaluate(X_test, Y_test, verbose=0)
-
-
     test_predictions = model.predict(X_test)
 
     test_predictions = np.argmax(test_predictions, axis=1)
