@@ -58,7 +58,7 @@ def get_fashion_mnist_data(preprocess=True):
     return X_train, Y_train, X_test, Y_test
 
 
-def inspect_predictions(score, predictions, classes, print_results=False, plot_results=True):
+def inspect_predictions(score, predictions,labels, classes, print_results=False, plot_results=True):
 
     test_score = score
     test_predictions = predictions
@@ -66,7 +66,7 @@ def inspect_predictions(score, predictions, classes, print_results=False, plot_r
     test_predictions = np.argmax(test_predictions, axis=1)
     test_predictions = [classes[p] for p in test_predictions]
 
-    y_test = np.argmax(Y_test, axis=1)
+    y_test = np.argmax(labels, axis=1)
     y_test = [classes[p] for p in y_test]
 
     test_precision,test_recall,test_f1,test_support = precision_recall_fscore_support(y_test, test_predictions, average=None, labels=classes)
