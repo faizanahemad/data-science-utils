@@ -124,7 +124,6 @@ def inspect_predictions(score, predictions,labels, classes, print_results=False,
 
     if print_results:
         print(" =-= " * 20)
-        print("Total Model Params = ",model.count_params())
         print("Score = ", test_score)
         print("Balanced Accuracy = {:2.2f}% ".format(balanced_accuracy * 100))
 
