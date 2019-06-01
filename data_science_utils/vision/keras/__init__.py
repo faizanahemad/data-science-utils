@@ -182,7 +182,8 @@ def evaluate(model, X_test, Y_test, classes,datagen=None, print_results=False, p
         X_test, Y_test = datagen.next()
     test_score = model.evaluate(X_test, Y_test, verbose=0)
     test_predictions = model.predict(X_test)
-    return inspect_predictions(test_score, test_predictions, print_results=print_results, plot_results=plot_results)
+    return inspect_predictions(test_score, test_predictions,labels=Y_test,classes=classes,
+                               print_results=print_results, plot_results=plot_results)
 
 
 
