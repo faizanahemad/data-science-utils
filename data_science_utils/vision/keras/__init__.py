@@ -203,5 +203,68 @@ def show_examples(X,y,classes):
         ax.set_title(classes[np.argmax(y[idx])])
     plt.show()
 
+
+def show_misclassified(X, Y_ohe, Y_pred, classes,
+                       columns=5, total=25,
+                       pick_randomly=True, image_size_multiplier=2):
+    y_true = np.argmax(Y_ohe, axis=1)
+    yp = np.argmax(Y_pred, axis=1)
+    misclassified = y_true != yp
+    X = X[misclassified]
+    Y_ohe = Y_ohe[misclassified]
+    Y_pred = Y_pred[misclassified]
+    y_true = y_true[misclassified]
+    yp = yp[misclassified]
+    total = min(total, len(X))
+    rows = int(np.ceil(total / columns))
+
+    indexes = np.random.choice(len(X), total, replace=False) if pick_randomly else list(range(0, total))
+
+    X = np.take(X, indexes, axis=0)
+    Y_ohe = np.take(Y_ohe, indexes, axis=0)
+    Y_pred = np.take(Y_pred, indexes, axis=0)
+    y_true = np.take(y_true, indexes, axis=0)
+    yp = np.take(yp, indexes, axis=0)
+
+    fig_height = rows * image_size_multiplier * 2
+    fig_width = columns * image_size_multiplier
+
+    fig = plt.figure(figsize=(fig_width, fig_height))
+    idx = 0
+    jdx = 0
+    for row in range(rows):
+        for column in range(columns):
+            if idx >= len(X):
+                break
+            img = X[idx]
+            assert (len(img.shape) == 3 and img.shape[2] in [1, 3, 4]) or len(img.shape) == 2
+            ax = fig.add_subplot(rows * 2, columns, jdx + 1, xticks=[], yticks=[])
+            cmap = None
+            if (len(img.shape) == 3 and img.shape[2] == 1) or len(img.shape) == 2:
+                cmap = "binary"
+            if len(img.shape) == 3 and img.shape[2] == 1:
+                img = img.reshape((img.shape[0], img.shape[1]))
+            ax.imshow(img, cmap=cmap)
+            ax.set_title("Predicted = %s, Actual = %s" % (classes[yp[idx]], classes[y_true[idx]]))
+            idx += 1
+            jdx += 1
+
+        for column in range(columns):
+            if jdx - columns >= len(Y_pred):
+                break
+            yps = Y_pred[jdx - columns]
+            ax = fig.add_subplot(rows * 2, columns, jdx + 1, xticks=[], yticks=[])
+            ind = np.arange(len(classes))
+            rects = ax.bar(ind, yps, 0.25, label='Labels')
+            ax.set_ylabel('Probability')
+            ax.set_yticks(np.arange(0, 1.2, 0.2))
+            ax.set_title('Probability vs Labels')
+            ax.set_xticks(ind)
+            ax.set_xticklabels(classes)
+            ax.legend()
+            jdx += 1
+    plt.show()
+
+
 def show_kernel_activation():
     pass
