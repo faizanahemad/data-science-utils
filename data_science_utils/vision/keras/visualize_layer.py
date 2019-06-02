@@ -243,7 +243,7 @@ def visualize_layer(model,
 
     # Compute to be processed filter range
     filter_lower = filter_range[0]
-    filter_upper = (filter_range[1]
+    filter_upper = (min(filter_range[1],len(output_layer.get_weights()[1]))
                     if filter_range[1] is not None
                     else len(output_layer.get_weights()[1]))
     assert (filter_lower >= 0
