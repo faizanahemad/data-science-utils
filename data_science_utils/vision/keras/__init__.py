@@ -16,7 +16,7 @@ from .adabound import AdaBound
 def get_mnist_labels():
     return list(range(0, 10))
 
-def get_mnist_data(preprocess=True):
+def get_mnist_data(preprocess=False):
     (X_train, y_train), (X_test, y_test) = mnist.load_data()
     X_train, y_train = shuffle(X_train, y_train)
     X_test, y_test = shuffle(X_test, y_test)
@@ -39,7 +39,7 @@ def get_fashion_mnist_labels():
                   "sandal", "shirt", "sneaker", "bag", "ankle boot"]
     return labelNames
 
-def get_fashion_mnist_data(preprocess=True):
+def get_fashion_mnist_data(preprocess=False):
     (X_train, y_train), (X_test, y_test) = fashion_mnist.load_data()
     X_train, y_train = shuffle(X_train, y_train)
     X_test, y_test = shuffle(X_test, y_test)
