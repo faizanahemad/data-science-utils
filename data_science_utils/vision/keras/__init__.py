@@ -12,6 +12,7 @@ from IPython.display import display
 import seaborn as sns
 from .visualize_layer import visualize_layer
 from .adabound import AdaBound
+from keras.datasets import cifar10
 
 def get_mnist_labels():
     return list(range(0, 10))
@@ -56,6 +57,28 @@ def get_fashion_mnist_data(preprocess=False):
     Y_train = np_utils.to_categorical(y_train, 10)
     Y_test = np_utils.to_categorical(y_test, 10)
     return X_train, Y_train, X_test, Y_test
+
+
+def get_cifar10_labels():
+    return ['airplane','automobile','bird','cat','deer','dog','frog','horse','ship','truck']
+
+def get_cifar10_data(preprocess=False):
+    (X_train, y_train), (X_test, y_test) = cifar10.load_data()
+    num_classes = len(np.unique(y_train))
+    X_train, y_train = shuffle(X_train, y_train)
+    X_test, y_test = shuffle(X_test, y_test)
+
+    if preprocess:
+        X_train = X_train.astype('float32')
+        X_test = X_test.astype('float32')
+        X_train /= 255
+        X_test /= 255
+
+    Y_train = np_utils.to_categorical(y_train, num_classes)
+    Y_test = np_utils.to_categorical(y_test, num_classes)
+    return X_train, Y_train, X_test, Y_test
+
+
 
 
 def inspect_predictions(score, predictions,labels, classes, print_results=False, plot_results=True):
