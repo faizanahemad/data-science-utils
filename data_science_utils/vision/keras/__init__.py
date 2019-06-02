@@ -212,7 +212,11 @@ def evaluate(model, X_test, Y_test, classes,datagen=None, print_results=False, p
 
 def show_examples(X,y,classes):
     rows = int(np.ceil(len(X)/5))
-    fig = plt.figure(figsize=(20, rows*4))
+    if X.shape[1] > 64:
+        multiplier = 2
+    else:
+        multiplier = 1
+    fig = plt.figure(figsize=(10*multiplier, rows*2*multiplier))
     for idx in np.arange(len(X)):
         img = X[idx]
         assert (len(img.shape)==3 and img.shape[2] in [1,3,4]) or len(img.shape)==2
