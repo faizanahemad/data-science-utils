@@ -191,7 +191,7 @@ def show_examples(X,y,classes):
     rows = int(np.ceil(len(X)/5))
     fig = plt.figure(figsize=(20, rows*4))
     for idx in np.arange(len(X)):
-        img = X[idx]*255
+        img = X[idx]
         assert (len(img.shape)==3 and img.shape[2] in [1,3,4]) or len(img.shape)==2
         ax = fig.add_subplot(rows, 5, idx + 1, xticks=[], yticks=[])
         cmap = None
