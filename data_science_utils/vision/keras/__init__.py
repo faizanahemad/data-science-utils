@@ -206,7 +206,7 @@ def show_examples(X,y,classes):
 
 def show_misclassified(X, Y_ohe, Y_pred, classes,
                        columns=5, total=25,
-                       pick_randomly=True, image_size_multiplier=2):
+                       pick_randomly=True, image_size_multiplier=4):
     y_true = np.argmax(Y_ohe, axis=1)
     yp = np.argmax(Y_pred, axis=1)
     misclassified = y_true != yp
