@@ -307,7 +307,7 @@ def show_misclassified(X, Y_ohe, Y_pred, classes,
             ax.set_yticks(np.arange(0, 1.2, 0.2))
             ax.set_title('Probability vs Labels')
             ax.set_xticks(ind)
-            ax.set_xticklabels(classes)
+            ax.set_xticklabels(classes, rotation=90, ha='left')
             ax.legend()
             idx2 += 1
             jdx += 1

@@ -277,4 +277,4 @@ if __name__ == '__main__':
     vgg.summary()
 
     # example function call
-    visualize_layer(vgg, LAYER_NAME, filter_range=(0, 8))
+    visualize_layer(vgg, LAYER_NAME, filter_range=(0, 4))
