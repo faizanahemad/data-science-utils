@@ -276,6 +276,7 @@ def show_misclassified(X, Y_ohe, Y_pred, classes,
     fig_width = columns * image_size_multiplier
 
     fig = plt.figure(figsize=(fig_width, fig_height))
+    plt.subplots_adjust(bottom=0.1, top=1.0)
     idx1 = 0
     idx2 = 0
     jdx = 0
@@ -305,10 +306,11 @@ def show_misclassified(X, Y_ohe, Y_pred, classes,
             rects = ax.bar(ind, yps, 0.25, label='Labels')
             ax.set_ylabel('Probability')
             ax.set_yticks(np.arange(0, 1.2, 0.2))
-            ax.set_title('Probability vs Labels')
             ax.set_xticks(ind)
             ax.set_xticklabels(classes, rotation=90, ha='left')
             ax.legend()
+            ax.tick_params(axis='both', which='major', labelsize=8)
+            ax.tick_params(axis='both', which='minor', labelsize=6)
             idx2 += 1
             jdx += 1
     plt.show()
