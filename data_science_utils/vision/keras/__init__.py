@@ -293,7 +293,7 @@ def show_misclassified(X, Y_ohe, Y_pred, classes,
             if len(img.shape) == 3 and img.shape[2] == 1:
                 img = img.reshape((img.shape[0], img.shape[1]))
             ax.imshow(img, cmap=cmap)
-            ax.set_title("Predicted = %s, Actual = %s" % (classes[yp[idx1]], classes[y_true[idx1]]))
+            ax.set_xlabel("Predicted = %s, Actual = %s" % (classes[yp[idx1]], classes[y_true[idx1]]))
             idx1 += 1
             jdx += 1
 
