@@ -5,7 +5,7 @@ import pandas as pd
 from keras.datasets import mnist
 from keras.datasets import fashion_mnist
 import matplotlib.pyplot as plt
-from sklearn.metrics import precision_recall_fscore_support, confusion_matrix, balanced_accuracy_score
+from sklearn.metrics import precision_recall_fscore_support, confusion_matrix, balanced_accuracy_score, accuracy_score
 from sklearn.model_selection import train_test_split
 from sklearn.utils import shuffle
 from IPython.display import display
@@ -143,12 +143,13 @@ def inspect_predictions(score, predictions,labels, classes, print_results=False,
     results = pd.concat((results, results_test))
     cm = confusion_matrix(y_test, test_predictions)
     balanced_accuracy = balanced_accuracy_score(y_test, test_predictions)
+    accuracy = accuracy_score(y_test, test_predictions)
 
 
     if print_results:
         print(" =-= " * 20)
         print("Score = ", test_score)
-        print("Balanced Accuracy = {:2.2f}% ".format(balanced_accuracy * 100))
+        print("Balanced Accuracy = {:2.2f}%, Accuracy = {:2.2f}%".format(balanced_accuracy * 100, accuracy*100))
 
 
     if plot_results:
@@ -209,23 +210,27 @@ def evaluate(model, X_test, Y_test, classes,datagen=None, print_results=False, p
                                print_results=print_results, plot_results=plot_results)
 
 
-def plot_model_history(model_history):
+def plot_model_history(model_history, clip_beginning=0):
     fig, axs = plt.subplots(1,2,figsize=(18,6))
     # summarize history for accuracy
-    axs[0].plot(range(1,len(model_history.history['acc'])+1),model_history.history['acc'])
-    axs[0].plot(range(1,len(model_history.history['val_acc'])+1),model_history.history['val_acc'])
+    acc = model_history.history['acc']
+    val_acc = model_history.history['val_acc']
+    axs[0].plot(range(clip_beginning+1,len(acc)+1),acc[clip_beginning:])
+    axs[0].plot(range(clip_beginning+1,len(val_acc)+1),val_acc[clip_beginning:])
     axs[0].set_title('Model Accuracy')
     axs[0].set_ylabel('Accuracy')
     axs[0].set_xlabel('Epoch')
-    axs[0].set_xticks(np.arange(1,len(model_history.history['acc'])+1),len(model_history.history['acc'])/10)
+    axs[0].set_xticks(np.arange(clip_beginning+1,len(acc)+1),len(acc)/10)
     axs[0].legend(['train', 'val'], loc='best')
     # summarize history for loss
-    axs[1].plot(range(1,len(model_history.history['loss'])+1),model_history.history['loss'])
-    axs[1].plot(range(1,len(model_history.history['val_loss'])+1),model_history.history['val_loss'])
+    loss = model_history.history['loss']
+    val_loss = model_history.history['val_loss']
+    axs[1].plot(range(clip_beginning+1,len(loss)+1),loss[clip_beginning:])
+    axs[1].plot(range(clip_beginning+1,len(val_loss)+1),val_loss[clip_beginning:])
     axs[1].set_title('Model Loss')
     axs[1].set_ylabel('Loss')
     axs[1].set_xlabel('Epoch')
-    axs[1].set_xticks(np.arange(1,len(model_history.history['loss'])+1),len(model_history.history['loss'])/10)
+    axs[1].set_xticks(np.arange(clip_beginning+1,len(loss)+1),len(loss)/10)
     axs[1].legend(['train', 'val'], loc='best')
     plt.show()
 
