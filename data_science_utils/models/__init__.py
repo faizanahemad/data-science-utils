@@ -57,7 +57,7 @@ def mean_absolute_percentage_error(y_true, y_pred, epsilon=1e-4):
                                             None))
     return 100. * np.mean(diff)
 
-def mean_absolute_percentage_error(y_true, y_pred, epsilon=1e-4):
+def median_absolute_percentage_error(y_true, y_pred, epsilon=1e-4):
     y_true = np.asarray(y_true)
     y_pred = np.asarray(y_pred)
     diff = np.abs((y_true - y_pred) / np.clip(np.abs(y_true),
