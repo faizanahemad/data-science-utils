@@ -12,6 +12,7 @@ from IPython.display import display
 import seaborn as sns
 from .visualize_layer import visualize_layer
 from .adabound import AdaBound
+from .one_cycle_lr import OneCycleLR, LRFinder
 from keras.datasets import cifar10
 
 def get_mnist_labels():
