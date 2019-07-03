@@ -2,6 +2,17 @@ import numpy as np
 
 
 def get_cutout_eraser(p=0.5, s_l=0.05, s_h=0.3, r_1=0.3, r_2=1 / 0.3, max_erasures_per_image=1, pixel_level=True):
+    """
+
+    :param p:
+    :param s_l: Minimum Area Proportion of Original that may be cut
+    :param s_h: Maximum Area Proportion of Original that may be cut
+    :param r_1: Min Aspect Ratio
+    :param r_2: Max Aspect Ratio
+    :param max_erasures_per_image:
+    :param pixel_level:
+    :return: Eraser to be used as Preprocessing Function
+    """
     assert max_erasures_per_image >= 1
 
     def eraser(input_img):

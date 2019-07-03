@@ -65,7 +65,7 @@ def concat_s2d(inputs):
     return inputs
 
 
-def transition_layer(inputs, name, n_kernels=32):
+def transition_layer(inputs, name, n_kernels=32,bn=True):
     inputs = concat_s2d(inputs)
     out = Conv2D(n_kernels,
                  kernel_size=(1, 1),
@@ -74,13 +74,13 @@ def transition_layer(inputs, name, n_kernels=32):
                  kernel_regularizer=l2(1e-4),
                  dilation_rate=1,
                  name=name)(inputs)
-    out = BatchNormalization()(out)
+    out = BatchNormalization()(out) if bn else out
     out = Activation("relu")(out)
     return out
 
 
 def conv_layer(inputs, name, n_kernels=32, kernel_size=(3, 3), dropout=0.0, dilation_rate=1, padding='same',
-               enable_transition=False, transition_layer_kernels=32, strides=1, spatial_dropout=0.0,
+               enable_transition=False, transition_layer_kernels=32, strides=1, spatial_dropout=0.0,bn=True,
                bn_zero_gamma=False):
     inputs = concat_s2d(inputs)
     inputs = transition_layer(inputs, name + "_tran", transition_layer_kernels) if enable_transition else inputs
@@ -91,8 +91,9 @@ def conv_layer(inputs, name, n_kernels=32, kernel_size=(3, 3), dropout=0.0, dila
                  kernel_regularizer=l2(1e-4),
                  dilation_rate=dilation_rate,
                  name=name + "conv_")(inputs)
-    out = BatchNormalization(name=name + "bn_", gamma_initializer='zeros')(
-        out) if bn_zero_gamma else BatchNormalization(name=name + "bn_")(out)
+    if bn:
+        out = BatchNormalization(name=name + "bn_", gamma_initializer='zeros')(
+            out) if bn_zero_gamma else BatchNormalization(name=name + "bn_")(out)
     out = Activation("relu", name=name + "activation_")(out)
     out = Dropout(dropout, name=name + "dropout_")(out) if dropout > 0 else out
     out = SpatialDropout2D(spatial_dropout)(out) if spatial_dropout > 0 else out
@@ -101,7 +102,7 @@ def conv_layer(inputs, name, n_kernels=32, kernel_size=(3, 3), dropout=0.0, dila
 
 def depthwise_conv_layer(inputs, name, n_kernels=32, kernel_size=(3, 3), dropout=0.0, dilation_rate=1, padding='same',
                          depth_multiplier=1,
-                         enable_transition=False, transition_layer_kernels=32, strides=1, spatial_dropout=0.0,
+                         enable_transition=False, transition_layer_kernels=32, strides=1, spatial_dropout=0.0,bn=True,
                          bn_zero_gamma=False):
     inputs = concat_s2d(inputs)
     inputs = transition_layer(inputs, name + "_tran", transition_layer_kernels) if enable_transition else inputs
@@ -113,8 +114,9 @@ def depthwise_conv_layer(inputs, name, n_kernels=32, kernel_size=(3, 3), dropout
                           dilation_rate=dilation_rate,
                           depth_multiplier=depth_multiplier,
                           name=name + "sep-conv_")(inputs)
-    out = BatchNormalization(name=name + "bn_", gamma_initializer='zeros')(
-        out) if bn_zero_gamma else BatchNormalization(name=name + "bn_")(out)
+    if bn:
+        out = BatchNormalization(name=name + "bn_", gamma_initializer='zeros')(
+            out) if bn_zero_gamma else BatchNormalization(name=name + "bn_")(out)
     out = Activation("relu", name=name + "activation_")(out)
     out = Dropout(dropout, name=name + "dropout_")(out) if dropout > 0 else out
     out = SpatialDropout2D(spatial_dropout)(out) if spatial_dropout > 0 else out

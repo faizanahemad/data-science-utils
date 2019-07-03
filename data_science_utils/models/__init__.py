@@ -43,6 +43,17 @@ def rmsle(y_true,y_pred):
     y_pred = np.asarray(y_pred)
     return mean_squared_error(np.log(y_true + 1),np.log(y_pred + 1)) ** 0.5
 
+def signed_rmsle(y_true,y_pred):
+    """
+    Useful for regression problems where you also have negative values and need log errors
+    :param y_true:
+    :param y_pred:
+    :return:
+    """
+    y_true = np.asarray(y_true)
+    y_pred = np.asarray(y_pred)
+    return mean_squared_error(np.sign(y_true)*np.log(np.abs(y_true) + 1),np.sign(y_pred)*np.log(np.abs(y_pred) + 1)) ** 0.5
+
 def rmse(y_true,y_pred):
     y_true = np.asarray(y_true)
     y_pred = np.asarray(y_pred)
