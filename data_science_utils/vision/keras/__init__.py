@@ -87,6 +87,10 @@ def get_fashion_mnist_data(preprocess=False):
 def get_cifar10_labels():
     return ['airplane','automobile','bird','cat','deer','dog','frog','horse','ship','truck']
 
+def get_imagenet_labels():
+    from .imagenet_classes import imagenet_classes
+    return imagenet_classes
+
 def get_cifar10_data(preprocess=False):
     (X_train, y_train), (X_test, y_test) = cifar10.load_data()
     num_classes = len(np.unique(y_train))
