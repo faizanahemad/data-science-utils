@@ -13,7 +13,8 @@ from IPython.display import display
 import seaborn as sns
 from .visualize_layer import visualize_layer
 from .adabound import AdaBound
-from .one_cycle_lr import OneCycleLR, LRFinder
+from .one_cycle_lr import OneCycleLR
+from .lr_finder import LRFinder
 from keras.datasets import cifar10
 
 from keras import backend as K
