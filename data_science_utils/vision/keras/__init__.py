@@ -14,6 +14,7 @@ from .visualize_layer import visualize_layer
 from .adabound import AdaBound
 from .one_cycle_lr import OneCycleLR
 from .lr_finder import LRFinder
+from .gradcam import *
 from .layer_utils import *
 from .regularizers import *
 from keras.datasets import cifar10
