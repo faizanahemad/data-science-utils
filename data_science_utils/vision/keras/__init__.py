@@ -12,7 +12,8 @@ from IPython.display import display
 import seaborn as sns
 from .visualize_layer import visualize_layer
 from .adabound import AdaBound
-from .one_cycle_lr import OneCycleLR, LRFinder
+from .one_cycle_lr import OneCycleLR
+from .lr_finder import LRFinder
 from .layer_utils import *
 from .regularizers import *
 from keras.datasets import cifar10
@@ -246,7 +247,7 @@ def plot_model_history(model_history, clip_beginning=0):
     val_acc = model_history.history['val_acc']
     axs[0].plot(range(clip_beginning+1,len(acc)+1),acc[clip_beginning:])
     axs[0].plot(range(clip_beginning+1,len(val_acc)+1),val_acc[clip_beginning:])
-    axs[0].set_title('Model Accuracy')
+    axs[0].set_title('Model Accuracy: Train = %.3f, Validation = %.3f'%(acc[-1],val_acc[-1]))
     axs[0].set_ylabel('Accuracy')
     axs[0].set_xlabel('Epoch')
     axs[0].set_xticks(np.arange(clip_beginning+1,len(acc)+1),len(acc)/10)
@@ -256,7 +257,7 @@ def plot_model_history(model_history, clip_beginning=0):
     val_loss = model_history.history['val_loss']
     axs[1].plot(range(clip_beginning+1,len(loss)+1),loss[clip_beginning:])
     axs[1].plot(range(clip_beginning+1,len(val_loss)+1),val_loss[clip_beginning:])
-    axs[1].set_title('Model Loss')
+    axs[1].set_title('Model Loss: Train = %.3f, Validation = %.3f'%(loss[-1],val_loss[-1]))
     axs[1].set_ylabel('Loss')
     axs[1].set_xlabel('Epoch')
     axs[1].set_xticks(np.arange(clip_beginning+1,len(loss)+1),len(loss)/10)
