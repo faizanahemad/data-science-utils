@@ -202,7 +202,8 @@ class LRFinder:
             n_skip_beginning - number of batches to skip on the left.
             n_skip_end - number of batches to skip on the right.
         """
-        plt.figure(figsize=(12, 6))
+        fig = plt.figure(figsize=(12, 6))
+        ax = fig.add_subplot(111)
         plt.ylabel("loss")
         plt.xlabel("learning rate (log scale)")
 
@@ -213,8 +214,18 @@ class LRFinder:
 
         plt.plot(self.lrs[n_skip_beginning:-n_skip_end], losses)
         plt.xscale('log')
+        best_lrs = self.get_best_lrs(sma)
+        lrs = [x for x, _ in best_lrs]
+        positions = [x for _, x in best_lrs]
+        # https://matplotlib.org/users/annotations_intro.html
+        for lr, pos in [best_lrs[-1]]:
+            ax.annotate('LR = %.3f, Loss = %.3f' % (lr, losses[pos]), xy=(lr, losses[pos]),
+                        xytext=(lr + 0.2, losses[pos] + 0.1),
+                        arrowprops=dict(facecolor='black', shrink=0.03, width=1, frac=0.05),
+                        )
+
         title = "LR-Loss Graph"
-        title = title + "\n" + "Best Candidate LR = %s" % (self.get_best_lrs(sma))
+        title = title + "\n" + "Best Candidate LR = %s" % lrs
         title = title + "\n" + "These Candidate LRs denote the positions of minima/troughs in LR-Loss graph"
         plt.title(title)
         plt.show()
@@ -249,37 +260,15 @@ class LRFinder:
         best_idxs = best_idxs[acceptable_loss_or_not]
 
         candidates = list(np.array(lrs)[best_idxs])
-        return sorted(candidates)
-
-    def __get_best_lr_method2__(self, sma, n_skip_beginning=10, n_skip_end=5):
-        derivatives = self.get_derivatives(sma)
-        derivatives = np.array(derivatives[n_skip_beginning:-n_skip_end])
-        lrs = np.array(self.lrs[n_skip_beginning:-n_skip_end])
-        losses = np.array(self.losses[n_skip_beginning:-n_skip_end])
-
-        idxs = np.where(losses >= self.best_loss * 2)[0]
-        idxs = idxs[0]
-        derivatives = derivatives[:idxs + sma]
-        losses = losses[:idxs + sma]
-        lrs = lrs[:idxs + sma]
-
-        idxs = detect_local_minima(moving_average(losses[:idxs], sma))[0]
-
-        acceptable_loss_or_not = losses[idxs] < (self.best_loss * 4)
-        idxs = idxs[acceptable_loss_or_not]
-
-        acceptable_loss_or_not = losses[idxs + sma] > (losses[idxs] * 1.05)
-        idxs = idxs[acceptable_loss_or_not]
-
-        return sorted(lrs[idxs])
+        return sorted(candidates), best_idxs
 
     def get_best_lrs(self, sma, n_skip_beginning=10, n_skip_end=5):
-        c1 = self.__get_best_lr_method1__(sma, n_skip_beginning, n_skip_end)
-        c2 = self.__get_best_lr_method2__(sma, n_skip_beginning, n_skip_end)
-        candidates = sorted(list(c1) + list(c2))
+        c1, i1 = self.__get_best_lr_method1__(sma, n_skip_beginning, n_skip_end)
+        candidates = list(zip(c1, i1))
+        candidates = sorted(candidates, key=lambda pair: pair[0])
         final_candidates = [candidates[0]]
-        for v in candidates:
-            if (v - final_candidates[-1]) / final_candidates[-1] > 0.2:
-                final_candidates.append(v)
-        final_candidates = list(map(lambda x: float("%.3f" % x), final_candidates))
+        for v, i in candidates:
+            if (v - final_candidates[-1][0]) / final_candidates[-1][0] > 0.2:
+                final_candidates.append((v, i))
+        final_candidates = list(map(lambda pair: (float("%.3f" % pair[0]), pair[1]), final_candidates))
         return final_candidates
