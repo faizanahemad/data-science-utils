@@ -8,6 +8,7 @@ from keras import backend as K
 import numpy as np
 import scipy.ndimage.filters as filters
 import scipy.ndimage.morphology as morphology
+import pandas as pd
 
 
 def detect_local_minima(arr):
