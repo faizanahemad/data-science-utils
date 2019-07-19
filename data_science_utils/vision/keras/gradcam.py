@@ -74,7 +74,7 @@ def gradcam(model, layer, img, class_idx, preprocess_func=None, preprocess_img=m
     return img, heatmap, superimposed_img, preds
 
 
-def show_examples_with_gradcam(model, layer, images, labels, classes=None, preprocess_func=None, preprocess_img=None,
+def show_examples_with_gradcam(model, layer, images, labels, classes=None, preprocess_func=None, preprocess_img=min_max_scale,
                                image_size_multiplier=3,
                                show_actual=True, show_heatmap=False, show_superimposed=True):
     columns = 5
@@ -117,7 +117,7 @@ def show_examples_with_gradcam(model, layer, images, labels, classes=None, prepr
     fig.show()
 
 
-def show_layers_with_gradcam(model, layers, image, label, classes=None, preprocess_func=None, preprocess_img=None,
+def show_layers_with_gradcam(model, layers, image, label, classes=None, preprocess_func=None, preprocess_img=min_max_scale,
                              image_size_multiplier=3,
                              show_actual=True, show_heatmap=False, show_superimposed=True):
     columns = 5
@@ -179,7 +179,7 @@ def find_correct(X, y_true, y_pred):
     return X, y_true, y_pred
 
 
-def show_misclassified_with_gradcam(model, layer, iterator, classes=None, preprocess_func=None, preprocess_img=None,
+def show_misclassified_with_gradcam(model, layer, iterator, classes=None, preprocess_func=None, preprocess_img=min_max_scale,
                                     image_size_multiplier=3, examples=25,
                                     show_actual=True, show_heatmap=False, show_superimposed=True):
     columns = 5
@@ -203,7 +203,7 @@ def show_misclassified_with_gradcam(model, layer, iterator, classes=None, prepro
                                preprocess_img=preprocess_img, image_size_multiplier=image_size_multiplier)
 
 
-def show_correct_with_gradcam(model, layer, iterator, classes=None, preprocess_func=None, preprocess_img=None,
+def show_correct_with_gradcam(model, layer, iterator, classes=None, preprocess_func=None, preprocess_img=min_max_scale,
                               image_size_multiplier=3, examples=25,
                               show_actual=True, show_heatmap=False, show_superimposed=True):
     columns = 5
