@@ -1,6 +1,14 @@
 # Project/Publishable Ideas
 For ideas to be viable it has to be computationally possible, and be programmable in Pytorch or keras or base python
 
+### Open Questions
+1. How to incorporate priors
+2. Learning via concepts and training a model to find repeatable+understandable concepts
+3. Brain Inspired Ideas: Another way of Transfer Learning
+    - Focus/Regional Attention: We watch what catches our attention longer and remember it.
+    - Drawing on Past knowledge and domain sub-setting
+    - [Many Model hypothesis/ Thousand Brain Theory](https://numenta.com/blog/2019/01/16/the-thousand-brains-theory-of-intelligence/) 
+
 ### Deep Learning
 1. Video Compression using DVAE, using super resolution techniques and Bidirectional LSTM time series
 2. Snapshot Ensembling of Neural Networks
@@ -8,6 +16,21 @@ For ideas to be viable it has to be computationally possible, and be programmabl
     - Lets say that our DNN has N parameters (weights), our error function is a function in the weight space. To determine if a snapshot is different we take it's Weight Wn and calculate cosine/euclid distances from all existing weights W1...n-1. If it is having significant difference above a threshold, then we take the snapshot.
     - A generalised process: Intelligent Snapshot selection to minimise overfitting and variance, and increase generalization. For example 1 process could be that the Validation error is lower than atleast half the existing snapshots and weight (Wn to W1..n-1 distance) distance should be above a threshold and predictions should be have less some threshold correlation.
     - https://medium.com/analytics-vidhya/snapshot-ensembles-leveraging-ensembling-in-neural-networks-a0d512cf2941
+3. Image Classification Techniques like GradCam and Cutout applied to Text Classification
+
+### RL
+1. RL based tuning of Classification/Regression Models
+    - https://towardsdatascience.com/how-to-improve-your-image-classifier-with-googles-autoaugment-77643f0be0c9
+    - Feature Engineering like Google's Auto-Augment
+    - Hyper-Params Optimization
+    - Data Driven Understanding of what model works best for what metrics.
+        - For example if imbalanced learn to apply Sampling/weighing techniques
+        - If Categorical variables with lots of category then special handling
+        - If categorical columns have semantic meaning then something like Word2Vec.
+2. RL Based Data Adaptive Model Stacking for faster inference and competitive accuracy.
+![Description](RL_stacking_1.jpg)
+
+
 
 
 ### Feature Engineering 
@@ -30,7 +53,10 @@ For ideas to be viable it has to be computationally possible, and be programmabl
     - Next We will train embedding layer to minimise loss in actual training
     - Keras Embedding layer can take only use only 1 categorical column, we will ensure that multiple categorical columns can be used at once.
         - Label Encoding and either Flatten or GAP  
-    - This approach is very similar to auto-encoder approach but since it is also trained during main training it should find more interactions 
+    - This approach is very similar to auto-encoder approach but since it is also trained during main training it should find more interactions
+4. Building Better Embedding Space for Regression and Classification problems by Converting the feature representation part into a comparator algorithm.
+    - We then use the feature representation part as first part of our network. Since this is pre-initialised. It can perform better.
+5.  
 
 ### Trees and RFs
 1. Explainable Trees
