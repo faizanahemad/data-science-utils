@@ -27,7 +27,32 @@ For ideas to be viable it has to be computationally possible, and be programmabl
         - For example if imbalanced learn to apply Sampling/weighing techniques
         - If Categorical variables with lots of category then special handling
         - If categorical columns have semantic meaning then something like Word2Vec.
-2. RL Based Data Adaptive Model Stacking for faster inference and competitive accuracy.
+        
+2. Data Adaptive Model Stacking for faster inference and competitive accuracy.
+    - What we want to do
+        - Use Existing SOTA Models (single models, not ensembles) 
+        - Ensemble then in a new way
+        - Beat each model's individual acc
+        - Beat Voter/Averaging/Stacking Ensemble of them
+        - Achieve faster inference speed than any other Ensemble method.
+    - We will need RL to optimise for prediction time?
+    - DCN: Data Characterization Network, 
+        - Find characteristics of data that make it hard to classify
+        - Find characteristics of data which make it better suited to a particular network and not others.
+        - This would need the classifier to not be overfit to training data. As a result I can't use the test set to evaluate my initial classifiers. Use a 10-fold CV on training set.
+        - Can we use Disentangled AutoEncoders here?
+        - The output of DCN should correlate with overall Model performance not with single predictions. So for example if DCN (1 variable output version) outputs 1 for a set of images then we can expect that prediction accuracy on those set of images is high, while if it outputs 0 we can expect prediction accuracy to be low on those set of images. DCN's output of 1 / 0 is not correlated with actual prediction results, only with accuracy here.
+        - Does training the DCN need to know which models we will use?
+        - DCN input can be image(not augmented?)+All Models Prediction for it, DCN output is a multiclass classification (or probability of correctness?) of which model is going to be more correct/accurate. This way DCN will learn which model works where.
+        - DCN is like stacking, we are finding which model works and when, if we use DCN output directly to combine models it should behave like stacking  
+    - ModelSeqSelector/Master
+        - Inputs: DCN,
+        - simplest variant can work on just multiplying DCN probability to reach a threshold which is our required accuracy threshold.
+            - Won't work: Imagine 3 networks with 98% accuracy each, perfectly correlated outputs. then combining them will give same 98%.
+        - It decides which sub-networks to execute, once a subnet is executed it takes the output of the subnet and then decides whether it needs to run another subnet or it can send the results.
+            - Can be implemented using an GRU/RNN which takes DCN + Current Model output + Time taken for Current Model, Outputs - Prediction, Whether Next Model is Needed to be run to reach our time and accuracy goal.  
+        - A different variant from above can be a Master which pre-decides which networks to run and how to combine their predictions
+              
 ![Description](RL_stacking_1.jpg)
 
 
