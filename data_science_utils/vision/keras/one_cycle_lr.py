@@ -15,7 +15,7 @@ class OneCycleLR(Callback):
                  steps,
                  max_lr,
                  end_percentage=0.1,
-                 scale_percentage=None,
+                 scale=100,
                  maximum_momentum=0.95,
                  minimum_momentum=0.85,
                  verbose=True):
@@ -50,12 +50,10 @@ class OneCycleLR(Callback):
         if end_percentage < 0. or end_percentage > 1.:
             raise ValueError("`end_percentage` must be between 0 and 1")
 
-        if scale_percentage is not None and (scale_percentage < 0. or scale_percentage > 1.):
-            raise ValueError("`scale_percentage` must be between 0 and 1")
 
         self.initial_lr = max_lr
         self.end_percentage = end_percentage
-        self.scale = float(scale_percentage) if scale_percentage is not None else float(end_percentage)
+        self.scale = scale
         self.max_momentum = maximum_momentum
         self.min_momentum = minimum_momentum
         self.verbose = verbose
@@ -95,19 +93,16 @@ class OneCycleLR(Callback):
         if self.clr_iterations > 2 * self.mid_cycle_id:
             current_percentage = (self.clr_iterations - 2 * self.mid_cycle_id)
             current_percentage /= float((self.num_iterations - 2 * self.mid_cycle_id))
-            new_lr = self.initial_lr * (1. + (current_percentage *
-                                              (1. - 100.) / 100.)) * self.scale
+            new_lr = self.initial_lr * (1. + (current_percentage * (1. - 100.) / 100.)) / self.scale
 
         elif self.clr_iterations > self.mid_cycle_id:
             current_percentage = 1. - (
                     self.clr_iterations - self.mid_cycle_id) / self.mid_cycle_id
-            new_lr = self.initial_lr * (1. + current_percentage *
-                                        (self.scale * 100 - 1.)) * self.scale
+            new_lr = self.initial_lr * (1. + current_percentage * (self.scale * 100 - 1.)) / self.scale
 
         else:
             current_percentage = self.clr_iterations / self.mid_cycle_id
-            new_lr = self.initial_lr * (1. + current_percentage *
-                                        (self.scale * 100 - 1.)) * self.scale
+            new_lr = self.initial_lr * (1. + current_percentage * (self.scale - 1.)) / self.scale
 
         if self.clr_iterations == self.num_iterations:
             self.clr_iterations = 0

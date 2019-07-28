@@ -16,7 +16,7 @@ For ideas to be viable it has to be computationally possible, and be programmabl
     - Lets say that our DNN has N parameters (weights), our error function is a function in the weight space. To determine if a snapshot is different we take it's Weight Wn and calculate cosine/euclid distances from all existing weights W1...n-1. If it is having significant difference above a threshold, then we take the snapshot.
     - A generalised process: Intelligent Snapshot selection to minimise overfitting and variance, and increase generalization. For example 1 process could be that the Validation error is lower than atleast half the existing snapshots and weight (Wn to W1..n-1 distance) distance should be above a threshold and predictions should be have less some threshold correlation.
     - https://medium.com/analytics-vidhya/snapshot-ensembles-leveraging-ensembling-in-neural-networks-a0d512cf2941
-3. Image Classification Techniques like GradCam and Cutout applied to Text Classification
+3. Image Classification Techniques like GradCam, Cutout and others applied to Text Classification
 
 ### RL
 1. RL based tuning of Classification/Regression Models
@@ -44,7 +44,9 @@ For ideas to be viable it has to be computationally possible, and be programmabl
         - The output of DCN should correlate with overall Model performance not with single predictions. So for example if DCN (1 variable output version) outputs 1 for a set of images then we can expect that prediction accuracy on those set of images is high, while if it outputs 0 we can expect prediction accuracy to be low on those set of images. DCN's output of 1 / 0 is not correlated with actual prediction results, only with accuracy here.
         - Does training the DCN need to know which models we will use?
         - DCN input can be image(not augmented?)+All Models Prediction for it, DCN output is a multiclass classification (or probability of correctness?) of which model is going to be more correct/accurate. This way DCN will learn which model works where.
-        - DCN is like stacking, we are finding which model works and when, if we use DCN output directly to combine models it should behave like stacking  
+        - DCN is like stacking, we are finding which model works and when, if we use DCN output directly to combine models it should behave like stacking
+        - DCN Tells things like - oh this image is really dark, low dynamic range, most of the image seems empty, so that `Master` can decide which network to use.
+        - DCN may also have a internal classification model which has a good top-N (N=3 for CIFAR10?) accuracy, this is useful to tell the `Master` that it might be one of these `N` classes but not sure which, `Master` please Select the best model to distinguish.  
     - ModelSeqSelector/Master
         - Inputs: DCN,
         - simplest variant can work on just multiplying DCN probability to reach a threshold which is our required accuracy threshold.
