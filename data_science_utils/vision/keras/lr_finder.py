@@ -103,6 +103,7 @@ class LRFinder:
 
         self.losses.append(loss)
         self.acc.append(acc)
+        self.one_minus_acc.append(1 - acc)
 
         # Check whether the loss got too large or NaN
         if batch > 16 and (math.isnan(loss) or loss > self.best_loss * 10):
@@ -190,10 +191,10 @@ class LRFinder:
         # Restore the original learning rate
         K.set_value(self.model.optimizer.lr, original_lr)
 
-    def plot_loss(self, n_skip_beginning=5, n_skip_end=5, sma=10):
+    def plot_loss(self, n_skip_beginning=5, n_skip_end=5, sma=20):
         self.__plot__(n_skip_beginning,n_skip_end,sma,use_acc=False)
 
-    def plot_one_minus_acc(self, n_skip_beginning=5, n_skip_end=5, sma=10):
+    def plot_one_minus_acc(self, n_skip_beginning=5, n_skip_end=5, sma=20):
         self.__plot__(n_skip_beginning,n_skip_end,sma,use_acc=True)
 
     def __plot__(self, n_skip_beginning=5, n_skip_end=5, sma=10, use_acc=False):
