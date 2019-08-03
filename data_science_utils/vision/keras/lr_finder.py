@@ -216,14 +216,14 @@ class LRFinder:
         lrs = [x for x, _ in best_lrs]
         positions = [x for _, x in best_lrs]
         # https://matplotlib.org/users/annotations_intro.html
-        for lr, pos in [best_lrs[-1]]:
-            ax.annotate('LR = %.3f, %s = %.2f' % (lr, y_label, losses[pos]), xy=(lr, losses[pos]),
-                        xytext=(lr + 0.2, losses[pos] + 0.1),
-                        arrowprops=dict(facecolor='black', shrink=0.03, width=1, frac=0.05),
-                        )
+        # for lr, pos in [best_lrs[-1]]:
+        #     ax.annotate('LR = %.3f, %s = %.2f' % (lr, y_label, losses[pos]), xy=(lr, losses[pos]),
+        #                 xytext=(lr + 0.2, losses[pos] + 0.1),
+        #                 arrowprops=dict(facecolor='black', shrink=0.03, width=1, frac=0.05),
+        #                 )
 
         title = "LR vs 1 - Acc Graph" if use_acc else "LR vs Loss Graph"
-        title = title + "\n" + "Best Candidate LR = %s" % lrs
+        # title = title + "\n" + "Best Candidate LR = %s" % lrs
         plt.title(title)
         plt.show()
 
