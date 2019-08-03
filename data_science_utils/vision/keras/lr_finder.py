@@ -227,8 +227,7 @@ class LRFinder:
         plt.title(title)
         plt.show()
 
-
-    def __get_best_lr_method1__(self, sma=10, n_skip_beginning=10, n_skip_end=5, use_acc=False):
+    def __get_best_lr_method1__(self, sma=20, n_skip_beginning=10, n_skip_end=5, use_acc=False):
         losses = self.losses if not use_acc else self.one_minus_acc
         derivatives = get_derivatives(losses, sma)
         losses = np.array(losses[n_skip_beginning:-n_skip_end])
@@ -248,8 +247,8 @@ class LRFinder:
         candidates = list(np.array(lrs)[best_idxs])
         return sorted(candidates), best_idxs
 
-    def get_best_lrs(self, sma=10, n_skip_beginning=10, n_skip_end=5, use_acc=False):
-        c1, i1 = self.__get_best_lr_method1__(sma, n_skip_beginning, n_skip_end)
+    def get_best_lrs(self, sma=20, n_skip_beginning=10, n_skip_end=5, use_acc=False):
+        c1, i1 = self.__get_best_lr_method1__(sma, n_skip_beginning, n_skip_end, use_acc)
         candidates = list(zip(c1, i1))
         candidates = sorted(candidates, key=lambda pair: pair[0])
         final_candidates = [candidates[0]]
