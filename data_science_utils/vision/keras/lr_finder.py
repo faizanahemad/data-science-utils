@@ -234,13 +234,9 @@ class LRFinder:
         derivatives = derivatives[n_skip_beginning:-n_skip_end]
         lrs = self.lrs[n_skip_beginning:-n_skip_end]
 
-        idxs = np.where(losses >= self.best_loss * 2)[0]
-        idxs = idxs[0]
-        derivatives = derivatives[:idxs + sma]
-        losses = losses[:idxs + sma]
-        lrs = lrs[:idxs + sma]
 
-        best_idxs = np.argpartition(derivatives[:idxs], -5)[-5:]
+
+        best_idxs = np.argpartition(derivatives, -5)[-5:]
         best_idxs = best_idxs - sma
         acceptable_loss_or_not = losses[best_idxs] <= self.best_loss * 4
         best_idxs = best_idxs[acceptable_loss_or_not]
