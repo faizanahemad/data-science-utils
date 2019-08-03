@@ -212,7 +212,7 @@ class LRFinder:
 
         plt.plot(self.lrs[n_skip_beginning:-n_skip_end], losses)
         plt.xscale('log')
-        best_lrs = self.get_best_lrs(sma)
+        best_lrs = self.get_best_lrs(sma,use_acc=use_acc)
         lrs = [x for x, _ in best_lrs]
         positions = [x for _, x in best_lrs]
         # https://matplotlib.org/users/annotations_intro.html
