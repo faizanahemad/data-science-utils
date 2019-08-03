@@ -17,6 +17,16 @@ For ideas to be viable it has to be computationally possible, and be programmabl
     - A generalised process: Intelligent Snapshot selection to minimise overfitting and variance, and increase generalization. For example 1 process could be that the Validation error is lower than atleast half the existing snapshots and weight (Wn to W1..n-1 distance) distance should be above a threshold and predictions should be have less some threshold correlation.
     - https://medium.com/analytics-vidhya/snapshot-ensembles-leveraging-ensembling-in-neural-networks-a0d512cf2941
 3. Image Classification Techniques like GradCam, Cutout and others applied to Text Classification
+4. How good is your Loss minima? Or How generalised is your model? / Model Compression Techniques.
+    - We do Random perturbations of weights. If some weights with perturbations do not change out-come then they are good weights.
+    - Alternatively it can be said that those model's are useless. So Can we compress the model?
+5. RL adversarial examples, like if in a mario like game a ladder that moves horizontally suddenly starts moving vertically.
+    - Time dependence / Length of observation needed to solve a RL problem. Maybe the agent needs to wait-observe-then-act based on very old past observation?
+    - RL + GAN, can we have games/environment generators?
+    
+6. It's been clear for quite a while now that neural networks have trouble understanding the physical nature of objects. They don't seem to care very much when objects in an image don't 'hold together' in a physical sense, whereas humans immediately see that something is wrong.
+    - I wonder how much of this discrepancy can be chalked up to humans having binocular vision? Or parallax generally? In general, we learn about physical objects by looking at real objects from multiple angles (either with our two eyes, or by rotating the object and/or ourselves around the object). This lets us get an idea in our heads of the 3D physical shapes of things and how they react to lighting in 3D space, and our reaction to 2D photographs is heavily informed by this background experience. On the other hand, I gather that pretty much all image-classification NN training uses separate images with no parallax and no 3D data to speak of, because that's what the big datasets tend to consist of; the NNs never get that background experience with parallax that we have. Maybe that's why they tend to ignore the 3D physicality of things and focus on texture-matching and such instead.
+    
 
 ### RL
 1. RL based tuning of Classification/Regression Models

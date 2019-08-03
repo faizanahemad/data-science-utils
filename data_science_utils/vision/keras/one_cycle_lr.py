@@ -98,7 +98,7 @@ class OneCycleLR(Callback):
         elif self.clr_iterations > self.mid_cycle_id:
             current_percentage = 1. - (
                     self.clr_iterations - self.mid_cycle_id) / self.mid_cycle_id
-            new_lr = self.initial_lr * (1. + current_percentage * (self.scale * 100 - 1.)) / self.scale
+            new_lr = self.initial_lr * (1. + current_percentage * (self.scale - 1.)) / self.scale
 
         else:
             current_percentage = self.clr_iterations / self.mid_cycle_id

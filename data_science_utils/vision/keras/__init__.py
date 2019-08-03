@@ -265,7 +265,8 @@ def plot_model_history(model_history, clip_beginning=0):
     axs[1].legend(['train', 'val'], loc='best')
     plt.show()
 
-def show_examples(X,y,classes):
+
+def show_examples(X, y_ohe, classes):
     rows = int(np.ceil(len(X)/5))
     if X.shape[1] > 64:
         multiplier = 2
@@ -282,7 +283,7 @@ def show_examples(X,y,classes):
         if len(img.shape)==3 and img.shape[2]==1:
             img = img.reshape((img.shape[0],img.shape[1]))
         ax.imshow(img,cmap=cmap)
-        ax.set_title(classes[np.argmax(y[idx])])
+        ax.set_title(classes[np.argmax(y_ohe[idx])])
     plt.show()
 
 

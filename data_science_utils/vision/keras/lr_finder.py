@@ -56,6 +56,14 @@ def moving_average(x, w):
     df = pd.DataFrame({"x": x})
     return df.rolling(w, win_type=None, min_periods=1, center=True).mean()['x'].values
 
+def get_derivatives(vals, sma=10):
+    assert sma >= 1
+    derivatives = [0] * sma
+    losses = moving_average(vals, 5)
+    for i in range(sma, len(vals)):
+        derivatives.append((losses[i] - losses[i - sma]) / sma)
+    return derivatives
+
 
 from matplotlib import pyplot as plt
 import math
@@ -74,8 +82,12 @@ class LRFinder:
     def __init__(self, model, num_validation_batches=10):
         self.model = model
         self.losses = []
+        self.acc = []
         self.lrs = []
         self.best_loss = 1e9
+        self.best_acc = 0
+        self.one_minus_acc = []
+        self.one_minus_acc_best = []
         self.num_validation_batches = num_validation_batches
         self.validation_set = None
         self.validation_generator = None
@@ -102,23 +114,29 @@ class LRFinder:
 
             values = self.model.evaluate(x, y, batch_size=self.batch_size, verbose=False)
             loss = values[0]
+            acc = values[1]
         elif self.validation_generator is not None:
             values = self.model.evaluate_generator(self.validation_generator, steps=self.num_validation_batches, )
             # print(values[0],logs['loss'])
             loss = values[0]
+            acc = values[1]
         else:
             loss = logs['loss']
+            acc = logs['acc']
 
         self.losses.append(loss)
+        self.acc.append(acc)
 
         # Check whether the loss got too large or NaN
-        if batch > 10 and (math.isnan(loss) or loss > self.best_loss * 8):
+        if batch > 16 and (math.isnan(loss) or loss > self.best_loss * 10):
             self.model.stop_training = True
             print("Stop Training at %s, loss = %.3f" % (batch, loss))
             return
 
         if loss < self.best_loss:
             self.best_loss = loss
+        if acc > self.best_acc:
+            self.best_acc = acc
 
         # Increase the learning rate for the next batch
         lr *= self.lr_mult
@@ -196,18 +214,20 @@ class LRFinder:
         K.set_value(self.model.optimizer.lr, original_lr)
 
     def plot_loss(self, n_skip_beginning=5, n_skip_end=5, sma=10):
-        """
-        Plots the loss.
-        Parameters:
-            n_skip_beginning - number of batches to skip on the left.
-            n_skip_end - number of batches to skip on the right.
-        """
+        self.__plot__(n_skip_beginning,n_skip_end,sma,use_acc=False)
+
+    def plot_one_minus_acc(self, n_skip_beginning=5, n_skip_end=5, sma=10):
+        self.__plot__(n_skip_beginning,n_skip_end,sma,use_acc=True)
+
+    def __plot__(self, n_skip_beginning=5, n_skip_end=5, sma=10, use_acc=False):
+
         fig = plt.figure(figsize=(12, 6))
         ax = fig.add_subplot(111)
-        plt.ylabel("loss")
+        y_label = "1 - Acc" if use_acc else "loss"
+        plt.ylabel(y_label)
         plt.xlabel("learning rate (log scale)")
 
-        losses = self.losses
+        losses = self.losses if not use_acc else self.one_minus_acc
         losses = moving_average(losses, sma)
 
         losses = losses[n_skip_beginning:-n_skip_end]
@@ -219,28 +239,21 @@ class LRFinder:
         positions = [x for _, x in best_lrs]
         # https://matplotlib.org/users/annotations_intro.html
         for lr, pos in [best_lrs[-1]]:
-            ax.annotate('LR = %.3f, Loss = %.3f' % (lr, losses[pos]), xy=(lr, losses[pos]),
+            ax.annotate('LR = %.3f, %s = %.2f' % (lr, y_label, losses[pos]), xy=(lr, losses[pos]),
                         xytext=(lr + 0.2, losses[pos] + 0.1),
                         arrowprops=dict(facecolor='black', shrink=0.03, width=1, frac=0.05),
                         )
 
-        title = "LR-Loss Graph"
+        title = "LR vs 1 - Acc Graph" if use_acc else "LR vs Loss Graph"
         title = title + "\n" + "Best Candidate LR = %s" % lrs
-        title = title + "\n" + "These Candidate LRs denote the positions of minima/troughs in LR-Loss graph"
         plt.title(title)
         plt.show()
 
-    def get_derivatives(self, sma=10):
-        assert sma >= 1
-        derivatives = [0] * sma
-        losses = moving_average(self.losses, 5)
-        for i in range(sma, len(self.lrs)):
-            derivatives.append((losses[i] - losses[i - sma]) / sma)
-        return derivatives
 
-    def __get_best_lr_method1__(self, sma, n_skip_beginning=10, n_skip_end=5):
-        derivatives = self.get_derivatives(sma)
-        losses = np.array(self.losses[n_skip_beginning:-n_skip_end])
+    def __get_best_lr_method1__(self, sma=10, n_skip_beginning=10, n_skip_end=5, use_acc=False):
+        losses = self.losses if not use_acc else self.one_minus_acc
+        derivatives = get_derivatives(losses, sma)
+        losses = np.array(losses[n_skip_beginning:-n_skip_end])
         derivatives = derivatives[n_skip_beginning:-n_skip_end]
         lrs = self.lrs[n_skip_beginning:-n_skip_end]
 
@@ -261,7 +274,7 @@ class LRFinder:
         candidates = list(np.array(lrs)[best_idxs])
         return sorted(candidates), best_idxs
 
-    def get_best_lrs(self, sma, n_skip_beginning=10, n_skip_end=5):
+    def get_best_lrs(self, sma=10, n_skip_beginning=10, n_skip_end=5, use_acc=False):
         c1, i1 = self.__get_best_lr_method1__(sma, n_skip_beginning, n_skip_end)
         candidates = list(zip(c1, i1))
         candidates = sorted(candidates, key=lambda pair: pair[0])
