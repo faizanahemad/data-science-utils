@@ -98,31 +98,8 @@ class LRFinder:
         self.lrs.append(lr)
 
         # Log the loss
-
-        if self.validation_set is not None:
-            X, Y = self.validation_set[0], self.validation_set[1]
-
-            # use 10 random batches from test set for fast approximate of loss
-            num_samples = self.batch_size * self.num_validation_batches
-
-            if num_samples > X.shape[0]:
-                num_samples = X.shape[0]
-
-            idx = np.random.choice(X.shape[0], num_samples, replace=False)
-            x = X[idx]
-            y = Y[idx]
-
-            values = self.model.evaluate(x, y, batch_size=self.batch_size, verbose=False)
-            loss = values[0]
-            acc = values[1]
-        elif self.validation_generator is not None:
-            values = self.model.evaluate_generator(self.validation_generator, steps=self.num_validation_batches, )
-            # print(values[0],logs['loss'])
-            loss = values[0]
-            acc = values[1]
-        else:
-            loss = logs['loss']
-            acc = logs['acc']
+        loss = logs['loss']
+        acc = logs['acc']
 
         self.losses.append(loss)
         self.acc.append(acc)
