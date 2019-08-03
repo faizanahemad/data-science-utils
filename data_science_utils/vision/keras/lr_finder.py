@@ -238,10 +238,10 @@ class LRFinder:
 
         best_idxs = np.argpartition(derivatives, -5)[-5:]
         best_idxs = best_idxs - sma
-        acceptable_loss_or_not = losses[best_idxs] <= self.best_loss * 4
+        acceptable_loss_or_not = losses[best_idxs] <= self.best_loss * 1.5
         best_idxs = best_idxs[acceptable_loss_or_not]
 
-        acceptable_loss_or_not = losses[best_idxs + sma] > (losses[best_idxs] * 1.05)
+        acceptable_loss_or_not = losses[best_idxs + sma] > (losses[best_idxs] * 1.0)
         best_idxs = best_idxs[acceptable_loss_or_not]
 
         candidates = list(np.array(lrs)[best_idxs])
