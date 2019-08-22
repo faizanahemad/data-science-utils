@@ -18,6 +18,7 @@ from .gradcam import *
 from .layer_utils import *
 from .regularizers import *
 from keras.datasets import cifar10
+import gc
 
 from keras import backend as K
 import time

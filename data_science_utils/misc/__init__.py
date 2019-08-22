@@ -94,7 +94,7 @@ def get_week_start_date(df,date_col,format=None):
 
 def save_list_per_line(lines, filename):
     # convert lines to a single blob of text
-    lines = list(map(str,lines))
+    lines = list(map(lambda x:x.strip(),map(str,lines)))
     data = '\n'.join(lines)
     with open(filename, 'w') as file:
         file.write(data)
