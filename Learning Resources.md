@@ -441,28 +441,28 @@ As usual It would be great if you comment on other good resources you have come 
 
 
 
- <iframe src="https://medium.com/media/eac3e73811cf29948ecbfaaddbe30edd" frameborder=0></iframe>
+https://medium.com/media/eac3e73811cf29948ecbfaaddbe30edd
 [**Mathematics for Data Science**
 *Overwhelmed by looking for resources to understand the math of data science and machine learning? We got you covered.*towardsdatascience.com](https://towardsdatascience.com/mathematics-for-data-science-e53939ee8306)
 
- <iframe src="https://medium.com/media/ee7cf26920c9b4683b958d6b9149788f" frameborder=0></iframe>
+https://medium.com/media/ee7cf26920c9b4683b958d6b9149788f
 
- <iframe src="https://medium.com/media/90b522ea2499753dd5b57350e25c9f32" frameborder=0></iframe>
+https://medium.com/media/90b522ea2499753dd5b57350e25c9f32
 [**Mathematics | MIT OpenCourseWare | Free Online Course Materials**
 *Unlocking knowledge, empowering minds. Free course notes, videos, instructor insights and more from MIT.*ocw.mit.edu](https://ocw.mit.edu/courses/mathematics/)
 
- <iframe src="https://medium.com/media/eaf67be489395aa15d11ee8512849558" frameborder=0></iframe>
+https://medium.com/media/eaf67be489395aa15d11ee8512849558
 
- <iframe src="https://medium.com/media/842fe24556aceec7d8884cb75d521dce" frameborder=0></iframe>
+https://medium.com/media/842fe24556aceec7d8884cb75d521dce
 
- <iframe src="https://medium.com/media/a7dc9b1dd1de115fdc2a8c8e9714a61b" frameborder=0></iframe>
+https://medium.com/media/a7dc9b1dd1de115fdc2a8c8e9714a61b
 [**ML**www.instagram.com](https://www.instagram.com/machinelearning/)
 
- <iframe src="https://medium.com/media/d2371b12028924138e1638fa5257fde4" frameborder=0></iframe>
+https://medium.com/media/d2371b12028924138e1638fa5257fde4
+https://medium.com/media/cdb0fc9e0b8cf9c7fe26df92952b2f47
+https://medium.com/media/72bae6febf210af450ec451dab101bcb
 
- <iframe src="https://medium.com/media/cdb0fc9e0b8cf9c7fe26df92952b2f47" frameborder=0></iframe>
 
- <iframe src="https://medium.com/media/72bae6febf210af450ec451dab101bcb" frameborder=0></iframe>
 [**An Opinionated Guide to ML Research**
 *← back to blog index I originally wrote this guide in back in December 2017 for the OpenAI Fellows program In this…*joschu.net](http://joschu.net/blog/opinionated-guide-ml-research.html)
 
@@ -472,13 +472,11 @@ As usual It would be great if you comment on other good resources you have come 
 [**ShuaiW/data-science-question-answer**
 *The purpose of this repo is two fold: To help you (data science practitioners) prepare for data science related…*github.com](https://github.com/ShuaiW/data-science-question-answer)
 
- <iframe src="https://medium.com/media/a8957e2ac945cd67f417f0d0c85615a1" frameborder=0></iframe>
+https://medium.com/media/a8957e2ac945cd67f417f0d0c85615a1
+https://medium.com/media/524287077aecdb0b54bc2f4dcc4f331e
+https://medium.com/media/0de3124f4a3ea27afe7ae22f1ae7df11
+https://medium.com/media/2be356a1164b3fab5cd28d14a396c67c
 
- <iframe src="https://medium.com/media/524287077aecdb0b54bc2f4dcc4f331e" frameborder=0></iframe>
-
- <iframe src="https://medium.com/media/0de3124f4a3ea27afe7ae22f1ae7df11" frameborder=0></iframe>
-
- <iframe src="https://medium.com/media/2be356a1164b3fab5cd28d14a396c67c" frameborder=0></iframe>
 
 
 
