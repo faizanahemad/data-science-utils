@@ -315,7 +315,7 @@ At a minimum keep checking reddit and Stack Exchange sites. [StatQuest by Josh S
 
 ### Good Resources
 
-* Checkout [r/ML](https://www.reddit.com/r/MachineLearning/) , [r/learnML](https://www.reddit.com/r/learnmachinelearning/), [r/DeepLearning](https://www.reddit.com/r/deeplearning/), [r/DS](https://www.reddit.com/r/datascience/), [r/RL](https://www.reddit.com/r/reinforcementlearning/), [r/AskStats](https://www.reddit.com/r/AskStatistics/)
+* Checkout [r/ML](https://www.reddit.com/r/MachineLearning/) , [r/learnML](https://www.reddit.com/r/learnmachinelearning/), [r/DeepLearning](https://www.reddit.com/r/deeplearning/), [r/DS](https://www.reddit.com/r/datascience/), [r/RL](https://www.reddit.com/r/reinforcementlearning/), [r/AskStats](https://www.reddit.com/r/AskStatistics/), [r/learnMaths](https://www.reddit.com/r/learnmath)
 
 * [VideoLectures.net](http://videolectures.net/Top/Computer_Science/Machine_Learning/#l=en), [MLSS 2014](https://www.youtube.com/playlist?list=PLZSO_6-bSqHQCIYxE3ycGLXHMjK3XV7Iz), [2019](https://sites.google.com/view/mlss-2019/lectures-and-tutorials?authuser=0)
 
@@ -428,26 +428,17 @@ Follow a 5 pass strategy to read a paper.
 As usual It would be great if you comment on other good resources you have come across and post in comments.
 
 ## More References
-[**How to Learn Machine Learning, The Self-Starter Way**
-*If you've chosen to seriously study machine learning, then congratulations! You have a fun and rewarding journey ahead…*elitedatascience.com](https://elitedatascience.com/learn-machine-learning)
-[**Data Science**
-*Resources and Tips*wrdrd.github.io](https://wrdrd.github.io/docs/consulting/data-science#mathematical-notation)
-[**nbro/understanding-math**
-*A Reference to lots of resources talking about how to understand mathematics, mathematical language and mathematical notation. …*github.com](https://github.com/nbro/understanding-math)
-[**List of logic symbols - Wikipedia**
-*In logic, a set of symbols is commonly used to express logical representation. The following table lists many common…*en.wikipedia.org](https://en.wikipedia.org/wiki/List_of_logic_symbols)
-[**List of mathematical symbols - Wikipedia**
-*This list is organized by symbol type and is intended to facilitate finding an unfamiliar symbol by its visual…*en.wikipedia.org](https://en.wikipedia.org/wiki/List_of_mathematical_symbols)
 
+- [**How to Learn Machine Learning, The Self-Starter Way**](https://elitedatascience.com/learn-machine-learning)
+- [**Data Science** Resources](https://wrdrd.github.io/docs/consulting/data-science#mathematical-notation)
+- [nbro/understanding-math](https://github.com/nbro/understanding-math)
+- [**List of logic symbols - Wikipedia**](https://en.wikipedia.org/wiki/List_of_logic_symbols)
+- [**List of mathematical symbols - Wikipedia**](https://en.wikipedia.org/wiki/List_of_mathematical_symbols)
+- [**Mathematics for Data Science**](https://towardsdatascience.com/mathematics-for-data-science-e53939ee8306)
+- [how_do_you_read_mathheavy_machine_learning](https://www.reddit.com/r/MachineLearning/comments/6rj9r4/d_how_do_you_read_mathheavy_machine_learning/?utm_content=title&utm_medium=post_embed&utm_name=dd9a87b5c5f744b0bb7a7cd2fb00ab21&utm_source=embedly&utm_term=6rj9r4)
+- [math_undergrad_how_do_you_efficiently_study](https://www.reddit.com/r/learnmath/comments/7k72lb/math_undergrad_how_do_you_efficiently_study/?utm_content=title&utm_medium=post_embed&utm_name=5cc89e87bbe24334ae772f50072e0c48&utm_source=embedly&utm_term=7k72lb)
+- [Confession as an AI researcher; seeking advice](https://www.reddit.com/r/MachineLearning/comments/73n9pm/d_confession_as_an_ai_researcher_seeking_advice/?utm_content=title&utm_medium=post_embed&utm_name=fa61a1cd9ee2432fa8241f45e54ab51f&utm_source=embedly&utm_term=73n9pm)
 
-
-https://medium.com/media/eac3e73811cf29948ecbfaaddbe30edd
-[**Mathematics for Data Science**
-*Overwhelmed by looking for resources to understand the math of data science and machine learning? We got you covered.*towardsdatascience.com](https://towardsdatascience.com/mathematics-for-data-science-e53939ee8306)
-
-https://medium.com/media/ee7cf26920c9b4683b958d6b9149788f
-
-https://medium.com/media/90b522ea2499753dd5b57350e25c9f32
 [**Mathematics | MIT OpenCourseWare | Free Online Course Materials**
 *Unlocking knowledge, empowering minds. Free course notes, videos, instructor insights and more from MIT.*ocw.mit.edu](https://ocw.mit.edu/courses/mathematics/)
 
