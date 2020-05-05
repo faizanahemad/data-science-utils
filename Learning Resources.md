@@ -435,38 +435,24 @@ As usual It would be great if you comment on other good resources you have come 
 - [**List of logic symbols - Wikipedia**](https://en.wikipedia.org/wiki/List_of_logic_symbols)
 - [**List of mathematical symbols - Wikipedia**](https://en.wikipedia.org/wiki/List_of_mathematical_symbols)
 - [**Mathematics for Data Science**](https://towardsdatascience.com/mathematics-for-data-science-e53939ee8306)
-- [how_do_you_read_mathheavy_machine_learning](https://www.reddit.com/r/MachineLearning/comments/6rj9r4/d_how_do_you_read_mathheavy_machine_learning/?utm_content=title&utm_medium=post_embed&utm_name=dd9a87b5c5f744b0bb7a7cd2fb00ab21&utm_source=embedly&utm_term=6rj9r4)
-- [math_undergrad_how_do_you_efficiently_study](https://www.reddit.com/r/learnmath/comments/7k72lb/math_undergrad_how_do_you_efficiently_study/?utm_content=title&utm_medium=post_embed&utm_name=5cc89e87bbe24334ae772f50072e0c48&utm_source=embedly&utm_term=7k72lb)
-- [Confession as an AI researcher; seeking advice](https://www.reddit.com/r/MachineLearning/comments/73n9pm/d_confession_as_an_ai_researcher_seeking_advice/?utm_content=title&utm_medium=post_embed&utm_name=fa61a1cd9ee2432fa8241f45e54ab51f&utm_source=embedly&utm_term=73n9pm)
+- [how_do_you_read_mathheavy_machine_learning](https://www.reddit.com/r/MachineLearning/comments/6rj9r4/d_how_do_you_read_mathheavy_machine_learning/)
+- [math_undergrad_how_do_you_efficiently_study](https://www.reddit.com/r/learnmath/comments/7k72lb/math_undergrad_how_do_you_efficiently_study/)
+- [Confession as an AI researcher; seeking advice](https://www.reddit.com/r/MachineLearning/comments/73n9pm/d_confession_as_an_ai_researcher_seeking_advice/)
+- [How Do You Read Large Numbers Of Academic Papers Without Going Crazy?](https://www.reddit.com/r/MachineLearning/comments/de5wam/d_how_do_you_read_large_numbers_of_academic/)
+- [How to deal with my research not being acknowledged ?](https://www.reddit.com/r/MachineLearning/comments/dh0aak/d_how_to_deal_with_my_research_not_being/)
+- [a_clear_roadmap_for_mldl](https://www.reddit.com/r/learnmachinelearning/comments/cxrpjz/a_clear_roadmap_for_mldl/)
+- [instagram.com/machinelearning](https://www.instagram.com/machinelearning/)
+- [Advice and Suggestions needed on my Roadmap to Machine Learning/AI Pro](https://www.reddit.com/r/learnmachinelearning/comments/90ohlm/advice_and_suggestions_needed_on_my_roadmap_to/)
+- [What math classes are relevant for machine learning?](https://www.reddit.com/r/MachineLearning/comments/f4i3v6/discussion_what_math_classes_are_relevant_for/)
+- [What are some habits of highly effective ML researchers?](https://www.reddit.com/r/MachineLearning/comments/f4oxuj/discussion_what_are_some_habits_of_highly/)
+- [**An Opinionated Guide to ML Research**](http://joschu.net/blog/opinionated-guide-ml-research.html)
+- [A Compilation of Useful, Free, Online Math Resources](https://www.reddit.com/r/math/comments/2mkmk0/a_compilation_of_useful_free_online_math_resources/)
+- [**llSourcell/learn_math_fast**](https://github.com/llSourcell/learn_math_fast)
+- [**ShuaiW/data-science-question-answer**](https://github.com/ShuaiW/data-science-question-answer)
 
-[**Mathematics | MIT OpenCourseWare | Free Online Course Materials**
-*Unlocking knowledge, empowering minds. Free course notes, videos, instructor insights and more from MIT.*ocw.mit.edu](https://ocw.mit.edu/courses/mathematics/)
-
-https://medium.com/media/eaf67be489395aa15d11ee8512849558
-
-https://medium.com/media/842fe24556aceec7d8884cb75d521dce
-
-https://medium.com/media/a7dc9b1dd1de115fdc2a8c8e9714a61b
-[**ML**www.instagram.com](https://www.instagram.com/machinelearning/)
-
-https://medium.com/media/d2371b12028924138e1638fa5257fde4
-https://medium.com/media/cdb0fc9e0b8cf9c7fe26df92952b2f47
-https://medium.com/media/72bae6febf210af450ec451dab101bcb
-
-
-[**An Opinionated Guide to ML Research**
-*← back to blog index I originally wrote this guide in back in December 2017 for the OpenAI Fellows program In this…*joschu.net](http://joschu.net/blog/opinionated-guide-ml-research.html)
-
- <iframe src="https://medium.com/media/2dc84860b553de007a96799251c21d6d" frameborder=0></iframe>
-[**llSourcell/learn_math_fast**
-*A curated list of awesome mathematics resources. This is resource mentioned in this video on Youtube by Siraj Raval…*github.com](https://github.com/llSourcell/learn_math_fast)
-[**ShuaiW/data-science-question-answer**
-*The purpose of this repo is two fold: To help you (data science practitioners) prepare for data science related…*github.com](https://github.com/ShuaiW/data-science-question-answer)
-
-https://medium.com/media/a8957e2ac945cd67f417f0d0c85615a1
-https://medium.com/media/524287077aecdb0b54bc2f4dcc4f331e
-https://medium.com/media/0de3124f4a3ea27afe7ae22f1ae7df11
-https://medium.com/media/2be356a1164b3fab5cd28d14a396c67c
+- [MIT HowToReadAScientificPaper](https://be.mit.edu/sites/default/files/documents/HowToReadAScientificPaper.pdf)
+- [Tips For First Paper?](https://www.reddit.com/r/MachineLearning/comments/g7nemh/d_tips_for_first_paper/)
+- [Advice for Beginners in ML and Data Science](https://www.reddit.com/r/learnmachinelearning/comments/gc5z6b/advice_for_beginners_in_ml_and_data_science/)
 
 
 
