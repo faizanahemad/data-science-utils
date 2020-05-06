@@ -122,6 +122,7 @@ While I have listed the courses here, it is best to visit them and see their syl
 ### Field Specific Stuff: NLP
 
 * [Stanford CS224N: Natural Language Processing with Deep Learning | Winter 2019](http://web.stanford.edu/class/cs224n/) ([Vids](https://www.youtube.com/playlist?list=PLoROMvodv4rOhcuXMZkNm7j3fVwBBY42z))
+* [Standford CS224U](https://web.stanford.edu/class/cs224u/)
 
 ### Field Specific Stuff: Reinforcement Learning
 
@@ -458,6 +459,7 @@ As usual It would be great if you comment on other good resources you have come 
 - [The Big Bad NLP Database](https://datasets.quantumstat.com/)
 - [Some Tutorials](https://github.com/madewithml/lessons)
 - [Some Good Papers](https://github.com/GokuMohandas/casual-digressions)
+- [https://nlpprogress.com/](https://nlpprogress.com/)
 
 
 
