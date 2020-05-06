@@ -325,7 +325,8 @@ At a minimum keep checking reddit and Stack Exchange sites. [StatQuest by Josh S
 
 * [http://www.wildml.com/](http://www.wildml.com/), [https://www.fast.ai/tag/technical/](https://www.fast.ai/tag/technical/), [https://www.dlology.com/](https://www.dlology.com/), [https://blog.otoro.net/](https://blog.otoro.net/), [https://shaoanlu.wordpress.com/](https://shaoanlu.wordpress.com/), [http://www.offconvex.org/](http://www.offconvex.org/), [https://setosa.io/ev/](https://setosa.io/ev/)
 
-* [https://discuss.analyticsvidhya.com/top](https://discuss.analyticsvidhya.com/top), [AV DL](https://www.analyticsvidhya.com/blog/category/deep-learning/), [https://www.topbots.com/](https://www.topbots.com/)
+* [https://discuss.analyticsvidhya.com/top](https://discuss.analyticsvidhya.com/top), [AV DL](https://www.analyticsvidhya.com/blog/category/deep-learning/), [https://www.topbots.com/](https://www.topbots.com/),
+[MadeWithML](https://madewithml.com/)
 
 * [Awesome Deep Learning](https://github.com/ChristosChristofidis/awesome-deep-learning), [Awesome ML](https://github.com/RatulGhosh/awesome-machine-learning), [Awesome RL](https://github.com/aikorea/awesome-rl), [TopDL](https://github.com/aymericdamien/TopDeepLearning), [Trending-Deep-Learning](https://github.com/mbadry1/Trending-Deep-Learning), [More Github Repos with cool learning](https://towardsdatascience.com/top-10-popular-github-repositories-to-learn-about-data-science-4acc7b99c44) ([Statistical Learning](https://github.com/topics/statistical-learning)), [Awesome AI](https://github.com/owainlewis/awesome-artificial-intelligence), [More papers](https://github.com/tirthajyoti/Papers-Literature-ML-DL-RL-AI), [Github ML list](https://github.com/collections/machine-learning), [ML resource list](https://github.com/ujjwalkarn/Machine-Learning-Tutorials), [Data science blogs](https://github.com/rushter/data-science-blogs)
 
