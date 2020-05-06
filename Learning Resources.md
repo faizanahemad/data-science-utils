@@ -453,6 +453,8 @@ As usual It would be great if you comment on other good resources you have come 
 - [MIT HowToReadAScientificPaper](https://be.mit.edu/sites/default/files/documents/HowToReadAScientificPaper.pdf)
 - [Tips For First Paper?](https://www.reddit.com/r/MachineLearning/comments/g7nemh/d_tips_for_first_paper/)
 - [Advice for Beginners in ML and Data Science](https://www.reddit.com/r/learnmachinelearning/comments/gc5z6b/advice_for_beginners_in_ml_and_data_science/)
+- [Speech and Language Processing (3rd ed. draft)](https://web.stanford.edu/~jurafsky/slp3/)
+- [The Big Bad NLP Database](https://datasets.quantumstat.com/)
 
 
 
