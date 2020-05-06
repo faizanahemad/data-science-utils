@@ -123,6 +123,8 @@ While I have listed the courses here, it is best to visit them and see their syl
 
 * [Stanford CS224N: Natural Language Processing with Deep Learning | Winter 2019](http://web.stanford.edu/class/cs224n/) ([Vids](https://www.youtube.com/playlist?list=PLoROMvodv4rOhcuXMZkNm7j3fVwBBY42z))
 * [Standford CS224U](https://web.stanford.edu/class/cs224u/)
+* [Natural Language Processing | University of Michigan](https://www.youtube.com/playlist?list=PLLssT5z_DsK8BdawOVCCaTCO99Ya58ryR), 
+* [Coursera Natural Language Processing | Dan Jurafsky, Christopher Manning](https://www.youtube.com/playlist?list=PLQiyVNMpDLKnZYBTUOlSI9mi9wAErFtFm) [Slides](https://web.stanford.edu/~jurafsky/NLPCourseraSlides.html)
 
 ### Field Specific Stuff: Reinforcement Learning
 
@@ -200,6 +202,10 @@ In general follow MIT OCW’s resources and search google/youtube for good expla
 
 * [Computational Linear Algerbra](https://www.youtube.com/playlist?list=PLtmWHNX-gukIc92m1K0P6bIOnZb-mg0hY) by Fast.ai
 
+* [Applications of Linear Algebra Part 2](https://www.edx.org/course/applications-of-linear-algebra-part-2)
+
+* [Coding the Matrix - Linear Algebra through Computer Science Applications](https://www.youtube.com/playlist?list=PLEhMEyM9jSinRHXJgRCOLZUiu9847V2g0), [Book](https://codingthematrix.com/)
+
 ### Advanced: Differential Equations
 
 * [18.03x Differential Equations](https://www.edx.org/xseries/mitx-18.03x-differential-equations)
@@ -239,6 +245,8 @@ In general follow MIT OCW’s resources and search google/youtube for good expla
 * [Computer Age Statistical Inference](https://web.stanford.edu/~hastie/CASI/)
 
 * [All of Nonparametric Statistics](http://www.stat.cmu.edu/~larry/all-of-nonpar/index.html)
+
+* [BioStatistics 1](https://www.coursera.org/learn/biostatistics) and [2](https://www.coursera.org/learn/biostatistics-2), [clinical-trials](https://www.coursera.org/learn/clinical-trials)
 
 ### Advanced: Calculus, Multivariate Calculus and Matrix Calculus
 
