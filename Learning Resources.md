@@ -437,7 +437,7 @@ Follow a 5 pass strategy to read a paper.
 
 As usual It would be great if you comment on other good resources you have come across and post in comments.
 
-## More References
+## Generic References
 
 - [**How to Learn Machine Learning, The Self-Starter Way**](https://elitedatascience.com/learn-machine-learning)
 - [**Data Science** Resources](https://wrdrd.github.io/docs/consulting/data-science#mathematical-notation)
@@ -468,6 +468,51 @@ As usual It would be great if you comment on other good resources you have come 
 - [Some Tutorials](https://github.com/madewithml/lessons)
 - [Some Good Papers](https://github.com/GokuMohandas/casual-digressions)
 - [https://nlpprogress.com/](https://nlpprogress.com/)
+
+## Research Papers
+
+### Big Domain Lists
+- [Survey_of_Deep_Metric_Learning](https://github.com/kdhht2334/Survey_of_Deep_Metric_Learning)
+
+### Individual Papers by Domain
+
+
+
+## Python References
+
+### Code Examples for Learning
+- [Numpy-ML](https://github.com/ddbourgin/numpy-ml)
+
+### Libraries
+
+#### EDA and plotting
+- [pandas-profiling](https://github.com/pandas-profiling/pandas-profiling)
+- 
+
+#### Modelling
+
+#### NLP
+
+#### RL
+- [vitchyr/rlkit](https://github.com/vitchyr/rlkit)
+
+#### CV
+- [Keract Activation Heatmap](https://github.com/philipperemy/keract)
+
+#### Recommendation Systems
+
+#### Explainable AI
+- [Lime](https://github.com/marcotcr/lime)
+- [Keract Activation Heatmap](https://github.com/philipperemy/keract)
+
+#### Performance
+- [Ray](https://docs.ray.io/en/latest/)
+- [Dask](https://docs.dask.org/en/latest/)
+- [SnakeViz](https://jiffyclub.github.io/snakeviz/#snakeviz), [Vprof](https://github.com/nvdv/vprof), [PyInstrument](https://github.com/joerick/pyinstrument)
+
+
+### Recipes
+- [Vectorizing Conditions in Numpy & Pandas](https://www.youtube.com/watch?v=nxWginnBklU)
 
 
 
