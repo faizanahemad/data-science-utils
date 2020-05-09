@@ -49,6 +49,8 @@ In my suggestion having 2 parallel threads, 1 on ML and 1 on Maths is best. Stud
 
 * [AV DS path](https://www.analyticsvidhya.com/blog/2020/01/learning-path-data-scientist-machine-learning-2020/), [NLP path](https://www.analyticsvidhya.com/blog/2020/01/learning-path-nlp-2020/?utm_source=blog&utm_medium=learning-path-data-scientist-machine-learning-2020)
 
+* [DataSchool starter](https://www.dataschool.io/start/)
+
 ## Machine Learning resources
 
 While I have listed the courses here, it is best to visit them and see their syllabus, many have redundant content.
