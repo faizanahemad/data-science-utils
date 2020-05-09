@@ -401,7 +401,7 @@ When you are new to this field, ensure that you take up those papers which are c
 
 ### Finding Good papers
 
-* [List of Top publications by Google Scholar](https://scholar.google.es/citations?view_op=top_venues&hl=en&vq=eng_artificialintelligence)
+* [List of Top publications by Google Scholar](https://scholar.google.es/citations?view_op=top_venues&hl=en&vq=eng_artificialintelligence), [best_paper_awards](https://jeffhuang.com/best_paper_awards.html), [CS-Rankings of Confs and Institutes](http://csrankings.org/#/index?all)
 
 * [ICML | 2019](https://icml.cc/Conferences/2019/Schedule) ([Full ICML Open Review Thread](https://openreview.net/group?id=ICML.cc)), [ICLR 2019](https://openreview.net/group?id=ICLR.cc/2019/Conference) ([Full Open Review thread of ICLR](https://openreview.net/group?id=ICLR.cc)), [NeurIPS](https://papers.nips.cc/) ([Open Review new thread](https://openreview.net/group?id=NeurIPS.cc), [old](https://openreview.net/group?id=NIPS.cc))
 
@@ -418,6 +418,8 @@ When you are new to this field, ensure that you take up those papers which are c
 * [SOTA from papers with code](https://paperswithcode.com/sota), [Follow Papers with code site for good list of Papers](https://paperswithcode.com/)
 
 * Other Notable Conferences: UAI, AISTATS, ECML, ACML, ICDM, COLT, [check this for more](http://www.guide2research.com/topconf/)
+
+* [Wider CS Papers: papers-we-love](https://github.com/papers-we-love/papers-we-love)
 
 * [Use Google Scholar to find more papers in your area](https://scholar.google.com/), also search “Advances in Field X” or “Recent Breakthroughs in X”, “Review X”, “Overview of X”. For each subject/book or field you are working on go to it’s discussion on reddit and look for other forums as well. Forum discussions are very good place to learn more about a topic.
 
