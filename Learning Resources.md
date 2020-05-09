@@ -485,7 +485,8 @@ As usual It would be great if you comment on other good resources you have come 
 ### Individual Papers by Domain
 
 
-<hr/>
+<hr/><hr/>
+
 ## Python References
 
 ### Code Examples for Learning
@@ -534,7 +535,7 @@ As usual It would be great if you comment on other good resources you have come 
 ### Recipes
 - [Vectorizing Conditions in Numpy & Pandas](https://www.youtube.com/watch?v=nxWginnBklU)
 
-<hr/>
+<hr/><hr/>
 
 ## Real World ML concerns
 - https://towardsdatascience.com/20-questions-to-ask-prior-to-starting-data-analysis-6ec11d6a504b
