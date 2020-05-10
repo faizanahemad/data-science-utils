@@ -170,6 +170,8 @@ In general follow MIT OCW’s resources and search google/youtube for good expla
 
 * [SticiGui](https://www.stat.berkeley.edu/~stark/SticiGui/index.htm)
 
+* [onlinestatbook](http://onlinestatbook.com/2/index.html)
+
 ### Basic: Calculus
 
 * [18.01x Single Variable Calculus](https://www.edx.org/xseries/mitx-18.01x-single-variable-calculus)
