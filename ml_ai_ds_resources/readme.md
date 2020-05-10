@@ -1,3 +1,4 @@
+<!-- >>>>>> BEGIN GENERATED FILE (include): SOURCE ml_ai_ds_resources/readme_template.md -->
 
 ## Grasping Machine Learning with Mathematical Theory — Resources
 
@@ -9,34 +10,60 @@ This type of deep understanding of ML algorithms can be achieved by knowing the 
 
 Understanding some CS basics before starting ML is very useful. Learn Python programming too.
 
-### CS Basics
-
-* [https://towardsdatascience.com/beginners-learning-path-for-machine-learning-5a7fb90f751a](https://towardsdatascience.com/beginners-learning-path-for-machine-learning-5a7fb90f751a)
-
-* [https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-0001-introduction-to-computer-science-and-programming-in-python-fall-2016/index.htm](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-0001-introduction-to-computer-science-and-programming-in-python-fall-2016/index.htm)
-
-* [Course on Data Structures](https://www.coursera.org/specializations/data-structures-algorithms), [Algorithms Youtube Stanford](https://www.youtube.com/playlist?list=PLXFMmlk03Dt7Q0xr1PIAriY5623cKiH7V), [MIT 6.006 Intro to algorithms](https://www.youtube.com/playlist?list=PLUl4u3cNGP61Oq3tWYp6V_F-5jb5L2iHb), [MIT algorithms 2015](https://www.youtube.com/playlist?list=PLkToMFwOtNHiJtcBu0piSLKnLVGOF9vaV), [IO-efficient algos](https://www.coursera.org/learn/io-efficient-algorithms), [MIT Introduction to Computational Thinking and Data Science](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-0002-introduction-to-computational-thinking-and-data-science-fall-2016/), [Algorithms in Python Implementations](https://github.com/TheAlgorithms/Python)
-
-* [Some Knowledge of System design](https://github.com/donnemartin/system-design-primer) (not mandatory)
-
-* [Using Linux Unix](https://www.coursera.org/learn/unix), Pip, apt-get, cat, grep, history, ls, cd and other tools/commands
+[Checkout Markdown Helper which helps doing includes](https://github.com/BurdetteLamar/markdown_helper)
+Install using `sudo gem install markdown_helper` then in this folder run `markdown_helper include readme_template.md readme.md`
 
 In my suggestion having 2 parallel threads, 1 on ML and 1 on Maths is best. Studying only mathematics will become monotonous, ML study and practice is essential since our goal is to gain deeper understanding of ML. For working on ML try combining theory and also do some practice challenges on [Kaggle](https://www.kaggle.com/).
 
+## Article Contents
+- [RoadMap References](#roadmap-references)
+- [Machine Learning resources](#machine-learning-resources)
+  - [Basic Starter](#basic-starter)
+  - [Some Advanced Courses](#some-advanced-courses)
+  - [Field Specific Stuff: Deep Learning](#field-specific-stuff-deep-learning)
+  - [Field Specific Stuff: Computer Vision](#field-specific-stuff-computer-vision)
+  - [Field Specific Stuff: NLP](#field-specific-stuff-nlp)
+  - [Field Specific Stuff: Reinforcement Learning](#field-specific-stuff-reinforcement-learning)
+  - [Field Specific Stuff: Recommendation Systems](#field-specific-stuff-recommendation-systems)
+  - [Other Random Areas/Resources](#other-random-areasresources)
+- [Mathematics resources](#mathematics-resources)
+  - [Starter](#starter)
+  - [Basic: Probability and Statistics](#basic-probability-and-statistics)
+  - [Basic: Calculus](#basic-calculus)
+  - [Basic: Linear Algebra](#basic-linear-algebra)
+  - [Advanced: Differential Equations](#advanced-differential-equations)
+  - [Advanced: Optimisation](#advanced-optimisation)
+  - [Advanced: Probability, Bayesian and Statistical Inference](#advanced-probability-bayesian-and-statistical-inference)
+  - [Advanced: Calculus, Multivariate Calculus and Matrix Calculus](#advanced-calculus-multivariate-calculus-and-matrix-calculus)
+  - [Other Topics](#other-topics)
+  - [More Math Resources](#more-math-resources)
+- [Staying Updated](#staying-updated)
+  - [Good Resources](#good-resources)
+- [Finding good Papers and Paper Reading Tips](#finding-good-papers-and-paper-reading-tips)
+  - [Finding Good Papers](#finding-good-papers)
+  - [Finding Good papers](#finding-good-papers-1)
+  - [Reading a Paper](#reading-a-paper)
+- [Some Good Papers That I am reading and plan to Blog about](#some-good-papers-that-i-am-reading-and-plan-to-blog-about)
+  - [Attention and Transformers](#attention-and-transformers)
+- [Engineering Aspects](#engineering-aspects)
+  - [Before Starting a Project](#before-starting-a-project)
+  - [Experiment Tracking](#experiment-tracking)
+  - [Deployments](#deployments)
+  - [Code Examples for Learning](#code-examples-for-learning)
+  - [EDA and plotting, visualizations](#eda-and-plotting-visualizations)
+  - [Modelling](#modelling)
+  - [NLP](#nlp)
+  - [RL](#rl)
+  - [CV](#cv)
+  - [Recommendation Systems](#recommendation-systems)
+  - [Explainable AI](#explainable-ai)
+  - [Performance](#performance)
+  - [Recipes](#recipes)
+- [Other Random Machine Learning Topics](#other-random-machine-learning-topics)
+- [Generic References](#generic-references)
+- [CS Basics](#cs-basics)
 
-
-**Rest of this article is divided into n parts**
-
-* Roadmap References
-
-* Machine Learning Resources
-
-* Mathematics Resources
-
-* Staying Updated with current ML field
-
-* Finding good Papers and Paper Reading Tips
-
+<!-- >>>>>> BEGIN INCLUDED FILE (markdown): SOURCE ml_ai_ds_resources/roadmaps.md -->
 ## RoadMap References
 
 * [ML subreddit Guide to Learning ML](https://www.reddit.com/r/MachineLearning/wiki/index)
@@ -50,7 +77,9 @@ In my suggestion having 2 parallel threads, 1 on ML and 1 on Maths is best. Stud
 * [AV DS path](https://www.analyticsvidhya.com/blog/2020/01/learning-path-data-scientist-machine-learning-2020/), [NLP path](https://www.analyticsvidhya.com/blog/2020/01/learning-path-nlp-2020/?utm_source=blog&utm_medium=learning-path-data-scientist-machine-learning-2020)
 
 * [DataSchool starter](https://www.dataschool.io/start/)
+<!-- <<<<<< END INCLUDED FILE (markdown): SOURCE ml_ai_ds_resources/roadmaps.md -->
 
+<!-- >>>>>> BEGIN INCLUDED FILE (markdown): SOURCE ml_ai_ds_resources/ml_learning.md -->
 ## Machine Learning resources
 
 While I have listed the courses here, it is best to visit them and see their syllabus, many have redundant content.
@@ -143,6 +172,9 @@ While I have listed the courses here, it is best to visit them and see their syl
 * [HarvardX’s Fundamentals of Neuroscience XSeries](https://www.edx.org/xseries/harvardx-fundamentals-of-neuroscience)
 
 * [https://www.edx.org/course/subject/data-science](https://www.edx.org/course/subject/data-science)
+<!-- <<<<<< END INCLUDED FILE (markdown): SOURCE ml_ai_ds_resources/ml_learning.md -->
+
+<!-- >>>>>> BEGIN INCLUDED FILE (markdown): SOURCE ml_ai_ds_resources/math_4_ml.md -->
 
 ## Mathematics resources
 
@@ -321,6 +353,9 @@ In general follow MIT OCW’s resources and search google/youtube for good expla
 * [Understanding Math](https://github.com/nbro/understanding-math), [Awesome Math](https://github.com/rossant/awesome-math)
 
 * [Evan Chen’s the napkin project](https://web.evanchen.cc/napkin.html)
+<!-- <<<<<< END INCLUDED FILE (markdown): SOURCE ml_ai_ds_resources/math_4_ml.md -->
+
+<!-- >>>>>> BEGIN INCLUDED FILE (markdown): SOURCE ml_ai_ds_resources/staying_updated.md -->
 
 ## Staying Updated
 
@@ -341,7 +376,7 @@ At a minimum keep checking reddit and Stack Exchange sites. [StatQuest by Josh S
 * [https://discuss.analyticsvidhya.com/top](https://discuss.analyticsvidhya.com/top), [AV DL](https://www.analyticsvidhya.com/blog/category/deep-learning/), [https://www.topbots.com/](https://www.topbots.com/),
 [MadeWithML](https://madewithml.com/)
 
-* [Awesome Deep Learning](https://github.com/ChristosChristofidis/awesome-deep-learning), [Awesome ML](https://github.com/RatulGhosh/awesome-machine-learning), [Awesome RL](https://github.com/aikorea/awesome-rl), [TopDL](https://github.com/aymericdamien/TopDeepLearning), [Trending-Deep-Learning](https://github.com/mbadry1/Trending-Deep-Learning), [More Github Repos with cool learning](https://towardsdatascience.com/top-10-popular-github-repositories-to-learn-about-data-science-4acc7b99c44) ([Statistical Learning](https://github.com/topics/statistical-learning)), [Awesome AI](https://github.com/owainlewis/awesome-artificial-intelligence), [More papers](https://github.com/tirthajyoti/Papers-Literature-ML-DL-RL-AI), [Github ML list](https://github.com/collections/machine-learning), [ML resource list](https://github.com/ujjwalkarn/Machine-Learning-Tutorials), [Data science blogs](https://github.com/rushter/data-science-blogs)
+* [Awesome Deep Learning](https://github.com/ChristosChristofidis/awesome-deep-learning), [Awesome ML](https://github.com/RatulGhosh/awesome-machine-learning), [Awesome RL](https://github.com/aikorea/awesome-rl), [TopDL](https://github.com/aymericdamien/TopDeepLearning), [Trending-Deep-Learning](https://github.com/mbadry1/Trending-Deep-Learning), [More Github Repos with cool learning](https://towardsdatascience.com/top-10-popular-github-repositories-to-learn-about-data-science-4acc7b99c44) ([Statistical Learning](https://github.com/topics/statistical-learning)), [Awesome AI](https://github.com/owainlewis/awesome-artificial-intelligence), [More papers](https://github.com/tirthajyoti/Papers-Literature-ML-DL-RL-AI), [Github ML list](https://github.com/collections/machine-learning), [ML resource list](https://github.com/ujjwalkarn/Machine-Learning-Tutorials), [Data science blogs](https://github.com/rushter/data-science-blogs), [Survey_of_Deep_Metric_Learning](https://github.com/kdhht2334/Survey_of_Deep_Metric_Learning)
 
 * [ML coding from scratch](https://github.com/python-engineer/MLfromscratch) and [ML coding from scratch Youtube](https://www.youtube.com/playlist?list=PLqnslRFeH2Upcrywf-u2etjdxxkL8nl7E) and [Another From scratch guide](https://github.com/pmuens/lab#implementations)
 
@@ -356,48 +391,12 @@ At a minimum keep checking reddit and Stack Exchange sites. [StatQuest by Josh S
 * [https://scirate.com/arxiv/cs.AI](https://scirate.com/arxiv/cs.AI) [https://scirate.com/arxiv/cs.CV](https://scirate.com/arxiv/cs.CV) [https://scirate.com/arxiv/cs.LG](https://scirate.com/arxiv/cs.LG)
 
 * [https://www.kaggle.com/](https://www.kaggle.com/)
+<!-- <<<<<< END INCLUDED FILE (markdown): SOURCE ml_ai_ds_resources/staying_updated.md -->
 
-### Other Random Machine Learning Topics
-
-* [Probability Calibration](https://scikit-learn.org/stable/modules/calibration.html) [[Ref-1](https://towardsdatascience.com/probability-calibration-for-boosted-trees-24cbd0f0ccae), [Ref-2](http://danielnee.com/2014/10/calibrating-classifier-probabilties/), [Ref-3](http://fastml.com/classifier-calibration-with-platts-scaling-and-isotonic-regression/)]
-
-* [Partial Dependence Plot for Feature Importance and Exploration](https://towardsdatascience.com/looking-beyond-feature-importance-37d2807aaaa7)
-
-* [Bayesian Optimisation](https://towardsdatascience.com/a-conceptual-explanation-of-bayesian-model-based-hyperparameter-optimization-for-machine-learning-b8172278050f) [[Paper](https://papers.nips.cc/paper/4443-algorithms-for-hyper-parameter-optimization.pdf)]
-
-* Reducing Model size in deep learning by knowledge distillation/Teacher Student training
-
-* [Augmenting Neural Networks with Constraints Optimization](https://towardsdatascience.com/augmenting-neural-networks-with-constraints-optimization-ac747408432f)
-
-* [Metric Learning](http://contrib.scikit-learn.org/metric-learn/introduction.html) ([A Survey](https://www.mdpi.com/2073-8994/11/9/1066/htm), [pytorch-metric-learning](https://github.com/KevinMusgrave/pytorch-metric-learning))
-
-* [PCA with Maths](https://www.youtube.com/playlist?list=PLBv09BD7ez_5_yapAg86Od6JeeypkS4YM) ([Another PCA by same guy](https://www.youtube.com/playlist?list=PLBv09BD7ez_4InDh85LM_43Bsw0cFDHdN)), [Clustering](https://www.youtube.com/watch?v=b9gPL6NvsnA&list=PLBv09BD7ez_6lYVoZ1RzVcOPIT5Lfjo0Y)
-
-* [A Paper explaining CNN with Maths](https://pdfs.semanticscholar.org/450c/a19932fcef1ca6d0442cbf52fec38fb9d1e5.pdf)
-
-* [Variational_AutoEncoder](https://www.youtube.com/watch?v=w8F7_rQZxXk&list=PLdxQ7SoCLQANizknbIiHzL_hYjEaI-wUe) ([Arxiv Insight Video](https://www.youtube.com/watch?v=9zKuYvjFFS8&vl=en), [Keras AutoEncoders](https://blog.keras.io/building-autoencoders-in-keras.html))
-
-* KD Tree for KNN: [Part 1](https://www.youtube.com/watch?v=u4M5rRYwRHs), [Part 2](https://www.youtube.com/watch?v=XqXSGSKc8NU), [Part 3](https://www.youtube.com/watch?v=DlPrTGbO19E&t=2s), [Part 4](https://www.youtube.com/watch?v=SD6bO8eu5RM) ([Full Playlist](https://www.youtube.com/playlist?list=PLguYJK7ydFE7R7KqRRVXw23kOrn6jiwqi))
-
-* [Simpson’s Paradox](https://towardsdatascience.com/simpsons-paradox-how-to-prove-two-opposite-arguments-using-one-dataset-1c9c917f5ff9)
-
-* [How to lie with Statistics Summary](https://towardsdatascience.com/lessons-from-how-to-lie-with-statistics-57060c0d2f19)
-
-* [Interview Questions](https://towardsdatascience.com/40-statistics-interview-problems-and-answers-for-data-scientists-6971a02b7eee), [2](https://towardsdatascience.com/over-100-data-scientist-interview-questions-and-answers-c5a66186769a), [3](https://towardsdatascience.com/giving-some-tips-for-data-science-interviews-after-interviewing-60-candidates-at-expedia-395fff7e073b), [4](https://towardsdatascience.com/googles-data-science-interview-brain-teasers-7f3c1dc4ea7f), [5](https://towardsdatascience.com/how-i-became-an-ai-consultant-interview-questions-answers-689ba03a2620)
-
-* [Anyone have experience combining ML models with expert rules](https://www.reddit.com/r/MachineLearning/comments/gbdz4n/discussion_anyone_have_experience_combining_ml/)
-
-All This should get you to good speed and provide you background to understand most papers. I use a 5 pass strategy to paper reading which I mention in the next section.
-
-## Engineering Aspects
-### Experiment Tracking
-- [Trains](https://github.com/allegroai/trains)
-- [MLFlow]()
-- [DVC: Open-source Version Control System for Machine Learning Projects](https://dvc.org/)
-
-### Deployments
+<!-- >>>>>> BEGIN INCLUDED FILE (markdown): SOURCE ml_ai_ds_resources/papers.md -->
 
 ## Finding good Papers and Paper Reading Tips
+All This should get you to good speed and provide you background to understand most papers. I use a 5 pass strategy to paper reading which I mention in the next section.
 
 ### Finding Good Papers
 
@@ -449,7 +448,99 @@ Follow a 5 pass strategy to read a paper.
 
 <Yet to Add>
 
-As usual It would be great if you comment on other good resources you have come across and post in comments.
+<!-- <<<<<< END INCLUDED FILE (markdown): SOURCE ml_ai_ds_resources/papers.md -->
+
+<!-- >>>>>> BEGIN INCLUDED FILE (markdown): SOURCE ml_ai_ds_resources/engineering_aspects.md -->
+
+## Engineering Aspects
+
+### Before Starting a Project
+- https://towardsdatascience.com/20-questions-to-ask-prior-to-starting-data-analysis-6ec11d6a504b
+- https://towardsdatascience.com/how-to-construct-valuable-data-science-projects-in-the-real-world-203a4f520d54
+
+### Experiment Tracking
+- [Trains](https://github.com/allegroai/trains)
+- [MLFlow]()
+- [DVC: Open-source Version Control System for Machine Learning Projects](https://dvc.org/)
+
+### Deployments
+
+### Code Examples for Learning
+- [Numpy-ML](https://github.com/ddbourgin/numpy-ml)
+
+
+### EDA and plotting, visualizations
+- [Lolviz: Visualize DataStructures](https://github.com/parrt/lolviz)
+- [pandas-profiling](https://github.com/pandas-profiling/pandas-profiling)
+- [Missing-No](https://github.com/ResidentMario/missingno)
+- Plotting Libs: [Altair](https://github.com/altair-viz/altair), [Plotly]()
+
+### Modelling
+- [Scikit Categorical encoders](https://github.com/scikit-learn-contrib/category_encoders)
+
+### NLP
+- [https://allennlp.org/](https://allennlp.org/)
+- [Spacy](https://spacy.io/)
+
+### RL
+- [vitchyr/rlkit](https://github.com/vitchyr/rlkit)
+
+### CV
+- [Keract Activation Heatmap](https://github.com/philipperemy/keract)
+- [image-super-resolution](https://github.com/idealo/image-super-resolution)
+
+### Recommendation Systems
+
+### Explainable AI
+- [Lime](https://github.com/marcotcr/lime)
+- [Keract Activation Heatmap](https://github.com/philipperemy/keract)
+- [DTree Viz](https://github.com/parrt/dtreeviz)
+
+### Performance
+- [Ray](https://docs.ray.io/en/latest/)
+- [Dask](https://docs.dask.org/en/latest/)
+- [Modin Dataframe](https://github.com/modin-project/modin), [CuDF](https://github.com/rapidsai/cudf)
+- [Vaex: Out-of-Core DataFrames](https://vaex.readthedocs.io/en/latest/)
+- [Intel SDC: Numba for Pandas](https://intelpython.github.io/sdc-doc/latest/getting_started.html)
+- [SnakeViz](https://jiffyclub.github.io/snakeviz/#snakeviz), [Vprof](https://github.com/nvdv/vprof), [PyInstrument](https://github.com/joerick/pyinstrument)
+
+
+### Recipes
+- [Vectorizing Conditions in Numpy & Pandas](https://www.youtube.com/watch?v=nxWginnBklU)
+<!-- <<<<<< END INCLUDED FILE (markdown): SOURCE ml_ai_ds_resources/engineering_aspects.md -->
+
+<!-- >>>>>> BEGIN INCLUDED FILE (markdown): SOURCE ml_ai_ds_resources/random_topics.md -->
+
+## Other Random Machine Learning Topics
+
+* [Probability Calibration](https://scikit-learn.org/stable/modules/calibration.html) [[Ref-1](https://towardsdatascience.com/probability-calibration-for-boosted-trees-24cbd0f0ccae), [Ref-2](http://danielnee.com/2014/10/calibrating-classifier-probabilties/), [Ref-3](http://fastml.com/classifier-calibration-with-platts-scaling-and-isotonic-regression/)]
+
+* [Partial Dependence Plot for Feature Importance and Exploration](https://towardsdatascience.com/looking-beyond-feature-importance-37d2807aaaa7)
+
+* [Bayesian Optimisation](https://towardsdatascience.com/a-conceptual-explanation-of-bayesian-model-based-hyperparameter-optimization-for-machine-learning-b8172278050f) [[Paper](https://papers.nips.cc/paper/4443-algorithms-for-hyper-parameter-optimization.pdf)]
+
+* Reducing Model size in deep learning by knowledge distillation/Teacher Student training
+
+* [Augmenting Neural Networks with Constraints Optimization](https://towardsdatascience.com/augmenting-neural-networks-with-constraints-optimization-ac747408432f)
+
+* [Metric Learning](http://contrib.scikit-learn.org/metric-learn/introduction.html) ([A Survey](https://www.mdpi.com/2073-8994/11/9/1066/htm), [pytorch-metric-learning](https://github.com/KevinMusgrave/pytorch-metric-learning))
+
+* [PCA with Maths](https://www.youtube.com/playlist?list=PLBv09BD7ez_5_yapAg86Od6JeeypkS4YM) ([Another PCA by same guy](https://www.youtube.com/playlist?list=PLBv09BD7ez_4InDh85LM_43Bsw0cFDHdN)), [Clustering](https://www.youtube.com/watch?v=b9gPL6NvsnA&list=PLBv09BD7ez_6lYVoZ1RzVcOPIT5Lfjo0Y)
+
+* [A Paper explaining CNN with Maths](https://pdfs.semanticscholar.org/450c/a19932fcef1ca6d0442cbf52fec38fb9d1e5.pdf)
+
+* [Variational_AutoEncoder](https://www.youtube.com/watch?v=w8F7_rQZxXk&list=PLdxQ7SoCLQANizknbIiHzL_hYjEaI-wUe) ([Arxiv Insight Video](https://www.youtube.com/watch?v=9zKuYvjFFS8&vl=en), [Keras AutoEncoders](https://blog.keras.io/building-autoencoders-in-keras.html))
+
+* KD Tree for KNN: [Part 1](https://www.youtube.com/watch?v=u4M5rRYwRHs), [Part 2](https://www.youtube.com/watch?v=XqXSGSKc8NU), [Part 3](https://www.youtube.com/watch?v=DlPrTGbO19E&t=2s), [Part 4](https://www.youtube.com/watch?v=SD6bO8eu5RM) ([Full Playlist](https://www.youtube.com/playlist?list=PLguYJK7ydFE7R7KqRRVXw23kOrn6jiwqi))
+
+* [Simpson’s Paradox](https://towardsdatascience.com/simpsons-paradox-how-to-prove-two-opposite-arguments-using-one-dataset-1c9c917f5ff9)
+
+* [How to lie with Statistics Summary](https://towardsdatascience.com/lessons-from-how-to-lie-with-statistics-57060c0d2f19)
+
+* [Interview Questions](https://towardsdatascience.com/40-statistics-interview-problems-and-answers-for-data-scientists-6971a02b7eee), [2](https://towardsdatascience.com/over-100-data-scientist-interview-questions-and-answers-c5a66186769a), [3](https://towardsdatascience.com/giving-some-tips-for-data-science-interviews-after-interviewing-60-candidates-at-expedia-395fff7e073b), [4](https://towardsdatascience.com/googles-data-science-interview-brain-teasers-7f3c1dc4ea7f), [5](https://towardsdatascience.com/how-i-became-an-ai-consultant-interview-questions-answers-689ba03a2620)
+
+* [Anyone have experience combining ML models with expert rules](https://www.reddit.com/r/MachineLearning/comments/gbdz4n/discussion_anyone_have_experience_combining_ml/)
+
 
 ## Generic References
 
@@ -482,70 +573,24 @@ As usual It would be great if you comment on other good resources you have come 
 - [Some Tutorials](https://github.com/madewithml/lessons)
 - [Some Good Papers](https://github.com/GokuMohandas/casual-digressions)
 - [https://nlpprogress.com/](https://nlpprogress.com/)
+<!-- <<<<<< END INCLUDED FILE (markdown): SOURCE ml_ai_ds_resources/random_topics.md -->
 
-## Research Papers
+<!-- >>>>>> BEGIN INCLUDED FILE (markdown): SOURCE ml_ai_ds_resources/cs.md -->
 
-### Big Domain Lists
-- [Survey_of_Deep_Metric_Learning](https://github.com/kdhht2334/Survey_of_Deep_Metric_Learning)
+## CS Basics
 
-### Individual Papers by Domain
+* [https://towardsdatascience.com/beginners-learning-path-for-machine-learning-5a7fb90f751a](https://towardsdatascience.com/beginners-learning-path-for-machine-learning-5a7fb90f751a)
 
+* [Learn Python](https://www.learnpython.org/), [How to Think Like a Computer Scientist: Learning with Python 3](http://openbookproject.net/thinkcs/python/english3e/#), [Automate the Boring Stuff with Python](https://automatetheboringstuff.com/#toc)
 
-<hr/><hr/>
+* [https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-0001-introduction-to-computer-science-and-programming-in-python-fall-2016/index.htm](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-0001-introduction-to-computer-science-and-programming-in-python-fall-2016/index.htm)
 
-## Python References
+* [Course on Data Structures](https://www.coursera.org/specializations/data-structures-algorithms), [Algorithms Youtube Stanford](https://www.youtube.com/playlist?list=PLXFMmlk03Dt7Q0xr1PIAriY5623cKiH7V), [MIT 6.006 Intro to algorithms](https://www.youtube.com/playlist?list=PLUl4u3cNGP61Oq3tWYp6V_F-5jb5L2iHb), [MIT algorithms 2015](https://www.youtube.com/playlist?list=PLkToMFwOtNHiJtcBu0piSLKnLVGOF9vaV), [IO-efficient algos](https://www.coursera.org/learn/io-efficient-algorithms), [MIT Introduction to Computational Thinking and Data Science](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-0002-introduction-to-computational-thinking-and-data-science-fall-2016/), [Algorithms in Python Implementations](https://github.com/TheAlgorithms/Python)
 
-### Code Examples for Learning
-- [Numpy-ML](https://github.com/ddbourgin/numpy-ml)
+* [Some Knowledge of System design](https://github.com/donnemartin/system-design-primer) (not mandatory)
 
-### Libraries
-
-### Python and programming
-- [Lolviz: Visualize DataStructures](https://github.com/parrt/lolviz)
-
-#### EDA and plotting
-- [pandas-profiling](https://github.com/pandas-profiling/pandas-profiling)
-- [Missing-No](https://github.com/ResidentMario/missingno)
-- Plotting Libs: [Altair](https://github.com/altair-viz/altair), [Plotly]()
-
-#### Modelling
-- [Scikit Categorical encoders](https://github.com/scikit-learn-contrib/category_encoders)
-
-#### NLP
-- [https://allennlp.org/](https://allennlp.org/)
-- [Spacy](https://spacy.io/)
-
-#### RL
-- [vitchyr/rlkit](https://github.com/vitchyr/rlkit)
-
-#### CV
-- [Keract Activation Heatmap](https://github.com/philipperemy/keract)
-- [image-super-resolution](https://github.com/idealo/image-super-resolution)
-
-#### Recommendation Systems
-
-#### Explainable AI
-- [Lime](https://github.com/marcotcr/lime)
-- [Keract Activation Heatmap](https://github.com/philipperemy/keract)
-- [DTree Viz](https://github.com/parrt/dtreeviz)
-
-#### Performance
-- [Ray](https://docs.ray.io/en/latest/)
-- [Dask](https://docs.dask.org/en/latest/)
-- [Modin Dataframe](https://github.com/modin-project/modin), [CuDF](https://github.com/rapidsai/cudf)
-- [Vaex: Out-of-Core DataFrames](https://vaex.readthedocs.io/en/latest/)
-- [Intel SDC: Numba for Pandas](https://intelpython.github.io/sdc-doc/latest/getting_started.html)
-- [SnakeViz](https://jiffyclub.github.io/snakeviz/#snakeviz), [Vprof](https://github.com/nvdv/vprof), [PyInstrument](https://github.com/joerick/pyinstrument)
-
-
-### Recipes
-- [Vectorizing Conditions in Numpy & Pandas](https://www.youtube.com/watch?v=nxWginnBklU)
-
-<hr/><hr/>
-
-## Real World ML concerns
-- https://towardsdatascience.com/20-questions-to-ask-prior-to-starting-data-analysis-6ec11d6a504b
-- https://towardsdatascience.com/how-to-construct-valuable-data-science-projects-in-the-real-world-203a4f520d54
+* [Using Linux Unix](https://www.coursera.org/learn/unix), Pip, apt-get, cat, grep, history, ls, cd and other tools/commands
+<!-- <<<<<< END INCLUDED FILE (markdown): SOURCE ml_ai_ds_resources/cs.md -->
 
 
 
@@ -553,3 +598,5 @@ As usual It would be great if you comment on other good resources you have come 
 
 
 
+
+<!-- <<<<<< END GENERATED FILE (include): SOURCE ml_ai_ds_resources/readme_template.md -->
