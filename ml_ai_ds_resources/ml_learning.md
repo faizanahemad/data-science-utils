@@ -4,23 +4,32 @@ While I have listed the courses here, it is best to visit them and see their syl
 
 ### Basic Starter
 
-* [Stanford CS229](https://see.stanford.edu/course/cs229) ([2018 Videos](https://www.youtube.com/playlist?list=PLoROMvodv4rMiGQp3WXShtMGgzqpfVfbU), [2014 Videos](https://www.youtube.com/playlist?list=PLA89DCFA6ADACE599))[[Notes](http://cs229.stanford.edu/syllabus.html) [Cheatsheet](https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-supervised-learning)](A more mathematical version of [Andrew ng’s](https://www.coursera.org/learn/machine-learning)|[Coursera course](https://www.youtube.com/playlist?list=PLLssT5z_DsK-h9vYZkQkYNWcItqhlRJLN)) or [ML carnegie melon 2011](http://www.cs.cmu.edu/~tom/10701_sp11/lectures.shtml) or [Stanford Statistical Learning](https://www.edx.org/course/statistical-learning) or [Caltech ML basics](https://work.caltech.edu/telecourse.html#lectures) ([Videos](http://work.caltech.edu/lectures.html)) or [Udacity GTech ML](https://www.udacity.com/course/machine-learning--ud262)
+* One of these basic courses
+    - [Stanford CS229](https://see.stanford.edu/course/cs229) ([2018 Videos](https://www.youtube.com/playlist?list=PLoROMvodv4rMiGQp3WXShtMGgzqpfVfbU), [2014 Videos](https://www.youtube.com/playlist?list=PLA89DCFA6ADACE599))[[Notes](http://cs229.stanford.edu/syllabus.html) [Cheatsheet](https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-supervised-learning)](A more mathematical version of [Andrew ng’s Coursera Course](https://www.coursera.org/learn/machine-learning)|[Coursera course Videos](https://www.youtube.com/playlist?list=PLLssT5z_DsK-h9vYZkQkYNWcItqhlRJLN)) or 
+    - [ML carnegie melon 2011](http://www.cs.cmu.edu/~tom/10701_sp11/lectures.shtml) or 
+    - [Stanford Statistical Learning](https://www.edx.org/course/statistical-learning) or 
+    - [Caltech ML basics](https://work.caltech.edu/telecourse.html#lectures) ([Videos](http://work.caltech.edu/lectures.html)) or 
+    - [Udacity GTech ML](https://www.udacity.com/course/machine-learning--ud262)
+    - [Google ML Crash Course](https://developers.google.com/machine-learning/crash-course/ml-intro)
+    - [EDX Machine Learning Fundamentals](https://courses.edx.org/courses/course-v1:UCSanDiegoX+DSE220x+3T2019/course/)
 
 * [MIT Intro to Computational Thinking and Data Science](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-0002-introduction-to-computational-thinking-and-data-science-fall-2016/)
 
-* [Google ML Crash Course](https://developers.google.com/machine-learning/crash-course/ml-intro)
+* Books
+    - [ISL Book](http://faculty.marshall.usc.edu/gareth-james/ISL/) ([Lecture Vids and Slides](http://fs2.american.edu/alberto/www/analytics/ISLRLectures.html)) [ISL solutions](https://github.com/tdpetrou/Machine-Learning-Books-With-Python/tree/master/Introduction%20to%20Statistical%20Learning) ([Code 1](https://github.com/JWarmenhoven/ISLR-python))
 
-* [EDX Machine Learning Fundamentals](https://courses.edx.org/courses/course-v1:UCSanDiegoX+DSE220x+3T2019/course/)
-
-* [ISL Book](http://faculty.marshall.usc.edu/gareth-james/ISL/) ([Lecture Vids and Slides](http://fs2.american.edu/alberto/www/analytics/ISLRLectures.html)) [ISL solutions](https://github.com/tdpetrou/Machine-Learning-Books-With-Python/tree/master/Introduction%20to%20Statistical%20Learning) ([Code 1](https://github.com/JWarmenhoven/ISLR-python))
-
-* [Fast.ai](https://www.fast.ai/)
-
+* [Applied Courses: Fast.ai](https://www.fast.ai/)
 * [A Few Useful Things to Know about Machine Learning](https://homes.cs.washington.edu/~pedrod/papers/cacm12.pdf)
-
 * [Rules of Machine Learning](https://developers.google.com/machine-learning/guides/rules-of-ml/) By Google
 
-* [Kaggle tutorials](https://www.kaggle.com/learn/overview): [Python](https://www.kaggle.com/learn/python), [Pandas](https://www.kaggle.com/learn/pandas), [Data-Visualization](https://www.kaggle.com/learn/data-visualization), [ML](https://www.kaggle.com/learn/intro-to-machine-learning), [Intermediate ML](https://www.kaggle.com/learn/intermediate-machine-learning), [Titanic competition](https://www.kaggle.com/c/titanic), [Housing Prices](https://www.kaggle.com/c/home-data-for-ml-course)
+* [Kaggle tutorials](https://www.kaggle.com/learn/overview): 
+    - [Python](https://www.kaggle.com/learn/python), 
+    - [Pandas](https://www.kaggle.com/learn/pandas), 
+    - [Data-Visualization](https://www.kaggle.com/learn/data-visualization), 
+    - [ML](https://www.kaggle.com/learn/intro-to-machine-learning), 
+    - [Intermediate ML](https://www.kaggle.com/learn/intermediate-machine-learning), 
+    - [Titanic competition](https://www.kaggle.com/c/titanic), 
+    - [Housing Prices](https://www.kaggle.com/c/home-data-for-ml-course)
 
 * [Data Science: Inferential Thinking through Simulations](https://www.edx.org/course/foundations-of-data-science-inferential-thinking-b)
 
@@ -54,9 +63,13 @@ While I have listed the courses here, it is best to visit them and see their syl
 
 * [Statistical Methods in Machine Learning Syllabus](http://www.stat.cmu.edu/~larry/=sml/syllabus.pdf) ([Notes and Exercises](http://www.stat.cmu.edu/~larry/=sml/))
 
+* [Mining Massive Datasets - Stanford University](https://www.youtube.com/playlist?list=PLLssT5z_DsK9JDLcT8T62VtzwyW9LNepV)
+
 ### Field Specific Stuff: Deep Learning
 
 * [Deep Learning Basics](https://www.coursera.org/specializations/deep-learning) ([deeplearning.ai](https://www.youtube.com/channel/UCcIXc5mJsHVYTZR1maL5l9w) [1st course](https://www.youtube.com/playlist?list=PLkDaE6sCZn6Ec-XTbcX1uRg2_u4xOEky0))
+
+* [A basic Implementation of NN in python with backprop](https://github.com/ahmedbesbes/Neural-Network-from-scratch/)
 
 * [Stanford CS230 Deep Learning](https://www.youtube.com/playlist?list=PLoROMvodv4rOABXSygHTsbvUz4G_YQhOb) ([Slides and Syllabus](https://cs230.stanford.edu/syllabus/))
 

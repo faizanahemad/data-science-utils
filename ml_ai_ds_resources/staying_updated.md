@@ -48,13 +48,17 @@ At a minimum keep checking reddit and Stack Exchange sites. [StatQuest by Josh S
     - [https://virgili0.github.io/Virgilio/](https://virgili0.github.io/Virgilio/), 
     - [https://bair.berkeley.edu/blog/](https://bair.berkeley.edu/blog/), 
     - [The Batch](https://www.deeplearning.ai/thebatch/)
+    - [Data Science Weekly Newsletter Archive](https://www.datascienceweekly.org/newsletters)
     - [AV DL](https://www.analyticsvidhya.com/blog/category/deep-learning/)
     - [http://www.wildml.com/](http://www.wildml.com/)
     - [https://www.topbots.com/](https://www.topbots.com/)
-    - [datascienceweekly](https://www.datascienceweekly.org/newsletters)
     - [https://rubikscode.net/category/ai/this-week-in-ai/](https://rubikscode.net/category/ai/this-week-in-ai/)
     - [TDS Learning Section](https://towardsdatascience.com/learn-on-towards-data-science-52245bc91451)
     - [Data science blogs](https://github.com/rushter/data-science-blogs)
+    - [AI FB](https://ai.facebook.com/)
+    - [datasciencecentral](https://www.datasciencecentral.com/)
+    - [fivethirtyeight](https://fivethirtyeight.com/)
+    - [101.datascience](https://101.datascience.community/)
     
 * Personal Blogs
     - [https://colah.github.io/](https://colah.github.io/),
@@ -66,6 +70,7 @@ At a minimum keep checking reddit and Stack Exchange sites. [StatQuest by Josh S
     - [https://blog.otoro.net/](https://blog.otoro.net/)
     - [http://www.offconvex.org/](http://www.offconvex.org/)
     - [Karpathy Blog](https://karpathy.github.io/)
+    - [computervisionblog](https://www.computervisionblog.com/)
 
 * Projects
     - [SOTA by paperswithcode](https://paperswithcode.com/sota)
