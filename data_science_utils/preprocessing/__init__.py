@@ -266,8 +266,8 @@ class NeuralCategoricalFeatureTransformer:
                  include_input_as_output=True, target_columns=None,
                  n_layers=2, n_components=32, n_iter=150, nan_fill="", verbose=0,
                  prefix="nncat_",
-                 save_file=None,inplace=True,
-                 skip_fit=False,skip_transform=False):
+                 save_file=None, inplace=True,
+                 skip_fit=False, skip_transform=False):
         """
         """
         self.model = None
@@ -287,7 +287,7 @@ class NeuralCategoricalFeatureTransformer:
         self.verbose = verbose
         self.prefix = prefix
         self.save_file = save_file
-        self.inplace=inplace
+        self.inplace = inplace
         self.skip_fit = skip_fit
         self.skip_transform = skip_transform
         if save_file is not None:
@@ -327,7 +327,7 @@ class NeuralCategoricalFeatureTransformer:
             # for all cols
             counts = X.groupby(self.cols)[cnt_col].agg(['count'])
 
-            X = X.groupby(self.cols)[self.target_columns].agg(['mean','std']).reset_index()
+            X = X.groupby(self.cols)[self.target_columns].agg(['mean', 'std']).reset_index()
             X.columns = list(map(lambda x:x[0]+x[1],list(X.columns)))
             mean_cols = [t + "mean" for t in self.target_columns]
             overall_means.index = mean_cols

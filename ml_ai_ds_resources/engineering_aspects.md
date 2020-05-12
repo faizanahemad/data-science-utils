@@ -21,6 +21,7 @@
 - [pandas-profiling](https://github.com/pandas-profiling/pandas-profiling)
 - [Missing-No](https://github.com/ResidentMario/missingno)
 - Plotting Libs: [Altair](https://github.com/altair-viz/altair), [Plotly]()
+- [Good theme for Matplotlib](https://towardsdatascience.com/a-new-plot-theme-for-matplotlib-gadfly-2cffc745ff84)
 
 ### Modelling
 - [Scikit Categorical encoders](https://github.com/scikit-learn-contrib/category_encoders)
@@ -42,6 +43,8 @@
 - [Lime](https://github.com/marcotcr/lime)
 - [Keract Activation Heatmap](https://github.com/philipperemy/keract)
 - [DTree Viz](https://github.com/parrt/dtreeviz)
+- [SHAP](https://github.com/slundberg/shap)
+- [CNN Feature Maps](https://github.com/lewis-morris/mapextrackt), [Grad-CAM](https://arxiv.org/abs/1610.02391), [Grad-CAM++](https://arxiv.org/abs/1710.11063)
 
 ### Performance
 - [Ray](https://docs.ray.io/en/latest/)

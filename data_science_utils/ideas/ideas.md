@@ -11,20 +11,26 @@ For ideas to be viable it has to be computationally possible, and be programmabl
 
 ### Deep Learning
 1. Video Compression using DVAE, using super resolution techniques and Bidirectional LSTM time series
+
 2. Snapshot Ensembling of Neural Networks
     - Instead of normal snapshot ensembling (where the idea is to increase LR after a local minima and then find a new minima and add it to existing snapshots) we propose a new method in which a new snapshot is only added to existing snapshots if it is significantly different from existing snapshots.
     - Lets say that our DNN has N parameters (weights), our error function is a function in the weight space. To determine if a snapshot is different we take it's Weight Wn and calculate cosine/euclid distances from all existing weights W1...n-1. If it is having significant difference above a threshold, then we take the snapshot.
     - A generalised process: Intelligent Snapshot selection to minimise overfitting and variance, and increase generalization. For example 1 process could be that the Validation error is lower than atleast half the existing snapshots and weight (Wn to W1..n-1 distance) distance should be above a threshold and predictions should be have less some threshold correlation.
     - https://medium.com/analytics-vidhya/snapshot-ensembles-leveraging-ensembling-in-neural-networks-a0d512cf2941
-3. Image Classification Techniques like GradCam, Cutout and others applied to Text Classification
-4. How good is your Loss minima? Or How generalised is your model? / Model Compression Techniques.
-    - We do Random perturbations of weights. If some weights with perturbations do not change out-come then they are good weights.
-    - Alternatively it can be said that those model's are useless. So Can we compress the model?
-5. RL adversarial examples, like if in a mario like game a ladder that moves horizontally suddenly starts moving vertically.
-    - Time dependence / Length of observation needed to solve a RL problem. Maybe the agent needs to wait-observe-then-act based on very old past observation?
-    - RL + GAN, can we have games/environment generators?
     
-6. It's been clear for quite a while now that neural networks have trouble understanding the physical nature of objects. They don't seem to care very much when objects in an image don't 'hold together' in a physical sense, whereas humans immediately see that something is wrong.
+3. Text Augmentation Strategies
+    - From Image Domain like Cutout and Label Smoothing
+    - Sentence order change
+    - Array rotate like circular rotation
+    - Word Compressions
+    - Adding Multi-task pre-trained embeddings
+    - Gradcam for seeing which words are being more focused
+
+4. How good is your Loss minima? Or How generalised is your model?
+    - We do Random perturbations of weights. If some weights with perturbations do not change out-come then they are good weights.
+    - Using this we can find over fit and generalization ability of model without looking at test set.
+
+5. It's been clear for quite a while now that neural networks have trouble understanding the physical nature of objects. They don't seem to care very much when objects in an image don't 'hold together' in a physical sense, whereas humans immediately see that something is wrong.
     - I wonder how much of this discrepancy can be chalked up to humans having binocular vision? Or parallax generally? In general, we learn about physical objects by looking at real objects from multiple angles (either with our two eyes, or by rotating the object and/or ourselves around the object). This lets us get an idea in our heads of the 3D physical shapes of things and how they react to lighting in 3D space, and our reaction to 2D photographs is heavily informed by this background experience. On the other hand, I gather that pretty much all image-classification NN training uses separate images with no parallax and no 3D data to speak of, because that's what the big datasets tend to consist of; the NNs never get that background experience with parallax that we have. Maybe that's why they tend to ignore the 3D physicality of things and focus on texture-matching and such instead.
     
 
@@ -64,6 +70,10 @@ For ideas to be viable it has to be computationally possible, and be programmabl
         - It decides which sub-networks to execute, once a subnet is executed it takes the output of the subnet and then decides whether it needs to run another subnet or it can send the results.
             - Can be implemented using an GRU/RNN which takes DCN + Current Model output + Time taken for Current Model, Outputs - Prediction, Whether Next Model is Needed to be run to reach our time and accuracy goal.  
         - A different variant from above can be a Master which pre-decides which networks to run and how to combine their predictions
+    
+3. RL adversarial examples, like if in a mario like game a ladder that moves horizontally suddenly starts moving vertically.
+    - Time dependence / Length of observation needed to solve a RL problem. Maybe the agent needs to wait-observe-then-act based on very old past observation?
+    - RL + GAN, can we have games/environment generators?
               
 ![Description](RL_stacking_1.jpg)
 
@@ -79,6 +89,9 @@ For ideas to be viable it has to be computationally possible, and be programmabl
 	    - Same as method 1 except that for each entity we also take nearest categories to its own categories for robustness
     - Method 3
         - Use Keras Embedding layer, feed categories as an array (like text), finally use GAP to get a vector
+    - Method 4
+        - Graphs and network methods, find nearest neighbors using graph, nodes are items and categories
+        
 2. Categorical features where categories have few examples
     - for low number of entiities category, get similar categories and use woe of nearby categories.
     - Getting Similar categories How?
@@ -86,13 +99,15 @@ For ideas to be viable it has to be computationally possible, and be programmabl
     - This will add more robustness and prevent too much variance for categories with less examples.
 3. Idea is to not treat each category as completely distinct entities but rather have vector representations of categories where categories which are similar are nearer in the N-D vector space.
     - Keras Embeddding layer be default is trained to minimise loss, and could lead to high variance
-    - First we will train embedding layer to minimise category aggregate statistics.
+    - First we will train embedding layer to minimise category aggregate statistics like mean,count,std.
     - Next We will train embedding layer to minimise loss in actual training
     - Keras Embedding layer can take only use only 1 categorical column, we will ensure that multiple categorical columns can be used at once.
         - Label Encoding and either Flatten or GAP  
     - This approach is very similar to auto-encoder approach but since it is also trained during main training it should find more interactions
-4. Building Better Embedding Space for Regression and Classification problems by Converting the feature representation part into a comparator algorithm.
+    - 
+4. Building Better Embedding Space for Regression problems by Converting the feature representation part into a comparator algorithm.
     - We then use the feature representation part as first part of our network. Since this is pre-initialised. It can perform better.
+    - In short convert a regression problem to a ranking problem first, thereby expanding our data, then back to regression
 5.  
 
 ### Trees and RFs
@@ -124,10 +139,12 @@ For ideas to be viable it has to be computationally possible, and be programmabl
     - Add a penalty term for num of clusters/depth of tree so we have shallow trees. 
     - Run LR separately within each cohort
     - Easier explainability and faster training+inference
+    
 2. XGB + RF
     - Use XGB as base learner
     - Use RF as the ensembling method for multiple XGB
     - This can avoid the XGB overfitting
+    - This can also provide confidence scores for each prediction
     
     
 # Resources

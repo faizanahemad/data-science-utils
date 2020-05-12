@@ -38,7 +38,8 @@ In my suggestion having 2 parallel threads, 1 on ML and 1 on Maths is best. Stud
   - [Other Topics](#other-topics)
   - [More Math Resources](#more-math-resources)
 - [Staying Updated](#staying-updated)
-  - [Good Resources](#good-resources)
+  - [Video Resources](#video-resources)
+  - [Article Resources](#article-resources)
 - [Finding good Papers and Paper Reading Tips](#finding-good-papers-and-paper-reading-tips)
   - [Finding Good Papers](#finding-good-papers)
   - [Finding Good papers](#finding-good-papers-1)
@@ -59,7 +60,8 @@ In my suggestion having 2 parallel threads, 1 on ML and 1 on Maths is best. Stud
   - [Explainable AI](#explainable-ai)
   - [Performance](#performance)
   - [Recipes](#recipes)
-- [Other Random Machine Learning Topics](#other-random-machine-learning-topics)
+- [Random Machine Learning Topics/Articles](#random-machine-learning-topicsarticles)
+- [Datasets ](#datasets-)
 - [Generic References](#generic-references)
 - [CS Basics](#cs-basics)
 
@@ -86,9 +88,11 @@ While I have listed the courses here, it is best to visit them and see their syl
 
 ### Basic Starter
 
-* [Stanford CS229](https://see.stanford.edu/course/cs229) ([2018 Videos](https://www.youtube.com/playlist?list=PLoROMvodv4rMiGQp3WXShtMGgzqpfVfbU), [2014 Videos](https://www.youtube.com/playlist?list=PLA89DCFA6ADACE599))[[Notes](http://cs229.stanford.edu/syllabus.html) [Cheatsheet](https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-supervised-learning)](A more mathematical version of [Andrew ng’s](https://www.coursera.org/learn/machine-learning)|[Coursera course](https://www.youtube.com/playlist?list=PLLssT5z_DsK-h9vYZkQkYNWcItqhlRJLN)) or [ML carnegie melon 2011](http://www.cs.cmu.edu/~tom/10701_sp11/lectures.shtml) or [Stanford Statistical Learning](https://www.edx.org/course/statistical-learning) or [Caltech ML basics](https://work.caltech.edu/telecourse.html#lectures) or [Udacity GTech ML](https://www.udacity.com/course/machine-learning--ud262)
+* [Stanford CS229](https://see.stanford.edu/course/cs229) ([2018 Videos](https://www.youtube.com/playlist?list=PLoROMvodv4rMiGQp3WXShtMGgzqpfVfbU), [2014 Videos](https://www.youtube.com/playlist?list=PLA89DCFA6ADACE599))[[Notes](http://cs229.stanford.edu/syllabus.html) [Cheatsheet](https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-supervised-learning)](A more mathematical version of [Andrew ng’s](https://www.coursera.org/learn/machine-learning)|[Coursera course](https://www.youtube.com/playlist?list=PLLssT5z_DsK-h9vYZkQkYNWcItqhlRJLN)) or [ML carnegie melon 2011](http://www.cs.cmu.edu/~tom/10701_sp11/lectures.shtml) or [Stanford Statistical Learning](https://www.edx.org/course/statistical-learning) or [Caltech ML basics](https://work.caltech.edu/telecourse.html#lectures) ([Videos](http://work.caltech.edu/lectures.html)) or [Udacity GTech ML](https://www.udacity.com/course/machine-learning--ud262)
 
 * [MIT Intro to Computational Thinking and Data Science](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-0002-introduction-to-computational-thinking-and-data-science-fall-2016/)
+
+* [Google ML Crash Course](https://developers.google.com/machine-learning/crash-course/ml-intro)
 
 * [EDX Machine Learning Fundamentals](https://courses.edx.org/courses/course-v1:UCSanDiegoX+DSE220x+3T2019/course/)
 
@@ -105,6 +109,8 @@ While I have listed the courses here, it is best to visit them and see their syl
 * [Data Science: Inferential Thinking through Simulations](https://www.edx.org/course/foundations-of-data-science-inferential-thinking-b)
 
 ### Some Advanced Courses
+
+* [COMS W4995 Applied Machine Learning Spring 2020](https://www.youtube.com/playlist?list=PL_pVmAaAnxIRnSw6wiCpSvshFyCREZmlM) [Website](https://www.cs.columbia.edu/~amueller/comsw4995s20/), 
 
 * [Another Mathematical Treatment and general coverage of ML by Washington Uni](https://www.youtube.com/playlist?list=PLTPQEx-31JXhguCush5J7OGnEORofoCW9) ([Course Materials](http://mathofml.cs.washington.edu/)) or [CORNELL CS4780 “Machine Learning for Intelligent Systems”](http://www.cs.cornell.edu/courses/cs4780/2018fa/lectures/)
 
@@ -124,11 +130,11 @@ While I have listed the courses here, it is best to visit them and see their syl
 
 * [ESL book](https://web.stanford.edu/~hastie/ElemStatLearn/printings/ESLII_print12.pdf) ([Site](https://web.stanford.edu/~hastie/ElemStatLearn/)) [ESL Solutions](https://waxworksmath.com/Authors/G_M/Hastie/WriteUp/Weatherwax_Epstein_Hastie_Solution_Manual.pdf) ([soln 2](https://blog.princehonest.com/stat-learning/) [[Backup](https://github.com/asadoughi/stat-learning)])([Notes 1](https://github.com/empathy87/The-Elements-of-Statistical-Learning-Python-Notebooks), [2](https://github.com/dgkim5360/the-elements-of-statistical-learning-notebooks), [3](https://github.com/maitbayev/the-elements-of-statistical-learning), [4](https://getd.libs.uga.edu/pdfs/ma_james_c_201412_ms.pdf))
 
-* [Probabilistic Graphical Models Specialization](https://www.coursera.org/specializations/probabilistic-graphical-models)
+* [Probabilistic Graphical Models Specialization](https://www.coursera.org/specializations/probabilistic-graphical-models), [Probabilistic Graphical Models by CMU](https://www.cs.cmu.edu/~epxing/Class/10708-20/), [Graphical Models: Jeffrey A. Bilmes](https://www.youtube.com/channel/UCvPnLF7oUh4p-m575fZcUxg/videos)
 
 * John Hopkins Advanced Linear Models for Data Science [Part 1](https://www.coursera.org/learn/linear-models) and [Part 2](https://www.coursera.org/learn/linear-models-2).
 
-* [ML by Mathematical Monk on YT](https://www.youtube.com/playlist?list=PLD0F06AA0D2E8FFBA)
+* [ML by Mathematical Monk on YT](https://www.youtube.com/playlist?list=PLD0F06AA0D2E8FFBA), [Information Theory by Jeffrey A. Bilmes](https://www.youtube.com/channel/UCvPnLF7oUh4p-m575fZcUxg/videos)
 
 * [Statistical Methods in Machine Learning Syllabus](http://www.stat.cmu.edu/~larry/=sml/syllabus.pdf) ([Notes and Exercises](http://www.stat.cmu.edu/~larry/=sml/))
 
@@ -140,11 +146,28 @@ While I have listed the courses here, it is best to visit them and see their syl
 
 * [DEEP LEARNING DS-GA 1008 · SPRING 2020 · NYU CENTER FOR DATA SCIENCE](https://atcold.github.io/pytorch-Deep-Learning/)
 
-* [Deep Learning Book](https://www.deeplearningbook.org/) ([Chapter Summaries](https://github.com/dalmia/Deep-Learning-Book-Chapter-Summaries))
+* [Analyses of Deep Learning (STATS 385) Stanford University, Fall 2019](https://stats385.github.io/) ([Videos](https://www.researchgate.net/project/Theories-of-Deep-Learning))
 
-* [Neural Networks by Hugo Larochelle](https://www.youtube.com/playlist?list=PL6Xpj9I5qXYEcOhn7TqghAJ6NAPrNmUBH)
+* [IFT 6085: Theoretical principles for deep learning](http://mitliagkas.github.io/ift6085-dl-theory-class-2019/)
+
+* [DL Brown Uni Assignments](http://cs.brown.edu/courses/cs1470/assignments.html)
+
+* [EPFL EE-559 – DEEP LEARNING](https://fleuret.org/ee559/)
+
+* Books for Deep Learning
+    - [Deep Learning Book](https://www.deeplearningbook.org/) ([Chapter Summaries](https://github.com/dalmia/Deep-Learning-Book-Chapter-Summaries), [Videos](https://www.youtube.com/channel/UCF9O8Vj-FEbRDA5DcDGz-Pg/playlists), )
+    - [Dive into Deep Learning Book](https://d2l.ai/), [Berkeley Site](https://courses.d2l.ai/berkeley-stat-157/index.html), [Pytorch Codes](https://github.com/dsgiitr/d2l-pytorch)
+    - [Neural Network Design](http://hagan.okstate.edu/nnd.html)
+    - [Neural Networks and Deep Learning](http://neuralnetworksanddeeplearning.com/) [GitHub](https://github.com/mnielsen/neural-networks-and-deep-learning) [solutions](https://github.com/reachtarunhere/nndl/blob/master/2016-11-22-ch1-sigmoid-2.md)
+    
+
+* [Neural Networks by Hugo Larochelle](https://www.youtube.com/playlist?list=PL6Xpj9I5qXYEcOhn7TqghAJ6NAPrNmUBH) ([Course Website](http://info.usherbrooke.ca/hlarochelle/neural_networks/content.html))
+
+* [CS294-158-SP20 Deep Unsupervised Learning Spring 2020](https://sites.google.com/view/berkeley-cs294-158-sp20/home)
 
 * [MIT Introduction to Deep Learning](http://introtodeeplearning.com/) ([Videos](https://www.youtube.com/playlist?list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI))
+
+* [Carnegie Mellon University Deep Learning](https://www.youtube.com/channel/UC8hYZGEkI2dDO8scT8C5UQA/playlists), [CMU DL website](https://deeplearning.cs.cmu.edu/)
 
 ### Field Specific Stuff: Computer Vision
 
@@ -163,15 +186,21 @@ While I have listed the courses here, it is best to visit them and see their syl
 
 * [Gtech RL](https://www.udacity.com/course/reinforcement-learning--ud600)
 
+* [David-Silver-Reinforcement-learning](https://github.com/dalmia/David-Silver-Reinforcement-learning) ([davidsilver](https://www.davidsilver.uk/teaching/))
+
 ### Field Specific Stuff: Recommendation Systems
 
 <Yet to Add>
 
 ### Other Random Areas/Resources
+* [Curated: awesome-ml-courses](https://github.com/luspr/awesome-ml-courses)
+
+* [deep-learning-drizzle](https://deep-learning-drizzle.github.io/) ([Github Page](https://github.com/kmario23/deep-learning-drizzle/blob/master/README.md))
 
 * [HarvardX’s Fundamentals of Neuroscience XSeries](https://www.edx.org/xseries/harvardx-fundamentals-of-neuroscience)
 
 * [https://www.edx.org/course/subject/data-science](https://www.edx.org/course/subject/data-science)
+
 <!-- <<<<<< END INCLUDED FILE (markdown): SOURCE ml_ai_ds_resources/ml_learning.md -->
 
 <!-- >>>>>> BEGIN INCLUDED FILE (markdown): SOURCE ml_ai_ds_resources/math_4_ml.md -->
@@ -181,6 +210,7 @@ While I have listed the courses here, it is best to visit them and see their syl
 In general follow MIT OCW’s resources and search google/youtube for good explanations.
 
 ### Starter
+* [The Matrix Calculus You Need For Deep Learning](https://explained.ai/matrix-calculus/index.html)
 
 * [Essence of Calculus](https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr) and [Essence of Linear Algebra](https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab), [3Blue1Brown Neural Networks](https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi), [DE by 3Blue1Brown](https://www.youtube.com/playlist?list=PLZHQObOWTQDNPOjrT6KVlfJuKtYTftqH6)
 
@@ -361,36 +391,99 @@ In general follow MIT OCW’s resources and search google/youtube for good expla
 
 At a minimum keep checking reddit and Stack Exchange sites. [StatQuest by Josh Stamer](https://www.youtube.com/user/joshstarmer) is highly recommended as a beginner’s watch.
 
-### Good Resources
+### Video Resources
+* Other
+    - [VideoLectures.net](http://videolectures.net/Top/Computer_Science/Machine_Learning/#l=en), 
+    - [MLSS 2014](https://www.youtube.com/playlist?list=PLZSO_6-bSqHQCIYxE3ycGLXHMjK3XV7Iz), [2019](https://sites.google.com/view/mlss-2019/lectures-and-tutorials?authuser=0)
+* YT
+    - [Arxiv Insights](https://www.youtube.com/channel/UCNIkB2IeJ-6AmZv7bQ1oBYg), 
+    - [StatQuest by Josh Stamer](https://www.youtube.com/user/joshstarmer) 
+    - [Yannic Kilcher](https://www.youtube.com/channel/UCZHmQk67mSJgfCCTn7xBfew/playlists), 
+    - [Two Minute Papers](https://www.youtube.com/channel/UCbfYPyITQ-7l4upoX8nvctg), 
+    - [Ahlad.K on Youtube](https://www.youtube.com/user/kumarahlad/playlists), 
+    - [Robert Miles](https://www.youtube.com/channel/UCLB7AzTwc6VFZrBsO2ucBMg), 
+    - [Computerphile](https://www.youtube.com/user/Computerphile)
 
-* Checkout [r/ML](https://www.reddit.com/r/MachineLearning/) , [r/learnML](https://www.reddit.com/r/learnmachinelearning/), [r/DeepLearning](https://www.reddit.com/r/deeplearning/), [r/DS](https://www.reddit.com/r/datascience/), [r/RL](https://www.reddit.com/r/reinforcementlearning/), [r/AskStats](https://www.reddit.com/r/AskStatistics/), [r/learnMaths](https://www.reddit.com/r/learnmath)
 
-* [VideoLectures.net](http://videolectures.net/Top/Computer_Science/Machine_Learning/#l=en), [MLSS 2014](https://www.youtube.com/playlist?list=PLZSO_6-bSqHQCIYxE3ycGLXHMjK3XV7Iz), [2019](https://sites.google.com/view/mlss-2019/lectures-and-tutorials?authuser=0)
+### Article Resources
+* *Discussion Forum* 
+    - [r/ML](https://www.reddit.com/r/MachineLearning/) , 
+    - [r/learnML](https://www.reddit.com/r/learnmachinelearning/), 
+    - [r/DeepLearning](https://www.reddit.com/r/deeplearning/), 
+    - [r/DS](https://www.reddit.com/r/datascience/), 
+    - [r/RL](https://www.reddit.com/r/reinforcementlearning/), 
+    - [r/AskStats](https://www.reddit.com/r/AskStatistics/), 
+    - [r/learnMaths](https://www.reddit.com/r/learnmath)
+    - [https://discuss.analyticsvidhya.com/top](https://discuss.analyticsvidhya.com/top)
+    - [https://www.fast.ai/tag/technical/](https://www.fast.ai/tag/technical/)
+    
 
-* [Cross Validated](https://stats.stackexchange.com/?tab=month), [MathExchange Questions tagged [machine-learning]](https://math.stackexchange.com/questions/tagged/machine-learning?sort=votes&pageSize=15), [SE Questions tagged [machine-learning]](https://stackoverflow.com/questions/tagged/machine-learning?sort=votes&pageSize=15), [SE Questions tagged [deep-learning]](https://stackoverflow.com/questions/tagged/deep-learning), [AI SE](https://ai.stackexchange.com/), [DS SE](https://datascience.stackexchange.com/)
+* StackExchange Sites
+    - [Cross Validated](https://stats.stackexchange.com/?tab=month), 
+    - [MathExchange Questions tagged [machine-learning]](https://math.stackexchange.com/questions/tagged/machine-learning?sort=votes&pageSize=15), 
+    - [SE Questions tagged [machine-learning]](https://stackoverflow.com/questions/tagged/machine-learning?sort=votes&pageSize=15), 
+    - [SE Questions tagged [deep-learning]](https://stackoverflow.com/questions/tagged/deep-learning), 
+    - [AI SE](https://ai.stackexchange.com/), 
+    - [DS SE](https://datascience.stackexchange.com/)
+    
+* NewLetters and feeds
+    - [https://distill.pub/](https://distill.pub/) 
+    - [https://openai.com/blog/](https://openai.com/blog/), 
+    - [https://ai.googleblog.com/](https://ai.googleblog.com/), 
+    - [Explained](https://explained.ai/)
+    - [http://newsletter.ruder.io/](http://newsletter.ruder.io/), 
+    - [https://ruder.io/](https://ruder.io/), 
+    - [https://virgili0.github.io/Virgilio/](https://virgili0.github.io/Virgilio/), 
+    - [https://bair.berkeley.edu/blog/](https://bair.berkeley.edu/blog/), 
+    - [The Batch](https://www.deeplearning.ai/thebatch/)
+    - [AV DL](https://www.analyticsvidhya.com/blog/category/deep-learning/)
+    - [http://www.wildml.com/](http://www.wildml.com/)
+    - [https://www.topbots.com/](https://www.topbots.com/)
+    - [datascienceweekly](https://www.datascienceweekly.org/newsletters)
+    - [https://rubikscode.net/category/ai/this-week-in-ai/](https://rubikscode.net/category/ai/this-week-in-ai/)
+    - [TDS Learning Section](https://towardsdatascience.com/learn-on-towards-data-science-52245bc91451)
+    - [Data science blogs](https://github.com/rushter/data-science-blogs)
+    
+* Personal Blogs
+    - [https://colah.github.io/](https://colah.github.io/),
+    - [https://setosa.io/ev/](https://setosa.io/ev/)
+    - [https://www.benfrederickson.com/blog/](https://www.benfrederickson.com/blog/), 
+    - [http://nicolas-hug.com/blog/](http://nicolas-hug.com/blog/), 
+    - [https://shaoanlu.wordpress.com/](https://shaoanlu.wordpress.com/)
+    - [https://www.dlology.com/](https://www.dlology.com/)
+    - [https://blog.otoro.net/](https://blog.otoro.net/)
+    - [http://www.offconvex.org/](http://www.offconvex.org/)
+    - [Karpathy Blog](https://karpathy.github.io/)
 
-* [https://distill.pub/](https://distill.pub/) [https://openai.com/blog/](https://openai.com/blog/), [https://ai.googleblog.com/](https://ai.googleblog.com/), [http://newsletter.ruder.io/](http://newsletter.ruder.io/), [https://ruder.io/](https://ruder.io/), [https://www.benfrederickson.com/blog/](https://www.benfrederickson.com/blog/), [http://nicolas-hug.com/blog/](http://nicolas-hug.com/blog/), [https://virgili0.github.io/Virgilio/](https://virgili0.github.io/Virgilio/), [https://bair.berkeley.edu/blog/](https://bair.berkeley.edu/blog/), [https://colah.github.io/](https://colah.github.io/)
+* Projects
+    - [SOTA by paperswithcode](https://paperswithcode.com/sota)
+    - [https://www.kaggle.com/](https://www.kaggle.com/)
+    - [MadeWithML](https://madewithml.com/)
+    - [ML coding from scratch](https://github.com/python-engineer/MLfromscratch) and [ML coding from scratch Youtube](https://www.youtube.com/playlist?list=PLqnslRFeH2Upcrywf-u2etjdxxkL8nl7E) and [Another From scratch guide](https://github.com/pmuens/lab#implementations)
+    
+* **Recommender** 
+    - [Arxiv Sanity](http://www.arxiv-sanity.com/) 
+    - [https://s2-sanity.apps.allenai.org/](https://s2-sanity.apps.allenai.org/)
+    - [https://scirate.com/arxiv/cs.AI](https://scirate.com/arxiv/cs.AI)
+    - [https://scirate.com/arxiv/cs.CV](https://scirate.com/arxiv/cs.CV)
+    - [https://scirate.com/arxiv/cs.LG](https://scirate.com/arxiv/cs.LG)
 
-* [http://www.wildml.com/](http://www.wildml.com/), [https://www.fast.ai/tag/technical/](https://www.fast.ai/tag/technical/), [https://www.dlology.com/](https://www.dlology.com/), [https://blog.otoro.net/](https://blog.otoro.net/), [https://shaoanlu.wordpress.com/](https://shaoanlu.wordpress.com/), [http://www.offconvex.org/](http://www.offconvex.org/), [https://setosa.io/ev/](https://setosa.io/ev/)
+* More Lists
+    - [Awesome Deep Learning](https://github.com/ChristosChristofidis/awesome-deep-learning), 
+    - [Awesome ML](https://github.com/RatulGhosh/awesome-machine-learning), 
+    - [Awesome RL](https://github.com/aikorea/awesome-rl), 
+    - [TopDL](https://github.com/aymericdamien/TopDeepLearning), 
+    - [Trending-Deep-Learning](https://github.com/mbadry1/Trending-Deep-Learning), 
+    - [More Github Repos with cool learning](https://towardsdatascience.com/top-10-popular-github-repositories-to-learn-about-data-science-4acc7b99c44) 
+    - [Statistical Learning](https://github.com/topics/statistical-learning), 
+    - [Awesome AI](https://github.com/owainlewis/awesome-artificial-intelligence), 
+    - [More papers](https://github.com/tirthajyoti/Papers-Literature-ML-DL-RL-AI), 
+    - [Github ML list](https://github.com/collections/machine-learning), 
+    - [ML resource list](https://github.com/ujjwalkarn/Machine-Learning-Tutorials), 
+    - [Survey_of_Deep_Metric_Learning](https://github.com/kdhht2334/Survey_of_Deep_Metric_Learning)
+    - [SOTA papers till 2018 in many DL tasks](https://www.eff.org/ai/metrics)
+    - [A gallery of interesting Jupyter Notebooks](https://github.com/jupyter/jupyter/wiki/A-gallery-of-interesting-Jupyter-Notebooks)
 
-* [https://discuss.analyticsvidhya.com/top](https://discuss.analyticsvidhya.com/top), [AV DL](https://www.analyticsvidhya.com/blog/category/deep-learning/), [https://www.topbots.com/](https://www.topbots.com/),
-[MadeWithML](https://madewithml.com/)
-
-* [Awesome Deep Learning](https://github.com/ChristosChristofidis/awesome-deep-learning), [Awesome ML](https://github.com/RatulGhosh/awesome-machine-learning), [Awesome RL](https://github.com/aikorea/awesome-rl), [TopDL](https://github.com/aymericdamien/TopDeepLearning), [Trending-Deep-Learning](https://github.com/mbadry1/Trending-Deep-Learning), [More Github Repos with cool learning](https://towardsdatascience.com/top-10-popular-github-repositories-to-learn-about-data-science-4acc7b99c44) ([Statistical Learning](https://github.com/topics/statistical-learning)), [Awesome AI](https://github.com/owainlewis/awesome-artificial-intelligence), [More papers](https://github.com/tirthajyoti/Papers-Literature-ML-DL-RL-AI), [Github ML list](https://github.com/collections/machine-learning), [ML resource list](https://github.com/ujjwalkarn/Machine-Learning-Tutorials), [Data science blogs](https://github.com/rushter/data-science-blogs), [Survey_of_Deep_Metric_Learning](https://github.com/kdhht2334/Survey_of_Deep_Metric_Learning)
-
-* [ML coding from scratch](https://github.com/python-engineer/MLfromscratch) and [ML coding from scratch Youtube](https://www.youtube.com/playlist?list=PLqnslRFeH2Upcrywf-u2etjdxxkL8nl7E) and [Another From scratch guide](https://github.com/pmuens/lab#implementations)
-
-* [https://rubikscode.net/category/ai/this-week-in-ai/](https://rubikscode.net/category/ai/this-week-in-ai/)
-
-* **Recommender** [Arxiv Sanity](http://www.arxiv-sanity.com/) and [https://s2-sanity.apps.allenai.org/](https://s2-sanity.apps.allenai.org/)
-
-* [Arxiv Insights](https://www.youtube.com/channel/UCNIkB2IeJ-6AmZv7bQ1oBYg), [StatQuest by Josh Stamer](https://www.youtube.com/user/joshstarmer) (See the whole channel, its a gem), [Yannic Kilche](https://www.youtube.com/channel/UCZHmQk67mSJgfCCTn7xBfew/playlists)r, [Two Minute Papers](https://www.youtube.com/channel/UCbfYPyITQ-7l4upoX8nvctg), [Ahlad.K on Youtube](https://www.youtube.com/user/kumarahlad/playlists)
-
-* [SOTA papers till 2018 in many DL tasks](https://www.eff.org/ai/metrics)
-
-* [https://scirate.com/arxiv/cs.AI](https://scirate.com/arxiv/cs.AI) [https://scirate.com/arxiv/cs.CV](https://scirate.com/arxiv/cs.CV) [https://scirate.com/arxiv/cs.LG](https://scirate.com/arxiv/cs.LG)
-
-* [https://www.kaggle.com/](https://www.kaggle.com/)
 <!-- <<<<<< END INCLUDED FILE (markdown): SOURCE ml_ai_ds_resources/staying_updated.md -->
 
 <!-- >>>>>> BEGIN INCLUDED FILE (markdown): SOURCE ml_ai_ds_resources/papers.md -->
@@ -474,6 +567,7 @@ Follow a 5 pass strategy to read a paper.
 - [pandas-profiling](https://github.com/pandas-profiling/pandas-profiling)
 - [Missing-No](https://github.com/ResidentMario/missingno)
 - Plotting Libs: [Altair](https://github.com/altair-viz/altair), [Plotly]()
+- [Good theme for Matplotlib](https://towardsdatascience.com/a-new-plot-theme-for-matplotlib-gadfly-2cffc745ff84)
 
 ### Modelling
 - [Scikit Categorical encoders](https://github.com/scikit-learn-contrib/category_encoders)
@@ -495,6 +589,8 @@ Follow a 5 pass strategy to read a paper.
 - [Lime](https://github.com/marcotcr/lime)
 - [Keract Activation Heatmap](https://github.com/philipperemy/keract)
 - [DTree Viz](https://github.com/parrt/dtreeviz)
+- [SHAP](https://github.com/slundberg/shap)
+- [CNN Feature Maps](https://github.com/lewis-morris/mapextrackt), [Grad-CAM](https://arxiv.org/abs/1610.02391), [Grad-CAM++](https://arxiv.org/abs/1710.11063)
 
 ### Performance
 - [Ray](https://docs.ray.io/en/latest/)
@@ -511,7 +607,7 @@ Follow a 5 pass strategy to read a paper.
 
 <!-- >>>>>> BEGIN INCLUDED FILE (markdown): SOURCE ml_ai_ds_resources/random_topics.md -->
 
-## Other Random Machine Learning Topics
+## Random Machine Learning Topics/Articles
 
 * [Probability Calibration](https://scikit-learn.org/stable/modules/calibration.html) [[Ref-1](https://towardsdatascience.com/probability-calibration-for-boosted-trees-24cbd0f0ccae), [Ref-2](http://danielnee.com/2014/10/calibrating-classifier-probabilties/), [Ref-3](http://fastml.com/classifier-calibration-with-platts-scaling-and-isotonic-regression/)]
 
@@ -537,10 +633,25 @@ Follow a 5 pass strategy to read a paper.
 
 * [How to lie with Statistics Summary](https://towardsdatascience.com/lessons-from-how-to-lie-with-statistics-57060c0d2f19)
 
-* [Interview Questions](https://towardsdatascience.com/40-statistics-interview-problems-and-answers-for-data-scientists-6971a02b7eee), [2](https://towardsdatascience.com/over-100-data-scientist-interview-questions-and-answers-c5a66186769a), [3](https://towardsdatascience.com/giving-some-tips-for-data-science-interviews-after-interviewing-60-candidates-at-expedia-395fff7e073b), [4](https://towardsdatascience.com/googles-data-science-interview-brain-teasers-7f3c1dc4ea7f), [5](https://towardsdatascience.com/how-i-became-an-ai-consultant-interview-questions-answers-689ba03a2620)
+* Interview Questions
+    - [Interview Questions](https://towardsdatascience.com/40-statistics-interview-problems-and-answers-for-data-scientists-6971a02b7eee), 
+    - [2](https://towardsdatascience.com/over-100-data-scientist-interview-questions-and-answers-c5a66186769a), 
+    - [3](https://towardsdatascience.com/giving-some-tips-for-data-science-interviews-after-interviewing-60-candidates-at-expedia-395fff7e073b), 
+    - [4](https://towardsdatascience.com/googles-data-science-interview-brain-teasers-7f3c1dc4ea7f), 
+    - [5](https://towardsdatascience.com/how-i-became-an-ai-consultant-interview-questions-answers-689ba03a2620), 
+    - [6](https://towardsdatascience.com/40-statistics-interview-problems-and-answers-for-data-scientists-6971a02b7eee)
+    - [7](https://towardsdatascience.com/facebooks-data-science-interview-practice-problems-46c7263709bf)
+    - [8](https://towardsdatascience.com/the-amazon-data-scientist-interview-93ba7195e4c9)
+    - [9](https://towardsdatascience.com/over-100-data-scientist-interview-questions-and-answers-c5a66186769a)
 
 * [Anyone have experience combining ML models with expert rules](https://www.reddit.com/r/MachineLearning/comments/gbdz4n/discussion_anyone_have_experience_combining_ml/)
 
+* Explainability: [deep-dive-into-catboost-functionalities-for-model-interpretation](https://towardsdatascience.com/deep-dive-into-catboost-functionalities-for-model-interpretation-7cdef669aeed)
+
+* [Technical Writing by Google](https://developers.google.com/tech-writing)
+
+## Datasets 
+* [CV datasets](https://lionbridge.ai/datasets/20-best-image-datasets-for-computer-vision/)
 
 ## Generic References
 
@@ -573,6 +684,7 @@ Follow a 5 pass strategy to read a paper.
 - [Some Tutorials](https://github.com/madewithml/lessons)
 - [Some Good Papers](https://github.com/GokuMohandas/casual-digressions)
 - [https://nlpprogress.com/](https://nlpprogress.com/)
+- [Guide to ML Research](http://joschu.net/blog/opinionated-guide-ml-research.html)
 <!-- <<<<<< END INCLUDED FILE (markdown): SOURCE ml_ai_ds_resources/random_topics.md -->
 
 <!-- >>>>>> BEGIN INCLUDED FILE (markdown): SOURCE ml_ai_ds_resources/cs.md -->

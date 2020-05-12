@@ -1,6 +1,8 @@
 
 import numpy as np # linear algebra
 import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
+import math
+
 
 def _check_df(df):
     # Empty Dataframe check
@@ -22,6 +24,7 @@ def count_nulls(df):
     df_t.index.names = ["Column"]
     return df_t.sort_values("percent_null",ascending=False)
 
+
 def count_distinct_values(df):
     _check_df(df)
     unique_counts = {}
@@ -35,15 +38,16 @@ def count_distinct_values(df):
     return unique_ctr.sort_values("count",ascending=False)
 
 
-def __particular_values_per_column(df,values):
+def __particular_values_per_column(df, values):
     _check_df(df)
     counts = {}
     for idx in df.columns.values:
-        cnt=np.sum(df[idx].isin(values).values)
-        counts[idx]=cnt
+        cnt = np.sum(df[idx].isin(values).values)
+        counts[idx] = cnt
     ctr = pd.DataFrame([counts]).T
     ctr_2 = ctr.rename(columns={0: '# Values as %s'%values})
     return ctr_2
+
 
 def get_column_datatypes(df):
     _check_df(df)
@@ -73,6 +77,7 @@ def most_common_value(df):
     description.index.names = ["Column"]
     return description
 
+
 def column_summaries(df):
     _check_df(df)
     mis_val = df.isnull().sum()
@@ -87,17 +92,19 @@ def column_summaries(df):
     mis_val_table_ren_columns = mis_val_table.rename(columns = {0 : 'Missing Values', 1 : '% missing of Total Values'})
     return mis_val_table_ren_columns
 
+
 def filter_dataframe_values(df,filter_columns):
     _check_df(df)
     df_filtered = df
     for feature in filter_columns:
         values = filter_columns[feature]
-        if(len(values)==1):
+        if len(values) == 1:
             # if only one value present assume upper range given
-            df_filtered = df_filtered[df_filtered[feature]<=values[0]]
-        elif(len(values)==2):
-            df_filtered = df_filtered[(df_filtered[feature]>=values[0]) & (df_filtered[feature]<=values[1])]
+            df_filtered = df_filtered[df_filtered[feature] <= values[0]]
+        elif len(values) == 2:
+            df_filtered = df_filtered[(df_filtered[feature] >= values[0]) & (df_filtered[feature] <= values[1])]
     return df_filtered
+
 
 def filter_dataframe_percentile(df, filter_columns):
     _check_df(df)
@@ -150,17 +157,12 @@ def drop_specific_cols(df,prefix=None,suffix=None,substring=None,inplace=False):
     return df.drop(sl,axis=1,inplace=inplace)
 
 
-
-
 def drop_columns_safely(df,columns,inplace=False):
     assert len(columns)>0,"Column list passed for dropping is empty"
     _check_df(df)
     cur_cols=set(df.columns)
     drop_columns = list(set(columns).intersection(cur_cols))
     return df.drop(drop_columns,axis=1,inplace=inplace)
-
-
-
 
 
 def find_correlated_pairs(df,thres):
@@ -204,6 +206,7 @@ def remove_correlated_pairs(df, thres, inplace=False):
     new_df = drop_columns_safely(df, dropped_cols, inplace)
     return (new_df, dropped_cols)
 
+
 def detect_nan_columns(df):
     _check_df(df)
     columns = df.columns.values.tolist()
@@ -212,6 +215,7 @@ def detect_nan_columns(df):
         if(np.sum(pd.isnull(df[colname]))>0):
             cols.append(colname)
     return list(np.sort(cols))
+
 
 def fast_read_and_append(file_path,chunksize,fullsize=1e9,dtype=None):
     # in chunk reading be careful as pandas might infer a columns dtype as different for diff chunk
@@ -227,6 +231,7 @@ def fast_read_and_append(file_path,chunksize,fullsize=1e9,dtype=None):
         iterations += 1
     return df
 
+
 def add_polynomial_and_log_features(df,f_name):
     _check_df(df)
     cnames=[f_name]
@@ -240,7 +245,3 @@ def add_polynomial_and_log_features(df,f_name):
     df[cube_col] = df[f_name]**3
     cnames += [log_col,square_col,cube_col,square_root_col]
     return cnames
-
-        
-
-    

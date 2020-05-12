@@ -11,7 +11,7 @@ from sklearn.metrics import mean_squared_error
 import seaborn as sns
 
 from sklearn.metrics import precision_recall_curve
-from sklearn.utils.fixes import signature
+from inspect import signature
 from sklearn.metrics import average_precision_score
 
 

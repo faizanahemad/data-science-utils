@@ -4,9 +4,11 @@ While I have listed the courses here, it is best to visit them and see their syl
 
 ### Basic Starter
 
-* [Stanford CS229](https://see.stanford.edu/course/cs229) ([2018 Videos](https://www.youtube.com/playlist?list=PLoROMvodv4rMiGQp3WXShtMGgzqpfVfbU), [2014 Videos](https://www.youtube.com/playlist?list=PLA89DCFA6ADACE599))[[Notes](http://cs229.stanford.edu/syllabus.html) [Cheatsheet](https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-supervised-learning)](A more mathematical version of [Andrew ng’s](https://www.coursera.org/learn/machine-learning)|[Coursera course](https://www.youtube.com/playlist?list=PLLssT5z_DsK-h9vYZkQkYNWcItqhlRJLN)) or [ML carnegie melon 2011](http://www.cs.cmu.edu/~tom/10701_sp11/lectures.shtml) or [Stanford Statistical Learning](https://www.edx.org/course/statistical-learning) or [Caltech ML basics](https://work.caltech.edu/telecourse.html#lectures) or [Udacity GTech ML](https://www.udacity.com/course/machine-learning--ud262)
+* [Stanford CS229](https://see.stanford.edu/course/cs229) ([2018 Videos](https://www.youtube.com/playlist?list=PLoROMvodv4rMiGQp3WXShtMGgzqpfVfbU), [2014 Videos](https://www.youtube.com/playlist?list=PLA89DCFA6ADACE599))[[Notes](http://cs229.stanford.edu/syllabus.html) [Cheatsheet](https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-supervised-learning)](A more mathematical version of [Andrew ng’s](https://www.coursera.org/learn/machine-learning)|[Coursera course](https://www.youtube.com/playlist?list=PLLssT5z_DsK-h9vYZkQkYNWcItqhlRJLN)) or [ML carnegie melon 2011](http://www.cs.cmu.edu/~tom/10701_sp11/lectures.shtml) or [Stanford Statistical Learning](https://www.edx.org/course/statistical-learning) or [Caltech ML basics](https://work.caltech.edu/telecourse.html#lectures) ([Videos](http://work.caltech.edu/lectures.html)) or [Udacity GTech ML](https://www.udacity.com/course/machine-learning--ud262)
 
 * [MIT Intro to Computational Thinking and Data Science](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-0002-introduction-to-computational-thinking-and-data-science-fall-2016/)
+
+* [Google ML Crash Course](https://developers.google.com/machine-learning/crash-course/ml-intro)
 
 * [EDX Machine Learning Fundamentals](https://courses.edx.org/courses/course-v1:UCSanDiegoX+DSE220x+3T2019/course/)
 
@@ -23,6 +25,8 @@ While I have listed the courses here, it is best to visit them and see their syl
 * [Data Science: Inferential Thinking through Simulations](https://www.edx.org/course/foundations-of-data-science-inferential-thinking-b)
 
 ### Some Advanced Courses
+
+* [COMS W4995 Applied Machine Learning Spring 2020](https://www.youtube.com/playlist?list=PL_pVmAaAnxIRnSw6wiCpSvshFyCREZmlM) [Website](https://www.cs.columbia.edu/~amueller/comsw4995s20/), 
 
 * [Another Mathematical Treatment and general coverage of ML by Washington Uni](https://www.youtube.com/playlist?list=PLTPQEx-31JXhguCush5J7OGnEORofoCW9) ([Course Materials](http://mathofml.cs.washington.edu/)) or [CORNELL CS4780 “Machine Learning for Intelligent Systems”](http://www.cs.cornell.edu/courses/cs4780/2018fa/lectures/)
 
@@ -42,11 +46,11 @@ While I have listed the courses here, it is best to visit them and see their syl
 
 * [ESL book](https://web.stanford.edu/~hastie/ElemStatLearn/printings/ESLII_print12.pdf) ([Site](https://web.stanford.edu/~hastie/ElemStatLearn/)) [ESL Solutions](https://waxworksmath.com/Authors/G_M/Hastie/WriteUp/Weatherwax_Epstein_Hastie_Solution_Manual.pdf) ([soln 2](https://blog.princehonest.com/stat-learning/) [[Backup](https://github.com/asadoughi/stat-learning)])([Notes 1](https://github.com/empathy87/The-Elements-of-Statistical-Learning-Python-Notebooks), [2](https://github.com/dgkim5360/the-elements-of-statistical-learning-notebooks), [3](https://github.com/maitbayev/the-elements-of-statistical-learning), [4](https://getd.libs.uga.edu/pdfs/ma_james_c_201412_ms.pdf))
 
-* [Probabilistic Graphical Models Specialization](https://www.coursera.org/specializations/probabilistic-graphical-models)
+* [Probabilistic Graphical Models Specialization](https://www.coursera.org/specializations/probabilistic-graphical-models), [Probabilistic Graphical Models by CMU](https://www.cs.cmu.edu/~epxing/Class/10708-20/), [Graphical Models: Jeffrey A. Bilmes](https://www.youtube.com/channel/UCvPnLF7oUh4p-m575fZcUxg/videos)
 
 * John Hopkins Advanced Linear Models for Data Science [Part 1](https://www.coursera.org/learn/linear-models) and [Part 2](https://www.coursera.org/learn/linear-models-2).
 
-* [ML by Mathematical Monk on YT](https://www.youtube.com/playlist?list=PLD0F06AA0D2E8FFBA)
+* [ML by Mathematical Monk on YT](https://www.youtube.com/playlist?list=PLD0F06AA0D2E8FFBA), [Information Theory by Jeffrey A. Bilmes](https://www.youtube.com/channel/UCvPnLF7oUh4p-m575fZcUxg/videos)
 
 * [Statistical Methods in Machine Learning Syllabus](http://www.stat.cmu.edu/~larry/=sml/syllabus.pdf) ([Notes and Exercises](http://www.stat.cmu.edu/~larry/=sml/))
 
@@ -58,11 +62,28 @@ While I have listed the courses here, it is best to visit them and see their syl
 
 * [DEEP LEARNING DS-GA 1008 · SPRING 2020 · NYU CENTER FOR DATA SCIENCE](https://atcold.github.io/pytorch-Deep-Learning/)
 
-* [Deep Learning Book](https://www.deeplearningbook.org/) ([Chapter Summaries](https://github.com/dalmia/Deep-Learning-Book-Chapter-Summaries))
+* [Analyses of Deep Learning (STATS 385) Stanford University, Fall 2019](https://stats385.github.io/) ([Videos](https://www.researchgate.net/project/Theories-of-Deep-Learning))
 
-* [Neural Networks by Hugo Larochelle](https://www.youtube.com/playlist?list=PL6Xpj9I5qXYEcOhn7TqghAJ6NAPrNmUBH)
+* [IFT 6085: Theoretical principles for deep learning](http://mitliagkas.github.io/ift6085-dl-theory-class-2019/)
+
+* [DL Brown Uni Assignments](http://cs.brown.edu/courses/cs1470/assignments.html)
+
+* [EPFL EE-559 – DEEP LEARNING](https://fleuret.org/ee559/)
+
+* Books for Deep Learning
+    - [Deep Learning Book](https://www.deeplearningbook.org/) ([Chapter Summaries](https://github.com/dalmia/Deep-Learning-Book-Chapter-Summaries), [Videos](https://www.youtube.com/channel/UCF9O8Vj-FEbRDA5DcDGz-Pg/playlists), )
+    - [Dive into Deep Learning Book](https://d2l.ai/), [Berkeley Site](https://courses.d2l.ai/berkeley-stat-157/index.html), [Pytorch Codes](https://github.com/dsgiitr/d2l-pytorch)
+    - [Neural Network Design](http://hagan.okstate.edu/nnd.html)
+    - [Neural Networks and Deep Learning](http://neuralnetworksanddeeplearning.com/) [GitHub](https://github.com/mnielsen/neural-networks-and-deep-learning) [solutions](https://github.com/reachtarunhere/nndl/blob/master/2016-11-22-ch1-sigmoid-2.md)
+    
+
+* [Neural Networks by Hugo Larochelle](https://www.youtube.com/playlist?list=PL6Xpj9I5qXYEcOhn7TqghAJ6NAPrNmUBH) ([Course Website](http://info.usherbrooke.ca/hlarochelle/neural_networks/content.html))
+
+* [CS294-158-SP20 Deep Unsupervised Learning Spring 2020](https://sites.google.com/view/berkeley-cs294-158-sp20/home)
 
 * [MIT Introduction to Deep Learning](http://introtodeeplearning.com/) ([Videos](https://www.youtube.com/playlist?list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI))
+
+* [Carnegie Mellon University Deep Learning](https://www.youtube.com/channel/UC8hYZGEkI2dDO8scT8C5UQA/playlists), [CMU DL website](https://deeplearning.cs.cmu.edu/)
 
 ### Field Specific Stuff: Computer Vision
 
@@ -81,12 +102,18 @@ While I have listed the courses here, it is best to visit them and see their syl
 
 * [Gtech RL](https://www.udacity.com/course/reinforcement-learning--ud600)
 
+* [David-Silver-Reinforcement-learning](https://github.com/dalmia/David-Silver-Reinforcement-learning) ([davidsilver](https://www.davidsilver.uk/teaching/))
+
 ### Field Specific Stuff: Recommendation Systems
 
 <Yet to Add>
 
 ### Other Random Areas/Resources
+* [Curated: awesome-ml-courses](https://github.com/luspr/awesome-ml-courses)
+
+* [deep-learning-drizzle](https://deep-learning-drizzle.github.io/) ([Github Page](https://github.com/kmario23/deep-learning-drizzle/blob/master/README.md))
 
 * [HarvardX’s Fundamentals of Neuroscience XSeries](https://www.edx.org/xseries/harvardx-fundamentals-of-neuroscience)
 
 * [https://www.edx.org/course/subject/data-science](https://www.edx.org/course/subject/data-science)
+

@@ -1,5 +1,5 @@
 
-## Other Random Machine Learning Topics
+## Random Machine Learning Topics/Articles
 
 * [Probability Calibration](https://scikit-learn.org/stable/modules/calibration.html) [[Ref-1](https://towardsdatascience.com/probability-calibration-for-boosted-trees-24cbd0f0ccae), [Ref-2](http://danielnee.com/2014/10/calibrating-classifier-probabilties/), [Ref-3](http://fastml.com/classifier-calibration-with-platts-scaling-and-isotonic-regression/)]
 
@@ -25,10 +25,25 @@
 
 * [How to lie with Statistics Summary](https://towardsdatascience.com/lessons-from-how-to-lie-with-statistics-57060c0d2f19)
 
-* [Interview Questions](https://towardsdatascience.com/40-statistics-interview-problems-and-answers-for-data-scientists-6971a02b7eee), [2](https://towardsdatascience.com/over-100-data-scientist-interview-questions-and-answers-c5a66186769a), [3](https://towardsdatascience.com/giving-some-tips-for-data-science-interviews-after-interviewing-60-candidates-at-expedia-395fff7e073b), [4](https://towardsdatascience.com/googles-data-science-interview-brain-teasers-7f3c1dc4ea7f), [5](https://towardsdatascience.com/how-i-became-an-ai-consultant-interview-questions-answers-689ba03a2620)
+* Interview Questions
+    - [Interview Questions](https://towardsdatascience.com/40-statistics-interview-problems-and-answers-for-data-scientists-6971a02b7eee), 
+    - [2](https://towardsdatascience.com/over-100-data-scientist-interview-questions-and-answers-c5a66186769a), 
+    - [3](https://towardsdatascience.com/giving-some-tips-for-data-science-interviews-after-interviewing-60-candidates-at-expedia-395fff7e073b), 
+    - [4](https://towardsdatascience.com/googles-data-science-interview-brain-teasers-7f3c1dc4ea7f), 
+    - [5](https://towardsdatascience.com/how-i-became-an-ai-consultant-interview-questions-answers-689ba03a2620), 
+    - [6](https://towardsdatascience.com/40-statistics-interview-problems-and-answers-for-data-scientists-6971a02b7eee)
+    - [7](https://towardsdatascience.com/facebooks-data-science-interview-practice-problems-46c7263709bf)
+    - [8](https://towardsdatascience.com/the-amazon-data-scientist-interview-93ba7195e4c9)
+    - [9](https://towardsdatascience.com/over-100-data-scientist-interview-questions-and-answers-c5a66186769a)
 
 * [Anyone have experience combining ML models with expert rules](https://www.reddit.com/r/MachineLearning/comments/gbdz4n/discussion_anyone_have_experience_combining_ml/)
 
+* Explainability: [deep-dive-into-catboost-functionalities-for-model-interpretation](https://towardsdatascience.com/deep-dive-into-catboost-functionalities-for-model-interpretation-7cdef669aeed)
+
+* [Technical Writing by Google](https://developers.google.com/tech-writing)
+
+## Datasets 
+* [CV datasets](https://lionbridge.ai/datasets/20-best-image-datasets-for-computer-vision/)
 
 ## Generic References
 
@@ -61,3 +76,4 @@
 - [Some Tutorials](https://github.com/madewithml/lessons)
 - [Some Good Papers](https://github.com/GokuMohandas/casual-digressions)
 - [https://nlpprogress.com/](https://nlpprogress.com/)
+- [Guide to ML Research](http://joschu.net/blog/opinionated-guide-ml-research.html)
