@@ -6,6 +6,7 @@ At a minimum keep checking reddit and Stack Exchange sites. [StatQuest by Josh S
 ### Video Resources
 * Other
     - [VideoLectures.net](http://videolectures.net/Top/Computer_Science/Machine_Learning/#l=en), 
+    - [SDS Podcast](https://www.superdatascience.com/podcast)
     - [MLSS 2014](https://www.youtube.com/playlist?list=PLZSO_6-bSqHQCIYxE3ycGLXHMjK3XV7Iz), [2019](https://sites.google.com/view/mlss-2019/lectures-and-tutorials?authuser=0)
 * YT
     - [Arxiv Insights](https://www.youtube.com/channel/UCNIkB2IeJ-6AmZv7bQ1oBYg), 
@@ -15,6 +16,8 @@ At a minimum keep checking reddit and Stack Exchange sites. [StatQuest by Josh S
     - [Ahlad.K on Youtube](https://www.youtube.com/user/kumarahlad/playlists), 
     - [Robert Miles](https://www.youtube.com/channel/UCLB7AzTwc6VFZrBsO2ucBMg), 
     - [Computerphile](https://www.youtube.com/user/Computerphile)
+    - [Lex Fridman](https://www.youtube.com/user/lexfridman/featured)
+    
 
 
 ### Article Resources
@@ -43,19 +46,20 @@ At a minimum keep checking reddit and Stack Exchange sites. [StatQuest by Josh S
     - [https://openai.com/blog/](https://openai.com/blog/), 
     - [https://ai.googleblog.com/](https://ai.googleblog.com/), 
     - [Explained](https://explained.ai/)
+    - [NTU Graph Deep Learning Lab](https://graphdeeplearning.github.io/)
     - [http://newsletter.ruder.io/](http://newsletter.ruder.io/), 
     - [https://ruder.io/](https://ruder.io/), 
     - [https://virgili0.github.io/Virgilio/](https://virgili0.github.io/Virgilio/), 
     - [https://bair.berkeley.edu/blog/](https://bair.berkeley.edu/blog/), 
     - [The Batch](https://www.deeplearning.ai/thebatch/)
     - [Data Science Weekly Newsletter Archive](https://www.datascienceweekly.org/newsletters)
+    - [AI FB](https://ai.facebook.com/)
     - [AV DL](https://www.analyticsvidhya.com/blog/category/deep-learning/)
     - [http://www.wildml.com/](http://www.wildml.com/)
     - [https://www.topbots.com/](https://www.topbots.com/)
     - [https://rubikscode.net/category/ai/this-week-in-ai/](https://rubikscode.net/category/ai/this-week-in-ai/)
     - [TDS Learning Section](https://towardsdatascience.com/learn-on-towards-data-science-52245bc91451)
     - [Data science blogs](https://github.com/rushter/data-science-blogs)
-    - [AI FB](https://ai.facebook.com/)
     - [datasciencecentral](https://www.datasciencecentral.com/)
     - [fivethirtyeight](https://fivethirtyeight.com/)
     - [101.datascience](https://101.datascience.community/)
@@ -71,6 +75,8 @@ At a minimum keep checking reddit and Stack Exchange sites. [StatQuest by Josh S
     - [http://www.offconvex.org/](http://www.offconvex.org/)
     - [Karpathy Blog](https://karpathy.github.io/)
     - [computervisionblog](https://www.computervisionblog.com/)
+    - [jalammar](http://jalammar.github.io/)
+    - [the morning paper](https://blog.acolyer.org/)
 
 * Projects
     - [SOTA by paperswithcode](https://paperswithcode.com/sota)

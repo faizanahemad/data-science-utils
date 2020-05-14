@@ -105,17 +105,50 @@ While I have listed the courses here, it is best to visit them and see their syl
 ### Field Specific Stuff: NLP
 
 * [Stanford CS224N: Natural Language Processing with Deep Learning | Winter 2019](http://web.stanford.edu/class/cs224n/) ([Vids](https://www.youtube.com/playlist?list=PLoROMvodv4rOhcuXMZkNm7j3fVwBBY42z))
-* [Standford CS224U](https://web.stanford.edu/class/cs224u/)
+* [Standford CS224U](https://web.stanford.edu/class/cs224u/), [Stanford ML book](https://web.stanford.edu/~jurafsky/slp3/)
 * [Natural Language Processing | University of Michigan](https://www.youtube.com/playlist?list=PLLssT5z_DsK8BdawOVCCaTCO99Ya58ryR), 
 * [Coursera Natural Language Processing | Dan Jurafsky, Christopher Manning](https://www.youtube.com/playlist?list=PLQiyVNMpDLKnZYBTUOlSI9mi9wAErFtFm) [Slides](https://web.stanford.edu/~jurafsky/NLPCourseraSlides.html)
 
 ### Field Specific Stuff: Reinforcement Learning
 
+* Intros
+    - [DRL FreeCodeCamp](https://medium.com/free-code-camp/an-introduction-to-reinforcement-learning-4339519de419)
+    - [Deep Reinforcement Learning: Pong from Pixels](http://karpathy.github.io/2016/05/31/rl/)
+    - [Deep Reinforcement Learning, Decision Making, and Control](https://vimeo.com/240428644)
+    - [Neural Information Processing Systems Conference - NIPS 2016 Deep Reinforcement Learning Through Policy Optimization, Jan 23, 2017 at 11:13AM by Pieter Abbeel](https://channel9.msdn.com/Events/Neural-Information-Processing-Systems-Conference/Neural-Information-Processing-Systems-Conference-NIPS-2016/Deep-Reinforcement-Learning-Through-Policy-Optimization)
+    - [MIT 6.S091: Introduction to Deep Reinforcement Learning (Deep RL)](https://www.youtube.com/watch?v=zR11FLZ-O9M&feature=youtu.be)
+    - [Deep Reinforcement Learning](http://videolectures.net/rldm2015_silver_reinforcement_learning/)
+    
+* [Deep RL Bootcamp 26-27 August 2017   |   Berkeley CA](https://sites.google.com/view/deep-rl-bootcamp/lectures)    
+
 * [CS234: Reinforcement Learning | Winter 2019](https://www.youtube.com/playlist?list=PLoROMvodv4rOSOPzutgyCTapiGlY2Nd8u) ([http://web.stanford.edu/class/cs234/index.html](http://web.stanford.edu/class/cs234/index.html))
+
+* [CS 285 at UC Berkeley Deep Reinforcement Learning](http://rail.eecs.berkeley.edu/deeprlcourse/)
+
+* [A Free course in Deep Reinforcement Learning](https://simoninithomas.github.io/Deep_reinforcement_learning_Course/)
+
+* UCL course 
+    - [David-Silver-Reinforcement-learning](https://github.com/dalmia/David-Silver-Reinforcement-learning) ([davidsilver](https://www.davidsilver.uk/teaching/), [Videos](https://www.youtube.com/playlist?list=PLqYmG7hTraZDM-OYHWgPebj2MfCFzFObQ), [Easy21 Soln 1](https://github.com/luofan18/Reinforcement-learning-playing-easy21), [Easy21 Soln 2](https://github.com/kvfrans/Easy21-RL)), 
+    - [Newer Videos - Slow and Easier - Advanced Deep Learning & Reinforcement Learning UCL](https://www.youtube.com/playlist?list=PLqYmG7hTraZDNJre23vqCGIVpfZ_K2RZs)
+
+* [IIT-M RL](https://www.cse.iitm.ac.in/~ravi/courses/Reinforcement%20Learning.html), [YT](https://www.youtube.com/playlist?list=PLuWx2S0SyaDctJtVKHhmjYACmHZ3nX9ew)
+
+* [dennybritz/reinforcement-learning](https://github.com/dennybritz/reinforcement-learning), [NervanaSystems/coach](https://github.com/NervanaSystems/coach), [rlcode/reinforcement-learning](https://github.com/rlcode/reinforcement-learning)
+
+* [https://mpatacchiola.github.io/](https://mpatacchiola.github.io/blog/)
+
+* [Richard S. Sutton and Andrew G. Barto Reinforcement Learning: An Introduction Book](http://incompleteideas.net/book/the-book-2nd.html)
 
 * [Gtech RL](https://www.udacity.com/course/reinforcement-learning--ud600)
 
-* [David-Silver-Reinforcement-learning](https://github.com/dalmia/David-Silver-Reinforcement-learning) ([davidsilver](https://www.davidsilver.uk/teaching/))
+* [More Resources]
+    - [Awesome RL](https://github.com/aikorea/awesome-rl)
+    - [Spinning Up in Deep RL!](https://spinningup.openai.com/en/latest/)
+    - [Deep Learning and Reinforcement Learning Summer School, Toronto 2018](http://videolectures.net/DLRLsummerschool2018_toronto/), [Notes](https://yobibyte.github.io/rlss17.html#rlss17)
+    - [Using Keras and Deep Deterministic Policy Gradient to play TORCS](https://yanpanlau.github.io/2016/10/11/Torcs-Keras.html)
+    - [Using Keras and Deep Q-Network to Play FlappyBird](https://yanpanlau.github.io/2016/07/10/FlappyBird-Keras.html)
+    - [Reddit: free resources to learn Deep Reinforcement Learning](https://www.reddit.com/r/reinforcementlearning/comments/ci1bvy/opinions_on_free_resources_to_learn_deep/)
+    
 
 ### Field Specific Stuff: Recommendation Systems
 

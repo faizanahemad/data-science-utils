@@ -44,8 +44,7 @@ In my suggestion having 2 parallel threads, 1 on ML and 1 on Maths is best. Stud
   - [Finding Good Papers](#finding-good-papers)
   - [Finding Good papers](#finding-good-papers-1)
   - [Reading a Paper](#reading-a-paper)
-- [Some Good Papers That I am reading and plan to Blog about](#some-good-papers-that-i-am-reading-and-plan-to-blog-about)
-  - [Attention and Transformers](#attention-and-transformers)
+- [Some Good Papers That I am reading](#some-good-papers-that-i-am-reading)
 - [Engineering Aspects](#engineering-aspects)
   - [Before Starting a Project](#before-starting-a-project)
   - [DL](#dl)
@@ -70,6 +69,7 @@ In my suggestion having 2 parallel threads, 1 on ML and 1 on Maths is best. Stud
   - [Explainability: ](#explainability-)
   - [Deep Learning](#deep-learning)
   - [NLP](#nlp-1)
+  - [RL](#rl-1)
   - [Misc](#misc)
 - [Datasets ](#datasets-)
 - [Generic References](#generic-references)
@@ -199,17 +199,50 @@ While I have listed the courses here, it is best to visit them and see their syl
 ### Field Specific Stuff: NLP
 
 * [Stanford CS224N: Natural Language Processing with Deep Learning | Winter 2019](http://web.stanford.edu/class/cs224n/) ([Vids](https://www.youtube.com/playlist?list=PLoROMvodv4rOhcuXMZkNm7j3fVwBBY42z))
-* [Standford CS224U](https://web.stanford.edu/class/cs224u/)
+* [Standford CS224U](https://web.stanford.edu/class/cs224u/), [Stanford ML book](https://web.stanford.edu/~jurafsky/slp3/)
 * [Natural Language Processing | University of Michigan](https://www.youtube.com/playlist?list=PLLssT5z_DsK8BdawOVCCaTCO99Ya58ryR), 
 * [Coursera Natural Language Processing | Dan Jurafsky, Christopher Manning](https://www.youtube.com/playlist?list=PLQiyVNMpDLKnZYBTUOlSI9mi9wAErFtFm) [Slides](https://web.stanford.edu/~jurafsky/NLPCourseraSlides.html)
 
 ### Field Specific Stuff: Reinforcement Learning
 
+* Intros
+    - [DRL FreeCodeCamp](https://medium.com/free-code-camp/an-introduction-to-reinforcement-learning-4339519de419)
+    - [Deep Reinforcement Learning: Pong from Pixels](http://karpathy.github.io/2016/05/31/rl/)
+    - [Deep Reinforcement Learning, Decision Making, and Control](https://vimeo.com/240428644)
+    - [Neural Information Processing Systems Conference - NIPS 2016 Deep Reinforcement Learning Through Policy Optimization, Jan 23, 2017 at 11:13AM by Pieter Abbeel](https://channel9.msdn.com/Events/Neural-Information-Processing-Systems-Conference/Neural-Information-Processing-Systems-Conference-NIPS-2016/Deep-Reinforcement-Learning-Through-Policy-Optimization)
+    - [MIT 6.S091: Introduction to Deep Reinforcement Learning (Deep RL)](https://www.youtube.com/watch?v=zR11FLZ-O9M&feature=youtu.be)
+    - [Deep Reinforcement Learning](http://videolectures.net/rldm2015_silver_reinforcement_learning/)
+    
+* [Deep RL Bootcamp 26-27 August 2017   |   Berkeley CA](https://sites.google.com/view/deep-rl-bootcamp/lectures)    
+
 * [CS234: Reinforcement Learning | Winter 2019](https://www.youtube.com/playlist?list=PLoROMvodv4rOSOPzutgyCTapiGlY2Nd8u) ([http://web.stanford.edu/class/cs234/index.html](http://web.stanford.edu/class/cs234/index.html))
+
+* [CS 285 at UC Berkeley Deep Reinforcement Learning](http://rail.eecs.berkeley.edu/deeprlcourse/)
+
+* [A Free course in Deep Reinforcement Learning](https://simoninithomas.github.io/Deep_reinforcement_learning_Course/)
+
+* UCL course 
+    - [David-Silver-Reinforcement-learning](https://github.com/dalmia/David-Silver-Reinforcement-learning) ([davidsilver](https://www.davidsilver.uk/teaching/), [Videos](https://www.youtube.com/playlist?list=PLqYmG7hTraZDM-OYHWgPebj2MfCFzFObQ), [Easy21 Soln 1](https://github.com/luofan18/Reinforcement-learning-playing-easy21), [Easy21 Soln 2](https://github.com/kvfrans/Easy21-RL)), 
+    - [Newer Videos - Slow and Easier - Advanced Deep Learning & Reinforcement Learning UCL](https://www.youtube.com/playlist?list=PLqYmG7hTraZDNJre23vqCGIVpfZ_K2RZs)
+
+* [IIT-M RL](https://www.cse.iitm.ac.in/~ravi/courses/Reinforcement%20Learning.html), [YT](https://www.youtube.com/playlist?list=PLuWx2S0SyaDctJtVKHhmjYACmHZ3nX9ew)
+
+* [dennybritz/reinforcement-learning](https://github.com/dennybritz/reinforcement-learning), [NervanaSystems/coach](https://github.com/NervanaSystems/coach), [rlcode/reinforcement-learning](https://github.com/rlcode/reinforcement-learning)
+
+* [https://mpatacchiola.github.io/](https://mpatacchiola.github.io/blog/)
+
+* [Richard S. Sutton and Andrew G. Barto Reinforcement Learning: An Introduction Book](http://incompleteideas.net/book/the-book-2nd.html)
 
 * [Gtech RL](https://www.udacity.com/course/reinforcement-learning--ud600)
 
-* [David-Silver-Reinforcement-learning](https://github.com/dalmia/David-Silver-Reinforcement-learning) ([davidsilver](https://www.davidsilver.uk/teaching/))
+* [More Resources]
+    - [Awesome RL](https://github.com/aikorea/awesome-rl)
+    - [Spinning Up in Deep RL!](https://spinningup.openai.com/en/latest/)
+    - [Deep Learning and Reinforcement Learning Summer School, Toronto 2018](http://videolectures.net/DLRLsummerschool2018_toronto/), [Notes](https://yobibyte.github.io/rlss17.html#rlss17)
+    - [Using Keras and Deep Deterministic Policy Gradient to play TORCS](https://yanpanlau.github.io/2016/10/11/Torcs-Keras.html)
+    - [Using Keras and Deep Q-Network to Play FlappyBird](https://yanpanlau.github.io/2016/07/10/FlappyBird-Keras.html)
+    - [Reddit: free resources to learn Deep Reinforcement Learning](https://www.reddit.com/r/reinforcementlearning/comments/ci1bvy/opinions_on_free_resources_to_learn_deep/)
+    
 
 ### Field Specific Stuff: Recommendation Systems
 
@@ -246,6 +279,8 @@ In general follow MIT OCW’s resources and search google/youtube for good expla
 ### Basic: Probability and Statistics
 
 * [Probability](https://www.youtube.com/playlist?list=PL2SOU6wwxB0uwwH80KTQ6ht66KWxbzTIo) (STAT 110 Harvard), [MIT 6–012 Introduction to Probability](https://ocw.mit.edu/resources/res-6-012-introduction-to-probability-spring-2018/) [Youtube Playlist](https://www.youtube.com/playlist?list=PLUl4u3cNGP60A3XMwZ5sep719_nh95qOe) or [EDX Harvard Probability](https://www.edx.org/course/introduction-to-probability) ([HarvardX: STAT110x EDX Introduction to Probability](https://courses.edx.org/courses/course-v1:HarvardX+STAT110x+1T2020/course/))
+
+* [Probability Theory Lectures](https://www.youtube.com/playlist?list=PL9v9IXDsJkktefQzX39wC2YG07vw7DsQ_), Follow PROBABILITY THEORY: THE LOGIC OF SCIENCE
 
 * [Intermediate Statistics by Larry Wasserman](https://www.youtube.com/playlist?list=PLJPW8OTey_OZk6K_9QLpguoPg_Ip3GkW_) ([Course page with Slides and assignments](http://www.stat.cmu.edu/~larry/=stat705/)| [All of statistics Book pdf](https://drive.google.com/open?id=1p0YcNL1zHbrjKtGaSgu9bMI88dF-_qWg))
 
@@ -417,6 +452,7 @@ At a minimum keep checking reddit and Stack Exchange sites. [StatQuest by Josh S
 ### Video Resources
 * Other
     - [VideoLectures.net](http://videolectures.net/Top/Computer_Science/Machine_Learning/#l=en), 
+    - [SDS Podcast](https://www.superdatascience.com/podcast)
     - [MLSS 2014](https://www.youtube.com/playlist?list=PLZSO_6-bSqHQCIYxE3ycGLXHMjK3XV7Iz), [2019](https://sites.google.com/view/mlss-2019/lectures-and-tutorials?authuser=0)
 * YT
     - [Arxiv Insights](https://www.youtube.com/channel/UCNIkB2IeJ-6AmZv7bQ1oBYg), 
@@ -426,6 +462,8 @@ At a minimum keep checking reddit and Stack Exchange sites. [StatQuest by Josh S
     - [Ahlad.K on Youtube](https://www.youtube.com/user/kumarahlad/playlists), 
     - [Robert Miles](https://www.youtube.com/channel/UCLB7AzTwc6VFZrBsO2ucBMg), 
     - [Computerphile](https://www.youtube.com/user/Computerphile)
+    - [Lex Fridman](https://www.youtube.com/user/lexfridman/featured)
+    
 
 
 ### Article Resources
@@ -454,19 +492,20 @@ At a minimum keep checking reddit and Stack Exchange sites. [StatQuest by Josh S
     - [https://openai.com/blog/](https://openai.com/blog/), 
     - [https://ai.googleblog.com/](https://ai.googleblog.com/), 
     - [Explained](https://explained.ai/)
+    - [NTU Graph Deep Learning Lab](https://graphdeeplearning.github.io/)
     - [http://newsletter.ruder.io/](http://newsletter.ruder.io/), 
     - [https://ruder.io/](https://ruder.io/), 
     - [https://virgili0.github.io/Virgilio/](https://virgili0.github.io/Virgilio/), 
     - [https://bair.berkeley.edu/blog/](https://bair.berkeley.edu/blog/), 
     - [The Batch](https://www.deeplearning.ai/thebatch/)
     - [Data Science Weekly Newsletter Archive](https://www.datascienceweekly.org/newsletters)
+    - [AI FB](https://ai.facebook.com/)
     - [AV DL](https://www.analyticsvidhya.com/blog/category/deep-learning/)
     - [http://www.wildml.com/](http://www.wildml.com/)
     - [https://www.topbots.com/](https://www.topbots.com/)
     - [https://rubikscode.net/category/ai/this-week-in-ai/](https://rubikscode.net/category/ai/this-week-in-ai/)
     - [TDS Learning Section](https://towardsdatascience.com/learn-on-towards-data-science-52245bc91451)
     - [Data science blogs](https://github.com/rushter/data-science-blogs)
-    - [AI FB](https://ai.facebook.com/)
     - [datasciencecentral](https://www.datasciencecentral.com/)
     - [fivethirtyeight](https://fivethirtyeight.com/)
     - [101.datascience](https://101.datascience.community/)
@@ -482,6 +521,8 @@ At a minimum keep checking reddit and Stack Exchange sites. [StatQuest by Josh S
     - [http://www.offconvex.org/](http://www.offconvex.org/)
     - [Karpathy Blog](https://karpathy.github.io/)
     - [computervisionblog](https://www.computervisionblog.com/)
+    - [jalammar](http://jalammar.github.io/)
+    - [the morning paper](https://blog.acolyer.org/)
 
 * Projects
     - [SOTA by paperswithcode](https://paperswithcode.com/sota)
@@ -549,7 +590,7 @@ When you are new to this field, ensure that you take up those papers which are c
 
 ### Reading a Paper
 
-Follow a 5 pass strategy to read a paper. 
+Follow a 5 pass strategy to read a paper. For most papers released post 2019 and with low citation counts -  Read the paper, extract the idea but if no code is present those numbers are most likely faulty.
 
 * **First pass**: understanding what the paper is trying to convey, important results, basically getting the story. For this read the abstract, titles/heading and the conclusion
 
@@ -561,11 +602,57 @@ Follow a 5 pass strategy to read a paper.
 
 * **Fifth Pass**: if a reference implementation exists then look at it.
 
-[More info here](http://blizzard.cs.uwaterloo.ca/keshav/home/Papers/data/07/paper-reading.pdf) and [here](https://elfsternberg.com/2018/10/27/so-you-want-to-get-into-theoretical-computer-science/) and [here](https://web.stanford.edu/class/ee384m/Handouts/HowtoReadPaper.pdf)
+[More info here](http://blizzard.cs.uwaterloo.ca/keshav/home/Papers/data/07/paper-reading.pdf) and [here](https://elfsternberg.com/2018/10/27/so-you-want-to-get-into-theoretical-computer-science/) and [here](https://web.stanford.edu/class/ee384m/Handouts/HowtoReadPaper.pdf) and [here](https://www.sciencemag.org/careers/2016/03/how-seriously-read-scientific-paper)
 
-## Some Good Papers That I am reading and plan to Blog about
+## Some Good Papers That I am reading
+- Attention and Transformers
+    - [NMT Paper by Bahdanau ICLR 2015](https://arxiv.org/abs/1409.0473)
+    - [Show, Attend and Tell](https://arxiv.org/abs/1502.03044)
+    - [A Structured Self-attentive Sentence Embedding](https://arxiv.org/abs/1703.03130)
+    - [Attention Is All You Need](https://arxiv.org/abs/1706.03762)
+    - [BERT](https://arxiv.org/abs/1810.04805), [A Primer in BERTology: What we know about how BERT works](https://arxiv.org/abs/2002.12327)
+    - Making Transformers Smaller and fixing other issues with them.
+        - [Transformer-XL](https://arxiv.org/abs/1901.02860)
+        - [Reformer: The Efficient Transformer](https://arxiv.org/abs/2001.04451)
+        - [Pay Less Attention with Lightweight and Dynamic Convolutions](https://arxiv.org/abs/1901.10430)
+        - [Adaptive Attention Span in Transformers](https://arxiv.org/abs/1905.07799)
+        - [Time-aware Large Kernel Convolutions](https://arxiv.org/abs/2002.03184)
+    - Other Interesting Papers using Attention
+        - [Stand-Alone Self-Attention in Vision Models](https://arxiv.org/abs/1906.05909)
+    - [TRANSFORMERS FROM SCRATCH](http://www.peterbloem.nl/blog/transformers)
+    - [The Illustrated Transformer](http://jalammar.github.io/illustrated-transformer/)
+    - [Transformers are Graph Neural Networks](https://graphdeeplearning.github.io/post/transformers-are-gnns/)
+    - [The Annotated Transformer](http://nlp.seas.harvard.edu/2018/04/03/attention.html)
+    
+- Graph Neural Networks
+    - [A Comprehensive Survey on Graph Neural Networks 2019](https://arxiv.org/abs/1901.00596)
+    - [Machine Learning on Graphs: A Model and Comprehensive Taxonomy 2020](https://arxiv.org/abs/2005.03675)
+    - [GCMC]()
+    - [GraphSage]()
+    - Scaling Graph networks
+        - [PyTorch-BigGraph: A Large-scale Graph Embedding System](https://arxiv.org/abs/1903.12287)
+        - [SIGN: Scalable Inception Graph Neural Networks](https://arxiv.org/abs/2004.11198)
 
-### Attention and Transformers
+
+- Deep Reinforcement Learning
+    - [A Brief Survey of Deep Reinforcement Learning](https://arxiv.org/abs/1708.05866)
+    - [Deep Reinforcement Learning: An Overview](https://arxiv.org/abs/1701.07274)
+    - [Key Papers in Deep R](https://spinningup.openai.com/en/latest/spinningup/keypapers.html)
+    - [deep-reinforcement-learning-papers](https://github.com/muupan/deep-reinforcement-learning-papers)
+
+- Deep Reinforcement Learning For SQL optimisations
+    - [Learning to Optimize Join Queries With Deep Reinforcement Learning](https://arxiv.org/abs/1808.03196), [Blog by Berkeley Lab](https://rise.cs.berkeley.edu/blog/sql-query-optimization-meets-deep-reinforcement-learning/)
+    - [Towards a hands-free query optimizer through deep learning](https://blog.acolyer.org/2019/01/18/towards-a-hands-free-query-optimizer-through-deep-learning/), [Deep Reinforcement Learning for Join Order Enumeration](https://arxiv.org/abs/1803.00055)
+    - [Neo: A Learned Query Optimizer](https://arxiv.org/abs/1904.03711)
+    
+- Explainable AI
+    - [Explainable Deep Learning: A Field Guide for the Uninitiated](https://arxiv.org/abs/2004.14545)
+    
+- Adversarial 
+    - [On Adaptive Attacks to Adversarial Example Defenses](https://arxiv.org/abs/2002.08347)
+    - [Adversarial Attacks and Defences: A Survey 2018](https://arxiv.org/abs/1810.00069)
+    - [A Complete List of All (arXiv) Adversarial Example Papers](https://nicholas.carlini.com/writing/2019/all-adversarial-example-papers.html)
+    
 
 <Yet to Add>
 
@@ -591,6 +678,7 @@ Follow a 5 pass strategy to read a paper.
 
 ### Code Examples for Learning
 - [Numpy-ML](https://github.com/ddbourgin/numpy-ml)
+- [dennybritz/reinforcement-learning](https://github.com/dennybritz/reinforcement-learning)
 
 
 ### EDA and plotting, visualizations
@@ -689,9 +777,13 @@ Follow a 5 pass strategy to read a paper.
 * [Variational_AutoEncoder](https://www.youtube.com/watch?v=w8F7_rQZxXk&list=PLdxQ7SoCLQANizknbIiHzL_hYjEaI-wUe) ([Arxiv Insight Video](https://www.youtube.com/watch?v=9zKuYvjFFS8&vl=en), [Keras AutoEncoders](https://blog.keras.io/building-autoencoders-in-keras.html))
 * [Augmenting Neural Networks with Constraints Optimization](https://towardsdatascience.com/augmenting-neural-networks-with-constraints-optimization-ac747408432f)
 * [Do We Really Need Model Compression?](http://mitchgordon.me/machine/learning/2020/01/13/do-we-really-need-model-compression.html)
+* [Andrej Karpathy blog: A Recipe for Training Neural Networks](http://karpathy.github.io/2019/04/25/recipe/)
 
 ### NLP
 - [Synonyms](https://blog.kensho.com/how-to-build-a-smart-synonyms-model-1d525971a4ee) ([Dataset](https://www.kaggle.com/kenshoresearch/kensho-derived-wikimedia-data), [Kernel](https://www.kaggle.com/kenshoresearch/kdwd-aliases-and-disambiguation))
+
+### RL
+- [Training AI Without Writing A Reward Function, with Reward Modelling](https://www.youtube.com/watch?v=PYylPRX6z4Q)
 
 ### Misc
 * [Technical Writing by Google](https://developers.google.com/tech-writing)

@@ -44,9 +44,13 @@
 * [Variational_AutoEncoder](https://www.youtube.com/watch?v=w8F7_rQZxXk&list=PLdxQ7SoCLQANizknbIiHzL_hYjEaI-wUe) ([Arxiv Insight Video](https://www.youtube.com/watch?v=9zKuYvjFFS8&vl=en), [Keras AutoEncoders](https://blog.keras.io/building-autoencoders-in-keras.html))
 * [Augmenting Neural Networks with Constraints Optimization](https://towardsdatascience.com/augmenting-neural-networks-with-constraints-optimization-ac747408432f)
 * [Do We Really Need Model Compression?](http://mitchgordon.me/machine/learning/2020/01/13/do-we-really-need-model-compression.html)
+* [Andrej Karpathy blog: A Recipe for Training Neural Networks](http://karpathy.github.io/2019/04/25/recipe/)
 
 ### NLP
 - [Synonyms](https://blog.kensho.com/how-to-build-a-smart-synonyms-model-1d525971a4ee) ([Dataset](https://www.kaggle.com/kenshoresearch/kensho-derived-wikimedia-data), [Kernel](https://www.kaggle.com/kenshoresearch/kdwd-aliases-and-disambiguation))
+
+### RL
+- [Training AI Without Writing A Reward Function, with Reward Modelling](https://www.youtube.com/watch?v=PYylPRX6z4Q)
 
 ### Misc
 * [Technical Writing by Google](https://developers.google.com/tech-writing)

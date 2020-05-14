@@ -17,6 +17,7 @@
 
 ### Code Examples for Learning
 - [Numpy-ML](https://github.com/ddbourgin/numpy-ml)
+- [dennybritz/reinforcement-learning](https://github.com/dennybritz/reinforcement-learning)
 
 
 ### EDA and plotting, visualizations

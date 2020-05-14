@@ -32,7 +32,7 @@ When you are new to this field, ensure that you take up those papers which are c
 
 ### Reading a Paper
 
-Follow a 5 pass strategy to read a paper. 
+Follow a 5 pass strategy to read a paper. For most papers released post 2019 and with low citation counts -  Read the paper, extract the idea but if no code is present those numbers are most likely faulty.
 
 * **First pass**: understanding what the paper is trying to convey, important results, basically getting the story. For this read the abstract, titles/heading and the conclusion
 
@@ -44,11 +44,57 @@ Follow a 5 pass strategy to read a paper.
 
 * **Fifth Pass**: if a reference implementation exists then look at it.
 
-[More info here](http://blizzard.cs.uwaterloo.ca/keshav/home/Papers/data/07/paper-reading.pdf) and [here](https://elfsternberg.com/2018/10/27/so-you-want-to-get-into-theoretical-computer-science/) and [here](https://web.stanford.edu/class/ee384m/Handouts/HowtoReadPaper.pdf)
+[More info here](http://blizzard.cs.uwaterloo.ca/keshav/home/Papers/data/07/paper-reading.pdf) and [here](https://elfsternberg.com/2018/10/27/so-you-want-to-get-into-theoretical-computer-science/) and [here](https://web.stanford.edu/class/ee384m/Handouts/HowtoReadPaper.pdf) and [here](https://www.sciencemag.org/careers/2016/03/how-seriously-read-scientific-paper)
 
-## Some Good Papers That I am reading and plan to Blog about
+## Some Good Papers That I am reading
+- Attention and Transformers
+    - [NMT Paper by Bahdanau ICLR 2015](https://arxiv.org/abs/1409.0473)
+    - [Show, Attend and Tell](https://arxiv.org/abs/1502.03044)
+    - [A Structured Self-attentive Sentence Embedding](https://arxiv.org/abs/1703.03130)
+    - [Attention Is All You Need](https://arxiv.org/abs/1706.03762)
+    - [BERT](https://arxiv.org/abs/1810.04805), [A Primer in BERTology: What we know about how BERT works](https://arxiv.org/abs/2002.12327)
+    - Making Transformers Smaller and fixing other issues with them.
+        - [Transformer-XL](https://arxiv.org/abs/1901.02860)
+        - [Reformer: The Efficient Transformer](https://arxiv.org/abs/2001.04451)
+        - [Pay Less Attention with Lightweight and Dynamic Convolutions](https://arxiv.org/abs/1901.10430)
+        - [Adaptive Attention Span in Transformers](https://arxiv.org/abs/1905.07799)
+        - [Time-aware Large Kernel Convolutions](https://arxiv.org/abs/2002.03184)
+    - Other Interesting Papers using Attention
+        - [Stand-Alone Self-Attention in Vision Models](https://arxiv.org/abs/1906.05909)
+    - [TRANSFORMERS FROM SCRATCH](http://www.peterbloem.nl/blog/transformers)
+    - [The Illustrated Transformer](http://jalammar.github.io/illustrated-transformer/)
+    - [Transformers are Graph Neural Networks](https://graphdeeplearning.github.io/post/transformers-are-gnns/)
+    - [The Annotated Transformer](http://nlp.seas.harvard.edu/2018/04/03/attention.html)
+    
+- Graph Neural Networks
+    - [A Comprehensive Survey on Graph Neural Networks 2019](https://arxiv.org/abs/1901.00596)
+    - [Machine Learning on Graphs: A Model and Comprehensive Taxonomy 2020](https://arxiv.org/abs/2005.03675)
+    - [GCMC]()
+    - [GraphSage]()
+    - Scaling Graph networks
+        - [PyTorch-BigGraph: A Large-scale Graph Embedding System](https://arxiv.org/abs/1903.12287)
+        - [SIGN: Scalable Inception Graph Neural Networks](https://arxiv.org/abs/2004.11198)
 
-### Attention and Transformers
+
+- Deep Reinforcement Learning
+    - [A Brief Survey of Deep Reinforcement Learning](https://arxiv.org/abs/1708.05866)
+    - [Deep Reinforcement Learning: An Overview](https://arxiv.org/abs/1701.07274)
+    - [Key Papers in Deep R](https://spinningup.openai.com/en/latest/spinningup/keypapers.html)
+    - [deep-reinforcement-learning-papers](https://github.com/muupan/deep-reinforcement-learning-papers)
+
+- Deep Reinforcement Learning For SQL optimisations
+    - [Learning to Optimize Join Queries With Deep Reinforcement Learning](https://arxiv.org/abs/1808.03196), [Blog by Berkeley Lab](https://rise.cs.berkeley.edu/blog/sql-query-optimization-meets-deep-reinforcement-learning/)
+    - [Towards a hands-free query optimizer through deep learning](https://blog.acolyer.org/2019/01/18/towards-a-hands-free-query-optimizer-through-deep-learning/), [Deep Reinforcement Learning for Join Order Enumeration](https://arxiv.org/abs/1803.00055)
+    - [Neo: A Learned Query Optimizer](https://arxiv.org/abs/1904.03711)
+    
+- Explainable AI
+    - [Explainable Deep Learning: A Field Guide for the Uninitiated](https://arxiv.org/abs/2004.14545)
+    
+- Adversarial 
+    - [On Adaptive Attacks to Adversarial Example Defenses](https://arxiv.org/abs/2002.08347)
+    - [Adversarial Attacks and Defences: A Survey 2018](https://arxiv.org/abs/1810.00069)
+    - [A Complete List of All (arXiv) Adversarial Example Papers](https://nicholas.carlini.com/writing/2019/all-adversarial-example-papers.html)
+    
 
 <Yet to Add>
 
