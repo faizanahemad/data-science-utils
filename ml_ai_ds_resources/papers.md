@@ -59,6 +59,7 @@ Follow a 5 pass strategy to read a paper. For most papers released post 2019 and
         - [Pay Less Attention with Lightweight and Dynamic Convolutions](https://arxiv.org/abs/1901.10430)
         - [Adaptive Attention Span in Transformers](https://arxiv.org/abs/1905.07799)
         - [Time-aware Large Kernel Convolutions](https://arxiv.org/abs/2002.03184)
+        - [Longformer: The Long-Document Transformer](https://arxiv.org/abs/2004.05150)
     - Other Interesting Papers using Attention
         - [Stand-Alone Self-Attention in Vision Models](https://arxiv.org/abs/1906.05909)
     - [TRANSFORMERS FROM SCRATCH](http://www.peterbloem.nl/blog/transformers)

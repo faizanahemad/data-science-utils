@@ -110,6 +110,8 @@ In general follow MIT OCW’s resources and search google/youtube for good expla
 
 * [BioStatistics 1](https://www.coursera.org/learn/biostatistics) and [2](https://www.coursera.org/learn/biostatistics-2), [clinical-trials](https://www.coursera.org/learn/clinical-trials)
 
+* [Probabilistic-Programming-and-Bayesian-Methods-for-Hackers](https://github.com/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers)
+
 ### Advanced: Calculus, Multivariate Calculus and Matrix Calculus
 
 * [Matrix Calculus for Deep Learning](https://explained.ai/matrix-calculus/index.html), 

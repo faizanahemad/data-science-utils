@@ -1,9 +1,17 @@
 
 ## Engineering Aspects
 
+
 ### Before Starting a Project
 - https://towardsdatascience.com/20-questions-to-ask-prior-to-starting-data-analysis-6ec11d6a504b
 - https://towardsdatascience.com/how-to-construct-valuable-data-science-projects-in-the-real-world-203a4f520d54
+
+### Mathematics
+- [SageMath](https://www.sagemath.org/)
+
+### General 
+- prettytable `pip install prettytable`
+- 
 
 ### DL
 - [Pytorch Lightning](https://github.com/PyTorchLightning/pytorch-lightning)
@@ -25,7 +33,8 @@
 - [pandas-profiling](https://github.com/pandas-profiling/pandas-profiling)
 - [Missing-No](https://github.com/ResidentMario/missingno)
 - Plotting Libs: [Altair](https://github.com/altair-viz/altair), [Plotly]()
-- [Good theme for Matplotlib](https://towardsdatascience.com/a-new-plot-theme-for-matplotlib-gadfly-2cffc745ff84)
+- [Good theme for Matplotlib](https://towardsdatascience.com/a-new-plot-theme-for-matplotlib-gadfly-2cffc745ff84), [Improve Matplotlib styling](https://towardsdatascience.com/simple-ways-to-improve-your-matplotlib-b64eebccfd5)
+- [Yellow Brick: Visualize Model outputs](https://www.scikit-yb.org/en/latest/oneliners.html)
 
 ### Modelling
 - [Scikit Categorical encoders](https://github.com/scikit-learn-contrib/category_encoders)

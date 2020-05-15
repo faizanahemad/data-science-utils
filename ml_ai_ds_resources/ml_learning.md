@@ -39,15 +39,20 @@ While I have listed the courses here, it is best to visit them and see their syl
 
 * [Another Mathematical Treatment and general coverage of ML by Washington Uni](https://www.youtube.com/playlist?list=PLTPQEx-31JXhguCush5J7OGnEORofoCW9) ([Course Materials](http://mathofml.cs.washington.edu/)) or [CORNELL CS4780 “Machine Learning for Intelligent Systems”](http://www.cs.cornell.edu/courses/cs4780/2018fa/lectures/)
 
-* [CS50’s Introduction to Artificial Intelligence with Python](https://www.edx.org/course/cs50s-introduction-to-artificial-intelligence-with-python)
+* Intro to AI courses 
+    - [MIT AI Course](https://www.youtube.com/playlist?list=PLUl4u3cNGP63gFHB6xb-kVBiQHYe_4hSi) [[MIT AI OCW](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-034-artificial-intelligence-fall-2010/)]
+    - [CS50’s Introduction to Artificial Intelligence with Python](https://www.edx.org/course/cs50s-introduction-to-artificial-intelligence-with-python)
+    - [CS 188 | Introduction to Artificial Intelligence Fall 2018 by Berkeley](https://inst.eecs.berkeley.edu/~cs188/fa18/)
+    - [Intro to AI Udacity](https://www.udacity.com/course/intro-to-artificial-intelligence--cs271)
+    - [Gtech Knowledge-Based AI: Cognitive Systems](https://www.udacity.com/course/knowledge-based-ai-cognitive-systems--ud409)
+    - [AI Columbia Univ EDX ](https://www.edx.org/course/artificial-intelligence-ai)([Link](https://courses.edx.org/courses/course-v1:ColumbiaX+CSMM.101x+1T2020/course/))
+    
 
 * [Advanced ML Coursera](https://www.coursera.org/specializations/aml)
 
 * [EDX Machine Learning for Data Science and Analytics](https://courses.edx.org/courses/course-v1:ColumbiaX+DS102X+1T2017/course/)
 
 * [Statistical ML](https://www.youtube.com/playlist?list=PLTB9VQq8WiaCBK2XrtYn5t9uuPdsNm7YE), [Statistical ML 2 ](https://www.youtube.com/playlist?list=PLjbUi5mgii6B7A0nM74zHTOVQtTC9DaCv)
-
-* [Intro to AI Udacity](https://www.udacity.com/course/intro-to-artificial-intelligence--cs271), [AI Columbia Univ EDX ](https://www.edx.org/course/artificial-intelligence-ai)([Link](https://courses.edx.org/courses/course-v1:ColumbiaX+CSMM.101x+1T2020/course/)), [MIT AI Course](https://www.youtube.com/playlist?list=PLUl4u3cNGP63gFHB6xb-kVBiQHYe_4hSi) [[MIT AI OCW](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-034-artificial-intelligence-fall-2010/)], [Gtech Knowledge-Based AI: Cognitive Systems](https://www.udacity.com/course/knowledge-based-ai-cognitive-systems--ud409)
 
 * [MIT 9.520 Statistical Learning Theory](https://www.youtube.com/playlist?list=PLyGKBDfnk-iDj3FBd0Avr_dLbrU8VG73O) 
 

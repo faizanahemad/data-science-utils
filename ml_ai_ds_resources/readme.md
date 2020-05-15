@@ -47,6 +47,8 @@ In my suggestion having 2 parallel threads, 1 on ML and 1 on Maths is best. Stud
 - [Some Good Papers That I am reading](#some-good-papers-that-i-am-reading)
 - [Engineering Aspects](#engineering-aspects)
   - [Before Starting a Project](#before-starting-a-project)
+  - [Mathematics](#mathematics)
+  - [General ](#general-)
   - [DL](#dl)
   - [Experiment Tracking](#experiment-tracking)
   - [Deployments](#deployments)
@@ -133,15 +135,20 @@ While I have listed the courses here, it is best to visit them and see their syl
 
 * [Another Mathematical Treatment and general coverage of ML by Washington Uni](https://www.youtube.com/playlist?list=PLTPQEx-31JXhguCush5J7OGnEORofoCW9) ([Course Materials](http://mathofml.cs.washington.edu/)) or [CORNELL CS4780 “Machine Learning for Intelligent Systems”](http://www.cs.cornell.edu/courses/cs4780/2018fa/lectures/)
 
-* [CS50’s Introduction to Artificial Intelligence with Python](https://www.edx.org/course/cs50s-introduction-to-artificial-intelligence-with-python)
+* Intro to AI courses 
+    - [MIT AI Course](https://www.youtube.com/playlist?list=PLUl4u3cNGP63gFHB6xb-kVBiQHYe_4hSi) [[MIT AI OCW](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-034-artificial-intelligence-fall-2010/)]
+    - [CS50’s Introduction to Artificial Intelligence with Python](https://www.edx.org/course/cs50s-introduction-to-artificial-intelligence-with-python)
+    - [CS 188 | Introduction to Artificial Intelligence Fall 2018 by Berkeley](https://inst.eecs.berkeley.edu/~cs188/fa18/)
+    - [Intro to AI Udacity](https://www.udacity.com/course/intro-to-artificial-intelligence--cs271)
+    - [Gtech Knowledge-Based AI: Cognitive Systems](https://www.udacity.com/course/knowledge-based-ai-cognitive-systems--ud409)
+    - [AI Columbia Univ EDX ](https://www.edx.org/course/artificial-intelligence-ai)([Link](https://courses.edx.org/courses/course-v1:ColumbiaX+CSMM.101x+1T2020/course/))
+    
 
 * [Advanced ML Coursera](https://www.coursera.org/specializations/aml)
 
 * [EDX Machine Learning for Data Science and Analytics](https://courses.edx.org/courses/course-v1:ColumbiaX+DS102X+1T2017/course/)
 
 * [Statistical ML](https://www.youtube.com/playlist?list=PLTB9VQq8WiaCBK2XrtYn5t9uuPdsNm7YE), [Statistical ML 2 ](https://www.youtube.com/playlist?list=PLjbUi5mgii6B7A0nM74zHTOVQtTC9DaCv)
-
-* [Intro to AI Udacity](https://www.udacity.com/course/intro-to-artificial-intelligence--cs271), [AI Columbia Univ EDX ](https://www.edx.org/course/artificial-intelligence-ai)([Link](https://courses.edx.org/courses/course-v1:ColumbiaX+CSMM.101x+1T2020/course/)), [MIT AI Course](https://www.youtube.com/playlist?list=PLUl4u3cNGP63gFHB6xb-kVBiQHYe_4hSi) [[MIT AI OCW](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-034-artificial-intelligence-fall-2010/)], [Gtech Knowledge-Based AI: Cognitive Systems](https://www.udacity.com/course/knowledge-based-ai-cognitive-systems--ud409)
 
 * [MIT 9.520 Statistical Learning Theory](https://www.youtube.com/playlist?list=PLyGKBDfnk-iDj3FBd0Avr_dLbrU8VG73O) 
 
@@ -371,6 +378,8 @@ In general follow MIT OCW’s resources and search google/youtube for good expla
 * [All of Nonparametric Statistics](http://www.stat.cmu.edu/~larry/all-of-nonpar/index.html)
 
 * [BioStatistics 1](https://www.coursera.org/learn/biostatistics) and [2](https://www.coursera.org/learn/biostatistics-2), [clinical-trials](https://www.coursera.org/learn/clinical-trials)
+
+* [Probabilistic-Programming-and-Bayesian-Methods-for-Hackers](https://github.com/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers)
 
 ### Advanced: Calculus, Multivariate Calculus and Matrix Calculus
 
@@ -617,6 +626,7 @@ Follow a 5 pass strategy to read a paper. For most papers released post 2019 and
         - [Pay Less Attention with Lightweight and Dynamic Convolutions](https://arxiv.org/abs/1901.10430)
         - [Adaptive Attention Span in Transformers](https://arxiv.org/abs/1905.07799)
         - [Time-aware Large Kernel Convolutions](https://arxiv.org/abs/2002.03184)
+        - [Longformer: The Long-Document Transformer](https://arxiv.org/abs/2004.05150)
     - Other Interesting Papers using Attention
         - [Stand-Alone Self-Attention in Vision Models](https://arxiv.org/abs/1906.05909)
     - [TRANSFORMERS FROM SCRATCH](http://www.peterbloem.nl/blog/transformers)
@@ -662,9 +672,17 @@ Follow a 5 pass strategy to read a paper. For most papers released post 2019 and
 
 ## Engineering Aspects
 
+
 ### Before Starting a Project
 - https://towardsdatascience.com/20-questions-to-ask-prior-to-starting-data-analysis-6ec11d6a504b
 - https://towardsdatascience.com/how-to-construct-valuable-data-science-projects-in-the-real-world-203a4f520d54
+
+### Mathematics
+- [SageMath](https://www.sagemath.org/)
+
+### General 
+- prettytable `pip install prettytable`
+- 
 
 ### DL
 - [Pytorch Lightning](https://github.com/PyTorchLightning/pytorch-lightning)
@@ -686,7 +704,8 @@ Follow a 5 pass strategy to read a paper. For most papers released post 2019 and
 - [pandas-profiling](https://github.com/pandas-profiling/pandas-profiling)
 - [Missing-No](https://github.com/ResidentMario/missingno)
 - Plotting Libs: [Altair](https://github.com/altair-viz/altair), [Plotly]()
-- [Good theme for Matplotlib](https://towardsdatascience.com/a-new-plot-theme-for-matplotlib-gadfly-2cffc745ff84)
+- [Good theme for Matplotlib](https://towardsdatascience.com/a-new-plot-theme-for-matplotlib-gadfly-2cffc745ff84), [Improve Matplotlib styling](https://towardsdatascience.com/simple-ways-to-improve-your-matplotlib-b64eebccfd5)
+- [Yellow Brick: Visualize Model outputs](https://www.scikit-yb.org/en/latest/oneliners.html)
 
 ### Modelling
 - [Scikit Categorical encoders](https://github.com/scikit-learn-contrib/category_encoders)
