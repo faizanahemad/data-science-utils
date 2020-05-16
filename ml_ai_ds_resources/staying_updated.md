@@ -77,6 +77,7 @@ At a minimum keep checking reddit and Stack Exchange sites. [StatQuest by Josh S
     - [computervisionblog](https://www.computervisionblog.com/)
     - [jalammar](http://jalammar.github.io/)
     - [the morning paper](https://blog.acolyer.org/)
+    - [Lil'Log](https://lilianweng.github.io/lil-log/)
 
 * Projects
     - [SOTA by paperswithcode](https://paperswithcode.com/sota)

@@ -55,17 +55,30 @@ Follow a 5 pass strategy to read a paper. For most papers released post 2019 and
     - [BERT](https://arxiv.org/abs/1810.04805), [A Primer in BERTology: What we know about how BERT works](https://arxiv.org/abs/2002.12327)
     - Making Transformers Smaller and fixing other issues with them.
         - [Transformer-XL](https://arxiv.org/abs/1901.02860)
+        - [Longformer: The Long-Document Transformer](https://arxiv.org/abs/2004.05150)
         - [Reformer: The Efficient Transformer](https://arxiv.org/abs/2001.04451)
         - [Pay Less Attention with Lightweight and Dynamic Convolutions](https://arxiv.org/abs/1901.10430)
         - [Adaptive Attention Span in Transformers](https://arxiv.org/abs/1905.07799)
         - [Time-aware Large Kernel Convolutions](https://arxiv.org/abs/2002.03184)
-        - [Longformer: The Long-Document Transformer](https://arxiv.org/abs/2004.05150)
+        - [BP-Transformer: Modelling Long-Range Context via Binary Partitioning](https://arxiv.org/abs/1911.04070)
+        - [Star-Transformer](https://arxiv.org/abs/1902.09113)
     - Other Interesting Papers using Attention
         - [Stand-Alone Self-Attention in Vision Models](https://arxiv.org/abs/1906.05909)
-    - [TRANSFORMERS FROM SCRATCH](http://www.peterbloem.nl/blog/transformers)
-    - [The Illustrated Transformer](http://jalammar.github.io/illustrated-transformer/)
-    - [Transformers are Graph Neural Networks](https://graphdeeplearning.github.io/post/transformers-are-gnns/)
-    - [The Annotated Transformer](http://nlp.seas.harvard.edu/2018/04/03/attention.html)
+        - [VL-BERT: Pre-training of Generic Visual-Linguistic Representations](https://arxiv.org/abs/1908.08530) ([Code](https://github.com/jackroos/VL-BERT))
+        - [VisualBERT: A Simple and Performant Baseline for Vision and Language](https://arxiv.org/abs/1908.03557)
+        - [Single Headed Attention RNN: Stop Thinking With Your Head](https://arxiv.org/abs/1911.11423)
+        - []()
+    - Online Important Blogs
+        - [TRANSFORMERS FROM SCRATCH](http://www.peterbloem.nl/blog/transformers)
+        - [The Illustrated Transformer](http://jalammar.github.io/illustrated-transformer/)
+        - [Transformers are Graph Neural Networks](https://graphdeeplearning.github.io/post/transformers-are-gnns/)
+        - [The Annotated Transformer](http://nlp.seas.harvard.edu/2018/04/03/attention.html)
+        - [Paper Dissected: “Attention is All You Need” Explained](https://mlexplained.com/2017/12/29/attention-is-all-you-need-explained/)
+        - [How is it possible to mask out illegal connections in decoder multi-head attention?](https://stats.stackexchange.com/questions/387114/on-masked-multi-head-attention-and-layer-normalization-in-transformer-model)
+        - [Attention? Attention!](https://lilianweng.github.io/lil-log/2018/06/24/attention-attention.html)
+        - [The Illustrated GPT-2](http://jalammar.github.io/illustrated-gpt2/)
+        - [The Transformer Family - april 2020](https://lilianweng.github.io/lil-log/2020/04/07/the-transformer-family.html)
+        
     
 - Graph Neural Networks
     - [A Comprehensive Survey on Graph Neural Networks 2019](https://arxiv.org/abs/1901.00596)
@@ -75,6 +88,9 @@ Follow a 5 pass strategy to read a paper. For most papers released post 2019 and
     - Scaling Graph networks
         - [PyTorch-BigGraph: A Large-scale Graph Embedding System](https://arxiv.org/abs/1903.12287)
         - [SIGN: Scalable Inception Graph Neural Networks](https://arxiv.org/abs/2004.11198)
+        
+- Text Summarization
+    - [Get to the point! Summarization with pointer-generator networks](https://arxiv.org/abs/1704.04368) ([Video](https://www.coursera.org/lecture/language-processing/get-to-the-point-summarization-with-pointer-generator-networks-RhxPO))
 
 
 - Deep Reinforcement Learning
