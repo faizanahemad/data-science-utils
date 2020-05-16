@@ -119,7 +119,7 @@ While I have listed the courses here, it is best to visit them and see their syl
 * [Rules of Machine Learning](https://developers.google.com/machine-learning/guides/rules-of-ml/) By Google
 
 * [Kaggle tutorials](https://www.kaggle.com/learn/overview): 
-    - [Python](https://www.kaggle.com/learn/python), 
+    - [Python](https://www.kaggle.com/learn/python), [Learnpython.org](https://www.learnpython.org/), [Python: Think like a Computer Scientist 3rd ed](http://openbookproject.net/thinkcs/python/english3e/#)
     - [Pandas](https://www.kaggle.com/learn/pandas), 
     - [Data-Visualization](https://www.kaggle.com/learn/data-visualization), 
     - [ML](https://www.kaggle.com/learn/intro-to-machine-learning), 
