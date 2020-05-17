@@ -58,7 +58,9 @@ While I have listed the courses here, it is best to visit them and see their syl
 
 * [Interpretable Machine Learning](https://christophm.github.io/interpretable-ml-book/)
 
-* [ESL book](https://web.stanford.edu/~hastie/ElemStatLearn/printings/ESLII_print12.pdf) ([Site](https://web.stanford.edu/~hastie/ElemStatLearn/)) [ESL Solutions](https://waxworksmath.com/Authors/G_M/Hastie/WriteUp/Weatherwax_Epstein_Hastie_Solution_Manual.pdf) ([soln 2](https://blog.princehonest.com/stat-learning/) [[Backup](https://github.com/asadoughi/stat-learning)])([Notes 1](https://github.com/empathy87/The-Elements-of-Statistical-Learning-Python-Notebooks), [2](https://github.com/dgkim5360/the-elements-of-statistical-learning-notebooks), [3](https://github.com/maitbayev/the-elements-of-statistical-learning), [4](https://getd.libs.uga.edu/pdfs/ma_james_c_201412_ms.pdf))
+* Books
+    - [Machine Learning: a Probabilistic Perspective](https://www.cs.ubc.ca/~murphyk/MLbook/)
+    - [ESL book](https://web.stanford.edu/~hastie/ElemStatLearn/printings/ESLII_print12.pdf) ([Site](https://web.stanford.edu/~hastie/ElemStatLearn/)) [ESL Solutions](https://waxworksmath.com/Authors/G_M/Hastie/WriteUp/Weatherwax_Epstein_Hastie_Solution_Manual.pdf) ([soln 2](https://blog.princehonest.com/stat-learning/) [[Backup](https://github.com/asadoughi/stat-learning)])([Notes 1](https://github.com/empathy87/The-Elements-of-Statistical-Learning-Python-Notebooks), [2](https://github.com/dgkim5360/the-elements-of-statistical-learning-notebooks), [3](https://github.com/maitbayev/the-elements-of-statistical-learning), [4](https://getd.libs.uga.edu/pdfs/ma_james_c_201412_ms.pdf))
 
 * [Probabilistic Graphical Models Specialization](https://www.coursera.org/specializations/probabilistic-graphical-models), [Probabilistic Graphical Models by CMU](https://www.cs.cmu.edu/~epxing/Class/10708-20/), [Graphical Models: Jeffrey A. Bilmes](https://www.youtube.com/channel/UCvPnLF7oUh4p-m575fZcUxg/videos)
 
@@ -113,6 +115,8 @@ While I have listed the courses here, it is best to visit them and see their syl
 * [Standford CS224U](https://web.stanford.edu/class/cs224u/), [Stanford ML book](https://web.stanford.edu/~jurafsky/slp3/)
 * [Natural Language Processing | University of Michigan](https://www.youtube.com/playlist?list=PLLssT5z_DsK8BdawOVCCaTCO99Ya58ryR), 
 * [Coursera Natural Language Processing | Dan Jurafsky, Christopher Manning](https://www.youtube.com/playlist?list=PLQiyVNMpDLKnZYBTUOlSI9mi9wAErFtFm) [Slides](https://web.stanford.edu/~jurafsky/NLPCourseraSlides.html)
+* Examples
+    - [The Super Duper NLP Repo](https://notebooks.quantumstat.com/)
 
 ### Field Specific Stuff: Reinforcement Learning
 

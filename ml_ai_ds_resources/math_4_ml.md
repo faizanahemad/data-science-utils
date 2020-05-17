@@ -1,7 +1,7 @@
 
 ## Mathematics resources
 
-In general follow MIT OCW’s resources and search google/youtube for good explanations.
+In general follow MIT OCW’s resources and search google/youtube for good explanations. [For us beginners: what do you mean, 'learn the math'?](https://www.reddit.com/r/MachineLearning/comments/gjvbg9/d_for_us_beginners_what_do_you_mean_learn_the_math/)
 
 ### Starter
 * [The Matrix Calculus You Need For Deep Learning](https://explained.ai/matrix-calculus/index.html)
@@ -16,7 +16,17 @@ In general follow MIT OCW’s resources and search google/youtube for good expla
 
 ### Basic: Probability and Statistics
 
-* [Probability](https://www.youtube.com/playlist?list=PL2SOU6wwxB0uwwH80KTQ6ht66KWxbzTIo) (STAT 110 Harvard), [MIT 6–012 Introduction to Probability](https://ocw.mit.edu/resources/res-6-012-introduction-to-probability-spring-2018/) [Youtube Playlist](https://www.youtube.com/playlist?list=PLUl4u3cNGP60A3XMwZ5sep719_nh95qOe) or [EDX Harvard Probability](https://www.edx.org/course/introduction-to-probability) ([HarvardX: STAT110x EDX Introduction to Probability](https://courses.edx.org/courses/course-v1:HarvardX+STAT110x+1T2020/course/))
+* [Statistics 110: Probability by Harvard](https://projects.iq.harvard.edu/stat110/home)
+    - [Assignments and solutions](https://projects.iq.harvard.edu/stat110/strategic-practice-problems), [handouts](https://projects.iq.harvard.edu/stat110/handouts)
+    - [List of videos](https://projects.iq.harvard.edu/stat110/youtube),[YT playlist](https://www.youtube.com/playlist?list=PL2SOU6wwxB0uwwH80KTQ6ht66KWxbzTIo)
+    - [EDX Harvard Probability](https://www.edx.org/course/introduction-to-probability) ([HarvardX: STAT110x EDX Introduction to Probability](https://courses.edx.org/courses/course-v1:HarvardX+STAT110x+1T2020/course/))
+    - [Book](http://probabilitybook.net/)
+
+* [MIT 6–012 Introduction to Probability](https://ocw.mit.edu/resources/res-6-012-introduction-to-probability-spring-2018/) [Youtube Playlist](https://www.youtube.com/playlist?list=PLUl4u3cNGP60A3XMwZ5sep719_nh95qOe)
+
+* [MIT 6-041: Probabilistic Systems Analysis and Applied Probability](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-041-probabilistic-systems-analysis-and-applied-probability-fall-2010/)
+    - [Problems and solutions](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-041-probabilistic-systems-analysis-and-applied-probability-fall-2010/assignments/), [Older Lectures and solutions](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-041-probabilistic-systems-analysis-and-applied-probability-spring-2006/)
+    - [MIT 6-041sc](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013/)
 
 * [Probability Theory Lectures](https://www.youtube.com/playlist?list=PL9v9IXDsJkktefQzX39wC2YG07vw7DsQ_), Follow PROBABILITY THEORY: THE LOGIC OF SCIENCE
 
@@ -31,6 +41,9 @@ In general follow MIT OCW’s resources and search google/youtube for good expla
 * [onlinestatbook](http://onlinestatbook.com/2/index.html)
 
 ### Basic: Calculus
+* MIT Calculus
+    - [MIT Single Variable Calculus](https://ocw.mit.edu/courses/mathematics/18-01sc-single-variable-calculus-fall-2010/), [2006 Version](https://ocw.mit.edu/courses/mathematics/18-01-single-variable-calculus-fall-2006/), [2005](https://ocw.mit.edu/courses/mathematics/18-01-single-variable-calculus-fall-2005/), [Calculus with Theory](https://ocw.mit.edu/courses/mathematics/18-014-calculus-with-theory-fall-2010/)
+    - [MIT Multivariate Calculus](https://ocw.mit.edu/courses/mathematics/18-02sc-multivariable-calculus-fall-2010), [2007](https://ocw.mit.edu/courses/mathematics/18-02-multivariable-calculus-fall-2007/), [Multivariable Calculus with Theory](https://ocw.mit.edu/courses/mathematics/18-024-multivariable-calculus-with-theory-spring-2011/), [Calculus of Several Variables](https://ocw.mit.edu/courses/mathematics/18-022-calculus-of-several-variables-fall-2010/)
 
 * [18.01x Single Variable Calculus](https://www.edx.org/xseries/mitx-18.01x-single-variable-calculus)
 
@@ -47,6 +60,8 @@ In general follow MIT OCW’s resources and search google/youtube for good expla
 ### Basic: Linear Algebra
 
 * [[TextBook+Practice Questions](http://math.mit.edu/~gs/linearalgebra/)][[Practice](https://ocw.mit.edu/courses/mathematics/18-06-linear-algebra-spring-2010/assignments/) [Practice-2](http://web.mit.edu/18.06/www/old.shtml) ] [[OCW](https://ocw.mit.edu/courses/mathematics/18-06sc-linear-algebra-fall-2011/) [Youtube Playlist](https://www.youtube.com/playlist?list=PL221E2BBF13BECF6C)]
+
+* [What is The Matrix? by Brown uni](http://cs.brown.edu/courses/cs053/current/index.htm) ([Videos](http://cs.brown.edu/courses/cs053/current/lectures.htm))
 
 * [Matrix Algebra](https://www.coursera.org/learn/matrix-algebra-engineers) For Engineers
 
@@ -85,6 +100,8 @@ In general follow MIT OCW’s resources and search google/youtube for good expla
 * [Optimization Methods in Business Analytics](https://courses.edx.org/courses/course-v1:MITx+15.053x+3T2016/course/) ([Link](https://www.edx.org/course/optimization-methods-for-business-analytics))
 
 * [Optimisation Coursera](https://www.coursera.org/learn/discrete-optimization), [Opt 1](https://www.coursera.org/learn/basic-modeling), [Opt 2](https://www.coursera.org/learn/advanced-modeling), [Opt-3](https://www.coursera.org/learn/solving-algorithms-discrete-optimization), [Approximation Algos](https://www.coursera.org/learn/approximation-algorithms), [Ap-1](https://www.coursera.org/learn/approximation-algorithms-part-1), [Ap-2](https://www.coursera.org/learn/approximation-algorithms-part-2)
+
+* [Book: Numerical Optimization by Jorge Nocedal, Stephen J. Wright](http://www.apmath.spbu.ru/cnsa/pdf/monograf/Numerical_Optimization2006.pdf) ([Mirror Link](https://www.csie.ntu.edu.tw/~r97002/temp/num_optimization.pdf))
 
 ### Advanced: Probability, Bayesian and Statistical Inference
 
@@ -167,6 +184,8 @@ In general follow MIT OCW’s resources and search google/youtube for good expla
 * [Principles of Economics with Calculus](https://www.edx.org/course/principles-of-economics-with-calculus)
 
 ### More Math Resources
+
+* [MIT OCW maths](https://ocw.mit.edu/courses/mathematics/): Many courses have assignments even though no vid lectures.
 
 * [Algebra, Topology, Differential Calculus, and Optimization Theory For Computer Science and Machine Learning —  Jean Gallier and Jocelyn Quaintance](https://www.cis.upenn.edu/~jean/math-deep.pdf)
 
