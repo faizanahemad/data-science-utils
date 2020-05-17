@@ -201,6 +201,7 @@ While I have listed the courses here, it is best to visit them and see their syl
 
 * [Carnegie Mellon University Deep Learning](https://www.youtube.com/channel/UC8hYZGEkI2dDO8scT8C5UQA/playlists), [CMU DL website](https://deeplearning.cs.cmu.edu/)
 
+
 ### Field Specific Stuff: Computer Vision
 
 * [Stanford CS 231 Conv Nets](http://cs231n.stanford.edu/2018/) ([github](https://cs231n.github.io/)) ([2016 by Andrej Karpathy](https://www.youtube.com/playlist?list=PLkt2uSq6rBVctENoVBg1TpCC7OQi31AlC), [2017 Version](https://www.youtube.com/playlist?list=PL3FW7Lu3i5JvHM8ljYj-zLfQRF3EO8sYv))
@@ -209,7 +210,8 @@ While I have listed the courses here, it is best to visit them and see their syl
 
 * [Stanford CS224N: Natural Language Processing with Deep Learning | Winter 2019](http://web.stanford.edu/class/cs224n/) ([Vids](https://www.youtube.com/playlist?list=PLoROMvodv4rOhcuXMZkNm7j3fVwBBY42z))
 * [Standford CS224U](https://web.stanford.edu/class/cs224u/), [Stanford ML book](https://web.stanford.edu/~jurafsky/slp3/)
-* [Natural Language Processing | University of Michigan](https://www.youtube.com/playlist?list=PLLssT5z_DsK8BdawOVCCaTCO99Ya58ryR), 
+* [Natural Language Processing | University of Michigan](https://www.youtube.com/playlist?list=PLLssT5z_DsK8BdawOVCCaTCO99Ya58ryR),
+* [Oxford 2017 Deep NLP](https://github.com/oxford-cs-deepnlp-2017/lectures) 
 * [Coursera Natural Language Processing | Dan Jurafsky, Christopher Manning](https://www.youtube.com/playlist?list=PLQiyVNMpDLKnZYBTUOlSI9mi9wAErFtFm) [Slides](https://web.stanford.edu/~jurafsky/NLPCourseraSlides.html)
 * Examples
     - [The Super Duper NLP Repo](https://notebooks.quantumstat.com/)
@@ -520,6 +522,7 @@ At a minimum keep checking reddit and Stack Exchange sites. [StatQuest by Josh S
     - [DS SE](https://datascience.stackexchange.com/)
     
 * NewLetters and feeds
+    - [DoYouEvenLearn](https://github.com/BAILOOL/DoYouEvenLearn), [DoYouEvenLearn-List](https://github.com/BAILOOL/DoYouEvenLearn#bookmarks-to-run-on-start)
     - [https://distill.pub/](https://distill.pub/) 
     - [https://openai.com/blog/](https://openai.com/blog/), 
     - [https://ai.googleblog.com/](https://ai.googleblog.com/), 
@@ -556,6 +559,7 @@ At a minimum keep checking reddit and Stack Exchange sites. [StatQuest by Josh S
     - [jalammar](http://jalammar.github.io/)
     - [the morning paper](https://blog.acolyer.org/)
     - [Lil'Log](https://lilianweng.github.io/lil-log/)
+    - [interp](https://csinva.github.io/research_ovws/ovw_interp.html)
 
 * Projects
     - [SOTA by paperswithcode](https://paperswithcode.com/sota)
@@ -611,7 +615,7 @@ When you are new to this field, ensure that you take up those papers which are c
 
 * [AAAI](https://aaai.org/Library/conferences-library.php), [IJCAI 2019](https://www.ijcai.org/Proceedings/2019/) ([Past](https://www.ijcai.org/past_proceedings)), [KDD](https://www.kdd.org/conferences), [ECAI](https://www.eurai.org/library/ECAI_proceedings), [WWW](https://dl.acm.org/conference/www) ([2019](https://www2019.thewebconf.org/proceedings), [2018](https://www2018.thewebconf.org/proceedings/)), [ACM Recsys](https://recsys.acm.org/#)
 
-* [EMNLP](https://www.aclweb.org/anthology/venues/emnlp/)
+* [EMNLP](https://www.aclweb.org/anthology/venues/emnlp/), [NLP Papers](https://github.com/sebastianruder/NLP-progress)
 
 * [SOTA from papers with code](https://paperswithcode.com/sota), [Follow Papers with code site for good list of Papers](https://paperswithcode.com/)
 
@@ -847,6 +851,7 @@ Follow a 5 pass strategy to read a paper. For most papers released post 2019 and
 ### Misc
 * [Technical Writing by Google](https://developers.google.com/tech-writing)
 * [DS Resume](https://towardsdatascience.com/data-science-resume-mistakes-to-avoid-2867460659ac)
+* [More ML Learning](https://github.com/amitness/learning)
 
 ## Datasets 
 * [CV datasets](https://lionbridge.ai/datasets/20-best-image-datasets-for-computer-vision/)

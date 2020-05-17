@@ -42,6 +42,7 @@ At a minimum keep checking reddit and Stack Exchange sites. [StatQuest by Josh S
     - [DS SE](https://datascience.stackexchange.com/)
     
 * NewLetters and feeds
+    - [DoYouEvenLearn](https://github.com/BAILOOL/DoYouEvenLearn), [DoYouEvenLearn-List](https://github.com/BAILOOL/DoYouEvenLearn#bookmarks-to-run-on-start)
     - [https://distill.pub/](https://distill.pub/) 
     - [https://openai.com/blog/](https://openai.com/blog/), 
     - [https://ai.googleblog.com/](https://ai.googleblog.com/), 
@@ -78,6 +79,7 @@ At a minimum keep checking reddit and Stack Exchange sites. [StatQuest by Josh S
     - [jalammar](http://jalammar.github.io/)
     - [the morning paper](https://blog.acolyer.org/)
     - [Lil'Log](https://lilianweng.github.io/lil-log/)
+    - [interp](https://csinva.github.io/research_ovws/ovw_interp.html)
 
 * Projects
     - [SOTA by paperswithcode](https://paperswithcode.com/sota)

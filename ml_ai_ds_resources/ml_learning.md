@@ -105,6 +105,7 @@ While I have listed the courses here, it is best to visit them and see their syl
 
 * [Carnegie Mellon University Deep Learning](https://www.youtube.com/channel/UC8hYZGEkI2dDO8scT8C5UQA/playlists), [CMU DL website](https://deeplearning.cs.cmu.edu/)
 
+
 ### Field Specific Stuff: Computer Vision
 
 * [Stanford CS 231 Conv Nets](http://cs231n.stanford.edu/2018/) ([github](https://cs231n.github.io/)) ([2016 by Andrej Karpathy](https://www.youtube.com/playlist?list=PLkt2uSq6rBVctENoVBg1TpCC7OQi31AlC), [2017 Version](https://www.youtube.com/playlist?list=PL3FW7Lu3i5JvHM8ljYj-zLfQRF3EO8sYv))
@@ -113,7 +114,8 @@ While I have listed the courses here, it is best to visit them and see their syl
 
 * [Stanford CS224N: Natural Language Processing with Deep Learning | Winter 2019](http://web.stanford.edu/class/cs224n/) ([Vids](https://www.youtube.com/playlist?list=PLoROMvodv4rOhcuXMZkNm7j3fVwBBY42z))
 * [Standford CS224U](https://web.stanford.edu/class/cs224u/), [Stanford ML book](https://web.stanford.edu/~jurafsky/slp3/)
-* [Natural Language Processing | University of Michigan](https://www.youtube.com/playlist?list=PLLssT5z_DsK8BdawOVCCaTCO99Ya58ryR), 
+* [Natural Language Processing | University of Michigan](https://www.youtube.com/playlist?list=PLLssT5z_DsK8BdawOVCCaTCO99Ya58ryR),
+* [Oxford 2017 Deep NLP](https://github.com/oxford-cs-deepnlp-2017/lectures) 
 * [Coursera Natural Language Processing | Dan Jurafsky, Christopher Manning](https://www.youtube.com/playlist?list=PLQiyVNMpDLKnZYBTUOlSI9mi9wAErFtFm) [Slides](https://web.stanford.edu/~jurafsky/NLPCourseraSlides.html)
 * Examples
     - [The Super Duper NLP Repo](https://notebooks.quantumstat.com/)

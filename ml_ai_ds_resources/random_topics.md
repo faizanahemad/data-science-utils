@@ -55,6 +55,7 @@
 ### Misc
 * [Technical Writing by Google](https://developers.google.com/tech-writing)
 * [DS Resume](https://towardsdatascience.com/data-science-resume-mistakes-to-avoid-2867460659ac)
+* [More ML Learning](https://github.com/amitness/learning)
 
 ## Datasets 
 * [CV datasets](https://lionbridge.ai/datasets/20-best-image-datasets-for-computer-vision/)
