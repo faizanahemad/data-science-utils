@@ -64,6 +64,7 @@ At a minimum keep checking reddit and Stack Exchange sites. [StatQuest by Josh S
     - [datasciencecentral](https://www.datasciencecentral.com/)
     - [fivethirtyeight](https://fivethirtyeight.com/)
     - [101.datascience](https://101.datascience.community/)
+    - [MIT Deep Learning](https://deeplearning.mit.edu/)
     
 * Personal Blogs
     - [https://colah.github.io/](https://colah.github.io/),
@@ -85,7 +86,6 @@ At a minimum keep checking reddit and Stack Exchange sites. [StatQuest by Josh S
     - [SOTA by paperswithcode](https://paperswithcode.com/sota)
     - [https://www.kaggle.com/](https://www.kaggle.com/)
     - [MadeWithML](https://madewithml.com/)
-    - [ML coding from scratch](https://github.com/python-engineer/MLfromscratch) and [ML coding from scratch Youtube](https://www.youtube.com/playlist?list=PLqnslRFeH2Upcrywf-u2etjdxxkL8nl7E) and [Another From scratch guide](https://github.com/pmuens/lab#implementations)
     
 * **Recommender** 
     - [Arxiv Sanity](http://www.arxiv-sanity.com/) 

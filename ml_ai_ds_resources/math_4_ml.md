@@ -6,6 +6,8 @@ In general follow MIT OCW’s resources and search google/youtube for good expla
 ### Starter
 * [The Matrix Calculus You Need For Deep Learning](https://explained.ai/matrix-calculus/index.html)
 
+* [Machine Learning Notation](https://nthu-datalab.github.io/ml/slides/Notation.pdf?fbclid=IwAR0kYjO13sIR4JvN8VVBrgXBH8e9wlE1TGBv_YC6wuAzyCFved5TC4gCqc8)
+
 * [Essence of Calculus](https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr) and [Essence of Linear Algebra](https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab), [3Blue1Brown Neural Networks](https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi), [DE by 3Blue1Brown](https://www.youtube.com/playlist?list=PLZHQObOWTQDNPOjrT6KVlfJuKtYTftqH6)
 
 * [MIT Mathematics for Computer Science](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-042j-mathematics-for-computer-science-spring-2015/) [[Book](https://courses.csail.mit.edu/6.042/spring17/mcs.pdf)] [[Youtube](https://www.youtube.com/playlist?list=PLUl4u3cNGP60UlabZBeeqOuoLuj_KNphQ)] [[OCW](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-042j-mathematics-for-computer-science-spring-2015/)]
@@ -13,6 +15,11 @@ In general follow MIT OCW’s resources and search google/youtube for good expla
 * [Maths for ML open book](https://mml-book.github.io/)
 
 * [http://neuralnetworksanddeeplearning.com/chap1.html](http://neuralnetworksanddeeplearning.com/chap1.html)
+
+* [A Beginner's Guide to the Mathematics of Neural Networks](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.161.3556&rep=rep1&type=pdf&fbclid=IwAR1ITvZjUvelADqXBYYyf6z6h1xA91p6EbsLBO4yZc46xzotWTJGNzAuv_g)
+
+* [Mathematics for Machine Learning by Garrett Thomas, EECS, Berkeley](https://gwthomas.github.io/docs/math4ml.pdf?fbclid=IwAR2UsBgZW9MRgS3nEo8Zh_ukUFnwtFeQS8Ek3OjGxZtDa7UxTYgIs_9pzSI)
+
 
 ### Basic: Probability and Statistics
 
@@ -27,12 +34,13 @@ In general follow MIT OCW’s resources and search google/youtube for good expla
 * [MIT 6-041: Probabilistic Systems Analysis and Applied Probability](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-041-probabilistic-systems-analysis-and-applied-probability-fall-2010/)
     - [Problems and solutions](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-041-probabilistic-systems-analysis-and-applied-probability-fall-2010/assignments/), [Older Lectures and solutions](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-041-probabilistic-systems-analysis-and-applied-probability-spring-2006/)
     - [MIT 6-041sc](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013/)
+    - [Introduction to Probability and Statistics](https://ocw.mit.edu/courses/mathematics/18-05-introduction-to-probability-and-statistics-spring-2014/)
 
 * [Probability Theory Lectures](https://www.youtube.com/playlist?list=PL9v9IXDsJkktefQzX39wC2YG07vw7DsQ_), Follow PROBABILITY THEORY: THE LOGIC OF SCIENCE
 
 * [Intermediate Statistics by Larry Wasserman](https://www.youtube.com/playlist?list=PLJPW8OTey_OZk6K_9QLpguoPg_Ip3GkW_) ([Course page with Slides and assignments](http://www.stat.cmu.edu/~larry/=stat705/)| [All of statistics Book pdf](https://drive.google.com/open?id=1p0YcNL1zHbrjKtGaSgu9bMI88dF-_qWg))
 
-* [Statistics for Applications by MIT](https://ocw.mit.edu/courses/mathematics/18-650-statistics-for-applications-fall-2016/) [[Youtube Playlist](https://www.youtube.com/playlist?list=PLUl4u3cNGP60uVBMaoNERc6knT_MgPKS0)], [CMU Intermediate Statistics](http://www.stat.cmu.edu/~larry/=stat705/) [[YouTube Playlist](https://www.youtube.com/playlist?list=PLJPW8OTey_OZk6K_9QLpguoPg_Ip3GkW_)], [MIT Probabilistic Systems Analysis and Applied Probability 6–041sc](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013/) ([Vids-youtube](https://www.youtube.com/playlist?list=PLUl4u3cNGP60A3XMwZ5sep719_nh95qOe))
+* [Statistics for Applications by MIT](https://ocw.mit.edu/courses/mathematics/18-650-statistics-for-applications-fall-2016/) [[Last year exercises](https://ocw.mit.edu/courses/mathematics/18-443-statistics-for-applications-spring-2015/index.htm) ,[Youtube Playlist](https://www.youtube.com/playlist?list=PLUl4u3cNGP60uVBMaoNERc6knT_MgPKS0)], [CMU Intermediate Statistics](http://www.stat.cmu.edu/~larry/=stat705/) [[YouTube Playlist](https://www.youtube.com/playlist?list=PLJPW8OTey_OZk6K_9QLpguoPg_Ip3GkW_)], [MIT Probabilistic Systems Analysis and Applied Probability 6–041sc](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013/) ([Vids-youtube](https://www.youtube.com/playlist?list=PLUl4u3cNGP60A3XMwZ5sep719_nh95qOe))
 
 * [Khan Academy https://www.khanacademy.org/math/statistics-probability](https://www.khanacademy.org/math/statistics-probability)
 
@@ -82,6 +90,8 @@ In general follow MIT OCW’s resources and search google/youtube for good expla
 * [Applications of Linear Algebra Part 2](https://www.edx.org/course/applications-of-linear-algebra-part-2)
 
 * [Coding the Matrix - Linear Algebra through Computer Science Applications](https://www.youtube.com/playlist?list=PLEhMEyM9jSinRHXJgRCOLZUiu9847V2g0), [Book](https://codingthematrix.com/)
+
+* [Introduction to Applied Linear Algebra Vectors, Matrices, and Least Squares Book](https://web.stanford.edu/~boyd/vmls/vmls.pdf)
 
 ### Advanced: Differential Equations
 

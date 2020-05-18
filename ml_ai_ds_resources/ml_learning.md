@@ -5,7 +5,10 @@ While I have listed the courses here, it is best to visit them and see their syl
 ### Basic Starter
 
 * One of these basic courses
-    - [Stanford CS229](https://see.stanford.edu/course/cs229) ([2018 Videos](https://www.youtube.com/playlist?list=PLoROMvodv4rMiGQp3WXShtMGgzqpfVfbU), [2014 Videos](https://www.youtube.com/playlist?list=PLA89DCFA6ADACE599))[[Notes](http://cs229.stanford.edu/syllabus.html) [Cheatsheet](https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-supervised-learning)](A more mathematical version of [Andrew ng’s Coursera Course](https://www.coursera.org/learn/machine-learning)|[Coursera course Videos](https://www.youtube.com/playlist?list=PLLssT5z_DsK-h9vYZkQkYNWcItqhlRJLN)) or 
+    - [Stanford CS229](https://see.stanford.edu/course/cs229) 
+    ([2018 Videos](https://www.youtube.com/playlist?list=PLoROMvodv4rMiGQp3WXShtMGgzqpfVfbU), [2014 Videos](https://www.youtube.com/playlist?list=PLA89DCFA6ADACE599), [Notes](http://www.holehouse.org/mlclass/), [Notes](https://www.ctanujit.org/uploads/2/5/3/9/25393293/machine_learning_notes__cs229_.pdf))[[Notes](http://cs229.stanford.edu/syllabus.html) 
+    [Cheatsheet](https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-supervised-learning)]
+    (A more mathematical version of [Andrew ng’s Coursera Course](https://www.coursera.org/learn/machine-learning)|[Coursera course Videos](https://www.youtube.com/playlist?list=PLLssT5z_DsK-h9vYZkQkYNWcItqhlRJLN)) or 
     - [ML carnegie melon 2011](http://www.cs.cmu.edu/~tom/10701_sp11/lectures.shtml) or 
     - [Stanford Statistical Learning](https://www.edx.org/course/statistical-learning) or 
     - [Caltech ML basics](https://work.caltech.edu/telecourse.html#lectures) ([Videos](http://work.caltech.edu/lectures.html)) or 
@@ -78,7 +81,7 @@ While I have listed the courses here, it is best to visit them and see their syl
 
 * [A basic Implementation of NN in python with backprop](https://github.com/ahmedbesbes/Neural-Network-from-scratch/)
 
-* [Stanford CS230 Deep Learning](https://www.youtube.com/playlist?list=PLoROMvodv4rOABXSygHTsbvUz4G_YQhOb) ([Slides and Syllabus](https://cs230.stanford.edu/syllabus/))
+* [Stanford CS230 Deep Learning](https://www.youtube.com/playlist?list=PLoROMvodv4rOABXSygHTsbvUz4G_YQhOb) ([Slides and Syllabus](https://cs230.stanford.edu/syllabus/), [Notes](https://stanford.edu/~shervine/teaching/))
 
 * [DEEP LEARNING DS-GA 1008 · SPRING 2020 · NYU CENTER FOR DATA SCIENCE](https://atcold.github.io/pytorch-Deep-Learning/)
 
@@ -89,6 +92,8 @@ While I have listed the courses here, it is best to visit them and see their syl
 * [DL Brown Uni Assignments](http://cs.brown.edu/courses/cs1470/assignments.html)
 
 * [EPFL EE-559 – DEEP LEARNING](https://fleuret.org/ee559/)
+
+* [DLAI - Deep Learning for Artificial Intelligence @ UPC Barcelona](https://www.youtube.com/playlist?list=PL-5eMc3HQTBagIUjKefjcTbnXC0wXC_vd)
 
 * Books for Deep Learning
     - [Deep Learning Book](https://www.deeplearningbook.org/) ([Chapter Summaries](https://github.com/dalmia/Deep-Learning-Book-Chapter-Summaries), [Videos](https://www.youtube.com/channel/UCF9O8Vj-FEbRDA5DcDGz-Pg/playlists), )
@@ -144,6 +149,8 @@ While I have listed the courses here, it is best to visit them and see their syl
 
 * [IIT-M RL](https://www.cse.iitm.ac.in/~ravi/courses/Reinforcement%20Learning.html), [YT](https://www.youtube.com/playlist?list=PLuWx2S0SyaDctJtVKHhmjYACmHZ3nX9ew)
 
+* [CS885 Reinforcement Learning - Spring 2018 - University of Waterloo](https://www.youtube.com/playlist?list=PLdAoL1zKcqTXFJniO3Tqqn6xMBBL07EDc)
+
 * [dennybritz/reinforcement-learning](https://github.com/dennybritz/reinforcement-learning), [NervanaSystems/coach](https://github.com/NervanaSystems/coach), [rlcode/reinforcement-learning](https://github.com/rlcode/reinforcement-learning)
 
 * [https://mpatacchiola.github.io/](https://mpatacchiola.github.io/blog/)
@@ -151,6 +158,8 @@ While I have listed the courses here, it is best to visit them and see their syl
 * [Richard S. Sutton and Andrew G. Barto Reinforcement Learning: An Introduction Book](http://incompleteideas.net/book/the-book-2nd.html)
 
 * [Gtech RL](https://www.udacity.com/course/reinforcement-learning--ud600)
+
+* [REINFORCEMENT LEARNING AND OPTIMAL CONTROL BOOK, VIDEOLECTURES, AND COURSE MATERIAL, 2019 Dimitri P. Bertsekas](http://web.mit.edu/dimitrib/www/RLbook.html)
 
 * [More Resources]
     - [Awesome RL](https://github.com/aikorea/awesome-rl)
@@ -173,4 +182,6 @@ While I have listed the courses here, it is best to visit them and see their syl
 * [HarvardX’s Fundamentals of Neuroscience XSeries](https://www.edx.org/xseries/harvardx-fundamentals-of-neuroscience)
 
 * [https://www.edx.org/course/subject/data-science](https://www.edx.org/course/subject/data-science)
+
+* [ML coding from scratch](https://github.com/python-engineer/MLfromscratch) and [ML coding from scratch Youtube](https://www.youtube.com/playlist?list=PLqnslRFeH2Upcrywf-u2etjdxxkL8nl7E) and [Another From scratch guide](https://github.com/pmuens/lab#implementations), [eriklindernoren/ML-From-Scratch](https://github.com/eriklindernoren/ML-From-Scratch)
 
