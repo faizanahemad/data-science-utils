@@ -862,6 +862,7 @@ Follow a 5 pass strategy to read a paper. For most papers released post 2019 and
 * [Augmenting Neural Networks with Constraints Optimization](https://towardsdatascience.com/augmenting-neural-networks-with-constraints-optimization-ac747408432f)
 * [Do We Really Need Model Compression?](http://mitchgordon.me/machine/learning/2020/01/13/do-we-really-need-model-compression.html)
 * [Andrej Karpathy blog: A Recipe for Training Neural Networks](http://karpathy.github.io/2019/04/25/recipe/)
+* [A question about triplet loss for Siamese networks](https://www.reddit.com/r/deeplearning/comments/gjmrts/a_question_about_triplet_loss_for_siamese_networks/)
 
 ### NLP
 - [Synonyms](https://blog.kensho.com/how-to-build-a-smart-synonyms-model-1d525971a4ee) ([Dataset](https://www.kaggle.com/kenshoresearch/kensho-derived-wikimedia-data), [Kernel](https://www.kaggle.com/kenshoresearch/kdwd-aliases-and-disambiguation))
