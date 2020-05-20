@@ -171,6 +171,10 @@ While I have listed the courses here, it is best to visit them and see their syl
 
 * [Mining Massive Datasets - Stanford University](https://www.youtube.com/playlist?list=PLLssT5z_DsK9JDLcT8T62VtzwyW9LNepV)
 
+* [Unsupervised Learning (René Vidal, Hopkins)](https://www.youtube.com/playlist?list=PLFInMJnvb3owAddRh4qk2gCX25kGLDay-)
+
+* [Artificial Intelligence 3rd Ed by Russel and Norvig]() ([Code 1](https://code.google.com/archive/p/aima-python/), [Code 2](https://github.com/simpleai-team/simpleai))
+
 ### Field Specific Stuff: Deep Learning
 
 * [Deep Learning Basics](https://www.coursera.org/specializations/deep-learning) ([deeplearning.ai](https://www.youtube.com/channel/UCcIXc5mJsHVYTZR1maL5l9w) [1st course](https://www.youtube.com/playlist?list=PLkDaE6sCZn6Ec-XTbcX1uRg2_u4xOEky0))
@@ -636,7 +640,7 @@ When you are new to this field, ensure that you take up those papers which are c
 
 * [AAAI](https://aaai.org/Library/conferences-library.php), [IJCAI 2019](https://www.ijcai.org/Proceedings/2019/) ([Past](https://www.ijcai.org/past_proceedings)), [KDD](https://www.kdd.org/conferences), [ECAI](https://www.eurai.org/library/ECAI_proceedings), [WWW](https://dl.acm.org/conference/www) ([2019](https://www2019.thewebconf.org/proceedings), [2018](https://www2018.thewebconf.org/proceedings/)), [ACM Recsys](https://recsys.acm.org/#)
 
-* [EMNLP](https://www.aclweb.org/anthology/venues/emnlp/), [NLP Papers](https://github.com/sebastianruder/NLP-progress)
+* [EMNLP](https://www.aclweb.org/anthology/venues/emnlp/), [NLP Papers](https://github.com/sebastianruder/NLP-progress), [Awesome-NLP-Resources](https://github.com/Robofied/Awesome-NLP-Resources)
 
 * [SOTA from papers with code](https://paperswithcode.com/sota), [Follow Papers with code site for good list of Papers](https://paperswithcode.com/)
 

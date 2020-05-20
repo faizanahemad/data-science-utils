@@ -75,6 +75,10 @@ While I have listed the courses here, it is best to visit them and see their syl
 
 * [Mining Massive Datasets - Stanford University](https://www.youtube.com/playlist?list=PLLssT5z_DsK9JDLcT8T62VtzwyW9LNepV)
 
+* [Unsupervised Learning (René Vidal, Hopkins)](https://www.youtube.com/playlist?list=PLFInMJnvb3owAddRh4qk2gCX25kGLDay-)
+
+* [Artificial Intelligence 3rd Ed by Russel and Norvig]() ([Code 1](https://code.google.com/archive/p/aima-python/), [Code 2](https://github.com/simpleai-team/simpleai))
+
 ### Field Specific Stuff: Deep Learning
 
 * [Deep Learning Basics](https://www.coursera.org/specializations/deep-learning) ([deeplearning.ai](https://www.youtube.com/channel/UCcIXc5mJsHVYTZR1maL5l9w) [1st course](https://www.youtube.com/playlist?list=PLkDaE6sCZn6Ec-XTbcX1uRg2_u4xOEky0))

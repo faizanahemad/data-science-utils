@@ -20,7 +20,7 @@ When you are new to this field, ensure that you take up those papers which are c
 
 * [AAAI](https://aaai.org/Library/conferences-library.php), [IJCAI 2019](https://www.ijcai.org/Proceedings/2019/) ([Past](https://www.ijcai.org/past_proceedings)), [KDD](https://www.kdd.org/conferences), [ECAI](https://www.eurai.org/library/ECAI_proceedings), [WWW](https://dl.acm.org/conference/www) ([2019](https://www2019.thewebconf.org/proceedings), [2018](https://www2018.thewebconf.org/proceedings/)), [ACM Recsys](https://recsys.acm.org/#)
 
-* [EMNLP](https://www.aclweb.org/anthology/venues/emnlp/), [NLP Papers](https://github.com/sebastianruder/NLP-progress)
+* [EMNLP](https://www.aclweb.org/anthology/venues/emnlp/), [NLP Papers](https://github.com/sebastianruder/NLP-progress), [Awesome-NLP-Resources](https://github.com/Robofied/Awesome-NLP-Resources)
 
 * [SOTA from papers with code](https://paperswithcode.com/sota), [Follow Papers with code site for good list of Papers](https://paperswithcode.com/)
 
