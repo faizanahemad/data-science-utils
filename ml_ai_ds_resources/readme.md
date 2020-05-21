@@ -356,14 +356,13 @@ In general follow MIT OCW’s resources and search google/youtube for good expla
 * [Calculus cheat sheet](http://tutorial.math.lamar.edu/pdf/Calculus_Cheat_Sheet_All.pdf)
 
 ### Basic: Linear Algebra
+* [EDX-Linear Algebra — Foundations to Frontiers](https://courses.edx.org/courses/course-v1:UTAustinX+UT.5.05x+2T2017/course/) ([Link](https://www.edx.org/course/linear-algebra-foundations-to-frontiers))
 
 * [[TextBook+Practice Questions](http://math.mit.edu/~gs/linearalgebra/)][[Practice](https://ocw.mit.edu/courses/mathematics/18-06-linear-algebra-spring-2010/assignments/) [Practice-2](http://web.mit.edu/18.06/www/old.shtml) ] [[OCW](https://ocw.mit.edu/courses/mathematics/18-06sc-linear-algebra-fall-2011/) [Youtube Playlist](https://www.youtube.com/playlist?list=PL221E2BBF13BECF6C)]
 
 * [What is The Matrix? by Brown uni](http://cs.brown.edu/courses/cs053/current/index.htm) ([Videos](http://cs.brown.edu/courses/cs053/current/lectures.htm))
 
 * [Matrix Algebra](https://www.coursera.org/learn/matrix-algebra-engineers) For Engineers
-
-* [EDX-Linear Algebra — Foundations to Frontiers](https://courses.edx.org/courses/course-v1:UTAustinX+UT.5.05x+2T2017/course/)
 
 * [MIT 18.065 Matrix Methods in Data Analysis, Signal Processing, and Machine Learning](https://www.youtube.com/playlist?list=PLUl4u3cNGP63oMNUHXqIUcrkS2PivhN3k) ([Course page](https://ocw.mit.edu/courses/mathematics/18-065-matrix-methods-in-data-analysis-signal-processing-and-machine-learning-spring-2018/))
 
