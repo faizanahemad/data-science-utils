@@ -210,6 +210,7 @@ While I have listed the courses here, it is best to visit them and see their syl
 
 * [Carnegie Mellon University Deep Learning](https://www.youtube.com/channel/UC8hYZGEkI2dDO8scT8C5UQA/playlists), [CMU DL website](https://deeplearning.cs.cmu.edu/)
 
+* [Introduction to Deep Learning (I2DL) (IN2346) by Visual Computing Group Prof. Matthias Nießner](https://niessner.github.io/I2DL/)
 
 ### Field Specific Stuff: Computer Vision
 
