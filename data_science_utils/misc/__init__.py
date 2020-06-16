@@ -1,4 +1,3 @@
-import inspect
 import time
 
 import numpy as np
@@ -13,6 +12,7 @@ import functools
 
 
 def print_code(func):
+    import inspect
     from pygments import highlight
     from pygments.lexers import PythonLexer
     from pygments.formatters import TerminalFormatter
