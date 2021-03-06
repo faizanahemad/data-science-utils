@@ -15,13 +15,18 @@
 
 ### DL
 - [Pytorch Lightning](https://github.com/PyTorchLightning/pytorch-lightning)
+- [Pytorch Geometric](https://pytorch-geometric.readthedocs.io/en/latest/index.html)
+
 
 ### Experiment Tracking
 - [Trains](https://github.com/allegroai/trains)
+- Guild
+- [Comet DDP](https://github.com/comet-ml/comet-examples/tree/master/pytorch#using-cometml-with-pytorch-parallel-data-training)
 - [MLFlow]()
 - [DVC: Open-source Version Control System for Machine Learning Projects](https://dvc.org/)
 
 ### Deployments
+- [LabML Remote Orchestration](https://github.com/lab-ml/remote)
 
 ### Code Examples for Learning
 - [Numpy-ML](https://github.com/ddbourgin/numpy-ml)

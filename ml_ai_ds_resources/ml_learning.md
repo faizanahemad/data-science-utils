@@ -142,7 +142,7 @@ While I have listed the courses here, it is best to visit them and see their syl
     
 * [Deep RL Bootcamp 26-27 August 2017   |   Berkeley CA](https://sites.google.com/view/deep-rl-bootcamp/lectures)    
 
-* [CS234: Reinforcement Learning | Winter 2019](https://www.youtube.com/playlist?list=PLoROMvodv4rOSOPzutgyCTapiGlY2Nd8u) ([http://web.stanford.edu/class/cs234/index.html](http://web.stanford.edu/class/cs234/index.html))
+* [CS234: Reinforcement Learning | Winter 2019](https://www.youtube.com/playlist?list=PLoROMvodv4rOSOPzutgyCTapiGlY2Nd8u) ([http://web.stanford.edu/class/cs234/CS234Win2019/index.html](http://web.stanford.edu/class/cs234/CS234Win2019/index.html)), [Most Recent cs234](https://web.stanford.edu/class/cs234/modules.html)
 
 * [CS 285 at UC Berkeley Deep Reinforcement Learning](http://rail.eecs.berkeley.edu/deeprlcourse/)
 
@@ -185,6 +185,10 @@ While I have listed the courses here, it is best to visit them and see their syl
 * [deep-learning-drizzle](https://deep-learning-drizzle.github.io/) ([Github Page](https://github.com/kmario23/deep-learning-drizzle/blob/master/README.md))
 
 * [HarvardX’s Fundamentals of Neuroscience XSeries](https://www.edx.org/xseries/harvardx-fundamentals-of-neuroscience)
+
+* [Neuronal Dynamics - Videos and Python Exercises](https://neuronaldynamics.epfl.ch/)
+
+* [Spiking Neurons](https://www.frontiersin.org/articles/10.3389/fnins.2018.00774/full)
 
 * [https://www.edx.org/course/subject/data-science](https://www.edx.org/course/subject/data-science)
 

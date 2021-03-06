@@ -109,4 +109,6 @@ At a minimum keep checking reddit and Stack Exchange sites. [StatQuest by Josh S
     - [Survey_of_Deep_Metric_Learning](https://github.com/kdhht2334/Survey_of_Deep_Metric_Learning)
     - [SOTA papers till 2018 in many DL tasks](https://www.eff.org/ai/metrics)
     - [A gallery of interesting Jupyter Notebooks](https://github.com/jupyter/jupyter/wiki/A-gallery-of-interesting-Jupyter-Notebooks)
+    - [Awesome Semi-Supervised Learning](https://github.com/yassouali/awesome-semi-supervised-learning)
+    - [awesome-fast-attention](https://github.com/Separius/awesome-fast-attention)
 
