@@ -81,3 +81,6 @@
 
 ### Recipes
 - [Vectorizing Conditions in Numpy & Pandas](https://www.youtube.com/watch?v=nxWginnBklU)
+
+### Best Practices
+- [ML Ops best practices reddit](https://www.reddit.com/r/MachineLearning/comments/j1xlcm/d_factors_of_successful_mlops_after_3_years_of_ml/)
