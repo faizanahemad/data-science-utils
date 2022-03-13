@@ -173,6 +173,7 @@ While I have listed the courses here, it is best to visit them and see their syl
     - [Using Keras and Deep Deterministic Policy Gradient to play TORCS](https://yanpanlau.github.io/2016/10/11/Torcs-Keras.html)
     - [Using Keras and Deep Q-Network to Play FlappyBird](https://yanpanlau.github.io/2016/07/10/FlappyBird-Keras.html)
     - [Reddit: free resources to learn Deep Reinforcement Learning](https://www.reddit.com/r/reinforcementlearning/comments/ci1bvy/opinions_on_free_resources_to_learn_deep/)
+    - [Reddit: A good RL course/book?](https://www.reddit.com/r/MachineLearning/comments/lbk6j6/d_a_good_rl_coursebook/) | [Other Refs](https://www.reddit.com/r/MachineLearning/comments/m6ablk/d_getting_started_with_rl_using_suttons_book/)
     
 
 ### Field Specific Stuff: Recommendation Systems
@@ -193,4 +194,6 @@ While I have listed the courses here, it is best to visit them and see their syl
 * [https://www.edx.org/course/subject/data-science](https://www.edx.org/course/subject/data-science)
 
 * [ML coding from scratch](https://github.com/python-engineer/MLfromscratch) and [ML coding from scratch Youtube](https://www.youtube.com/playlist?list=PLqnslRFeH2Upcrywf-u2etjdxxkL8nl7E) and [Another From scratch guide](https://github.com/pmuens/lab#implementations), [eriklindernoren/ML-From-Scratch](https://github.com/eriklindernoren/ML-From-Scratch)
+
+* [Mining of Massive Datasets](http://www.mmds.org/) | [Stanford Home](http://web.stanford.edu/class/cs246/index.html#content)
 
