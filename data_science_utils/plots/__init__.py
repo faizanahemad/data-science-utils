@@ -15,6 +15,82 @@ from inspect import signature
 from sklearn.metrics import average_precision_score
 
 
+def plot_aucroc_aucpr_confusion_matrix(y_true, y_pred, threshold=0.5):
+    import seaborn as sns
+    from matplotlib.colors import ListedColormap
+    from sklearn.metrics import roc_curve, roc_auc_score, precision_recall_curve, average_precision_score, f1_score, accuracy_score, confusion_matrix
+    import numpy as np
+    import matplotlib.pyplot as plt
+    fpr, tpr, _ = roc_curve(y_true, y_pred)
+    roc_auc = roc_auc_score(y_true, y_pred)
+
+    precision, recall, _ = precision_recall_curve(y_true, y_pred)
+    aupr = average_precision_score(y_true, y_pred)
+
+    plt.figure(figsize=(20, 4))
+
+    # Plot ROC AUC curve
+    plt.subplot(1, 3, 1)
+    plt.plot(fpr, tpr, label='ROC curve (area = %0.2f)' % roc_auc)
+    plt.plot([0, 1], [0, 1], 'k--')
+    plt.xlim([0.0, 1.0])
+    plt.ylim([0.0, 1.05])
+    plt.xlabel('False Positive Rate')
+    plt.ylabel('True Positive Rate')
+    plt.title('ROC AUC Curve')
+    plt.legend(loc="lower right")
+
+    # Plot Precision-Recall curve
+    plt.subplot(1, 3, 2)
+    plt.plot(recall, precision, label='AUPR = %0.2f' % aupr)
+    plt.xlim([0.0, 1.0])
+    plt.ylim([0.0, 1.05])
+    plt.xlabel('Recall')
+    plt.ylabel('Precision')
+    plt.title('Precision-Recall Curve')
+    plt.legend(loc="upper right")
+
+    
+    y_pred = y_pred > threshold
+    tn, fp, fn, tp = confusion_matrix(y_true, y_pred).ravel()
+    cm = np.array([[tp, fp], [fn, tn]])
+    plt.subplot(1, 3, 3)
+    # Define the colors for each cell
+    colors = ["green", "red", "orange", "green"]
+    cm_sb = np.array([[1.0, 2.0], [3.0, 4.0]])
+    # Create the ListedColormap
+    cmap = ListedColormap(colors)
+    sns.heatmap(cm_sb, annot=False, cmap=cmap, fmt='g',  cbar=False, annot_kws={"size": 32})
+    plt.xlabel('Actual', labelpad=-10)
+    plt.ylabel('Predicted')
+    plt.xticks([0.5, 1.5], ['Positive', 'Negative',])
+    plt.yticks([0.5, 1.5], ['Positive', 'Negative',])
+    names = [["TP", "FP"], ["FN", "TN"]]
+    # Add value annotations to the heatmap
+    for i in range(cm.shape[0]):
+        for j in range(cm.shape[1]):
+            plt.annotate(names[i][j] + " = " + str(cm[i][j]), xy=(j+0.5, i+0.5), ha="center", va="center")
+
+    plt.title('Confusion Matrix')
+    plt.show()
+    
+    
+    accuracy = accuracy_score(y_true, y_pred)
+    print("Accuracy: %.2f%%" % (accuracy * 100.0))
+
+    roc_auc = roc_auc_score(y_true, y_pred)
+    aupr = average_precision_score(y_true, y_pred)
+
+    print("ROC AUC: %.2f" % roc_auc)
+    print("AUPR: %.2f" % aupr)
+    
+    f1 = f1_score(y_true, y_pred)
+    print("F1: %.2f" % f1)
+    return roc_auc, aupr, f1
+    
+    
+
+
 def scatter_plot_exclude_outliers(f_name,predicted_column,df,title=None,percentile=[0.01,0.99],logy=False,logx=False):
     df = utils.filter_dataframe_percentile(df,{f_name:percentile,predicted_column:percentile})
     df.plot.scatter(x=f_name, y=predicted_column,title=title,logy=logy,logx=logx)
@@ -308,12 +384,18 @@ def analyze_ts_results(test_true, test_pred, train_true=[], train_pred=[], times
     return result
 
 
-def plot_correlation_heatmap(df, threshold=0, figsize=(10, 8)):
+def plot_correlation_heatmap(df, threshold=0, figsize=(6, 5), fmt='.2f', spearman=False):
+    import seaborn as sns
     corr = df.corr()
+    if spearman:
+        from scipy import stats
+        res = stats.spearmanr(df.values)
+        corr = pd.DataFrame(res.statistic, index=corr.index, columns=corr.columns)
+
     corr = corr.where(np.abs(corr) > threshold, 0)
 
     # Generate a mask for the upper triangle
-    mask = np.zeros_like(corr, dtype=np.bool)
+    mask = np.zeros_like(corr, dtype=bool)
     mask[np.triu_indices_from(mask)] = True
 
     # Set up the matplotlib figure
@@ -324,9 +406,10 @@ def plot_correlation_heatmap(df, threshold=0, figsize=(10, 8)):
 
     # Draw the heatmap with the mask and correct aspect ratio
     sns.heatmap(corr, mask=mask, cmap=cmap, vmax=1.0, vmin=-1.0, cbar_kws={"shrink": .8}, center=0,
-                square=True, linewidths=.5, annot=True, fmt='.2f')
+                square=True, linewidths=.5, annot=True, fmt=fmt)
     plt.title("Column Correlation Heatmap")
     plt.show()
+    
     return corr
 
 def sorted_barplot(df,x,y,limit=50,ascending=True,figsize=(16, 6),logy=False):
